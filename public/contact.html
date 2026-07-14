@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Contact — D.C Alacrity</title>
+  <meta name="description" content="Contact D.C Alacrity for client work, partnerships, press, crew, and Pure Alacrity questions. North Carolina. dcalacrity@gmail.com"/>
+  <link rel="icon" href="assets/img/logo-sprite.png" type="image/png"/>
+  <link rel="stylesheet" href="css/site.css"/>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-nav">
+    <a class="nav-brand" href="index.html"><img src="assets/img/logo-sprite.png" alt="" width="36" height="36"/><span><b>D.C</b> Alacrity</span></a>
+    <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="work/index.html">Work</a>
+      <a href="services.html">Services</a>
+      <a href="product.html">Pure Alacrity</a>
+      <a href="about.html">Studio</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+      <a class="nav-cta" href="https://dcalacrity.com/pure">Launch Pure</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <header class="page-hero">
+      <div class="wrap">
+        <p class="section-label">Contact</p>
+        <h1>Start here.</h1>
+        <p class="support">Clients, partners, press, classmates — same inbox, clear topics.</p>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="split">
+          <div class="reveal">
+            <form class="form-grid" id="contact-form" novalidate>
+              <label>Name
+                <input type="text" name="name" required autocomplete="name" placeholder="Your name"/>
+              </label>
+              <label>Email
+                <input type="email" name="email" required autocomplete="email" placeholder="you@example.com"/>
+              </label>
+              <label>Topic
+                <select name="topic" id="topic">
+                  <option value="Client / commercial">Client / commercial</option>
+                  <option value="Investor / partner">Investor / partner</option>
+                  <option value="Press / media">Press / media</option>
+                  <option value="Crew / collaborator">Crew / collaborator</option>
+                  <option value="Pure Alacrity">Pure Alacrity</option>
+                  <option value="VR waitlist">VR waitlist</option>
+                  <option value="Other">Other</option>
+                </select>
+              </label>
+              <label>Message
+                <textarea name="message" required placeholder="What are you making, booking, or asking?"></textarea>
+              </label>
+              <button class="btn btn-primary" type="submit">Open email draft</button>
+              <p class="muted" style="font-size:0.85rem">Opens your mail app addressed to dcalacrity@gmail.com. No data is stored on this site.</p>
+            </form>
+          </div>
+          <div class="reveal">
+            <p class="section-label">Direct</p>
+            <h2 style="max-width:12ch;font-size:clamp(1.6rem,3vw,2.2rem)">dcalacrity@gmail.com</h2>
+            <div class="prose" style="margin-top:1.5rem">
+              <p><strong>Based in</strong> North Carolina.</p>
+              <p><strong>Product:</strong> <a href="https://dcalacrity.com/pure">dcalacrity.com/pure</a> (free)</p>
+              <p><strong>Press assets:</strong> <a href="press.html">Press kit</a></p>
+              <p><strong>Response:</strong> We aim for two business days on commercial estimates.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div><div class="footer-brand"><b>D.C</b> Alacrity</div><p>The Experience Industry, Built from North Carolina.</p></div>
+      <div><h4>Explore</h4><a href="work/index.html">Work</a><a href="services.html">Services</a></div>
+      <div><h4>Product</h4><a href="https://dcalacrity.com/pure">Pure Alacrity</a><a href="product.html">Overview</a></div>
+      <div><h4>Press</h4><a href="press.html">Kit</a><a href="about.html">Studio</a></div>
+    </div>
+    <div class="footer-bottom"><span>© <span data-year>2026</span> D.C Alacrity</span><span>Contact</span></div>
+  </footer>
+  <script src="js/site.js"></script>
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var topic = params.get("topic");
+      if (topic) {
+        var sel = document.getElementById("topic");
+        if (!sel) return;
+        var found = false;
+        for (var i = 0; i < sel.options.length; i++) {
+          if (sel.options[i].value === topic) { sel.selectedIndex = i; found = true; break; }
+        }
+        if (!found) {
+          var opt = document.createElement("option");
+          opt.value = topic; opt.textContent = topic; opt.selected = true;
+          sel.appendChild(opt);
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
