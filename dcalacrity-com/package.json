@@ -1,0 +1,13 @@
+{
+  "name": "dcalacrity-com",
+  "version": "1.0.0",
+  "private": true,
+  "description": "D.C Alacrity official website — Cloudflare Pages (dcalacrity.com)",
+  "scripts": {
+    "dev": "wrangler pages dev ./public",
+    "deploy": "wrangler pages deploy ./public --project-name=dcalacrity"
+  },
+  "devDependencies": {
+    "wrangler": "^3.90.0"
+  }
+}
