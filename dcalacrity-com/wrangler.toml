@@ -1,9 +1,0 @@
-# Cloudflare Pages — D.C Alacrity official site
-name = "dcalacrity"
-compatibility_date = "2026-07-14"
-
-# Build output = ./public  (set the same in the Pages dashboard)
-pages_build_output_dir = "./public"
-
-[observability]
-enabled = true

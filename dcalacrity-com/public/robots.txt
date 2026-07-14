@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://dcalacrity.com/sitemap.xml
