@@ -1,96 +1,100 @@
-# D.C Alacrity — www.dcalacrity.com
+# D.C Alacrity — Cloudflare Pages
 
-Cloudflare Worker + static assets for the **official D.C Alacrity website**.
+Official site for **https://dcalacrity.com**
 
 | URL | What |
 | --- | --- |
-| **https://www.dcalacrity.com** | This site (canonical) |
-| https://dcalacrity.com/… | 301 → www (except `/pure`) |
-| https://dcalacrity.com/pure | **Pure Alacrity** (separate Worker / repo) |
+| **https://dcalacrity.com** | This site (canonical) |
+| https://www.dcalacrity.com | Cloudflare redirect → apex (you already have this on) |
+| https://dcalacrity.com/pure | **Pure Alacrity** — separate Worker (do not put in this repo) |
+| `https://<project>.pages.dev` | Pages preview |
 
-This folder is meant to be its **own GitHub repository**. Push it, connect Cloudflare Workers Builds, deploy.
+Push **this folder** as the GitHub repo root.
 
 ---
 
 ## Layout
 
 ```
-dcalacrity-com/
-├── worker.js          # Edge gateway: HTTPS, www canonical, security headers
-├── wrangler.toml      # Routes + assets binding
+dcalacrity-com/          ← GitHub repo root
+├── wrangler.toml
 ├── package.json
 ├── README.md
 ├── .gitignore
-└── public/            # Everything web-served
+├── functions/
+│   └── _middleware.js   # backup www→apex + security headers
+└── public/              ← Build output directory
     ├── index.html
     ├── about.html
     ├── services.html
-    ├── … 
+    ├── product.html
+    ├── contact.html
+    ├── press.html
+    ├── _headers
+    ├── robots.txt
+    ├── sitemap.xml
     ├── css/ js/ assets/
-    └── work/          # Includes full RHRN site (rhrn.html)
+    └── work/
+        ├── index.html
+        ├── sidequest.html
+        ├── right-here-right-now.html   # marketing page
+        ├── rhrn.html                   # full experience microsite (~22MB)
+        ├── prize-pool.html
+        └── welcome-to-wilmy.html
 ```
 
 ---
 
-## One-time Cloudflare setup
+## Pages build settings (required)
 
-1. Create a GitHub repo (e.g. `dcalacrity-com`) and push **this folder as the repo root**.
-2. Cloudflare Dashboard → **Workers & Pages** → Create → **Workers** → Connect to Git.
-3. Build settings:
-   - **Build command:** *(empty)*
-   - **Deploy command:** `npx wrangler deploy`
-   - **Root directory:** `/`
-4. Ensure the zone `dcalacrity.com` is on Cloudflare.
-5. Confirm the **purealacrity** Worker still owns:
-   - `dcalacrity.com/pure`
-   - `dcalacrity.com/pure/*`
-   - `www.dcalacrity.com/pure` (+ `/*`)
-   - `pure.dcalacrity.com`
-6. Deploy this Worker. It claims `www.dcalacrity.com` and apex paths; `/pure` stays more-specific on Pure’s Worker.
+| Field | Value |
+| --- | --- |
+| Framework preset | None |
+| **Build command** | *(empty)* |
+| **Build output directory** | **`public`** |
+| Root directory | *(empty)* |
 
-### Route conflict tip
-
-If deploy fails with *“route already assigned”*, remove that pattern from the other Worker first. Never attach `dcalacrity.com/pure` to this project.
+If `*.pages.dev` shows 404, the output directory is wrong.
 
 ---
 
-## Manual deploy
+## Custom domains (no redirect loop)
 
+1. Pages → **Custom domains** → primary = **`dcalacrity.com`**
+2. Keep your existing **www → dcalacrity.com** redirect
+3. **Remove** any old Worker (`dcalacrity-com`) routes on apex/www that send visitors the other way (apex → www). That fight causes `ERR_TOO_MANY_REDIRECTS`.
+4. Leave **purealacrity** Worker routes for `/pure` and `/pure/*` alone.
+
+SSL/TLS on the zone should be **Full (strict)**.
+
+---
+
+## Deploy
+
+### Git
+Connect the repo in Cloudflare Pages → push → auto deploy.
+
+### CLI
 ```bash
 npm install
 npx wrangler login
-npx wrangler deploy
+npx wrangler pages deploy ./public --project-name=dcalacrity
 ```
 
-Local preview:
-
+### Local
 ```bash
-npx wrangler dev
+npm run dev
 ```
 
 ---
 
-## Updating the site
+## Projects on the site
 
-Replace files under `public/` (from the `dcalacrity-website` working copy), then:
-
-```bash
-git add -A
-git commit -m "Update marketing site"
-git push
-```
-
-Workers Builds redeploys on push.
-
----
-
-## Canonical behaviour
-
-| Request | Result |
+| Page | Status |
 | --- | --- |
-| `http://www.dcalacrity.com/…` | 301 → `https://www.dcalacrity.com/…` |
-| `https://dcalacrity.com/about.html` | 301 → `https://www.dcalacrity.com/about.html` |
-| `https://dcalacrity.com/pure` | Pure Alacrity Worker (not this one) |
-| `*.workers.dev` | 301 → www |
+| Sidequest | Flagship series — fleshed |
+| Right Here Right Now! | Marketing page + full `rhrn.html` experience |
+| Prize Pool | VR flagship — Fall 2026 principal |
+| Welcome to Wilmy | Cape Fear doc + destination flywheel |
 
-Pure Alacrity launch buttons on the site still point at **https://dcalacrity.com/pure** (Pure’s canonical).
+Canonical host everywhere: **dcalacrity.com** (not www).

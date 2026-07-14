@@ -1,33 +1,9 @@
-# ╔══════════════════════════════════════════════════════════════════════════╗
-# ║  D.C Alacrity — official site (www.dcalacrity.com)                        ║
-# ╚══════════════════════════════════════════════════════════════════════════╝
-
-name = "dcalacrity-com"
-main = "worker.js"
+# Cloudflare Pages — D.C Alacrity official site
+name = "dcalacrity"
 compatibility_date = "2026-07-14"
 
-# Static marketing site lives in ./public (HTML/CSS/JS/images).
-# worker.js / wrangler.toml / README are outside public and never web-served.
-[assets]
-directory = "./public"
-binding = "ASSETS"
-# Worker runs first so we can redirect apex → www and attach security headers.
-run_worker_first = true
-
-# www is the canonical marketing host.
-# Apex dcalacrity.com/* is also attached so bare apex visitors get 301 → www,
-# EXCEPT /pure and /pure/* which stay on the separate purealacrity Worker
-# (more-specific path routes win in Cloudflare).
-routes = [
-  { pattern = "www.dcalacrity.com/*", zone_name = "dcalacrity.com" },
-  { pattern = "www.dcalacrity.com",   zone_name = "dcalacrity.com" },
-  { pattern = "dcalacrity.com/",      zone_name = "dcalacrity.com" },
-  { pattern = "dcalacrity.com/*",     zone_name = "dcalacrity.com" },
-]
-
-# Optional: also bind www as a Custom Domain in the dashboard if you prefer
-# DNS auto-management. Routes above are enough when the zone is already on CF.
+# Build output = ./public  (set the same in the Pages dashboard)
+pages_build_output_dir = "./public"
 
 [observability]
 enabled = true
-head_sampling_rate = 1
