@@ -2,7 +2,7 @@
 # ║  D.C Alacrity — official site (www.dcalacrity.com)                        ║
 # ╚══════════════════════════════════════════════════════════════════════════╝
 
-name = "dcalacrity-com"
+name = "dcalacrity"
 main = "worker.js"
 compatibility_date = "2026-07-14"
 
