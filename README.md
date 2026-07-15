@@ -5,7 +5,7 @@ Official site for **https://dcalacrity.com**
 | URL | What |
 | --- | --- |
 | **https://dcalacrity.com** | This site (canonical) |
-| https://www.dcalacrity.com | Cloudflare redirect → apex (you already have this on) |
+| https://www.dcalacrity.com | Must resolve in DNS, then 301 → apex (see below) |
 | https://dcalacrity.com/pure | **Pure Alacrity** — separate Worker (do not put in this repo) |
 | `https://<project>.pages.dev` | Pages preview |
 
@@ -60,10 +60,25 @@ If `*.pages.dev` shows 404, the output directory is wrong.
 
 ## Custom domains (no redirect loop)
 
+### Fix www (as of Jul 2026)
+
+`www.dcalacrity.com` was **NXDOMAIN** — there is no DNS record, so nothing can
+redirect. Middleware/`_redirects` never run until www resolves to Cloudflare.
+
+In **Cloudflare Dashboard → DNS → Records** for `dcalacrity.com`:
+
+1. Add **CNAME** `www` → `dcalacrity.com` (or your Pages hostname), **Proxied** (orange cloud).
+2. **Pages → dcalacrity → Custom domains** → add **`www.dcalacrity.com`** (recommended), **or**
+3. **Rules → Redirect Rules** → If hostname equals `www.dcalacrity.com` →
+   Dynamic redirect to `concat("https://dcalacrity.com", http.request.uri.path)` (301).
+
+After DNS propagates, `https://www.dcalacrity.com/` should 301 to `https://dcalacrity.com/`.
+
+Also:
+
 1. Pages → **Custom domains** → primary = **`dcalacrity.com`**
-2. Keep your existing **www → dcalacrity.com** redirect
-3. **Remove** any old Worker (`dcalacrity-com`) routes on apex/www that send visitors the other way (apex → www). That fight causes `ERR_TOO_MANY_REDIRECTS`.
-4. Leave **purealacrity** Worker routes for `/pure` and `/pure/*` alone.
+2. **Remove** any old Worker routes on apex/www that send visitors the other way (apex → www). That fight causes `ERR_TOO_MANY_REDIRECTS`.
+3. Leave **purealacrity** Worker routes for `/pure` and `/pure/*` alone.
 
 SSL/TLS on the zone should be **Full (strict)**.
 

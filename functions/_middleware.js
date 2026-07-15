@@ -1,8 +1,9 @@
 /**
  * Cloudflare Pages middleware — D.C Alacrity marketing site
  *
- * Canonical host is dcalacrity.com. Zone already redirects www → apex;
- * this middleware mirrors that as a backup and adds security headers.
+ * Canonical host is dcalacrity.com.
+ * www → apex: requires a DNS record for www (see README). Once www hits this
+ * Pages project, this middleware (and public/_redirects) 301 to apex.
  * Do not handle /pure — that path belongs to the purealacrity Worker.
  */
 

@@ -1,0 +1,7 @@
+# Cloudflare Pages static redirects (backup).
+# www → apex ONLY works after DNS for www exists and www is served by this project.
+# Primary fix: Cloudflare Dashboard → DNS → CNAME www → dcalacrity.com (Proxied),
+# then Pages → Custom domains → add www.dcalacrity.com (or a Redirect Rule).
+
+https://www.dcalacrity.com/* https://dcalacrity.com/:splat 301
+http://www.dcalacrity.com/* https://dcalacrity.com/:splat 301
