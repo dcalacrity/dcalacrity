@@ -105,13 +105,19 @@
           throw new Error(result.error || "Send failed");
         }
         form.reset();
+        // The endpoint captures the lead before it tries to email, so a mail
+        // hiccup is not the sender's problem to solve. Only say "sent" when it
+        // was actually sent; otherwise confirm receipt and give them the ref.
         setStatus(
           "success",
           result.message ||
-            "Message sent. Check your inbox if FormSubmit asks you to confirm — then we’ll reply from dcalacrity@gmail.com."
+            (result.emailed === false
+              ? `Message received${result.ref ? ` (ref ${result.ref})` : ""}. We have it — no need to resend.`
+              : "Message sent. We reply within two business days on commercial estimates.")
         );
       } catch (err) {
-        // Fallback: open a draft so the user is never stuck
+        // Genuine hard failure (offline, endpoint unreachable). Only now do we
+        // hand the visitor a draft, so their words are never lost.
         const subject = encodeURIComponent(`[dcalacrity.com] ${payload.topic || "Inquiry"} — ${payload.name}`);
         const body = encodeURIComponent(
           [
@@ -130,9 +136,9 @@
         );
         setStatus(
           "error",
-          "Couldn’t send from the site just now. Opening an email draft instead — or write dcalacrity@gmail.com directly."
+          "Couldn’t reach us from the site just now — opening an email draft so nothing you wrote is lost. You can also write pure@dcalacrity.com directly."
         );
-        window.location.href = `mailto:dcalacrity@gmail.com?subject=${subject}&body=${body}`;
+        window.location.href = `mailto:pure@dcalacrity.com?subject=${subject}&body=${body}`;
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
