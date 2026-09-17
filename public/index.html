@@ -3,238 +3,438 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>D.C Alacrity — The Experience Industry, Built from North Carolina</title>
-  <meta name="description" content="D.C Alacrity is a North Carolina media company across film, series, commercial video, software, VR, and mobile — original stories, Pure Alacrity, and client work."/>
-  <meta property="og:title" content="D.C Alacrity"/>
-  <meta property="og:description" content="Media across screens — film, series, commercial, software, VR, and mobile. Built from North Carolina."/>
-  <meta property="og:image" content="assets/img/dcalacrity.png"/>
+  <title>D.C Alacrity — Technology, Media & the Experience Industry</title>
+  <meta name="description" content="D.C Alacrity is a technology and media company building original IP, software and interactive experiences, with a mission to expand across industries."/>
+  <link rel="canonical" href="https://dcalacrity.com/"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="D.C Alacrity"/>
+  <meta property="og:title" content="D.C Alacrity — Technology, Media & the Experience Industry"/>
+  <meta property="og:description" content="A technology and media company building original IP, software and interactive experiences. Founded in North Carolina."/>
+  <meta property="og:image" content="https://dcalacrity.com/assets/img/dcalacrity.jpg"/>
   <meta property="og:url" content="https://dcalacrity.com/"/>
-  <meta name="theme-color" content="#061018"/>
-  <link rel="icon" href="assets/img/logo-sprite.png" type="image/png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="theme-color" content="#05090f"/>
+  <link rel="icon" href="assets/img/favicon.png" type="image/png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500&display=swap"/>
   <link rel="stylesheet" href="css/site.css"/>
 </head>
-<body>
+<body class="t-tech">
   <a class="skip" href="#main">Skip to content</a>
 
-  <header class="site-nav">
-    <a class="nav-brand" href="index.html">
-      <img src="assets/img/logo-sprite.png" alt="" width="36" height="36"/>
+  <header class="top">
+    <a class="brand" href="index.html">
+      <img src="assets/img/logo-mark.jpg" alt="" width="34" height="34" fetchpriority="high"/>
       <span><b>D.C</b> Alacrity</span>
     </a>
-    <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false">
+      <nav class="nav" aria-label="Primary">
+        <a href="technology.html">Technology</a>
+        <a href="work/index.html">Experiences</a>
+        <a href="research.html">R&D</a>
+        <a href="about.html">Company</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+        <a class="btn btn--arc btn--sm" href="https://dcalacrity.com/pure">Open Pure Alacrity</a>
+      </nav>
+    <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menu">
       <span></span><span></span><span></span>
     </button>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="work/index.html">Work</a>
-      <a href="services.html">Services</a>
-      <a href="product.html">Pure Alacrity</a>
-      <a href="about.html">Studio</a>
-      <a href="contact.html">Contact</a>
-      <a class="nav-cta" href="https://dcalacrity.com/pure">Launch Pure</a>
-    </nav>
   </header>
 
-  <main id="main">
-    <section class="hero" aria-label="D.C Alacrity">
-      <div class="hero-media" aria-hidden="true">
-        <img src="assets/img/dcalacrity.png" alt="" width="1600" height="900"/>
-      </div>
-      <div class="hero-shade" aria-hidden="true"></div>
-      <div class="hero-content">
-        <h1 class="hero-brand"><b>D.C</b> Alacrity</h1>
-        <p class="hero-line">The Experience Industry, Built from North Carolina.</p>
-        <p class="hero-support">A full-stack media company — film, series, commercial video, production software, VR cinema, and mobile apps in progress. Interactive headset work is a flagship proof, not the whole story.</p>
-        <div class="btn-row">
-          <a class="btn btn-primary" href="work/index.html">See the work</a>
-          <a class="btn btn-ghost" href="https://dcalacrity.com/pure">Try Pure Alacrity</a>
-          <a class="btn btn-ghost" href="https://dcalacrity.com/pure/demo.html">Watch the demo</a>
-        </div>
-      </div>
-    </section>
-
-    <div class="proof" role="list">
-      <article role="listitem"><strong>Across media</strong><span>Film · series · commercial · software</span></article>
-      <article role="listitem"><strong>VR proof</strong><span>NC’s first interactive live-action title</span></article>
-      <article role="listitem"><strong>Building</strong><span>Mobile apps on the roadmap</span></article>
-      <article role="listitem"><strong>Live</strong><span>Pure Alacrity — free to use</span></article>
+  <div class="menu" id="menu" aria-hidden="true">
+    <nav class="menu__links" aria-label="All pages">
+        <a href="technology.html" data-area="tech">Technology <small>Pure Alacrity · Alacrity Player · Alacrity Bridge</small></a>
+        <a href="work/index.html" data-area="media">Experiences <small>Media & experiences we own</small></a>
+        <a href="research.html" data-area="rnd">R&D <small>What we are investigating</small></a>
+        <a href="about.html" data-area="co">Company <small>The Experience Industry, and why we build</small></a>
+        <a href="services.html" data-area="svc">Services <small>Hire the commercial unit</small></a>
+        <a href="contact.html" data-area="co">Contact <small>Clients · partners · press · crew</small></a>
+    </nav>
+    <div class="menu__foot">
+      <a href="mailto:pure@dcalacrity.com">pure@dcalacrity.com</a>
+      <a class="btn btn--arc btn--sm" href="https://dcalacrity.com/pure">Open Pure Alacrity</a>
     </div>
+  </div>
 
-    <section class="section">
-      <div class="wrap">
-        <p class="section-label reveal">What we are</p>
-        <h2 class="reveal">More than one format.</h2>
-        <p class="lede reveal">D.C Alacrity ships stories and systems across the screens people already use — and invents new ones when the story needs them. VR cinema is a big part of that thesis. So are series, docs, client work, Pure Alacrity, and the mobile apps we’re building next.</p>
-        <div class="audience reveal">
-          <article>
-            <h3>Film &amp; series</h3>
-            <p>Original IP like Sidequest and destination docs like Welcome to Wilmy — made to travel beyond one platform.</p>
-          </article>
-          <article>
-            <h3>VR &amp; interactive</h3>
-            <p>Shipped proof with Right Here Right Now! and Prize Pool next — choice-driven live action on headset.</p>
-          </article>
-          <article>
-            <h3>Software &amp; mobile</h3>
-            <p>Pure Alacrity runs productions today. Mobile apps and companion experiences are actively in development.</p>
-          </article>
-          <article>
-            <h3>Commercial desk</h3>
-            <p>Affordable shoots, edits, color, and social for North Carolina businesses — same craft, client brief.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section bg-ink-2">
-      <div class="wrap">
-        <p class="section-label reveal">In the works &amp; shipped</p>
-        <h2 class="reveal">The slate.</h2>
-        <p class="lede reveal">Original IP across series, VR, and documentary — plus the commercial work that funds the next one.</p>
-        <div class="project-rail">
-          <a class="project-tile reveal" href="work/sidequest.html">
-            <div class="media"><img src="assets/img/squad.jpg" alt="Sidequest cast — ABC Squad" width="800" height="600"/></div>
-            <div class="body">
-              <p class="kind sq">Flagship series · Crime dramedy</p>
-              <h3>$IDEQU3ST</h3>
-              <p>A broke grocery clerk reunites his crew to chase fortune on a dark-web gig marketplace built by a dead god. Aiming for an October release.</p>
-              <span class="go">Enter the world →</span>
-            </div>
-          </a>
-          <a class="project-tile reveal" href="work/right-here-right-now.html">
-            <div class="media"><img src="assets/img/dcalacrity.png" alt="D.C Alacrity brand mark" width="800" height="600" style="object-position:center"/></div>
-            <div class="body">
-              <p class="kind vr">VR interactive film · Live</p>
-              <h3>Right Here Right Now!</h3>
-              <p>North Carolina’s first interactive live-action VR film. Free on Meta Horizon &amp; SideQuest — 16 nodes, 22 paths.</p>
-              <span class="go">Format · pipeline · play →</span>
-            </div>
-          </a>
-          <a class="project-tile reveal" href="work/prize-pool.html">
-            <div class="media">
-              <img src="assets/img/prize-pool-placeholder.png" alt="Prize Pool AI placeholder key art" width="800" height="450"/>
-              <span class="media-cap">AI placeholder · Prize Pool VR is still in development</span>
-            </div>
-            <div class="body">
-              <p class="kind pp">VR flagship · Upcoming</p>
-              <h3>Prize Pool</h3>
-              <p>The campus assassin pot hits $1,000,000. Ally, protect, betray, confess. You are the experiment.</p>
-              <span class="go">See the design →</span>
-            </div>
-          </a>
-          <a class="project-tile reveal" href="work/welcome-to-wilmy.html">
-            <div class="media"><img src="assets/img/welcome-to-wilmy.jpg" alt="Welcome to Wilmy — Cape Fear interview still" width="800" height="600"/></div>
-            <div class="body">
-              <p class="kind">Documentary · In production</p>
-              <h3>Welcome to Wilmy</h3>
-              <p>Cape Fear surf and beach culture — destination storytelling and the commercial flywheel.</p>
-              <span class="go">Local story →</span>
-            </div>
-          </a>
-        </div>
-        <p style="margin-top:2rem" class="reveal"><a class="btn btn-ghost" href="work/index.html">Full portfolio</a></p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="wrap">
-        <div class="split reveal">
-          <div class="visual">
-            <img src="assets/img/logo-sprite.png" alt="D.C Alacrity logo" width="640" height="640"/>
+  <main id="main">
+    <section class="stage" aria-labelledby="stage-title">
+      <div class="stage__floor" aria-hidden="true"></div>
+      <div class="stage__key" aria-hidden="true"></div>
+      <div class="stage__haze" aria-hidden="true"></div>
+      <div class="stage__sun" aria-hidden="true"></div>
+      <div class="stage__grain" aria-hidden="true"></div>
+      <p class="sr-only">Behind this page is the story graph of <em>Right Here Right Now!</em> — the branching structure of a released interactive film, drawn from the file the Unity runtime actually plays.</p>
+      <div class="wrap stage__content">
+        <div class="stage__copy">
+          <p class="eyebrow">D.C Alacrity · North Carolina</p>
+          <h1 id="stage-title">Building the <em>Experience Industry</em>.</h1>
+          <p class="lede">We are a technology and media company developing original IP, software and interactive experiences. Our first products and productions are the foundation for a broader mission: technologies and businesses that change how people create, work, learn and connect.</p>
+          <div class="btn-row">
+            <a class="btn btn--arc" href="technology.html">See the technology</a>
+            <a class="btn btn--ghost" href="work/index.html">See the work</a>
           </div>
+        </div>
+        <dl class="stage__aside">
+          <div><dt>Founded</dt><dd>North Carolina</dd></div>
+          <div><dt>Live</dt><dd><a href="https://dcalacrity.com/pure">Pure Alacrity</a> — free to use</dd></div>
+          <div><dt>Shipped</dt><dd><a href="work/right-here-right-now.html">Right Here Right Now!</a> on Meta Horizon</dd></div>
+        </dl>
+      </div>
+      <div class="stage__scroll" aria-hidden="true"><span>The story graph</span><i></i></div>
+    </section>
+
+    <section class="sec sec--tight">
+      <div class="wrap">
+      <div class="facts" data-rise>
+        <article><strong>Free</strong><span>Pure Alacrity — live, no account needed</span></article>
+        <article><strong>Shipped</strong><span>North Carolina’s first interactive live-action VR film</span></article>
+        <article><strong>4</strong><span>original properties we own</span></article>
+        <article><strong>Local-first</strong><span>your work stays on your device</span></article>
+      </div>
+      </div>
+    </section>
+
+    <section class="sec sec--deep stagey" id="definition">
+      <div class="wrap">
+        <div class="sec-head" data-rise>
           <div>
-            <p class="section-label">The product</p>
-            <h2 style="max-width:14ch">Pure Alacrity.</h2>
-            <p class="lede" style="margin-bottom:1.25rem">The production command system — free to use. Script to set to delivery for film, series, and interactive work — including the pipeline behind Right Here Right Now!</p>
-            <p style="color:var(--fog-dim);max-width:42ch;margin-bottom:1.5rem">Local-first today. The same stack informs the mobile apps we’re building next. Live at dcalacrity.com/pure.</p>
-            <div class="btn-row">
-              <a class="btn btn-primary" href="https://dcalacrity.com/pure">Open Pure Alacrity</a>
-              <a class="btn btn-ghost" href="product.html">How it works</a>
+            <p class="eyebrow">The organising idea</p>
+            <h2>What we mean by the <em>Experience Industry</em>.</h2>
+          </div>
+          <p class="lede">Three things have to be true at once for an experience to exist: someone has to make it, something has to deliver it, and other people have to be able to build the next one. We work on all three, and each already has something finished attached to it.</p>
+        </div>
+
+        <div class="def">
+          <article data-flat data-area="media">
+            <p class="eyebrow eyebrow--plain">01 · The experience</p>
+            <h3>What a person actually meets.</h3>
+            <p>The thing someone watches, plays or walks into. For us that has meant branching live action on a headset, a crime series, a documentary about a coastline.</p>
+            <div class="ex">
+              <b>What exists</b>
+              <a href="work/right-here-right-now.html">Right Here Right Now!</a> — North Carolina’s first interactive live-action VR film, free on Meta Horizon and SideQuest.
+            </div>
+            <p style="margin-top:1rem"><strong>The capability it establishes:</strong> we can design a story that branches, shoot it as live action, and finish it as something a person opens on a device they already own.</p>
+          </article>
+
+          <article data-flat data-area="tech">
+            <p class="eyebrow eyebrow--plain">02 · The delivery</p>
+            <h3>The technology that carries it.</h3>
+            <p>A runtime that turns an authored story into something playable, and a contract strict enough that the two halves cannot drift apart.</p>
+            <div class="ex">
+              <b>What exists</b>
+              <a href="technology.html">Alacrity Player</a> — a Unity runtime that reads one JSON bundle and plays the graph. Schema 2.0.0, pinned on both sides, round-trip tested.
+            </div>
+            <p style="margin-top:1rem"><strong>The capability it establishes:</strong> a written branching story compiles into a playable experience. Film is where we applied it first, not the limit of it.</p>
+          </article>
+
+          <article data-flat data-area="rnd">
+            <p class="eyebrow eyebrow--plain">03 · The system</p>
+            <h3>What lets other people do it.</h3>
+            <p>Software that takes a way of working and turns it into something a team can operate — schedules, budgets, breakdowns, the day on set, the handoff to post.</p>
+            <div class="ex">
+              <b>What exists</b>
+              <a href="https://dcalacrity.com/pure">Pure Alacrity</a> — the production suite, free to use, running real productions since March 2026.
+            </div>
+            <p style="margin-top:1rem"><strong>The capability it establishes:</strong> a process one person invented becomes a system other people run. That is the difference between a practitioner and a company.</p>
+          </article>
+        </div>
+
+        <div class="def__thread" data-rise>
+          <div>
+            <p class="eyebrow">The thread</p>
+          </div>
+          <p>All three are the same underlying job: take work that only exists in one person’s head, give it a structure, and hand other people the controls. We do it for film because that is the industry we came from and the one whose problems we know in detail. <strong>The capability is not specific to film</strong> — any field where complicated work has to be coordinated, then delivered as something a person experiences, is the same shape of problem.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="areas">
+      <div class="wrap">
+        <div class="sec-head sec-head--stack" data-rise>
+          <p class="eyebrow">Areas of activity</p>
+          <h2>Four places the work happens.</h2>
+        </div>
+        <div class="areas">
+          <a class="area" data-area="tech" href="technology.html">
+            <i aria-hidden="true"></i>
+            <h3>Technology</h3>
+            <p>Pure Alacrity, Alacrity Player and Alacrity Bridge — a production suite, a runtime, and the seam into professional post.</p>
+            <span class="pill pill--live">One live · two in build</span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="area" data-area="media" href="work/index.html">
+            <i aria-hidden="true"></i>
+            <h3>Media &amp; experiences</h3>
+            <p>Original properties we own: a crime series, an interactive VR film, a social thriller in pre-production, a coastal documentary.</p>
+            <span class="pill pill--shipped">4 properties</span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="area" data-area="rnd" href="research.html">
+            <i aria-hidden="true"></i>
+            <h3>Research &amp; development</h3>
+            <p>What we are investigating, what the current experiments establish, and where the capability could go next — kept separate from what already works.</p>
+            <span class="pill pill--dev">In progress</span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="area" data-area="svc" href="services.html">
+            <i aria-hidden="true"></i>
+            <h3>Services</h3>
+            <p>A commercial unit for North Carolina businesses — shoots, edits, colour and social, at published rates.</p>
+            <span class="pill">Booking now</span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec sec--deep stagey" id="technology">
+      <div class="wrap">
+        <div class="sec-head" data-rise>
+          <div>
+            <p class="eyebrow">Technology</p>
+            <h2>The software is the company’s second product line.</h2>
+          </div>
+          <p class="lede">Not a tool we built for one film and kept. Pure Alacrity is free, public and running real productions. These are real screens from the current build.</p>
+        </div>
+
+        <div class="tech">
+          <div>
+            <div class="prods">
+              <article class="flat prod" data-flat data-area="tech">
+                <div>
+                  <h3>Pure Alacrity</h3>
+                  <p>Script, breakdown, schedule, budget, the day on set, post and delivery — with the same numbers in every one of them. Runs in a browser, on Windows, macOS and Android, and offline.</p>
+                </div>
+                <span class="pill pill--live">Live · free</span>
+                <p class="meta">Built out of Sidequest, not for it · development began January 2026 · running productions since March 2026</p>
+              </article>
+              <article class="flat prod" data-flat data-area="tech">
+                <div>
+                  <h3>Alacrity Player</h3>
+                  <p>A Unity runtime that reads one exported bundle and plays a branching story on a headset, with a flat 2D path for people without one.</p>
+                </div>
+                <span class="pill pill--shipped">Shipped in RHRN!</span>
+                <p class="meta">Schema 2.0.0 · the same contract on both sides · round-trip tested</p>
+              </article>
+              <article class="flat prod" data-flat data-area="tech">
+                <div>
+                  <h3>Alacrity Bridge</h3>
+                  <p>The seam into professional post: the shot plan and the day’s record arriving in Premiere Pro and DaVinci Resolve as a real timeline, through OpenTimelineIO.</p>
+                </div>
+                <span class="pill pill--dev">In development</span>
+                <p class="meta">Open format, not a proprietary handoff</p>
+              </article>
+            </div>
+            <p style="margin-top:1.5rem"><a class="btn btn--link" href="technology.html">How the three fit together</a></p>
+          </div>
+
+          <div class="fan" data-rise>
+            <figure class="fan__shot is-a">
+              <img src="assets/screens/storymap.jpg" alt="Pure Alacrity’s Story Map — a branching story drawn as a node graph, with tracks, phases and an inspector" width="1440" height="900" loading="lazy" decoding="async"/>
+              <figcaption>Story Map</figcaption>
+            </figure>
+            <figure class="fan__shot is-b">
+              <img src="assets/screens/script-editor.jpg" alt="Pure Alacrity’s Script Studio showing a formatted screenplay page with scene markers and page eighths" width="1440" height="900" loading="lazy" decoding="async"/>
+              <figcaption>Script Studio</figcaption>
+            </figure>
+            <figure class="fan__shot is-c">
+              <img src="assets/screens/breakdown.jpg" alt="Pure Alacrity’s Breakdown screen with scene, element, cast and location counts and category chips" width="1440" height="900" loading="lazy" decoding="async"/>
+              <figcaption>Breakdown</figcaption>
+            </figure>
+            <figure class="fan__shot is-d">
+              <img src="assets/screens/dashboard.jpg" alt="Pure Alacrity’s command centre showing a production’s story, plan, set, post, delivery and business state" width="1440" height="900" loading="lazy" decoding="async"/>
+              <figcaption>Command centre</figcaption>
+            </figure>
+            <div class="fan__dots" role="tablist" aria-label="Choose a screen">
+              <button type="button" aria-label="Story Map"></button>
+              <button type="button" aria-label="Script Studio"></button>
+              <button type="button" aria-label="Breakdown"></button>
+              <button type="button" aria-label="Command centre"></button>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section bg-ink-2">
+    <section class="sec rail" id="compiler">
+      <div class="rail__pin">
+        <div class="wrap">
+          <div class="rail__head" data-rise>
+            <div>
+              <p class="eyebrow">The capability</p>
+              <h2>How a story becomes an experience.</h2>
+            </div>
+            <p class="lede">A branching script is written, broken down and scheduled like any film — then compiled into something a person can play. Game engines have done half of this for years. None of them know what a call sheet is.</p>
+          </div>
+          <div class="rail__stage">
+            <div class="rail__line" aria-hidden="true"></div>
+            <div class="rail__track">
+              <div class="node" data-area="tech"><div class="flat"><p class="k"><span>Author</span><span>01</span></p><h3>The story graph</h3><p>Scenes, choices and endings as a graph you can actually read. Written in Pure Alacrity.</p></div></div>
+              <div class="node" data-area="tech"><div class="flat"><p class="k"><span>Produce</span><span>02</span></p><h3>Breakdown &amp; schedule</h3><p>Because in live action a branch is not a line of script. It is a shooting day, with a crew and a budget attached.</p></div></div>
+              <div class="node" data-area="media"><div class="flat"><p class="k"><span>Compile</span><span>03</span></p><h3>One bundle</h3><p>A single JSON file carrying the graph and the clips. Schema 2.0.0, pinned on both sides and tested by round trip.</p></div></div>
+              <div class="node" data-area="tech"><div class="flat"><p class="k"><span>Run</span><span>04</span></p><h3>Alacrity Player</h3><p>A Unity runtime reads the bundle and plays it. No hand-wiring between what was written and what runs.</p></div></div>
+              <div class="node" data-area="rnd"><div class="flat"><p class="k"><span>Deliver</span><span>05</span></p><h3>Wherever people are</h3><p>Headset, a flat 2D path, the web. The same graph, different output — which is why the format stalling is not the bet.</p></div></div>
+            </div>
+          </div>
+          <div class="rail__foot" data-rise>
+            <span class="pill pill--shipped">This path shipped</span>
+            <span>It produced <a href="work/right-here-right-now.html">Right Here Right Now!</a>, and it is the path <a href="work/prize-pool.html">Prize Pool</a> is being built on.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec sec--deep stagey" id="work">
       <div class="wrap">
-        <p class="section-label reveal">Services</p>
-        <h2 class="reveal">Hire the commercial unit.</h2>
-        <p class="lede reveal">Shoots from $225. Edits from $95. Social retainers from $249/mo. VR house tours coming soon.</p>
-        <div class="service-list reveal">
-          <a class="service-item" href="services.html#packages">
-            <span class="num">01</span>
-            <div>
-              <h3>Shoots &amp; brand films</h3>
-              <p>Half-day, full-day, and bundled Spark / Brand packages.</p>
+        <div class="sec-head" data-rise>
+          <div>
+            <p class="eyebrow">Media &amp; experiences</p>
+            <h2>Properties we own.</h2>
+          </div>
+          <p class="lede">Original work, not client work. Each one earns on its own surface and de-risks the next thing — and each is an application of the capabilities above.</p>
+        </div>
+        <div class="slate">
+          <a class="tile tile--wide t-sq" data-flat href="work/sidequest.html">
+            <div class="media"><img src="assets/img/squad.jpg" alt="The ABC Squad cast of Sidequest on location" width="1800" height="1012" loading="lazy" decoding="async"/><span class="cap">Series · in post</span></div>
+            <div class="body">
+              <p class="kind">Flagship series · crime dramedy</p>
+              <h3>$IDEQU3ST</h3>
+              <p>A broke grocery clerk reunites his crew to chase fortune on a dark-web gig marketplace built by a dead god. Season 1 Part 1 shot with 84 cast and crew; October 2026 release aim.</p>
+              <span class="go">Enter the world</span>
             </div>
-            <span class="meta">From $225</span>
           </a>
-          <a class="service-item" href="services.html#post">
-            <span class="num">02</span>
-            <div>
-              <h3>Editing &amp; color</h3>
-              <p>Social cuts, promo edits, and DaVinci grades.</p>
+          <a class="tile tile--tall t-teal" data-flat href="work/right-here-right-now.html">
+            <div class="media"><img src="assets/img/dcalacrity.jpg" alt="D.C Alacrity’s brand mark" width="800" height="800" loading="lazy" decoding="async"/><span class="cap">Live on Meta Horizon</span></div>
+            <div class="body">
+              <p class="kind">Interactive VR film · released</p>
+              <h3>Right Here Right Now!</h3>
+              <p>North Carolina’s first interactive live-action VR film. Free on Meta Horizon and SideQuest — and the proof that the compile path works end to end.</p>
+              <span class="go">Format · pipeline · play</span>
             </div>
-            <span class="meta">From $85</span>
           </a>
-          <a class="service-item" href="services.html#vr-soon">
-            <span class="num">03</span>
-            <div>
-              <h3>VR commercial</h3>
-              <p>House tours and brand VR — waitlist open.</p>
+          <a class="tile tile--half" data-flat data-area="rnd" href="work/prize-pool.html">
+            <div class="media"><img src="assets/img/prize-pool-placeholder.jpg" alt="Placeholder key art for Prize Pool" width="1536" height="1024" loading="lazy" decoding="async"/><span class="cap">Placeholder art · in development</span></div>
+            <div class="body">
+              <p class="kind">Interactive VR · principal Fall 2026</p>
+              <h3>Prize Pool</h3>
+              <p>The campus assassin pot hits $1,000,000. Alliance, romance and suspicion move as meters, not menus. The next title on the same stack.</p>
+              <span class="go">See the design</span>
             </div>
-            <span class="meta">Coming soon</span>
+          </a>
+          <a class="tile tile--half" data-flat data-area="media" href="work/welcome-to-wilmy.html">
+            <div class="media"><img src="assets/img/welcome-to-wilmy.jpg" alt="An interview on the Cape Fear coast for Welcome to Wilmy" width="1024" height="576" loading="lazy" decoding="async"/><span class="cap">Documentary · in production</span></div>
+            <div class="body">
+              <p class="kind">Documentary · Cape Fear</p>
+              <h3>Welcome to Wilmy</h3>
+              <p>Surf and beach culture on the Cape Fear coast, under a City of Wilmington permit — and a working relationship with the businesses in frame.</p>
+              <span class="go">Film · flywheel · hire</span>
+            </div>
           </a>
         </div>
       </div>
     </section>
 
-    <section class="band-cyan">
-      <div class="wrap reveal">
-        <h2>Watch. Hire. Build.</h2>
-        <p>Browse the slate across media. Hire the commercial unit. Run Pure Alacrity free — or talk mobile, VR, and partnerships.</p>
-        <div class="btn-row">
-          <a class="btn btn-primary" href="work/index.html">See the work</a>
-          <a class="btn btn-ghost" href="contact.html">Start a conversation</a>
+    <section class="sec" id="expansion">
+      <div class="wrap">
+        <div class="sec-head" data-rise>
+          <div>
+            <p class="eyebrow">Expansion</p>
+            <h2>Why the first products support a broader future.</h2>
+          </div>
+          <p class="lede">A narrow starting market and a broad company are not in conflict. These are the five capabilities we are actually building, stated as what they are good for rather than what they were first used on.</p>
         </div>
+        <ul class="caps">
+          <li data-rise><div><h3>Creating original intellectual property</h3><p>We own what we make. A property earns on its own surface, and it is also the test case that proves the technology under it.</p></div></li>
+          <li data-rise><div><h3>Software that coordinates complicated work</h3><p>A film set is a hard coordination problem with a fixed deadline and no second attempt. Software that survives one is not fragile anywhere else.</p></div></li>
+          <li data-rise><div><h3>Connecting creative tools to delivery systems</h3><p>Story map into Unity. Shot plan into Premiere Pro and DaVinci Resolve through OpenTimelineIO. The seams between systems are where work is normally lost, and they are the part we build deliberately.</p></div></li>
+          <li data-rise><div><h3>Building interactive experiences</h3><p>Branching live action that reaches a store, not a prototype that screens once. Choice, state and consequence, authored by people who are not engineers.</p></div></li>
+          <li data-rise><div><h3>Making the work repeatable without us</h3><p>Every process here started inside one person’s head and ended as something a team can operate. That is the move from individual ability to an organisation, and it is the one that decides whether a company can grow.</p></div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sec sec--deep stagey" id="routes">
+      <div class="wrap">
+        <div class="sec-head sec-head--stack" data-rise>
+          <p class="eyebrow">Where to go next</p>
+          <h2>Watch, use, hire or partner.</h2>
+        </div>
+        <div class="doors">
+          <a class="flat door" data-flat data-tilt data-area="media" href="work/index.html">
+            <p class="k">Watch</p>
+            <div><h3>The work</h3><p>Four original properties, and what state each is really in.</p></div>
+          </a>
+          <a class="flat door" data-flat data-tilt data-area="tech" href="https://dcalacrity.com/pure">
+            <p class="k">Use</p>
+            <div><h3>Pure Alacrity</h3><p>Free, no account needed. Open it and put a production in it.</p></div>
+          </a>
+          <a class="flat door" data-flat data-tilt data-area="svc" href="services.html">
+            <p class="k">Hire</p>
+            <div><h3>The commercial unit</h3><p>Shoots, edits, colour and social at published rates.</p></div>
+          </a>
+          <a class="flat door" data-flat data-tilt data-area="rnd" href="contact.html?topic=Investor%20%2F%20partner">
+            <p class="k">Partner</p>
+            <div><h3>Build with us</h3><p>Production partners, investors, and anyone with a coordination problem this shape.</p></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="wrap" data-rise>
+        <h2>Tell us what you’re building.</h2>
+        <p class="lede">Clients, partners, press, crew, Pure Alacrity questions — one form, routed by topic. It reaches pure@dcalacrity.com.</p>
+        <div class="btn-row"><a class="btn btn--arc" href="contact.html">Start a conversation</a> <a class="btn btn--ghost" href="press.html">Press kit</a></div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-brand"><b>D.C</b> Alacrity</div>
-        <p>The Experience Industry, Built from North Carolina.</p>
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot__grid">
+        <div>
+          <div class="foot__brand"><b>D.C</b> Alacrity</div>
+          <p>A technology and media company building the Experience Industry.</p>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <nav>
+            <a href="about.html">Company &amp; vision</a>
+            <a href="research.html">Research &amp; development</a>
+            <a href="press.html">Press kit</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <h4>Technology</h4>
+          <nav>
+            <a href="technology.html">Overview</a>
+            <a href="https://dcalacrity.com/pure">Pure Alacrity</a>
+            <a href="work/right-here-right-now.html">Alacrity Player</a>
+            <a href="services.html">Services</a>
+          </nav>
+        </div>
+        <div>
+          <h4>Experiences</h4>
+          <nav>
+            <a href="work/index.html">All work</a>
+            <a href="work/sidequest.html">Sidequest</a>
+            <a href="work/right-here-right-now.html">Right Here Right Now!</a>
+            <a href="work/prize-pool.html">Prize Pool</a>
+            <a href="work/welcome-to-wilmy.html">Welcome to Wilmy</a>
+          </nav>
+        </div>
       </div>
-      <div>
-        <h4>Explore</h4>
-        <a href="work/index.html">Work</a>
-        <a href="services.html">Services</a>
-        <a href="product.html">Pure Alacrity</a>
-        <a href="about.html">Studio</a>
+      <div class="foot__bottom">
+        <span>© <span data-year>2026</span> D.C Alacrity · North Carolina</span>
+        <span><a href="mailto:pure@dcalacrity.com">pure@dcalacrity.com</a></span>
       </div>
-      <div>
-        <h4>Projects</h4>
-        <a href="work/sidequest.html">Sidequest</a>
-        <a href="work/right-here-right-now.html">Right Here Right Now!</a>
-        <a href="work/prize-pool.html">Prize Pool</a>
-        <a href="work/welcome-to-wilmy.html">Welcome to Wilmy</a>
-      </div>
-      <div>
-        <h4>Connect</h4>
-        <a href="mailto:pure@dcalacrity.com">pure@dcalacrity.com</a>
-        <a href="contact.html">Contact form</a>
-        <a href="https://dcalacrity.com/pure">dcalacrity.com/pure</a>
-        <a href="press.html">Press kit</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© <span data-year>2026</span> D.C Alacrity</span>
-      <span>dcalacrity.com</span>
     </div>
   </footer>
 
-  <script src="js/site.js"></script>
+  <script src="vendor/gsap.min.js" defer></script>
+  <script src="vendor/ScrollTrigger.min.js" defer></script>
+  <script src="js/site.js" defer></script>
 </body>
 </html>

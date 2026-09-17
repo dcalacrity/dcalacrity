@@ -3,210 +3,238 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>$IDEQU3ST — Sidequest · Powered by Pure Alacrity</title>
-  <meta name="description" content="Sidequest ($IDEQU3ST): a crime dramedy / cyberpunk series Powered by Pure Alacrity. Get rich or get deleted. Season 1 Part 1 shot; October 2026 free-streaming aim."/>
-  <meta property="og:title" content="$IDEQU3ST — Sidequest · Powered by Pure Alacrity"/>
+  <title>$IDEQU3ST — Sidequest · D.C Alacrity</title>
+  <meta name="description" content="Sidequest ($IDEQU3ST): a crime dramedy / cyberpunk series from D.C Alacrity. Get rich or get deleted. Season 1 Part 1 shot; October 2026 free-streaming aim."/>
+  <link rel="canonical" href="https://dcalacrity.com/work/sidequest.html"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="D.C Alacrity"/>
+  <meta property="og:title" content="$IDEQU3ST — Sidequest · D.C Alacrity"/>
   <meta property="og:description" content="Crime dramedy / cyberpunk. Dark-web gigs, Igbo cosmology, ABC Squad."/>
   <meta property="og:image" content="https://dcalacrity.com/assets/img/squad.jpg"/>
   <meta property="og:url" content="https://dcalacrity.com/work/sidequest.html"/>
-  <link rel="canonical" href="https://dcalacrity.com/work/sidequest.html"/>
-  <link rel="icon" href="../assets/img/logo-sprite.png" type="image/png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="theme-color" content="#05090f"/>
+  <link rel="icon" href="../assets/img/favicon.png" type="image/png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500&display=swap"/>
   <link rel="stylesheet" href="../css/site.css"/>
   <style>
-    .sq-hero-logo { max-width: min(520px, 90vw); margin: 1.5rem 0 0.5rem; filter: drop-shadow(0 0 24px rgba(255,45,160,0.35)); }
-    .sq-accent .section-label, .sq-accent .kind { color: var(--pink) !important; }
-    .sq-accent .pull { border-left-color: var(--pink); }
+    .sq-logo { max-width: min(520px, 92%); margin: 1.25rem 0 0.5rem; filter: drop-shadow(0 0 28px rgba(255,45,160,.38)); }
   </style>
 </head>
-<body>
+<body class="t-sq">
   <a class="skip" href="#main">Skip to content</a>
-  <header class="site-nav">
-    <a class="nav-brand" href="../index.html">
-      <img src="../assets/img/logo-sprite.png" alt="" width="36" height="36"/>
+
+  <header class="top">
+    <a class="brand" href="../index.html">
+      <img src="../assets/img/logo-mark.jpg" alt="" width="34" height="34" fetchpriority="high"/>
       <span><b>D.C</b> Alacrity</span>
     </a>
-    <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="index.html" aria-current="page">Work</a>
-      <a href="../services.html">Services</a>
-      <a href="../product.html">Pure Alacrity</a>
-      <a href="../about.html">Studio</a>
-      <a href="../contact.html">Contact</a>
-      <a class="nav-cta" href="https://dcalacrity.com/pure">Launch Pure</a>
-    </nav>
+      <nav class="nav" aria-label="Primary">
+        <a href="../technology.html">Technology</a>
+        <a href="../work/index.html" aria-current="page">Experiences</a>
+        <a href="../research.html">R&D</a>
+        <a href="../about.html">Company</a>
+        <a href="../services.html">Services</a>
+        <a href="../contact.html">Contact</a>
+        <a class="btn btn--arc btn--sm" href="https://dcalacrity.com/pure">Open Pure Alacrity</a>
+      </nav>
+    <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menu">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
-  <main id="main" class="sq-accent">
-    <header class="page-hero">
+  <div class="menu" id="menu" aria-hidden="true">
+    <nav class="menu__links" aria-label="All pages">
+        <a href="../technology.html" data-area="tech">Technology <small>Pure Alacrity · Alacrity Player · Alacrity Bridge</small></a>
+        <a href="../work/index.html" data-area="media" aria-current="page">Experiences <small>Media & experiences we own</small></a>
+        <a href="../research.html" data-area="rnd">R&D <small>What we are investigating</small></a>
+        <a href="../about.html" data-area="co">Company <small>The Experience Industry, and why we build</small></a>
+        <a href="../services.html" data-area="svc">Services <small>Hire the commercial unit</small></a>
+        <a href="../contact.html" data-area="co">Contact <small>Clients · partners · press · crew</small></a>
+    </nav>
+    <div class="menu__foot">
+      <a href="mailto:pure@dcalacrity.com">pure@dcalacrity.com</a>
+      <a class="btn btn--arc btn--sm" href="https://dcalacrity.com/pure">Open Pure Alacrity</a>
+    </div>
+  </div>
+
+  <main id="main">
+    <header class="phero">
       <div class="wrap">
-        <p class="section-label">Flagship TV series · Crime dramedy / cyberpunk</p>
-        <img class="sq-hero-logo" src="../assets/img/sidequest-logo.png" alt="$IDEQU3ST + ∞ XP" width="520" height="120"/>
-        <p class="support" style="margin-top:1.25rem">A broke grocery clerk reunites his crew of small-time crooks to chase fortune on Sidequest — a lawless dark-web gig marketplace secretly built by the ghost of the world’s most dangerous hacker: the father his own missing dad helped kill.</p>
-        <p class="ey" style="margin-top:1rem;letter-spacing:.18em;">Powered by Pure Alacrity · Edit Aug 7 · Release Oct 7, 2026</p>
-        <div class="btn-row" style="margin-top:1.5rem">
-          <a class="btn btn-primary" href="#cast">Meet ABC Squad</a>
-          <a class="btn btn-ghost" href="#status">Production status</a>
+        <div class="phero__grid">
+          <div>
+            <p class="eyebrow">Flagship series · crime dramedy / cyberpunk</p>
+            <h1><img class="sq-logo" src="../assets/img/sidequest-logo.png" alt="$IDEQU3ST" width="1200" height="334"/></h1>
+            <p class="lede" style="margin-top:1rem">A broke grocery clerk reunites his crew of small-time crooks to chase fortune on Sidequest — a lawless dark-web gig marketplace secretly built by the ghost of the world’s most dangerous hacker: the father his own missing dad helped kill.</p>
+            <p class="mono muted" style="margin-top:1rem">Powered by Pure Alacrity · Edit locked Aug 7 · Release aim Oct 7, 2026</p>
+            <div class="btn-row">
+              <a class="btn btn--area" href="#cast">Meet ABC Squad</a>
+              <a class="btn btn--ghost" href="#status">Production status</a>
+            </div>
+          </div>
+          <div>
+            <div class="visual" data-rise><img src="../assets/img/squad.jpg" alt="The ABC Squad on location" width="1800" height="1012"/></div>
+          </div>
         </div>
       </div>
     </header>
 
-    <div class="proof" role="list">
-      <article role="listitem"><strong>~$1,400</strong><span>S1 on-set spend</span></article>
-      <article role="listitem"><strong>84</strong><span>cast &amp; crew</span></article>
-      <article role="listitem"><strong>378</strong><span>clips · 7.5 hrs 4K</span></article>
-      <article role="listitem"><strong>75</strong><span>marketability / 100</span></article>
-    </div>
-
-    <section class="section">
+    <section class="sec sec--tight">
       <div class="wrap">
-        <div class="split reveal">
-          <div class="visual">
-            <img src="../assets/img/squad.jpg" alt="ABC Squad production still" width="800" height="600"/>
-          </div>
-          <div>
-            <p class="section-label">The thesis</p>
+      <div class="facts" data-rise>
+        <article><strong>~$1,400</strong><span>Season 1 on-set spend</span></article>
+        <article><strong>84</strong><span>cast &amp; crew</span></article>
+        <article><strong>378</strong><span>clips · 7.5 hours of 4K</span></article>
+        <article><strong>Oct 2026</strong><span>free streaming aim</span></article>
+      </div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="wrap">
+        <div class="split">
+          <div class="visual" data-rise><img src="../assets/img/cyberrealm-logo.jpeg" alt="The Cyber Realm insignia" width="2000" height="1748" style="object-fit:contain;padding:2rem;background:#000" loading="lazy"/></div>
+          <div data-rise>
+            <p class="eyebrow">The thesis</p>
             <h2>Get rich. Or get deleted.</h2>
             <div class="prose">
-              <p>Atlanta energy × Mr. Robot paranoia × Guy Ritchie heist comedy — with a video-game UI and a mythology rooted in <strong>Igbo cosmology</strong>.</p>
-              <p>On the surface it’s a crew chasing gigs. Underneath, the playground is a god’s trap: Sidequest is the public storefront of the Cyber Realm, and Adam Dawnbringer is the rope in a tug-of-war between his missing father and a dead hacker in the machine.</p>
+              <p>Atlanta energy × Mr. Robot paranoia × Guy Ritchie heist comedy — with a video-game interface and a mythology rooted in <strong>Igbo cosmology</strong>.</p>
+              <p>On the surface it is a crew chasing gigs. Underneath, the playground is a god’s trap: Sidequest is the public storefront of the Cyber Realm, and Adam Dawnbringer is the rope in a tug-of-war between his missing father and a dead hacker in the machine.</p>
               <p>Nelson’s invitation still stands: <em>“You gotta cheat the system if you want to win. How about a Sidequest?”</em></p>
             </div>
-            <p class="pull">“You can’t kill a system you’re already inside.”</p>
+            <p class="pull">You can’t kill a system you’re already inside.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section bg-ink-2" id="episodes">
-      <div class="wrap reveal">
-        <p class="section-label">Season 1 shape</p>
-        <h2>Four plots. One marketplace.</h2>
-        <div class="prose">
-          <p>Season 1 runs four parallel tracks: <strong>A</strong> ABC Squad heist-comedy · <strong>B</strong> FBI Team 4B · <strong>C</strong> the Family / Cain · <strong>D</strong> the Myth / Trojan Stallion. Early episode titles include the refusal-of-the-call opener, <em>Sharks and Minnows</em>, and <em>On Thin Ice</em>.</p>
-        </div>
-        <div class="timeline" style="margin-top:2rem">
-          <article>
-            <time>A-plot</time>
-            <h3>ABC Squad</h3>
-            <p>Adam reunites Brock, Chester, Diego, Eric, Felicia, and Gemma for Sidequest gigs that escalate faster than their morals can keep up.</p>
-          </article>
-          <article>
-            <time>B-plot</time>
-            <h3>FBI Cyber Realm</h3>
-            <p>Agent Alexa and the taskforce chase a marketplace that looks like crime and behaves like theology.</p>
-          </article>
-          <article>
-            <time>C / D</time>
-            <h3>Family &amp; myth</h3>
-            <p>Cain’s disappearance, Nelson’s recruitment, and the Trojan Stallion origin bleeding into every “simple” gig.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="cast">
+    <section class="sec sec--deep" id="episodes">
       <div class="wrap">
-        <p class="section-label reveal">ABC Squad</p>
-        <h2 class="reveal">The crew.</h2>
-        <p class="lede reveal">Faces from the actor guides — principal cast of the flagship. Full Season 1 credits list 84 people.</p>
-        <div class="cast-grid reveal">
-          <figure><img src="../assets/img/adam.jpg" alt="Adam Dawnbringer"/><figcaption>Adam Dawnbringer<span>Garrett Sessoms</span></figcaption></figure>
-          <figure><img src="../assets/img/chester.jpg" alt="Chester Wiseman"/><figcaption>Chester Wiseman<span>Collin Davis</span></figcaption></figure>
-          <figure><img src="../assets/img/diego.jpg" alt="Diego"/><figcaption>Diego Cicatriz-Olvidado<span>Noah Piechoski</span></figcaption></figure>
-          <figure><img src="../assets/img/felicia-fox.jpg" alt="Felicia"/><figcaption>Felicia Wall<span>Venus Parker · w/ Agent Fox</span></figcaption></figure>
-          <figure><img src="../assets/img/eric.jpg" alt="Eric"/><figcaption>Eric McSharry<span>Andrew Overby III</span></figcaption></figure>
-          <figure><img src="../assets/img/nelson.jpg" alt="Nelson"/><figcaption>Nelson<span>The recruiter</span></figcaption></figure>
-          <figure><img src="../assets/img/cain.jpg" alt="Cain"/><figcaption>Cain Dawnbringer<span>The missing father</span></figcaption></figure>
-          <figure><img src="../assets/img/alexa.jpg" alt="Agent Alexa"/><figcaption>Agent Alexa<span>FBI Cyber Realm</span></figcaption></figure>
+        <div class="sec-head" data-rise>
+          <div><p class="eyebrow">Season 1 shape</p><h2>Four plots. One marketplace.</h2></div>
+          <p class="lede">Season 1 runs four parallel tracks: the ABC Squad heist comedy, FBI Team 4B, the Family, and the Myth. Early episode titles include the refusal-of-the-call opener, <em>Sharks and Minnows</em>, and <em>On Thin Ice</em>.</p>
         </div>
-        <p class="prose reveal" style="margin-top:1.75rem;max-width:60ch">Also in the ABC Squad orbit: <strong>Brock Turismo</strong> (Isaac Corrigan) — the wheelman — and <strong>Gemma Gazelle</strong> (Emily Kahl). Call sheets and actor guides run deeper than this grid.</p>
+        <div class="timeline" data-rise>
+          <article><time>A-plot</time><h3>ABC Squad</h3><p>Adam reunites Brock, Chester, Diego, Eric, Felicia and Gemma for gigs that escalate faster than their morals can keep up.</p></article>
+          <article><time>B-plot</time><h3>FBI Cyber Realm</h3><p>Agent Alexa and the taskforce chase a marketplace that looks like crime and behaves like theology.</p></article>
+          <article><time>C / D</time><h3>Family &amp; myth</h3><p>Cain’s disappearance, Nelson’s recruitment, and the Trojan Stallion origin bleeding into every “simple” gig.</p></article>
+        </div>
       </div>
     </section>
 
-    <section class="section bg-ink-2" id="world">
-      <div class="wrap reveal">
-        <p class="section-label">World</p>
-        <h2>Platform fiction.</h2>
-        <div class="prose">
-          <p>Sidequest marketplace · K.U.M currency · XP · Quest Broker · Cyber Realm · Trojan Stallion · FBI Cyber Realm Taskforce. A <strong>136-page</strong> world bible and <strong>187 pages</strong> of actor guides back the tone — heist comedy on the surface, cyber-horror mythology underneath, family tragedy at the core.</p>
+    <section class="sec" id="cast">
+      <div class="wrap">
+        <div class="sec-head" data-rise>
+          <div><p class="eyebrow">ABC Squad</p><h2>The crew.</h2></div>
+          <p class="lede">Principal cast of the flagship. Full Season 1 credits list 84 people.</p>
         </div>
-        <div class="split" style="margin-top:2rem">
-          <div class="visual" style="min-height:280px">
-            <img src="../assets/img/cyberrealm-logo.jpeg" alt="Cyber Realm insignia" width="640" height="400" style="object-fit:contain;padding:2rem;background:#000"/>
+        <div class="cast-grid" data-rise>
+          <figure><img src="../assets/img/adam.jpg" alt="Adam Dawnbringer" loading="lazy"/><figcaption>Adam Dawnbringer<span>Garrett Sessoms</span></figcaption></figure>
+          <figure><img src="../assets/img/chester.jpg" alt="Chester Wiseman" loading="lazy"/><figcaption>Chester Wiseman<span>Collin Davis</span></figcaption></figure>
+          <figure><img src="../assets/img/diego.jpg" alt="Diego Cicatriz-Olvidado" loading="lazy"/><figcaption>Diego Cicatriz-Olvidado<span>Noah Piechoski</span></figcaption></figure>
+          <figure><img src="../assets/img/felicia-fox.jpg" alt="Felicia Wall" loading="lazy"/><figcaption>Felicia Wall<span>Venus Parker</span></figcaption></figure>
+          <figure><img src="../assets/img/eric.jpg" alt="Eric McSharry" loading="lazy"/><figcaption>Eric McSharry<span>Andrew Overby III</span></figcaption></figure>
+          <figure><img src="../assets/img/nelson.jpg" alt="Nelson" loading="lazy"/><figcaption>Nelson<span>The recruiter</span></figcaption></figure>
+          <figure><img src="../assets/img/cain.jpg" alt="Cain Dawnbringer" loading="lazy"/><figcaption>Cain Dawnbringer<span>The missing father</span></figcaption></figure>
+          <figure><img src="../assets/img/alexa.jpg" alt="Agent Alexa" loading="lazy"/><figcaption>Agent Alexa<span>FBI Cyber Realm</span></figcaption></figure>
+        </div>
+        <p class="prose" data-rise style="margin-top:1.75rem">Also in the ABC Squad orbit: <strong>Brock Turismo</strong> (Isaac Corrigan), the wheelman, and <strong>Gemma Gazelle</strong> (Emily Kahl). Call sheets and actor guides run deeper than this grid.</p>
+      </div>
+    </section>
+
+    <section class="sec sec--deep" id="world">
+      <div class="wrap">
+        <div class="sec-head" data-rise>
+          <div><p class="eyebrow">World</p><h2>Platform fiction.</h2></div>
+          <p class="lede">Sidequest marketplace · K.U.M currency · XP · Quest Broker · Cyber Realm · Trojan Stallion · FBI Cyber Realm Taskforce.</p>
+        </div>
+        <div class="split split--top">
+          <div class="prose" data-rise>
+            <p>A <strong>136-page</strong> world bible and <strong>187 pages</strong> of actor guides back the tone — heist comedy on the surface, cyber-horror mythology underneath, family tragedy at the core.</p>
+            <p><strong>Spin-offs seeded:</strong> a Cain and Nelson crime drama, an FBI procedural, the Trojan Stallion origin, an ARG marketplace, interactive episodes, and merchandise.</p>
           </div>
-          <div class="prose">
-            <p><strong>Spin-offs seeded:</strong> Cain × Nelson crime drama, FBI procedural, Trojan Stallion origin, ARG marketplace, interactive episodes, merch (PRESS START / XP / K.U.M).</p>
-            <p>Every property does two jobs: earn on its own surface, and de-risk the next thing.</p>
+          <div class="flat flat--pad-l" data-flat data-rise>
+            <h3>Why the world bible matters to the company</h3>
+            <p>A franchise bible is not a creative indulgence — it is the asset register. It is also what the IP workspace in <a href="https://dcalacrity.com/pure">Pure Alacrity</a> was built to hold, which is a good example of a production problem becoming a software feature.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="status">
-      <div class="wrap reveal">
-        <p class="section-label">Status · July 2026</p>
-        <h2>Distribution-ready.</h2>
-        <div class="timeline">
-          <article>
-            <time>Done</time>
-            <h3>Season 1 Part 1 principal</h3>
-            <p>14 shoot days · dual-cam 4K · ~$1,400 on-set · 378 clips / 7.5 hours in the vault · post toward aggregator delivery.</p>
-          </article>
-          <article>
-            <time>Oct 2026</time>
-            <h3>Release aim</h3>
-            <p>Free streaming target — with a YouTube CYOA pilot cut from the show’s own choice UI so discovery doesn’t require a login wall.</p>
-          </article>
-          <article>
-            <time>Next</time>
-            <h3>Season 2 &amp; spin-offs</h3>
-            <p>More episodes as the audience finds the world — this time with Pure Alacrity running the pipeline end to end, not just post.</p>
-          </article>
+    <section class="sec" id="status">
+      <div class="wrap">
+        <div class="sec-head" data-rise>
+          <div><p class="eyebrow">Status</p><h2>Distribution-ready.</h2></div>
+          <p class="lede">Shot in summer 2025 with additional photography that November. In post since.</p>
+        </div>
+        <div class="timeline" data-rise>
+          <article><time>Done</time><h3>Season 1 Part 1 principal</h3><p>14 shoot days, dual-camera 4K, roughly $1,400 of on-set spend, 378 clips and 7.5 hours in the vault.</p></article>
+          <article><time>Oct 2026</time><h3>Release aim</h3><p>Free streaming, with a branching pilot cut from the show’s own choice interface so discovery does not require a login wall.</p></article>
+          <article><time>Next</time><h3>Season 2 &amp; spin-offs</h3><p>More episodes as the audience finds the world — this time with the production software running the pipeline end to end, not only post.</p></article>
+        </div>
+        <div class="flat flat--pad-l" data-flat data-rise style="margin-top:2rem">
+          <p class="eyebrow eyebrow--plain">A correction worth making</p>
+          <p>Sidequest was not made on Pure Alacrity. The software post-dates the shoot: this season is where its specification came from, and it runs the show’s post today. Built out of Sidequest, not for it.</p>
         </div>
       </div>
     </section>
 
-    <section class="band-cyan">
-      <div class="wrap reveal">
+    <section class="band">
+      <div class="wrap" data-rise>
         <h2>Press Start.</h2>
-        <p>Sidequest is the flagship. Pure Alacrity is the tool it forced us to build — and what its post runs on now. Right Here Right Now! is the VR proof that branching ships.</p>
-        <div class="btn-row">
-          <a class="btn btn-primary" href="right-here-right-now.html">See RHRN!</a>
-          <a class="btn btn-ghost" href="../contact.html?topic=Sidequest">Partner with us</a>
-        </div>
+        <p class="lede">Sidequest is the flagship. The software is what it forced us to build. Right Here Right Now! is the proof that branching ships.</p>
+        <div class="btn-row"><a class="btn btn--area" href="right-here-right-now.html">See RHRN!</a> <a class="btn btn--ghost" href="../contact.html?topic=Investor%20%2F%20partner">Partner with us</a></div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-brand"><b>D.C</b> Alacrity</div>
-        <p>$IDEQU3ST — Powered by Pure Alacrity. Parent company D.C Alacrity.</p>
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot__grid">
+        <div>
+          <div class="foot__brand"><b>D.C</b> Alacrity</div>
+          <p>A technology and media company building the Experience Industry.</p>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <nav>
+            <a href="../about.html">Company &amp; vision</a>
+            <a href="../research.html">Research &amp; development</a>
+            <a href="../press.html">Press kit</a>
+            <a href="../contact.html">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <h4>Technology</h4>
+          <nav>
+            <a href="../technology.html">Overview</a>
+            <a href="https://dcalacrity.com/pure">Pure Alacrity</a>
+            <a href="../work/right-here-right-now.html">Alacrity Player</a>
+            <a href="../services.html">Services</a>
+          </nav>
+        </div>
+        <div>
+          <h4>Experiences</h4>
+          <nav>
+            <a href="../work/index.html">All work</a>
+            <a href="../work/sidequest.html">Sidequest</a>
+            <a href="../work/right-here-right-now.html">Right Here Right Now!</a>
+            <a href="../work/prize-pool.html">Prize Pool</a>
+            <a href="../work/welcome-to-wilmy.html">Welcome to Wilmy</a>
+          </nav>
+        </div>
       </div>
-      <div>
-        <h4>Work</h4>
-        <a href="index.html">Portfolio</a>
-        <a href="right-here-right-now.html">RHRN!</a>
-        <a href="prize-pool.html">Prize Pool</a>
-        <a href="welcome-to-wilmy.html">Wilmy</a>
+      <div class="foot__bottom">
+        <span>© <span data-year>2026</span> D.C Alacrity · North Carolina</span>
+        <span><a href="mailto:pure@dcalacrity.com">pure@dcalacrity.com</a></span>
       </div>
-      <div>
-        <h4>More</h4>
-        <a href="../product.html">Pure Alacrity</a>
-        <a href="../services.html">Services</a>
-      </div>
-      <div>
-        <h4>Connect</h4>
-        <a href="mailto:pure@dcalacrity.com">pure@dcalacrity.com</a>
-        <a href="../contact.html">Contact</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© <span data-year>2026</span> D.C Alacrity</span>
-      <span>GET RICH · OR GET DELETED</span>
     </div>
   </footer>
-  <script src="../js/site.js"></script>
+
+  <script src="../vendor/gsap.min.js" defer></script>
+  <script src="../vendor/ScrollTrigger.min.js" defer></script>
+  <script src="../js/site.js" defer></script>
 </body>
 </html>

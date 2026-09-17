@@ -4,54 +4,86 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Contact — D.C Alacrity</title>
-  <meta name="description" content="Contact D.C Alacrity for client work, partnerships, press, mobile/apps, VR, crew, and Pure Alacrity. North Carolina. pure@dcalacrity.com"/>
-  <link rel="icon" href="assets/img/logo-sprite.png" type="image/png"/>
+  <meta name="description" content="Contact D.C Alacrity about client work, partnerships, press, technology, crew or Pure Alacrity. North Carolina. pure@dcalacrity.com"/>
+  <link rel="canonical" href="https://dcalacrity.com/contact.html"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="D.C Alacrity"/>
+  <meta property="og:title" content="Contact — D.C Alacrity"/>
+  <meta property="og:description" content="Contact D.C Alacrity about client work, partnerships, press, technology, crew or Pure Alacrity. North Carolina. pure@dcalacrity.com"/>
+  <meta property="og:image" content="https://dcalacrity.com/assets/img/dcalacrity.jpg"/>
+  <meta property="og:url" content="https://dcalacrity.com/contact.html"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="theme-color" content="#05090f"/>
+  <link rel="icon" href="assets/img/favicon.png" type="image/png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500&display=swap"/>
   <link rel="stylesheet" href="css/site.css"/>
 </head>
-<body>
+<body class="t-co">
   <a class="skip" href="#main">Skip to content</a>
-  <header class="site-nav">
-    <a class="nav-brand" href="index.html"><img src="assets/img/logo-sprite.png" alt="" width="36" height="36"/><span><b>D.C</b> Alacrity</span></a>
-    <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="work/index.html">Work</a>
-      <a href="services.html">Services</a>
-      <a href="product.html">Pure Alacrity</a>
-      <a href="about.html">Studio</a>
-      <a href="contact.html" aria-current="page">Contact</a>
-      <a class="nav-cta" href="https://dcalacrity.com/pure">Launch Pure</a>
-    </nav>
+
+  <header class="top">
+    <a class="brand" href="index.html">
+      <img src="assets/img/logo-mark.jpg" alt="" width="34" height="34" fetchpriority="high"/>
+      <span><b>D.C</b> Alacrity</span>
+    </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="technology.html">Technology</a>
+        <a href="work/index.html">Experiences</a>
+        <a href="research.html">R&D</a>
+        <a href="about.html">Company</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html" aria-current="page">Contact</a>
+        <a class="btn btn--arc btn--sm" href="https://dcalacrity.com/pure">Open Pure Alacrity</a>
+      </nav>
+    <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menu">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
+  <div class="menu" id="menu" aria-hidden="true">
+    <nav class="menu__links" aria-label="All pages">
+        <a href="technology.html" data-area="tech">Technology <small>Pure Alacrity · Alacrity Player · Alacrity Bridge</small></a>
+        <a href="work/index.html" data-area="media">Experiences <small>Media & experiences we own</small></a>
+        <a href="research.html" data-area="rnd">R&D <small>What we are investigating</small></a>
+        <a href="about.html" data-area="co">Company <small>The Experience Industry, and why we build</small></a>
+        <a href="services.html" data-area="svc">Services <small>Hire the commercial unit</small></a>
+        <a href="contact.html" data-area="co" aria-current="page">Contact <small>Clients · partners · press · crew</small></a>
+    </nav>
+    <div class="menu__foot">
+      <a href="mailto:pure@dcalacrity.com">pure@dcalacrity.com</a>
+      <a class="btn btn--arc btn--sm" href="https://dcalacrity.com/pure">Open Pure Alacrity</a>
+    </div>
+  </div>
+
   <main id="main">
-    <header class="page-hero">
+    <header class="phero">
       <div class="wrap">
-        <p class="section-label">Contact</p>
-        <h1>Tell us what you’re building.</h1>
-        <p class="support">Client work, partnerships, press, crew, Pure Alacrity, VR, or mobile — same form, routed by topic. Submissions go to pure@dcalacrity.com.</p>
+        <div class="phero__grid">
+          <div>
+            <p class="eyebrow">Contact</p>
+            <h1>Tell us what you’re building.</h1>
+            <p class="lede">Client work, partnerships, press, technology, crew or a question about Pure Alacrity — one form, routed by topic. Everything reaches pure@dcalacrity.com.</p>
+            
+          </div>
+          
+        </div>
       </div>
     </header>
 
-    <section class="section">
+    <section class="sec">
       <div class="wrap">
-        <div class="split contact-layout">
-          <div class="reveal">
-            <form class="form-grid form-grid--wide" id="contact-form" novalidate>
+        <div class="split contact-layout split--top">
+          <div data-rise>
+            <form class="form-grid" id="contact-form" novalidate>
               <div class="form-row">
-                <label>Name *
-                  <input type="text" name="name" required autocomplete="name" placeholder="Your name" maxlength="120"/>
-                </label>
-                <label>Email *
-                  <input type="email" name="email" required autocomplete="email" placeholder="you@example.com" maxlength="160"/>
-                </label>
+                <label>Name *<input type="text" name="name" required autocomplete="name" placeholder="Your name" maxlength="120"/></label>
+                <label>Email *<input type="email" name="email" required autocomplete="email" placeholder="you@example.com" maxlength="160"/></label>
               </div>
               <div class="form-row">
-                <label>Phone
-                  <input type="tel" name="phone" autocomplete="tel" placeholder="Optional" maxlength="40"/>
-                </label>
-                <label>Organization
-                  <input type="text" name="organization" autocomplete="organization" placeholder="Company, school, or outlet" maxlength="160"/>
-                </label>
+                <label>Phone<input type="tel" name="phone" autocomplete="tel" placeholder="Optional" maxlength="40"/></label>
+                <label>Organization<input type="text" name="organization" autocomplete="organization" placeholder="Company, school or outlet" maxlength="160"/></label>
               </div>
               <div class="form-row">
                 <label>Topic *
@@ -59,9 +91,9 @@
                     <option value="Client / commercial">Client / commercial</option>
                     <option value="Investor / partner">Investor / partner</option>
                     <option value="Press / media">Press / media</option>
-                    <option value="Crew / collaborator">Crew / collaborator</option>
+                    <option value="Technology / licensing">Technology / licensing</option>
                     <option value="Pure Alacrity">Pure Alacrity</option>
-                    <option value="Mobile / apps">Mobile / apps</option>
+                    <option value="Crew / collaborator">Crew / collaborator</option>
                     <option value="VR waitlist">VR waitlist</option>
                     <option value="Other">Other</option>
                   </select>
@@ -70,11 +102,11 @@
                   <select name="projectType" id="projectType">
                     <option value="">Select if relevant</option>
                     <option value="Shoot / brand film">Shoot / brand film</option>
-                    <option value="Edit / color / social">Edit / color / social</option>
+                    <option value="Edit / color / social">Edit / colour / social</option>
                     <option value="Series / film partnership">Series / film partnership</option>
                     <option value="VR / interactive">VR / interactive</option>
-                    <option value="Mobile app">Mobile app</option>
                     <option value="Software / Pure Alacrity">Software / Pure Alacrity</option>
+                    <option value="Pipeline / integration">Pipeline / integration</option>
                     <option value="Press / interview">Press / interview</option>
                     <option value="Not sure yet">Not sure yet</option>
                   </select>
@@ -115,32 +147,28 @@
                   <option value="Other">Other</option>
                 </select>
               </label>
-              <label>Message *
-                <textarea name="message" required placeholder="What are you making, booking, partnering on, or asking? Include links, dates, or locations if you have them." maxlength="5000"></textarea>
-              </label>
-              <!-- Honeypot — leave empty -->
-              <label class="hp-field" aria-hidden="true">Company website
-                <input type="text" name="website" tabindex="-1" autocomplete="off"/>
-              </label>
+              <label>Message *<textarea name="message" required placeholder="What are you making, booking, partnering on or asking? Include links, dates or locations if you have them." maxlength="5000"></textarea></label>
+              <label class="hp-field" aria-hidden="true">Company website<input type="text" name="website" tabindex="-1" autocomplete="off"/></label>
               <div class="form-actions">
-                <button class="btn btn-primary" type="submit" id="contact-submit">Send message</button>
-                <p class="form-note muted">Sends securely to pure@dcalacrity.com. We aim to reply within two business days on commercial estimates.</p>
+                <button class="btn btn--arc" type="submit" id="contact-submit">Send message</button>
+                <p class="form-note">Sends to pure@dcalacrity.com. We aim to reply within two business days on commercial estimates.</p>
               </div>
               <div class="form-status" id="contact-status" role="status" aria-live="polite" hidden></div>
             </form>
           </div>
-          <aside class="reveal contact-aside">
-            <p class="section-label">Direct</p>
+
+          <aside data-rise>
+            <p class="eyebrow">Direct</p>
             <h2 class="contact-email"><a href="mailto:pure@dcalacrity.com">pure@dcalacrity.com</a></h2>
             <div class="prose" style="margin-top:1.5rem">
               <p><strong>Based in</strong> North Carolina.</p>
-              <p><strong>Good for:</strong> shoots &amp; edits, press, partnerships, Pure Alacrity questions, VR waitlist, and mobile / app conversations.</p>
-              <p><strong>Product:</strong> <a href="https://dcalacrity.com/pure">dcalacrity.com/pure</a> (free)</p>
-              <p><strong>Press assets:</strong> <a href="press.html">Press kit</a></p>
+              <p><strong>Product:</strong> <a href="https://dcalacrity.com/pure">dcalacrity.com/pure</a> — free to use.</p>
+              <p><strong>Press assets:</strong> <a href="press.html">the press kit</a>, including the boilerplate we ask to be introduced by.</p>
             </div>
             <ul class="contact-topics">
               <li><strong>Clients</strong> — shoots, edits, social, destination packages</li>
-              <li><strong>Partners</strong> — slate, VR, mobile, investment</li>
+              <li><strong>Partners</strong> — the slate, interactive titles, investment</li>
+              <li><strong>Technology</strong> — the runtime, the bundle format, pipelines of your own</li>
               <li><strong>Press</strong> — interviews, assets, embargoes</li>
               <li><strong>Crew</strong> — credits on real productions</li>
             </ul>
@@ -150,33 +178,51 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-grid">
-      <div><div class="footer-brand"><b>D.C</b> Alacrity</div><p>Media across film, series, commercial, software, VR, and mobile — from North Carolina.</p></div>
-      <div><h4>Explore</h4><a href="work/index.html">Work</a><a href="services.html">Services</a></div>
-      <div><h4>Product</h4><a href="https://dcalacrity.com/pure">Pure Alacrity</a><a href="product.html">Overview</a></div>
-      <div><h4>Press</h4><a href="press.html">Kit</a><a href="about.html">Studio</a></div>
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot__grid">
+        <div>
+          <div class="foot__brand"><b>D.C</b> Alacrity</div>
+          <p>A technology and media company building the Experience Industry.</p>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <nav>
+            <a href="about.html">Company &amp; vision</a>
+            <a href="research.html">Research &amp; development</a>
+            <a href="press.html">Press kit</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <h4>Technology</h4>
+          <nav>
+            <a href="technology.html">Overview</a>
+            <a href="https://dcalacrity.com/pure">Pure Alacrity</a>
+            <a href="work/right-here-right-now.html">Alacrity Player</a>
+            <a href="services.html">Services</a>
+          </nav>
+        </div>
+        <div>
+          <h4>Experiences</h4>
+          <nav>
+            <a href="work/index.html">All work</a>
+            <a href="work/sidequest.html">Sidequest</a>
+            <a href="work/right-here-right-now.html">Right Here Right Now!</a>
+            <a href="work/prize-pool.html">Prize Pool</a>
+            <a href="work/welcome-to-wilmy.html">Welcome to Wilmy</a>
+          </nav>
+        </div>
+      </div>
+      <div class="foot__bottom">
+        <span>© <span data-year>2026</span> D.C Alacrity · North Carolina</span>
+        <span><a href="mailto:pure@dcalacrity.com">pure@dcalacrity.com</a></span>
+      </div>
     </div>
-    <div class="footer-bottom"><span>© <span data-year>2026</span> D.C Alacrity</span><span>Contact</span></div>
   </footer>
-  <script src="js/site.js"></script>
-  <script>
-    (function () {
-      var params = new URLSearchParams(window.location.search);
-      var topic = params.get("topic");
-      if (!topic) return;
-      var sel = document.getElementById("topic");
-      if (!sel) return;
-      var found = false;
-      for (var i = 0; i < sel.options.length; i++) {
-        if (sel.options[i].value === topic) { sel.selectedIndex = i; found = true; break; }
-      }
-      if (!found) {
-        var opt = document.createElement("option");
-        opt.value = topic; opt.textContent = topic; opt.selected = true;
-        sel.appendChild(opt);
-      }
-    })();
-  </script>
+
+  <script src="vendor/gsap.min.js" defer></script>
+  <script src="vendor/ScrollTrigger.min.js" defer></script>
+  <script src="js/site.js" defer></script>
 </body>
 </html>

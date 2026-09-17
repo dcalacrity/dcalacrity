@@ -15,3 +15,9 @@
 
 /js/*
   Cache-Control: public, max-age=86400
+
+# Pinned library builds — GSAP 3.15.0 and ScrollTrigger, self-hosted so the
+# page pulls nothing from a third-party CDN. The bytes never change under a
+# given filename, so they can be cached hard.
+/vendor/*
+  Cache-Control: public, max-age=31536000, immutable
