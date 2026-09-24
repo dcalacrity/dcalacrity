@@ -21,7 +21,7 @@
  * instead of reporting success because one leg of the chain returned 200.
  */
 
-const TO = 'pure@dcalacrity.com';
+const TO = 'support@dcalacrity.com';
 const ALLOWED_ORIGINS = new Set([
   'https://dcalacrity.com',
   'https://www.dcalacrity.com',

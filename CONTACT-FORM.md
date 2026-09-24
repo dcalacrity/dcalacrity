@@ -11,7 +11,7 @@ is the function answering). The failure was one layer further out:
   in a comment. Unconfirmed inbox → every send fails → the page fell back to
   "Couldn't send… opening an email draft".
 * It was addressed to **dcalacrity@gmail.com**, against the standing rule that
-  `pure@dcalacrity.com` is the contact everywhere. 37 references across the site
+  `support@dcalacrity.com` is the contact everywhere. 37 references across the site
   said gmail; zero said pure@.
 * Worst part: a failed send **lost the lead**. The visitor got a `mailto:` draft
   they had to finish themselves. If they closed it, the inquiry was gone and you
@@ -31,17 +31,29 @@ The reply is honest about what happened: it only says "sent" when mail actually
 went out. If mail failed but the lead was stored, the visitor sees
 *"Message received (ref XXXX) — no need to resend"* and stays on the page.
 The `mailto:` fallback now only fires on a genuine hard failure (offline /
-endpoint unreachable), and points at **pure@dcalacrity.com**.
+endpoint unreachable), and points at **support@dcalacrity.com**.
 
 `GET /api/contact` is a health check — it reports the destination address, which
 providers are configured, and whether the lead store is bound. Use it to verify
 the form without sending yourself a fake inquiry.
 
+## Where it delivers now
+
+**The form delivers to `support@dcalacrity.com`.** It was `pure@dcalacrity.com`
+until 2026-09-23; the whole site now says support@, and `pure@dcalacrity.com`
+remains the address the Pure Alacrity **app** publishes. They are two different
+routes and both need to exist in Cloudflare Email Routing.
+
+`MAIL_TO` still overrides the destination without a deploy.
+
+**The setup steps live in `BACKEND-SETUP.md`** — five of them, in order, with
+what breaks if each is skipped. The three below are the mail ones.
+
 ## The 3 things only you can do
 
 These need your Cloudflare/provider logins, so they are yours to click:
 
-1. **Make `pure@dcalacrity.com` real.** The domain's MX already points at
+1. **Make `support@dcalacrity.com` real.** The domain's MX already points at
    Cloudflare Email Routing, so this is a two-minute job:
    Cloudflare dashboard → *dcalacrity.com* → **Email** → Routing → add address
    `pure@` and forward it to whichever inbox you actually read.
@@ -57,7 +69,7 @@ These need your Cloudflare/provider logins, so they are yours to click:
    *Skip this and it falls back to FormSubmit — which needs step 3.*
 
 3. **If you stay on FormSubmit, confirm the inbox once.** Submit the form a
-   single time; FormSubmit emails `pure@dcalacrity.com` an activation link.
+   single time; FormSubmit emails `support@dcalacrity.com` an activation link.
    Click it. Until then FormSubmit will never deliver.
 
 **Also recommended:** create a KV namespace called `LEADS` and bind it to the
@@ -80,7 +92,7 @@ your Cloudflare login — it was not run for you.)
 curl -s https://dcalacrity.com/api/contact
 ```
 
-Expect `deliversTo: "pure@dcalacrity.com"`, and `resend` / `leadStore` to read
+Expect `deliversTo: "support@dcalacrity.com"`, and `resend` / `leadStore` to read
 `true` once you have done steps 1–3. Then send one real submission and confirm
 it arrives.
 

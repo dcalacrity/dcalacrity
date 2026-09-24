@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+  <style>
+    body { margin: 0; font-family: Inter, "Segoe UI", system-ui, sans-serif; background: #061018; }
+    a { color: #0080b0; text-decoration: none; } a:hover { color: #061018; }
+  </style>
+</helmet>
+
+<!-- DAYLIGHT · the brand image as the whole world. Bright blue sky, real clouds,
+     navy type, the hand raising the arrow. The boldest of the three: a tech
+     company in full daylight, which almost nobody in the category does. -->
+<div style="position: relative; width: 1440px; height: 900px; overflow: hidden; background: #3f8fe0; color: #061018;">
+
+  <!-- the sky -->
+  <img src="sky.jpg" alt="" style="position: absolute; left: 0; top: 0; width: 1440px; height: 900px; object-fit: cover; object-position: 50% 40%;">
+  <img src="skycloud.jpg" alt="" style="position: absolute; left: 520px; top: 0; width: 920px; height: 330px; object-fit: cover; opacity: .9; mask-image: linear-gradient(90deg, transparent, #000 25%); -webkit-mask-image: linear-gradient(90deg, transparent, #000 25%);">
+  <img src="clouds.jpg" alt="" style="position: absolute; left: -40px; top: 520px; width: 1520px; height: 420px; object-fit: cover; object-position: 50% 20%; opacity: .85; mask-image: linear-gradient(180deg, transparent, #000 45%); -webkit-mask-image: linear-gradient(180deg, transparent, #000 45%);">
+
+  <!-- the brand's own hero: the hand and the arrow -->
+  <img src="hand.jpg" alt="A hand raised to the sky, the electric arrow rising from it" style="position: absolute; left: 700px; top: 96px; width: 900px; height: 701px; object-fit: cover; mask-image: radial-gradient(70% 70% at 55% 50%, #000 40%, transparent 78%); -webkit-mask-image: radial-gradient(70% 70% at 55% 50%, #000 40%, transparent 78%);">
+
+  <!-- the ground: the page's dark sections begin here -->
+  <div style="position: absolute; left: 0; top: 836px; width: 1440px; height: 64px; background: #061018;"></div>
+  <div style="position: absolute; left: 0; top: 780px; width: 1440px; height: 60px; background: linear-gradient(180deg, rgba(6,16,24,0), rgba(6,16,24,.85));"></div>
+
+  <!-- nav: navy lockup on the sky -->
+  <div style="position: absolute; left: 0; top: 0; width: 1440px; height: 72px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; box-sizing: border-box;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <img src="mark.png" alt="" style="height: 44px; width: auto; filter: drop-shadow(0 2px 10px rgba(6,16,24,.35));">
+      <img src="wordmark-navy.png" alt="D.C Alacrity" style="height: 26px; width: auto;">
+    </div>
+    <div style="display: flex; align-items: center; gap: 4px; font-size: 15px; font-weight: 500; color: rgba(6,16,24,.82);">
+      <span style="padding: 9px 13px;">Technology</span><span style="padding: 9px 13px;">Experiences</span><span style="padding: 9px 13px;">R&amp;D</span><span style="padding: 9px 13px;">Company</span><span style="padding: 9px 13px;">Services</span><span style="padding: 9px 13px;">Contact</span>
+      <span style="margin-left: 10px; padding: 0 17px; height: 40px; display: inline-flex; align-items: center; border-radius: 999px; background: #061018; color: #ffffff; font-weight: 600; font-size: 14px;">Open Pure Alacrity</span>
+    </div>
+  </div>
+
+  <!-- the words, navy on sky -->
+  <div style="position: absolute; left: 80px; top: 232px; width: 660px; display: flex; flex-direction: column; gap: 22px;">
+    <div style="display: inline-flex; align-items: center; gap: 10px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: rgba(6,16,24,.62);"><span style="width: 7px; height: 7px; border-radius: 50%; background: #061018;"></span>D.C Alacrity · North Carolina</div>
+    <h1 style="margin: 0; font-family: Unbounded, 'Inter Tight', system-ui, sans-serif; font-weight: 800; font-size: 78px; line-height: 1.0; letter-spacing: -.025em; color: #061018;">Building the<br><span style="font-weight: 300;">Experience Industry</span><span style="color: #00c2ff;">.</span></h1>
+    <p style="margin: 0; max-width: 600px; font-size: 20px; line-height: 1.5; color: rgba(6,16,24,.8); text-wrap: pretty;">We are a technology and media company developing original IP, software and interactive experiences. Our first products and productions are the foundation for a broader mission: technologies and businesses that change how people create, work, learn and connect.</p>
+    <div style="display: flex; gap: 12px; align-items: center; margin-top: 6px;">
+      <span style="display: inline-flex; align-items: center; height: 48px; padding: 0 22px; border-radius: 999px; background: #061018; color: #ffffff; font-weight: 600; font-size: 15px;">See the technology</span>
+      <span style="display: inline-flex; align-items: center; height: 48px; padding: 0 22px; border-radius: 999px; border: 1px solid rgba(6,16,24,.4); background: rgba(255,255,255,.28); backdrop-filter: blur(8px); color: #061018; font-weight: 600; font-size: 15px;">See the work</span>
+    </div>
+  </div>
+
+  <!-- three facts, on the ground -->
+  <div style="position: absolute; left: 80px; top: 852px; display: flex; gap: 40px; font-size: 13px; color: rgba(238,245,249,.85); font-family: 'JetBrains Mono', monospace; letter-spacing: .08em;">
+    <span><span style="color: rgba(238,245,249,.5);">FOUNDED · </span>NORTH CAROLINA</span>
+    <span><span style="color: rgba(238,245,249,.5);">LIVE · </span><span style="color: #7fe3ff;">PURE ALACRITY</span> — FREE</span>
+    <span><span style="color: rgba(238,245,249,.5);">SHIPPED · </span><span style="color: #7fe3ff;">RIGHT HERE RIGHT NOW!</span></span>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

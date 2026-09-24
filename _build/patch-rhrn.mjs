@@ -35,9 +35,9 @@ const swap = (label, find, make) => {
 
 /* 1 · the company line, in the crew card where the production company is credited */
 swap('crew card',
-  '<div class="crew-role">PRODUCTION COMPANY</div><div class="crew-name">D.C ALACRITY PRODUCTIONS</div><div class="crew-note">Wilmington, NC · pure@dcalacrity.com</div>',
+  '<div class="crew-role">PRODUCTION COMPANY</div><div class="crew-name">D.C ALACRITY PRODUCTIONS</div><div class="crew-note">Wilmington, NC · support@dcalacrity.com</div>',
   () => '<div class="crew-role">PRODUCTION COMPANY</div><div class="crew-name">D.C ALACRITY PRODUCTIONS</div>' +
-        '<div class="crew-note">The production arm of <a href="https://dcalacrity.com" style="color:var(--teal)">D.C Alacrity</a>, a technology and media company building the Experience Industry. Wilmington, NC · pure@dcalacrity.com</div>');
+        '<div class="crew-note">The production arm of <a href="https://dcalacrity.com" style="color:var(--teal)">D.C Alacrity</a>, a technology and media company building the Experience Industry. Wilmington, NC · support@dcalacrity.com</div>');
 
 /* 2 · the footer: the company, named as a company, with a way to reach it */
 swap('footer',

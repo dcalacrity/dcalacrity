@@ -1,0 +1,15 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "title": "Electric hour · recommended", "x": 0, "y": 0, "w": 1440, "h": 900 },
+    { "file": "Phone.dc.html", "title": "Electric hour · phone", "x": 1540, "y": 0, "w": 390, "h": 844 },
+    { "file": "Daylight.dc.html", "title": "Daylight", "x": 0, "y": 1180, "w": 1440, "h": 900 },
+    { "file": "Skybreak.dc.html", "title": "Skybreak · above the clouds", "x": 1540, "y": 1180, "w": 1440, "h": 900 }
+  ],
+  "annotations": [
+    { "id": "brief", "x": 0, "y": -230, "w": 560, "text": "Three sky directions, all blue and violet, no amber anywhere. Same copy, same mark and wordmark from the brand package, same story graph. Pick one and the site is rebuilt to it.\n\nEvery colour is measured from the package: ground #061018, cyan #00C2FF, violet #8143FF, white-hot #E7FAFF. The clouds are cut from the brand image itself." },
+    { "id": "electric", "x": 620, "y": -170, "w": 380, "text": "ELECTRIC HOUR — the hour after sunset. Indigo overhead, the sky still bright blue at the horizon, clouds lit from below in violet, the mark rising where the light is.\n\nWhy: keeps the cinematic depth and the dark product screens, and it is the brand's own navy with the sky let in.\nTrade-off: the least literal reading of the brand image, which is daylight." },
+    { "id": "daylight", "x": 0, "y": 1050, "w": 420, "text": "DAYLIGHT — the brand image as the whole world. Full blue sky, navy type, the hand raising the arrow.\n\nWhy: the boldest. A technology company in daylight is rare and instantly recognisable as this brand.\nTrade-off: the WebGL glow and the dark product screenshots need reworking for a light ground; the page must turn navy for the product sections." },
+    { "id": "skybreak", "x": 1540, "y": 1050, "w": 420, "text": "SKYBREAK — above the clouds. Deep blue-violet overhead, a cloud deck below, the graph lying on it like a flight path. The page scrolls DOWN through the deck into the navy product sections.\n\nWhy: gives the scroll a story — day above, the work below — and the most sky of the three.\nTrade-off: the busiest hero; the deck has to stay quiet under the copy." }
+  ],
+  "launch": { "view": "canvas" }
+}

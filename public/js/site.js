@@ -1,8 +1,7 @@
-/* dcalacrity.com — behaviour.
+/* dcalacrity.com — behaviour, sixth pass.
    Part 1: navigation, the contact form, the year. Runs everywhere.
-   Part 2: motion — the story graph in the hero, the reveals, the compiler
-   rail, the screen fan. Runs only where motion is allowed, and nothing in
-   the markup or CSS waits for it. See ../../DESIGN.md. */
+   Part 2: sections arriving, and the halftone plates — raw WebGL points, no
+   library. See ../../DESIGN.md §9. */
 
 (function () {
   "use strict";
@@ -26,32 +25,7 @@
   var onScroll = function () { if (top) top.classList.toggle("is-scrolled", window.scrollY > 16); };
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
-
   document.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = String(new Date().getFullYear()); });
-
-  /* the desktop nav's travelling highlight */
-  var nav = document.querySelector(".nav");
-  var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (nav && !calm && window.matchMedia("(min-width: 1024px)").matches) {
-    var ind = document.createElement("span");
-    ind.className = "nav__ind"; ind.setAttribute("aria-hidden", "true");
-    nav.appendChild(ind);
-    var items = [].slice.call(nav.querySelectorAll("a")).filter(function (a) { return !a.classList.contains("btn"); });
-    var current = nav.querySelector('a[aria-current="page"]');
-    var moveTo = function (el) {
-      if (!el) { nav.classList.remove("ind-on"); return; }
-      ind.style.width = el.offsetWidth + "px";
-      ind.style.transform = "translateX(" + el.offsetLeft + "px)";
-      nav.classList.add("ind-on");
-    };
-    var rest = function () { moveTo(current); };
-    items.forEach(function (a) { a.addEventListener("mouseenter", function () { moveTo(a); }); a.addEventListener("focus", function () { moveTo(a); }); });
-    nav.addEventListener("mouseleave", rest);
-    nav.addEventListener("focusout", function (e) { if (!nav.contains(e.relatedTarget)) rest(); });
-    rest();
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(rest);
-    window.addEventListener("resize", rest, { passive: true });
-  }
 
   /* contact form — the endpoint captures the lead before it emails, so the
      visitor is only handed a mail draft when the site itself is unreachable */
@@ -59,15 +33,8 @@
   if (form) {
     var status = document.querySelector("#contact-status");
     var submitBtn = document.querySelector("#contact-submit");
-    var setStatus = function (kind, text) {
-      if (!status) return;
-      status.hidden = false;
-      status.className = "form-status" + (kind ? " is-" + kind : "");
-      status.textContent = text;
-    };
-    var params = new URLSearchParams(window.location.search);
-    var topic = params.get("topic");
-    var sel = document.getElementById("topic");
+    var setStatus = function (kind, text) { if (!status) return; status.hidden = false; status.className = "form-status" + (kind ? " is-" + kind : ""); status.textContent = text; };
+    var params = new URLSearchParams(window.location.search), topic = params.get("topic"), sel = document.getElementById("topic");
     if (topic && sel) {
       var found = false;
       for (var i = 0; i < sel.options.length; i++) if (sel.options[i].value === topic) { sel.selectedIndex = i; found = true; break; }
@@ -76,8 +43,7 @@
     form.addEventListener("submit", async function (e) {
       e.preventDefault();
       form.querySelectorAll(".is-invalid").forEach(function (el) { el.classList.remove("is-invalid"); });
-      var data = new FormData(form);
-      var get = function (k) { return (data.get(k) || "").toString().trim(); };
+      var data = new FormData(form), get = function (k) { return (data.get(k) || "").toString().trim(); };
       var payload = { name: get("name"), email: get("email"), phone: get("phone"), organization: get("organization"), topic: get("topic"), projectType: get("projectType"), budget: get("budget"), timeline: get("timeline"), source: get("source"), message: get("message"), website: get("website") };
       var valid = true;
       ["name", "email", "topic", "message"].forEach(function (key) { var f = form.elements.namedItem(key); if (!payload[key] && f) { f.classList.add("is-invalid"); valid = false; } });
@@ -90,452 +56,375 @@
         var result = await res.json().catch(function () { return {}; });
         if (!res.ok || !result.ok) throw new Error(result.error || "Send failed");
         form.reset();
-        setStatus("success", result.message || (result.emailed === false
-          ? "Message received" + (result.ref ? " (ref " + result.ref + ")" : "") + ". We have it — no need to resend."
-          : "Message sent. We reply within two business days on commercial estimates."));
+        setStatus("success", result.message || (result.emailed === false ? "Message received" + (result.ref ? " (ref " + result.ref + ")" : "") + ". We have it — no need to resend." : "Message sent. We reply within two business days on commercial estimates."));
       } catch (err) {
         var subject = encodeURIComponent("[dcalacrity.com] " + (payload.topic || "Inquiry") + " — " + payload.name);
         var body = encodeURIComponent(["Name: " + payload.name, "Email: " + payload.email, "Phone: " + (payload.phone || "—"), "Organization: " + (payload.organization || "—"), "Topic: " + payload.topic, "Project type: " + (payload.projectType || "—"), "Budget: " + (payload.budget || "—"), "Timeline: " + (payload.timeline || "—"), "Found us via: " + (payload.source || "—"), "", payload.message].join("\n"));
-        setStatus("error", "Couldn’t reach us from the site just now — opening an email draft so nothing you wrote is lost. You can also write pure@dcalacrity.com directly.");
-        window.location.href = "mailto:pure@dcalacrity.com?subject=" + subject + "&body=" + body;
-      } finally {
-        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = "Send message"; }
-      }
+        setStatus("error", "Couldn’t reach us from the site just now — opening an email draft so nothing you wrote is lost. You can also write support@dcalacrity.com directly.");
+        window.location.href = "mailto:support@dcalacrity.com?subject=" + subject + "&body=" + body;
+      } finally { if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = "Send message"; } }
     });
   }
 })();
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   Motion. The rules: only transform, opacity and filter move; reduced motion
-   turns everything off, not down; WebGL never runs on a phone, under
-   reduced motion, with saveData, or on a machine that drops frames.
+   Part 2 — arrivals, and the halftone plates.
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
   "use strict";
+  var root = document.documentElement;
   var mq = function (q) { return !!(window.matchMedia && window.matchMedia(q).matches); };
-  var conn = navigator.connection || {};
   var ENV = {
     reduced: mq("(prefers-reduced-motion: reduce)"),
-    fine: mq("(hover: hover) and (pointer: fine)"),
-    phone: mq("(max-width: 768px)"),
-    tablet: mq("(max-width: 1023px)"),
-    saveData: !!conn.saveData
+    fine: mq("(pointer: fine)"),
+    save: !!(navigator.connection && navigator.connection.saveData)
   };
-  var hasGL = function () { try { var c = document.createElement("canvas"); return !!(c.getContext("webgl") || c.getContext("experimental-webgl")); } catch (_) { return false; } };
-  var G = window.gsap, ST = window.ScrollTrigger;
-  if (G && ST) G.registerPlugin(ST);
   window.DCA = window.DCA || {};
   window.DCA.env = ENV;
 
-  /* ── the story graph: the real topology of Right Here Right Now! ─────────
-     14 scene nodes, 18 choices, read from the shipped Alacrity Player bundle.
-     Columns are story progression and become depth; a node with no way out
-     is an ending. Labels are not drawn: the shape is the statement. */
-  var GRAPH = {
-    start: "event_zero",
-    nodes: [["event_zero", 80, 60], ["event_1A", 320, 60], ["event_2A", 320, 220], ["event_1B", 560, 60], ["event_2B", 560, 220], ["event_3B", 560, 380], ["event_4B", 560, 540], ["event_1C", 800, 60], ["event_2C", 800, 220], ["event_1D", 1040, 60], ["event_5D", 800, 540], ["event_9D", 800, 380], ["event_13D", 800, 700], ["event_16D", 800, 860]],
-    links: [["event_zero", "event_1A"], ["event_zero", "event_2A"], ["event_1A", "event_1B"], ["event_1A", "event_2B"], ["event_2A", "event_3B"], ["event_2A", "event_4B"], ["event_1B", "event_1C"], ["event_1B", "event_2C"], ["event_2B", "event_9D"], ["event_2B", "event_5D"], ["event_3B", "event_13D"], ["event_3B", "event_16D"], ["event_4B", "event_1C"], ["event_4B", "event_2C"], ["event_1C", "event_1D"], ["event_1C", "event_9D"], ["event_2C", "event_5D"], ["event_2C", "event_9D"]]
-  };
-  var ARC = [0.21, 0.84, 1.0], EMBER = [1.0, 0.70, 0.36], PLASMA = [0.69, 0.30, 1.0];
-
-  /* The graph is a plane — it was authored as one — so it is presented as a
-     plane in perspective rather than scattered into a cloud. Story order runs
-     along it and recedes to the right; branches stack across it. The result
-     still reads as the same diagram, which is the point. */
-  var PLANE = { turn: 0.66, along: 1.18, across: 0.78, x0: 2.2, y0: 0.62, z0: -1.5 };
-
-  function buildGraph() {
-    var byId = {}, outs = {};
-    GRAPH.links.forEach(function (l) { outs[l[0]] = (outs[l[0]] || 0) + 1; });
-    var ct = Math.cos(PLANE.turn), st = Math.sin(PLANE.turn);
-    var nodes = GRAPH.nodes.map(function (n, i) {
-      var col = Math.round((n[1] - 80) / 240);          /* 0..4 — story order */
-      var row = (n[2] - 460) / 400;                      /* -1..1 — which branch */
-      var along = col * PLANE.along - 3;
-      var wobble = Math.sin(i * 12.9898) * 0.06;         /* hand-placed, not a lattice */
-      var p = {
-        id: n[0],
-        x: along * ct + PLANE.x0 + wobble,
-        y: -row * PLANE.across + PLANE.y0 + wobble,
-        z: -along * st + PLANE.z0,
-        kind: n[0] === GRAPH.start ? "start" : (outs[n[0]] ? "scene" : "end")
-      };
-      p.c = p.kind === "start" ? EMBER : p.kind === "end" ? PLASMA : ARC;
-      byId[n[0]] = p;
-      return p;
-    });
-    var links = GRAPH.links.map(function (l, i) { return { a: byId[l[0]], b: byId[l[1]], phase: (i * 0.618) % 1, speed: 0.14 + ((i * 7) % 5) * 0.02 }; });
-    return { nodes: nodes, links: links };
+  /* ── sections arrive ─────────────────────────────────────────────────────
+     Whatever is already on screen is marked arrived BEFORE the hiding rule
+     can apply, so nothing above the fold ever blinks out and back. With no
+     script, or with motion turned down, nothing is ever hidden at all. */
+  var rises = [].slice.call(document.querySelectorAll("[data-rise]"));
+  if (!ENV.reduced && "IntersectionObserver" in window) {
+    var vh = window.innerHeight || 800;
+    rises.forEach(function (el) { if (el.getBoundingClientRect().top < vh * 0.94) el.classList.add("is-in"); });
+    root.classList.add("rise-ready");
+    var io = new IntersectionObserver(function (en) {
+      en.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add("is-in"); io.unobserve(x.target); } });
+    }, { rootMargin: "0px 0px -6% 0px" });
+    rises.forEach(function (el) { if (!el.classList.contains("is-in")) io.observe(el); });
+  } else {
+    rises.forEach(function (el) { el.classList.add("is-in"); });
   }
 
-  /* camera: a perspective projection with a pointer tilt and a scroll dolly */
-  function makeCamera() {
-    var cam = { z: 5.1, y: 0.5, tx: 0, ty: 0, dolly: 0, fov: 1.05 };
-    cam.project = function (p, w, h) {
-      var cz = cam.z - cam.dolly * 5.2;
-      var dx = p.x, dy = p.y - cam.y, dz = p.z - cz;
-      var ry = cam.tx * 0.35, rx = -0.16 + cam.ty * 0.25;
-      var x1 = dx * Math.cos(ry) - dz * Math.sin(ry), z1 = dx * Math.sin(ry) + dz * Math.cos(ry);
-      var y1 = dy * Math.cos(rx) - z1 * Math.sin(rx), z2 = dy * Math.sin(rx) + z1 * Math.cos(rx);
-      if (z2 > -0.2) return null;
-      var f = 1 / Math.tan(cam.fov / 2), aspect = w / h;
-      return { x: (x1 * f / aspect) / -z2, y: (y1 * f) / -z2, depth: -z2 };
-    };
-    return cam;
-  }
-
-  var stage = document.querySelector(".stage");
-  var graph = stage ? buildGraph() : null;
-  var cam = makeCamera();
-
-  /* Warmth by depth: the far end of the graph is nearer the sun, so it picks
-     up the key light. Same rule in the shader and in the SVG fallback, so the
-     two paths cannot look like different pages. */
-  var NEAR_W = 3.6, FAR_W = 8.4;
-  function warmth(depth) { return Math.min(1, Math.max(0, (depth - NEAR_W) / (FAR_W - NEAR_W))); }
-  function mix(a, b, t) { return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; }
-  function css(c) { return "rgb(" + c.map(function (v) { return Math.round(v * 255); }).join(",") + ")"; }
-
-  /* the fallback: the same graph, the same camera, drawn once as inline SVG */
-  var svgRaf = 0;
-  function drawSVG() {
-    if (!stage) return;
-    var old = stage.querySelector(".stage__svg");
-    var w = Math.max(320, stage.clientWidth), h = Math.max(320, stage.clientHeight);
-    var NS = "http://www.w3.org/2000/svg";
-    var svg = document.createElementNS(NS, "svg");
-    svg.setAttribute("class", "stage__svg");
-    svg.setAttribute("viewBox", "0 0 " + w + " " + h);
-    svg.setAttribute("preserveAspectRatio", "none");
-    svg.setAttribute("aria-hidden", "true");
-    var px = function (p) { var q = cam.project(p, w, h); return q ? { x: w / 2 + q.x * w / 2, y: h / 2 - q.y * h / 2, d: q.depth } : null; };
-    var g = document.createElementNS(NS, "g");
-    graph.links.forEach(function (l) {
-      var a = px(l.a), b = px(l.b); if (!a || !b) return;
-      var t = warmth((a.d + b.d) / 2);
-      var path = document.createElementNS(NS, "path");
-      var mid = px({ x: (l.a.x + l.b.x) / 2, y: (l.a.y + l.b.y) / 2 + 0.28, z: (l.a.z + l.b.z) / 2 });
-      path.setAttribute("d", mid
-        ? "M" + a.x.toFixed(1) + " " + a.y.toFixed(1) + " Q" + mid.x.toFixed(1) + " " + mid.y.toFixed(1) + " " + b.x.toFixed(1) + " " + b.y.toFixed(1)
-        : "M" + a.x.toFixed(1) + " " + a.y.toFixed(1) + "L" + b.x.toFixed(1) + " " + b.y.toFixed(1));
-      path.setAttribute("fill", "none");
-      path.setAttribute("stroke", css(mix(ARC, EMBER, t)));
-      path.setAttribute("stroke-opacity", (0.5 - t * 0.14).toFixed(2));
-      path.setAttribute("stroke-width", (2 - t * 0.9).toFixed(2));
-      g.appendChild(path);
-    });
-    graph.nodes.forEach(function (n) {
-      var p = px(n); if (!p) return;
-      var t = warmth(p.d);
-      var base = n.kind === "start" ? EMBER : n.kind === "end" ? PLASMA : ARC;
-      var c = css(mix(base, EMBER, t * 0.7));
-      var r = Math.max(3, 26 / p.d * 2.4);
-      var halo = document.createElementNS(NS, "circle");
-      halo.setAttribute("cx", p.x.toFixed(1)); halo.setAttribute("cy", p.y.toFixed(1));
-      halo.setAttribute("r", (r * 2.3).toFixed(1));
-      halo.setAttribute("fill", c); halo.setAttribute("fill-opacity", (0.16 - t * 0.05).toFixed(2));
-      var dot = document.createElementNS(NS, "circle");
-      dot.setAttribute("cx", p.x.toFixed(1)); dot.setAttribute("cy", p.y.toFixed(1));
-      dot.setAttribute("r", r.toFixed(1));
-      dot.setAttribute("fill", c); dot.setAttribute("fill-opacity", (0.95 - t * 0.25).toFixed(2));
-      g.appendChild(halo); g.appendChild(dot);
-    });
-    svg.appendChild(g);
-    if (old) old.replaceWith(svg); else stage.insertBefore(svg, stage.firstChild);
-  }
-  function redrawSVG() { if (svgRaf) return; svgRaf = requestAnimationFrame(function () { svgRaf = 0; if (stage.querySelector(".stage__svg")) drawSVG(); }); }
-
-  /* the WebGL graph: points and lines with perspective, additive glow,
-     a pulse travelling every choice. A few hundred vertices. */
-  function startGL() {
-    if (!stage || ENV.reduced || ENV.phone || ENV.saveData || !hasGL()) return false;
-    var c = document.createElement("canvas"); c.className = "stage__gl"; c.setAttribute("aria-hidden", "true");
-    var gl = c.getContext("webgl", { alpha: true, antialias: true, premultipliedAlpha: false, powerPreference: "low-power" });
-    if (!gl) return false;
-    /* WM is the key light's colour. Everything the far end of the graph is
-       made of drifts toward it, because that end is nearer the sun. */
-    var VS = "attribute vec3 p;attribute vec3 col;attribute float sz;uniform vec2 R;uniform vec3 C;uniform vec2 T;uniform float D;uniform vec3 WM;uniform float SC;varying vec3 vc;varying float va;" +
-      "void main(){float cz=C.z-D*5.2;vec3 d=vec3(p.x,p.y-C.y,p.z-cz);float ry=T.x*.35,rx=-.16+T.y*.25;" +
-      "float x1=d.x*cos(ry)-d.z*sin(ry),z1=d.x*sin(ry)+d.z*cos(ry);float y1=d.y*cos(rx)-z1*sin(rx),z2=d.y*sin(rx)+z1*cos(rx);" +
-      "float f=1./tan(.525);float a=R.x/R.y;float w=-z2;gl_Position=vec4(x1*f/a,y1*f,w*.1,w);" +
-      "float fog=clamp(1.-(w-2.2)/14.,0.,1.);va=pow(fog,1.25);" +
-      "float t=clamp((w-3.6)/4.8,0.,1.);vc=mix(col,WM,t*.72);" +
-      "gl_PointSize=sz*SC*clamp(3.6/w,.3,2.4);}";
-    /* A point is a soft disc, not a square. The wide, gentle falloff is what
-       makes a few hundred vertices read as light rather than as confetti. */
-    var FS = "precision mediump float;varying vec3 vc;varying float va;uniform float P;" +
-      "void main(){float a=va;if(P>.5){vec2 q=gl_PointCoord-.5;float r=length(q)*2.;if(r>1.)discard;" +
-      "float k=pow(1.-r,1.7);a*=k*(.42+.58*smoothstep(.55,0.,r));}gl_FragColor=vec4(vc,a);}";
-    function sh(t, s) { var o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; }
-    var prog;
-    try { prog = gl.createProgram(); gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS)); gl.linkProgram(prog); if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error("link"); } catch (e) { return false; }
-    gl.useProgram(prog);
-    var aP = gl.getAttribLocation(prog, "p"), aC = gl.getAttribLocation(prog, "col"), aS = gl.getAttribLocation(prog, "sz");
-    var uR = gl.getUniformLocation(prog, "R"), uC = gl.getUniformLocation(prog, "C"), uT = gl.getUniformLocation(prog, "T"), uD = gl.getUniformLocation(prog, "D"), uP = gl.getUniformLocation(prog, "P"), uW = gl.getUniformLocation(prog, "WM"), uSC = gl.getUniformLocation(prog, "SC");
-    gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE); gl.disable(gl.DEPTH_TEST);
-
-    /* geometry: floor grid, links as curved polylines, nodes, pulses */
-    var lines = [], SEG = 14;
-    var pushV = function (arr, x, y, z, c, s) { arr.push(x, y, z, c[0], c[1], c[2], s); };
-    var FLOOR = -1.5, DIM = [0.13, 0.30, 0.42];
-    for (var gx = -8; gx <= 8; gx++) { pushV(lines, gx, FLOOR, 2, DIM, 0); pushV(lines, gx, FLOOR, -16, DIM, 0); }
-    for (var gz = 2; gz >= -16; gz -= 1) { pushV(lines, -8, FLOOR, gz, DIM, 0); pushV(lines, 8, FLOOR, gz, DIM, 0); }
-    /* Links are drawn as a run of small lights rather than as GL LINES.
-       A GL line is one pixel wide whatever the screen, which at this scale
-       disappears; a trace of points carries depth, thickness and glow. */
-    var pts = [];
-    SEG = 26;
-    graph.links.forEach(function (l) {
-      for (var i = 0; i <= SEG; i++) {
-        var t = i / SEG, u = 1 - t;
-        var bx = (l.a.x + l.b.x) / 2, by = (l.a.y + l.b.y) / 2 + 0.3, bz = (l.a.z + l.b.z) / 2;
-        var x = u * u * l.a.x + 2 * u * t * bx + t * t * l.b.x;
-        var y = u * u * l.a.y + 2 * u * t * by + t * t * l.b.y;
-        var z = u * u * l.a.z + 2 * u * t * bz + t * t * l.b.z;
-        pushV(pts, x, y, z, ARC, 30);
-      }
-    });
-    /* Each node is three passes: a wide bloom, the body, and a white core. */
-    graph.nodes.forEach(function (n) {
-      var big = n.kind === "start" ? 260 : n.kind === "end" ? 210 : 175;
-      pushV(pts, n.x, n.y, n.z, n.c, big);
-      pushV(pts, n.x, n.y, n.z, n.c, big * 0.42);
-      pushV(pts, n.x, n.y, n.z, [1, 0.97, 0.9], n.kind === "start" ? 22 : 15);
-    });
-    var lineBuf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, lineBuf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(lines), gl.STATIC_DRAW);
-    var ptBuf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, ptBuf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(pts), gl.STATIC_DRAW);
-    var pulse = new Float32Array(graph.links.length * 7);
-    var pulseBuf = gl.createBuffer();
-    var bind = function (buf) {
-      gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-      gl.enableVertexAttribArray(aP); gl.vertexAttribPointer(aP, 3, gl.FLOAT, false, 28, 0);
-      gl.enableVertexAttribArray(aC); gl.vertexAttribPointer(aC, 3, gl.FLOAT, false, 28, 12);
-      gl.enableVertexAttribArray(aS); gl.vertexAttribPointer(aS, 1, gl.FLOAT, false, 28, 24);
-    };
-
-    var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-    var W = 2, H = 2;
-    var size = function () { var w = Math.max(2, Math.floor(stage.clientWidth * dpr)), h = Math.max(2, Math.floor(stage.clientHeight * dpr)); if (c.width !== w || c.height !== h) { c.width = w; c.height = h; W = w; H = h; gl.viewport(0, 0, w, h); } };
-    var tx = 0, ty = 0, gx2 = 0, gy2 = 0, visible = !document.hidden, onScreen = true, raf = 0, t0 = performance.now(), last = 0, fade = 0;
-    var slow = 0, checked = 0, alive = true;
-    var lineAlpha = 0.22;
-    function frame(now) {
-      raf = 0;
-      if (!alive || !visible || !onScreen) return;
-      var gap = now - last;
-      if (checked < 60 && last) { checked++; if (gap > 58) slow++; if (checked === 60 && slow > 12) { window.DCA.glDegraded = true; stop(); drawSVG(); return; } }
-      last = now; size();
-      fade = Math.min(1, fade + 0.02);
-      gx2 += (tx - gx2) * 0.06; gy2 += (ty - gy2) * 0.06;
-      var t = (now - t0) / 1000;
-      var breathe = Math.sin(t * 0.35) * 0.02;
-      gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.uniform2f(uR, W, H); gl.uniform3f(uC, 0, cam.y + breathe, cam.z); gl.uniform2f(uT, gx2, gy2); gl.uniform1f(uD, cam.dolly);
-      gl.uniform3f(uW, EMBER[0], EMBER[1], EMBER[2]);
-      /* Point sizes are in device pixels, so they scale with the canvas — a
-         node must not shrink because the screen is denser. */
-      gl.uniform1f(uSC, H / 900);
-      /* the floor */
-      gl.uniform1f(uP, 0); bind(lineBuf);
-      gl.drawArrays(gl.LINES, 0, lines.length / 7);
-      /* the graph */
-      gl.uniform1f(uP, 1); bind(ptBuf);
-      gl.drawArrays(gl.POINTS, 0, pts.length / 7);
-      /* pulses: one light travelling each choice */
-      for (var i = 0; i < graph.links.length; i++) {
-        var l = graph.links[i], k = (t * l.speed + l.phase) % 1, u = 1 - k;
-        var by = (l.a.y + l.b.y) / 2 + 0.28, bz = (l.a.z + l.b.z) / 2, bx = (l.a.x + l.b.x) / 2;
-        var o = i * 7;
-        pulse[o] = u * u * l.a.x + 2 * u * k * bx + k * k * l.b.x; pulse[o + 1] = u * u * l.a.y + 2 * u * k * by + k * k * l.b.y; pulse[o + 2] = u * u * l.a.z + 2 * u * k * bz + k * k * l.b.z;
-        var e = Math.sin(k * Math.PI);
-        pulse[o + 3] = 0.7 + 0.3 * e; pulse[o + 4] = 0.95; pulse[o + 5] = 1; pulse[o + 6] = 36 * e + 7;
-      }
-      gl.bindBuffer(gl.ARRAY_BUFFER, pulseBuf); gl.bufferData(gl.ARRAY_BUFFER, pulse, gl.DYNAMIC_DRAW); bind(pulseBuf);
-      gl.drawArrays(gl.POINTS, 0, graph.links.length);
-      c.style.opacity = String(fade * (1 - Math.min(1, cam.dolly * 1.4)));
-      raf = requestAnimationFrame(frame);
-    }
-    function kick() { if (!raf && alive && visible && onScreen) raf = requestAnimationFrame(frame); }
-    function stop() { alive = false; if (raf) cancelAnimationFrame(raf); raf = 0; try { c.remove(); } catch (_) {} window.DCA.gl = null; }
-    if (ENV.fine) {
-      stage.addEventListener("pointermove", function (e) { var r = stage.getBoundingClientRect(); tx = (e.clientX - r.left) / r.width - 0.5; ty = (e.clientY - r.top) / r.height - 0.5; }, { passive: true });
-      stage.addEventListener("pointerleave", function () { tx = 0; ty = 0; });
-    }
-    document.addEventListener("visibilitychange", function () { visible = !document.hidden; kick(); });
-    if ("IntersectionObserver" in window) { new IntersectionObserver(function (en) { onScreen = en[0].isIntersecting; kick(); }, { threshold: 0.02 }).observe(stage); }
-    window.addEventListener("resize", function () { size(); }, { passive: true });
-    c.style.opacity = "0";
-    stage.insertBefore(c, stage.firstChild);
-    window.DCA.gl = { canvas: c, stop: stop, cam: cam };
-    kick();
-    return true;
-  }
-
-  if (stage) {
-    var ok = false;
-    try { ok = startGL(); } catch (e) { ok = false; }
-    if (!ok) drawSVG();
-    /* the scroll dolly: the camera moves into the graph as the hero leaves */
-    var dollyFrame = function () {
-      var r = stage.getBoundingClientRect();
-      var p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height * 0.9)));
-      cam.dolly = p;
-    };
-    if (!ENV.reduced) { window.addEventListener("scroll", dollyFrame, { passive: true }); dollyFrame(); }
-    window.addEventListener("resize", redrawSVG, { passive: true });
-  }
-
-  /* ── the proof that the stage costs nothing ─────────────────────────── */
+  /* ── the proof that the page costs nothing ─────────────────────────────── */
   window.DCA.measure = function (ms) {
     return new Promise(function (resolve) {
-      var t = performance.now(), last = t, n = 0, over32 = 0, over50 = 0, worst = 0, sum = 0;
-      (function tick(now) {
-        var d = now - last; last = now;
-        if (n > 0) { sum += d; if (d > 32) over32++; if (d > 50) over50++; if (d > worst) worst = d; }
-        n++;
-        if (now - t < (ms || 2000)) requestAnimationFrame(tick);
-        else resolve({ frames: n, over32: over32, over50: over50, worst: Math.round(worst * 10) / 10, avg: Math.round(sum / Math.max(1, n - 1) * 10) / 10, gl: !!window.DCA.gl });
-      })(t);
+      var t = performance.now(), last = t, n = 0, over32 = 0, worst = 0, sum = 0;
+      (function tick(now) { var d = now - last; last = now; if (n > 0) { sum += d; if (d > 32) over32++; if (d > worst) worst = d; } n++; if (now - t < (ms || 2000)) requestAnimationFrame(tick); else resolve({ frames: n, over32: over32, worst: Math.round(worst * 10) / 10, avg: Math.round(sum / Math.max(1, n - 1) * 10) / 10, plates: (window.DCA.plates || []).map(function (p) { return p.mode + ":" + p.points + (p.live ? "" : ":static"); }) }); })(t);
     });
   };
 
-  if (ENV.reduced || !G) return;
+  /* ═══ the plates ══════════════════════════════════════════════════════════
+     A halftone: one dot per cell of a screen, its SIZE following brightness.
+     It is drawn as GL points — one vertex per cell — so every per-cell sum
+     (the smoke, the graph, the pointer's lens) runs once per dot in the
+     vertex shader and the fragment shader only has to draw a disc.
 
-  /* ── progress rail ──────────────────────────────────────────────────── */
-  var prog = document.createElement("div"); prog.className = "progress"; prog.setAttribute("aria-hidden", "true");
-  var fill = document.createElement("i"); prog.appendChild(fill); document.body.appendChild(prog);
-  var pTick = false;
-  var pFrame = function () { pTick = false; var doc = document.documentElement; var max = (doc.scrollHeight - window.innerHeight) || 1; fill.style.transform = "scaleX(" + Math.min(1, Math.max(0, window.scrollY / max)) + ")"; };
-  window.addEventListener("scroll", function () { if (!pTick) { pTick = true; requestAnimationFrame(pFrame); } }, { passive: true });
-  pFrame();
+     'graph' plates draw a branching story: nodes and edges as denser dots,
+     and a playhead that walks from the start, CHOOSES at every fork, and
+     lights the route it took, until it reaches an ending and begins again.
+     'image' plates halftone a picture — the page's own subject — sampled
+     once per cell on the CPU and drifted by the same slow smoke.
 
-  /* ── the hero's one orchestrated moment ─────────────────────────────── */
-  var h1 = document.querySelector(".stage h1");
-  function splitWords(node) {
-    [].slice.call(node.childNodes).forEach(function (child) {
-      if (child.nodeType === 3) {
-        var parts = String(child.nodeValue).split(/(\s+)/), frag = document.createDocumentFragment();
-        parts.forEach(function (part) {
-          if (!part) return;
-          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
-          var box = document.createElement("span"); box.className = "w";
-          var inner = document.createElement("span"); inner.textContent = part; box.appendChild(inner); frag.appendChild(box);
-        });
-        node.replaceChild(frag, child);
-      } else if (child.nodeType === 1 && !child.classList.contains("w")) splitWords(child);
-    });
-  }
-  if (h1 && stage) {
-    splitWords(h1);
-    var words = h1.querySelectorAll(".w > span");
-    var tl = G.timeline({ defaults: { ease: "expo.out" } });
-    tl.from(words, { yPercent: 110, duration: 1.1, stagger: 0.07 }, 0.15)
-      .from(stage.querySelectorAll(".stage__copy .eyebrow, .stage .lede, .stage .btn-row, .stage__aside > *"), { y: 26, opacity: 0, duration: 0.9, stagger: 0.08 }, 0.55)
-      .fromTo(".stage__key", { opacity: 0, rotate: -10 }, { opacity: 0.9, rotate: 0, duration: 1.4, ease: "power2.out" }, 0.4)
-      .to(".stage__key", { opacity: 0.35, rotate: 5, duration: 2.2, ease: "power1.inOut" }, 1.8);
-    G.to(".stage__key", { rotate: "+=6", duration: 14, repeat: -1, yoyo: true, ease: "sine.inOut", delay: 4 });
-  }
+     No WebGL, reduced motion, save-data: the CSS dot screen under the canvas
+     stays (no WebGL), or one still frame is drawn with a finished route
+     (reduced motion). A watchdog stills everything if frames run long. ── */
+  var hosts = [].slice.call(document.querySelectorAll("[data-plate]"));
+  window.DCA.plates = [];
+  if (!hosts.length) return;
 
-  /* ── sections rise; flats stand up out of the floor ──────────────────── */
-  ST.batch("[data-rise]", {
-    start: "top 88%",
-    once: true,
-    onEnter: function (els) { G.from(els, { y: 42, opacity: 0, duration: 1.05, ease: "expo.out", stagger: 0.08, clearProps: "transform,opacity" }); }
-  });
-  G.utils.toArray(".stagey").forEach(function (sec) {
-    var flats = sec.querySelectorAll("[data-flat]");
-    if (!flats.length) return;
-    ST.batch(flats, {
-      start: "top 90%",
-      once: true,
-      onEnter: function (els) { G.from(els, { rotateX: 16, y: 56, opacity: 0, transformOrigin: "50% 100%", transformPerspective: 1400, duration: 1.2, ease: "expo.out", stagger: 0.09, clearProps: "transform,opacity" }); }
-    });
-  });
+  var probe = document.createElement("canvas");
+  var probeGL = null;
+  try { probeGL = probe.getContext("webgl", { failIfMajorPerformanceCaveat: true }) || probe.getContext("experimental-webgl"); } catch (_) {}
+  if (!probeGL) return;
+  var ext = probeGL.getExtension("WEBGL_lose_context");
+  if (ext) ext.loseContext();
 
-  /* ── the compiler rail — pinned dolly on a laptop, a snap strip below ── */
-  var rail = document.querySelector(".rail");
-  if (rail) {
-    var mm = G.matchMedia();
-    mm.add("(min-width: 1024px)", function () {
-      var track = rail.querySelector(".rail__track"), nodes = G.utils.toArray(rail.querySelectorAll(".node"));
-      /* The focused card sits near the left edge and the rest recede to the
-         right and back, so the rail reads in the direction it is read in. */
-      var STEP_X = 300, STEP_Z = 380, BASE_X = -474, n = nodes.length;
-      nodes.forEach(function (el, i) { el.style.transform = "translate3d(" + (i * STEP_X) + "px,0," + (-i * STEP_Z) + "px)"; el.style.opacity = "1"; });
-      track.style.transform = "translate3d(" + BASE_X + "px,0,0)";
-      var st = ST.create({
-        trigger: rail, start: "top top", end: "+=" + (n * 640), pin: rail.querySelector(".rail__pin"), scrub: 0.8,
-        onUpdate: function (self) {
-          var p = self.progress * (n - 1);
-          track.style.transform = "translate3d(" + (BASE_X - p * STEP_X) + "px,0," + (p * STEP_Z) + "px)";
-          nodes.forEach(function (el, i) {
-            var d = i - p;
-            var op = d < -0.6 ? Math.max(0, 1 - (-d - 0.6) * 1.6) : Math.max(0.18, 1 - Math.abs(d) * 0.33);
-            el.style.opacity = String(op);
-            var flat = el.firstElementChild; if (flat) flat.style.filter = Math.abs(d) < 0.5 ? "none" : "brightness(" + (0.9 - Math.min(0.45, Math.abs(d) * 0.18)) + ")";
-          });
-        }
-      });
-      return function () { st.kill(); nodes.forEach(function (el) { el.style.transform = ""; el.style.opacity = ""; }); track.style.transform = ""; };
-    });
-  }
+  var hex = function (h) { h = h.replace("#", "").trim(); if (h.length === 3) h = h.replace(/./g, "$&$&"); var n = parseInt(h, 16); return [(n >> 16 & 255) / 255, (n >> 8 & 255) / 255, (n & 255) / 255]; };
+  var cs = getComputedStyle(root);
+  var tok = function (name, fb) { var v = cs.getPropertyValue(name).trim(); return hex(v || fb); };
+  var COL = { tide: tok("--c-tide", "#15313b"), mist: tok("--c-mist", "#a5b7bf"), paper: tok("--c-paper", "#f7fafb"), spark: tok("--c-spark", "#00c2ff") };
 
-  /* ── the app's screens, fanned in depth ─────────────────────────────── */
-  var fan = document.querySelector(".fan");
-  if (fan) {
-    var shots = [].slice.call(fan.querySelectorAll(".fan__shot")), dots = [].slice.call(fan.querySelectorAll(".fan__dots button"));
-    var order = ["is-a", "is-b", "is-c", "is-d"], cur = 0, timer = 0;
-    var show = function (idx) {
-      cur = idx;
-      shots.forEach(function (s, i) { s.className = "fan__shot " + order[Math.min(order.length - 1, (i - idx + shots.length) % shots.length)]; });
-      dots.forEach(function (d, i) { d.setAttribute("aria-current", i === idx ? "true" : "false"); });
-    };
-    var next = function () { show((cur + 1) % shots.length); };
-    var arm = function () { clearInterval(timer); timer = setInterval(next, 4600); };
-    dots.forEach(function (d, i) { d.addEventListener("click", function () { show(i); arm(); }); });
-    show(0);
-    if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { if (en[0].isIntersecting) arm(); else clearInterval(timer); }, { threshold: 0.2 }).observe(fan); else arm();
-    if (ENV.fine && !ENV.tablet) {
-      var fx = 0, fy = 0, fraf = 0;
-      var apply = function () { fraf = 0; fan.style.transform = "rotateY(" + (fx * 6).toFixed(2) + "deg) rotateX(" + (-fy * 4).toFixed(2) + "deg)"; };
-      fan.style.transformStyle = "preserve-3d"; fan.style.transition = "transform .6s cubic-bezier(.16,1,.3,1)";
-      fan.addEventListener("pointermove", function (e) { var r = fan.getBoundingClientRect(); fx = (e.clientX - r.left) / r.width - 0.5; fy = (e.clientY - r.top) / r.height - 0.5; if (!fraf) fraf = requestAnimationFrame(apply); });
-      fan.addEventListener("pointerleave", function () { fx = 0; fy = 0; if (!fraf) fraf = requestAnimationFrame(apply); });
+  var MAXSEG = 26, MAXNODE = 18;
+  var VS = [
+    "precision highp float;",
+    "attribute vec2 a_pos; attribute float a_val;",
+    "uniform vec2 u_res; uniform float u_cell; uniform float u_time; uniform float u_mode;",
+    "uniform vec2 u_ptr; uniform float u_lens;",
+    "uniform vec4 u_seg[" + MAXSEG + "]; uniform float u_lit[" + MAXSEG + "]; uniform int u_nseg;",
+    "uniform vec3 u_node[" + MAXNODE + "]; uniform int u_nnode; uniform vec3 u_head;",
+    "uniform vec3 u_tide; uniform vec3 u_mist; uniform vec3 u_paper; uniform vec3 u_spark;",
+    "varying vec3 v_col; varying float v_size;",
+    "float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }",
+    "float noise(vec2 p) { vec2 i = floor(p), f = fract(p); vec2 u = f * f * (3.0 - 2.0 * f);",
+    "  return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), u.x), mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x), u.y); }",
+    "float fbm(vec2 p) { float v = 0.0, a = 0.5; for (int i = 0; i < 4; i++) { v += a * noise(p); p = p * 2.03 + vec2(1.7, 9.2); a *= 0.5; } return v; }",
+    "float sd(vec2 p, vec4 s) { vec2 pa = p - s.xy, ba = s.zw - s.xy; float h = clamp(dot(pa, ba) / max(dot(ba, ba), 0.001), 0.0, 1.0); return length(pa - ba * h); }",
+    "void main() {",
+    "  vec2 uv = a_pos / u_res;",
+    "  vec2 q = a_pos / max(u_res.y, 1.0);",
+    "  float t = u_time;",
+    "  vec2 w = vec2(fbm(q * 1.4 + vec2(t * 0.020, -t * 0.013)), fbm(q * 1.4 + vec2(5.2, 1.3) - t * 0.017));",
+    "  float smoke = fbm(q * 2.1 + w * 1.5 + vec2(t * 0.008, 0.0));",
+    "  float edge = smoothstep(0.0, 0.16, uv.x) * smoothstep(1.0, 0.84, uv.x) * smoothstep(0.0, 0.2, uv.y) * smoothstep(1.0, 0.8, uv.y);",
+    "  float b; vec3 col;",
+    "  if (u_mode < 0.5) {",
+    "    float s = smoothstep(0.40, 0.86, smoke) * (0.3 + 0.7 * edge);",
+    "    float sig = u_cell * 1.05; float g = 0.0; float lit = 0.0;",
+    "    for (int i = 0; i < " + MAXSEG + "; i++) { if (i >= u_nseg) break; float d = sd(a_pos, u_seg[i]); float k = exp(-d * d / (2.0 * sig * sig)); g = max(g, k * (0.5 + 0.5 * u_lit[i])); lit = max(lit, k * u_lit[i]); }",
+    "    float nd = 0.0; float end = 0.0;",
+    "    for (int i = 0; i < " + MAXNODE + "; i++) { if (i >= u_nnode) break; float r = u_cell * (1.35 + 0.55 * u_node[i].z); float d = length(a_pos - u_node[i].xy); float k = exp(-d * d / (2.0 * r * r)); nd = max(nd, k); end = max(end, k * u_node[i].z); }",
+    "    float hd = length(a_pos - u_head.xy); float hr = u_cell * 2.4; float head = u_head.z * exp(-hd * hd / (2.0 * hr * hr));",
+    "    b = max(s * 0.52, max(g * 0.74, max(nd * 0.95, head)));",
+    "    col = mix(u_tide, u_mist, s);",
+    "    col = mix(col, u_mist, max(g, nd) * 0.9);",
+    "    col = mix(col, u_paper, end * 0.85);",
+    "    col = mix(col, u_spark, clamp(max(lit, head), 0.0, 1.0));",
+    "  } else {",
+    "    b = clamp(a_val + (smoke - 0.5) * 0.24, 0.0, 1.0) * (0.55 + 0.45 * edge);",
+    "    col = mix(u_tide, u_mist, smoothstep(0.12, 0.72, b));",
+    "    col = mix(col, u_paper, smoothstep(0.8, 1.0, b) * 0.8);",
+    "  }",
+    "  float pd = length(a_pos - u_ptr); float lr = u_cell * 15.0; float lens = u_lens * exp(-pd * pd / (2.0 * lr * lr));",
+    "  float size = u_cell * sqrt(clamp(b, 0.0, 1.0)) * (0.98 + 0.42 * lens);",
+    "  v_size = size; v_col = col;",
+    "  gl_PointSize = size;",
+    "  gl_Position = vec4(uv.x * 2.0 - 1.0, 1.0 - uv.y * 2.0, 0.0, 1.0);",
+    "}"
+  ].join("\n");
+  var FS = [
+    "precision mediump float;",
+    "varying vec3 v_col; varying float v_size;",
+    "void main() {",
+    "  if (v_size < 0.8) discard;",
+    "  vec2 c = gl_PointCoord * 2.0 - 1.0;",
+    "  float a = clamp((1.0 - length(c)) * v_size * 0.5 + 0.5, 0.0, 1.0);",
+    "  if (a <= 0.0) discard;",
+    "  gl_FragColor = vec4(v_col * a, a);",
+    "}"
+  ].join("\n");
+
+  /* the story graph — a small branching film. x across (0..1), y down (0..1).
+     Four endings, a merge in the middle: the shape of a real branching script,
+     not a tree that only ever divides. */
+  var NODES = [
+    [0.00, 0.50], [0.16, 0.30], [0.16, 0.70], [0.33, 0.16], [0.33, 0.50], [0.33, 0.84],
+    [0.50, 0.34], [0.50, 0.68], [0.67, 0.18], [0.67, 0.50], [0.67, 0.82],
+    [0.84, 0.10], [0.84, 0.38], [0.84, 0.64], [0.84, 0.92], [1.00, 0.28], [1.00, 0.74]
+  ];
+  var EDGES = [[0, 1], [0, 2], [1, 3], [1, 4], [2, 4], [2, 5], [3, 6], [4, 6], [4, 7], [5, 7], [6, 8], [6, 9], [7, 9], [7, 10],
+    [8, 11], [8, 12], [9, 12], [9, 13], [10, 13], [10, 14], [12, 15], [13, 15], [13, 16]];
+  var OUT = NODES.map(function (_, n) { var o = []; EDGES.forEach(function (e, i) { if (e[0] === n) o.push(i); }); return o; });
+  var ENDING = NODES.map(function (_, n) { return OUT[n].length === 0; });
+  var STILL_ROUTE = [1, 4, 8, 13, 18, 22];   /* the route drawn when motion is off */
+
+  function Plate(el) {
+    this.el = el;
+    this.mode = el.getAttribute("data-plate") === "image" ? "image" : "graph";
+    this.src = el.getAttribute("data-src");
+    this.visible = true;
+    this.ready = this.mode === "graph";
+    this.points = 0;
+    this.ptr = [-1e5, -1e5]; this.lensTarget = 0; this.lens = 0;
+    this.seed = Math.random() * 100;
+    var c = this.canvas = document.createElement("canvas");
+    el.appendChild(c);
+    var gl = this.gl = c.getContext("webgl", { premultipliedAlpha: true, antialias: false, alpha: true, depth: false, stencil: false, powerPreference: "low-power" });
+    if (!gl) { this.dead = true; c.remove(); return; }
+    /* the dots are GL points; a driver that cannot draw a point this size cannot draw the plate */
+    var range = gl.getParameter(gl.ALIASED_POINT_SIZE_RANGE);
+    if (range && range[1] < 24) { this.dead = true; c.remove(); return; }
+    var self = this;
+    c.addEventListener("webglcontextlost", function (e) { e.preventDefault(); self.dead = true; el.classList.remove("is-live"); });
+    var sh = function (t, src) { var o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; };
+    var pr = this.prog = gl.createProgram();
+    gl.attachShader(pr, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, FS)); gl.linkProgram(pr);
+    if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(pr));
+    gl.useProgram(pr);
+    this.U = {};
+    ["u_res", "u_cell", "u_time", "u_mode", "u_ptr", "u_lens", "u_seg", "u_lit", "u_nseg", "u_node", "u_nnode", "u_head", "u_tide", "u_mist", "u_paper", "u_spark"].forEach(function (n) { self.U[n] = gl.getUniformLocation(pr, n); });
+    this.aPos = gl.getAttribLocation(pr, "a_pos"); this.aVal = gl.getAttribLocation(pr, "a_val");
+    this.bPos = gl.createBuffer(); this.bVal = gl.createBuffer();
+    gl.uniform3fv(this.U.u_tide, COL.tide); gl.uniform3fv(this.U.u_mist, COL.mist); gl.uniform3fv(this.U.u_paper, COL.paper); gl.uniform3fv(this.U.u_spark, COL.spark);
+    gl.uniform1f(this.U.u_mode, this.mode === "image" ? 1 : 0);
+    gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+    gl.clearColor(0, 0, 0, 0);
+    /* the story's own state */
+    this.lit = new Float32Array(EDGES.length);
+    this.S = { at: 0, edge: -1, t: 0, dur: 1, hold: 0.9, phase: "hold", fade: 1, pulse: 0 };
+    if (this.mode === "image" && this.src) this.load();
+    if (ENV.fine && !ENV.reduced) {
+      var host = el.closest(".stage, .close__plate, .desk__side, .lost, .phero") || el;
+      host.addEventListener("pointermove", function (e) { var r = c.getBoundingClientRect(); self.ptr = [(e.clientX - r.left) * self.dpr, (e.clientY - r.top) * self.dpr]; self.lensTarget = 1; kick(); }, { passive: true });
+      host.addEventListener("pointerleave", function () { self.lensTarget = 0; });
     }
   }
 
-  if (!ENV.fine) return;   /* everything below is a hover behaviour */
+  Plate.prototype.size = function () {
+    if (this.dead) return;
+    var el = this.el, dpr = this.dpr = Math.min(2, window.devicePixelRatio || 1);
+    var w = Math.max(2, Math.round(el.clientWidth * dpr)), h = Math.max(2, Math.round(el.clientHeight * dpr));
+    if (w === this.w && h === this.h) return;
+    this.w = w; this.h = h;
+    this.canvas.width = w; this.canvas.height = h;
+    var cssCell = el.clientWidth < 700 ? 6 : 7;
+    var cell = this.cell = cssCell * dpr;
+    /* a halftone screen: rows offset by half a cell, like the print it imitates */
+    var rowH = cell * 0.866;
+    var cols = Math.ceil(w / cell) + 1, rows = Math.ceil(h / rowH) + 1;
+    var n = cols * rows, pos = new Float32Array(n * 2), k = 0;
+    for (var y = 0; y < rows; y++) for (var x = 0; x < cols; x++) { pos[k++] = (x + (y & 1 ? 0.5 : 0)) * cell; pos[k++] = y * rowH + cell * 0.5; }
+    this.cols = cols; this.rows = rows; this.rowH = rowH; this.points = n;
+    var gl = this.gl;
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.bPos); gl.bufferData(gl.ARRAY_BUFFER, pos, gl.STATIC_DRAW);
+    gl.viewport(0, 0, w, h);
+    gl.uniform2f(this.U.u_res, w, h); gl.uniform1f(this.U.u_cell, cell);
+    if (this.mode === "graph") this.layout(); else this.sample();
+  };
 
-  /* ── spotlight follows the pointer across flats and rows ─────────────── */
-  document.addEventListener("pointermove", function (e) {
-    var el = e.target.closest && e.target.closest(".flat, .area");
-    if (!el) return;
-    var r = el.getBoundingClientRect();
-    el.style.setProperty("--mx", ((e.clientX - r.left) / r.width * 100).toFixed(1) + "%");
-    el.style.setProperty("--my", ((e.clientY - r.top) / r.height * 100).toFixed(1) + "%");
-  }, { passive: true });
-
-  /* ── flats lean toward the pointer, shallow on purpose ───────────────── */
-  G.utils.toArray("[data-tilt]").forEach(function (el) {
-    var raf = 0, rx = 0, ry = 0;
-    var apply = function () { raf = 0; el.style.transform = "perspective(1000px) rotateX(" + rx.toFixed(2) + "deg) rotateY(" + ry.toFixed(2) + "deg) translateZ(0)"; };
-    el.addEventListener("pointermove", function (e) {
-      var r = el.getBoundingClientRect();
-      ry = ((e.clientX - r.left) / r.width - 0.5) * 6; rx = (0.5 - (e.clientY - r.top) / r.height) * 6;
-      if (!raf) raf = requestAnimationFrame(apply);
+  /* the graph in pixels: clear of the nav above and the captions below */
+  Plate.prototype.layout = function () {
+    var w = this.w, h = this.h, narrow = this.el.clientWidth < 700;
+    /* a portrait plate (a phone) runs the story top to bottom, the way the
+       page itself is read there; a landscape one runs it left to right */
+    var tall = h > w * 0.9;
+    var x0 = w * (tall ? 0.14 : narrow ? 0.09 : 0.1), x1 = w * (tall ? 0.86 : narrow ? 0.91 : 0.9);
+    var y0 = h * (tall ? 0.17 : narrow ? 0.26 : 0.24), y1 = h * (tall ? 0.74 : narrow ? 0.72 : 0.76);
+    var seed = this.seed;
+    var jit = function (i, k) { var v = Math.sin(i * 12.9898 + k * 78.233 + seed) * 43758.5453; return (v - Math.floor(v)) - 0.5; };
+    this.P = NODES.map(function (p, i) {
+      var along = p[0], across = p[1];
+      return tall
+        ? [x0 + (x1 - x0) * across + jit(i, 1) * w * 0.03, y0 + (y1 - y0) * along + jit(i, 2) * h * 0.012]
+        : [x0 + (x1 - x0) * along + jit(i, 1) * w * 0.018, y0 + (y1 - y0) * across + jit(i, 2) * h * 0.05];
     });
-    el.addEventListener("pointerleave", function () { if (raf) cancelAnimationFrame(raf); raf = 0; el.style.transform = ""; });
-  });
+    var seg = new Float32Array(MAXSEG * 4), self = this;
+    EDGES.forEach(function (e, i) { var a = self.P[e[0]], b = self.P[e[1]]; seg.set([a[0], a[1], b[0], b[1]], i * 4); });
+    this.seg = seg;
+    var node = new Float32Array(MAXNODE * 3);
+    this.P.forEach(function (p, i) { node.set([p[0], p[1], ENDING[i] ? 1 : 0], i * 3); });
+    var gl = this.gl;
+    gl.uniform3fv(this.U.u_node, node); gl.uniform1i(this.U.u_nnode, NODES.length);
+  };
 
-  /* ── buttons acknowledge the cursor without chasing it ───────────────── */
-  G.utils.toArray(".btn").forEach(function (btn) {
-    var raf = 0, dx = 0, dy = 0;
-    var apply = function () { raf = 0; btn.style.transform = "translate(" + dx.toFixed(1) + "px," + dy.toFixed(1) + "px)"; };
-    btn.addEventListener("pointermove", function (e) {
-      var r = btn.getBoundingClientRect();
-      dx = Math.max(-5, Math.min(5, (e.clientX - (r.left + r.width / 2)) * 0.16)); dy = Math.max(-4, Math.min(4, (e.clientY - (r.top + r.height / 2)) * 0.16));
-      if (!raf) raf = requestAnimationFrame(apply);
-    });
-    btn.addEventListener("pointerleave", function () { if (raf) cancelAnimationFrame(raf); raf = 0; btn.style.transform = ""; });
-  });
+  /* an image, once per cell: cover-fit, luminance, a curve that lets the
+     shadows fall away so the dots carry the shape rather than the murk */
+  Plate.prototype.load = function () {
+    var self = this, img = new Image();
+    img.decoding = "async";
+    img.onload = function () { self.img = img; self.sample(); self.ready = true; draw1(self); kick(); };
+    img.src = this.src;
+  };
+  Plate.prototype.sample = function () {
+    if (!this.img || !this.cols) return;
+    var cols = this.cols, rows = this.rows, cv = document.createElement("canvas");
+    cv.width = cols; cv.height = rows;
+    var cx = cv.getContext("2d", { willReadFrequently: true });
+    var iw = this.img.naturalWidth, ih = this.img.naturalHeight;
+    var aspect = (cols * this.cell) / (rows * this.rowH);
+    var sw = iw, sh = iw / aspect; if (sh > ih) { sh = ih; sw = ih * aspect; }
+    cx.drawImage(this.img, (iw - sw) / 2, (ih - sh) / 2, sw, sh, 0, 0, cols, rows);
+    var d; try { d = cx.getImageData(0, 0, cols, rows).data; } catch (_) { return; }
+    /* levels from the 3rd and 97th percentile, not the extremes: a night
+       scene is mostly shadow, and min/max would leave only the moon */
+    var val = new Float32Array(cols * rows), hist = new Uint32Array(256), i;
+    for (i = 0; i < val.length; i++) { var l = (0.2126 * d[i * 4] + 0.7152 * d[i * 4 + 1] + 0.0722 * d[i * 4 + 2]) / 255; val[i] = l; hist[Math.min(255, Math.floor(l * 256))]++; }
+    var pct = function (q) { var want = val.length * q, acc = 0; for (var j = 0; j < 256; j++) { acc += hist[j]; if (acc >= want) return j / 255; } return 1; };
+    var lo = pct(0.03), hi = pct(0.97), span = Math.max(0.08, hi - lo);
+    for (i = 0; i < val.length; i++) { var v = Math.max(0, Math.min(1, (val[i] - lo) / span)); v = v * v * (3 - 2 * v); val[i] = Math.pow(v, 0.85); }
+    var gl = this.gl;
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.bVal); gl.bufferData(gl.ARRAY_BUFFER, val, gl.STATIC_DRAW);
+    this.hasVal = true;
+  };
+
+  var ease = function (x) { return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+
+  /* the playhead: walk, choose, light the route, reach an ending, begin again */
+  Plate.prototype.step = function (dt) {
+    var S = this.S, P = this.P;
+    if (!P) return [0, 0, 0];
+    if (S.phase === "hold") {
+      S.hold -= dt;
+      if (S.hold <= 0) {
+        var o = OUT[S.at];
+        if (!o.length) { S.phase = "fade"; S.fade = 1.3; }
+        else {
+          S.edge = o[Math.floor(Math.random() * o.length)];
+          var a = P[EDGES[S.edge][0]], b = P[EDGES[S.edge][1]];
+          S.dur = Math.max(0.75, Math.hypot(b[0] - a[0], b[1] - a[1]) / (190 * this.dpr));
+          S.t = 0; S.phase = "move";
+        }
+      }
+    } else if (S.phase === "move") {
+      S.t += dt / S.dur;
+      if (S.t >= 1) { this.lit[S.edge] = 1; S.at = EDGES[S.edge][1]; S.edge = -1; S.phase = "hold"; S.hold = OUT[S.at].length ? 0.5 : 2.4; }
+    } else if (S.phase === "fade") {
+      S.fade -= dt;
+      if (S.fade <= 0) { this.lit.fill(0); S.at = 0; S.phase = "hold"; S.hold = 0.9; }
+    }
+    var fadeK = S.phase === "fade" ? Math.max(0, S.fade / 1.3) : 1;
+    if (S.phase === "move") {
+      var e = EDGES[S.edge], p0 = P[e[0]], p1 = P[e[1]], k = ease(Math.min(1, S.t));
+      return [p0[0] + (p1[0] - p0[0]) * k, p0[1] + (p1[1] - p0[1]) * k, 1, fadeK, p0];
+    }
+    var at = P[S.at];
+    return [at[0], at[1], (ENDING[S.at] ? 1 : 0.85) * fadeK, fadeK, null];
+  };
+
+  Plate.prototype.render = function (time, dt, still) {
+    if (this.dead || !this.points) return;
+    var gl = this.gl, U = this.U;
+    if (this.mode === "image" && !this.hasVal) return;
+    this.lens += (this.lensTarget - this.lens) * Math.min(1, dt * 5);
+    gl.uniform1f(U.u_time, time + this.seed);
+    gl.uniform2f(U.u_ptr, this.ptr[0], this.ptr[1]);
+    gl.uniform1f(U.u_lens, still ? 0 : this.lens);
+    if (this.mode === "graph") {
+      var head, lit = new Float32Array(MAXSEG), seg = this.seg, n = EDGES.length, i;
+      if (still) {
+        STILL_ROUTE.forEach(function (ix) { lit[ix] = 1; });
+        var endAt = this.P[EDGES[STILL_ROUTE[STILL_ROUTE.length - 1]][1]];
+        head = [endAt[0], endAt[1], 1];
+      } else {
+        var h = this.step(dt), fk = h[3];
+        for (i = 0; i < n; i++) lit[i] = this.lit[i] * fk;
+        if (h[4]) { seg[n * 4] = h[4][0]; seg[n * 4 + 1] = h[4][1]; seg[n * 4 + 2] = h[0]; seg[n * 4 + 3] = h[1]; lit[n] = 1; n++; }
+        head = [h[0], h[1], h[2]];
+      }
+      gl.uniform4fv(U.u_seg, seg); gl.uniform1fv(U.u_lit, lit); gl.uniform1i(U.u_nseg, n);
+      gl.uniform3f(U.u_head, head[0], head[1], head[2]);
+    }
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.bPos); gl.enableVertexAttribArray(this.aPos); gl.vertexAttribPointer(this.aPos, 2, gl.FLOAT, false, 0, 0);
+    if (this.mode === "image") { gl.bindBuffer(gl.ARRAY_BUFFER, this.bVal); gl.enableVertexAttribArray(this.aVal); gl.vertexAttribPointer(this.aVal, 1, gl.FLOAT, false, 0, 0); }
+    else { gl.disableVertexAttribArray(this.aVal); gl.vertexAttrib1f(this.aVal, 0); }
+    gl.drawArrays(gl.POINTS, 0, this.points);
+    if (!this.shown) { this.shown = true; this.el.classList.add("is-live"); }
+  };
+
+  var plates = [];
+  hosts.forEach(function (el) { try { var p = new Plate(el); if (!p.dead) plates.push(p); } catch (e) { if (window.console) console.warn("plate:", e.message); } });
+  window.DCA.plates = plates.map(function (p) { return { get mode() { return p.mode; }, get points() { return p.points; }, get live() { return !STILL; } }; });
+  if (!plates.length) return;
+
+  var STILL = ENV.reduced || ENV.save;
+  var raf = 0, last = 0, clock = 0;
+  var slow = 0, frames = 0;
+  function draw1(p) { p.size(); p.render(STILL ? 12 : clock, 0.016, STILL); }
+  function loop(now) {
+    raf = 0;
+    var dt = Math.min(0.05, Math.max(0.001, (now - last) / 1000)); last = now; clock += dt;
+    /* the watchdog: a machine that cannot keep up gets a still plate, not a stutter */
+    if (frames < 90) { frames++; if (dt > 0.049) slow++; if (slow > 18) { STILL = true; plates.forEach(draw1); return; } }
+    var any = false;
+    plates.forEach(function (p) { if (p.visible && p.ready && !p.dead) { p.render(clock, dt, false); any = true; } });
+    if (any && !document.hidden) raf = requestAnimationFrame(loop);
+  }
+  function kick() { if (!STILL && !raf && !document.hidden) { last = performance.now(); raf = requestAnimationFrame(loop); } }
+
+  plates.forEach(function (p) { p.size(); });
+  if (STILL) plates.forEach(draw1);
+  if ("IntersectionObserver" in window) {
+    var pio = new IntersectionObserver(function (en) { en.forEach(function (x) { plates.forEach(function (p) { if (p.el === x.target) p.visible = x.isIntersecting; }); }); kick(); });
+    plates.forEach(function (p) { pio.observe(p.el); });
+  }
+  if ("ResizeObserver" in window) {
+    var ro = new ResizeObserver(function () { plates.forEach(function (p) { if (STILL) draw1(p); else p.size(); }); });
+    plates.forEach(function (p) { ro.observe(p.el); });
+  }
+  document.addEventListener("visibilitychange", function () { if (!document.hidden) kick(); });
+  kick();
 })();

@@ -33,7 +33,7 @@ function mockFetch(handler) { globalThis.fetch = handler; }
   let r = await onRequest(ctx('GET', undefined, {}));
   let j = await r.json();
   check('GET reports config without sending anything',
-    r.status === 200 && j.ok && j.deliversTo === 'pure@dcalacrity.com' && j.providers.resend === false,
+    r.status === 200 && j.ok && j.deliversTo === 'support@dcalacrity.com' && j.providers.resend === false,
     'deliversTo=' + j.deliversTo + ' leadStore=' + j.leadStore);
 
   /* validation */
@@ -66,12 +66,12 @@ function mockFetch(handler) { globalThis.fetch = handler; }
     return new Response('{"id":"x"}', { status: 200 });
   });
   const k2 = kv();
-  r = await onRequest(ctx('POST', GOOD, { LEADS: k2, RESEND_API_KEY: 're_test', MAIL_TO: 'pure@dcalacrity.com' }));
+  r = await onRequest(ctx('POST', GOOD, { LEADS: k2, RESEND_API_KEY: 're_test', MAIL_TO: 'support@dcalacrity.com' }));
   j = await r.json();
   check('Resend is used when a key is bound',
     j.ok && j.emailed === true && /api\.resend\.com/.test(hit.url) && hit.auth === 'Bearer re_test');
   check('Resend addresses pure@ and sets reply-to to the enquirer',
-    hit.body.to[0] === 'pure@dcalacrity.com' && hit.body.reply_to === GOOD.email,
+    hit.body.to[0] === 'support@dcalacrity.com' && hit.body.reply_to === GOOD.email,
     hit.body.to[0] + ' reply→' + hit.body.reply_to);
 
   /* Resend fails → FormSubmit fallback */
@@ -86,15 +86,15 @@ function mockFetch(handler) { globalThis.fetch = handler; }
   check('falls back to FormSubmit when Resend fails',
     j.ok && j.emailed === true && seen.length === 2 && /formsubmit\.co/.test(seen[1]),
     seen.map(u => u.replace(/https:\/\//, '')).join(' → '));
-  check('FormSubmit is addressed to pure@dcalacrity.com',
-    decodeURIComponent(seen[1]).includes('pure@dcalacrity.com'));
+  check('FormSubmit is addressed to support@dcalacrity.com',
+    decodeURIComponent(seen[1]).includes('support@dcalacrity.com'));
 
   /* everything fails and nothing to store → honest 502 */
   mockFetch(async () => new Response('down', { status: 500 }));
   r = await onRequest(ctx('POST', GOOD, {}));
   j = await r.json();
-  check('total failure with no store → honest error naming pure@',
-    r.status === 502 && j.ok === false && /pure@dcalacrity\.com/.test(j.error), j.error);
+  check('total failure with no store → honest error naming support@',
+    r.status === 502 && j.ok === false && /support@dcalacrity\.com/.test(j.error), j.error);
 
   /* CORS */
   r = await onRequest(ctx('POST', GOOD, {}, 'https://dcalacrity.com'));

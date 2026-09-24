@@ -6,7 +6,8 @@
 
    node dcalacrity-com/_build/shot.mjs <page> <out.png>
         [--w 1440] [--h 900] [--dsf 1] [--calm] [--headed] [--full]
-        [--eval "<js>"] [--widths 390,768,1280,1600] [--no-shot] [--wait 2500]
+        [--eval "<js>"] [--widths 390,768,1280,1600] [--no-shot] [--wait 2500] [--scroll 900|1.4vh]
+        [--hover "<css selector>"]   move a real pointer over an element before the shot, settle 900 ms
 */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -15,10 +16,10 @@ import { spawn, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const PUB = path.join(HERE, '..', 'public');
 const A = process.argv.slice(2);
 const arg = (n, d) => { const i = A.indexOf('--' + n); return i > -1 ? A[i + 1] : d; };
 const has = (n) => A.includes('--' + n);
+const PUB = arg('root', '') ? path.resolve(arg('root', '')) : path.join(HERE, '..', 'public');   // --root <dir> serves another folder (the design artboards)
 
 const PAGE = (A[0] || 'index.html').replace(/^\/+/, '');
 const OUT = A[1] || path.join(HERE, '..', '..', 'shot.png');
@@ -26,13 +27,17 @@ const W = +arg('w', 1440), H = +arg('h', 900), DSF = +arg('dsf', 1);
 const WAIT = +arg('wait', 2500);
 const EVAL = arg('eval', '');
 const WIDTHS = arg('widths', '');
+const SCROLL = arg('scroll', '');
+const HOVER = arg('hover', '');     // a real mouse move (Input.dispatchMouseEvent) to the centre of the first match   // scroll to a pixel offset (or 'N vh') before the shot, and let the scrub settle
 const PORT = 8231, DP = 9231;
 
 const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.svg': 'image/svg+xml', '.webmanifest': 'application/manifest+json', '.xml': 'application/xml', '.txt': 'text/plain; charset=utf-8', '.mp4': 'video/mp4' };
 
 const server = http.createServer((req, res) => {
   let f = decodeURIComponent((req.url || '/').split('?')[0]);
-  if (f === '/') f = '/index.html';
+  /* clean URLs, as Cloudflare Pages serves them: /x → x.html, /x/ → x/index.html */
+  if (f.endsWith('/')) f += 'index.html';
+  else if (!/\.[a-z0-9]+$/i.test(f)) f += '.html';
   const fp = path.join(PUB, f);
   if (!fp.startsWith(PUB)) { res.writeHead(403); res.end(); return; }
   fs.readFile(fp, (e, d) => {
@@ -102,6 +107,20 @@ const run = async () => {
 
   await S('Page.navigate', { url: `http://localhost:${PORT}/${PAGE}` });
   await new Promise((r) => setTimeout(r, WAIT));
+  if (SCROLL) {
+    const px = /vh$/.test(SCROLL) ? `innerHeight * ${parseFloat(SCROLL)}` : SCROLL;
+    /* small steps, so scroll-driven work sees a scroll rather than a jump */
+    await evaluate(`(async()=>{const t=${px};for(let i=1;i<=12;i++){window.scrollTo(0,t*i/12);await new Promise(r=>setTimeout(r,45));}return scrollY})()`);
+    await new Promise((r) => setTimeout(r, 1100));
+  }
+
+  if (HOVER) {
+    const box = await evaluate(`(function(){var el=document.querySelector(${JSON.stringify(HOVER)});if(!el)return null;var r=el.getBoundingClientRect();return {x:r.left+r.width*0.62,y:r.top+r.height*0.4};})()`);
+    if (box) {
+      for (let i = 1; i <= 8; i++) { await S('Input.dispatchMouseEvent', { type: 'mouseMoved', x: box.x - 40 + i * 5, y: box.y + 10 - i, pointerType: 'mouse' }); await new Promise((r) => setTimeout(r, 30)); }
+      await new Promise((r) => setTimeout(r, 900));
+    } else console.log('hover: no match for ' + HOVER);
+  }
 
   if (WIDTHS) {
     for (const w of WIDTHS.split(',').map(Number)) {

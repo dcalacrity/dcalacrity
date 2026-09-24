@@ -7,7 +7,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { page, SITE, NAV } from './shell.mjs';
+import { page, SITE, NAV, clean } from './shell.mjs';
 import core from './pages-core.mjs';
 import work from './pages-work.mjs';
 import rest from './pages-rest.mjs';
@@ -19,10 +19,32 @@ const MIRROR = path.join(ROOT, '..', 'dcalacrity-website');
 
 const PAGES = [...core, ...work, ...rest];
 const rendered = new Map();
+/* Page bodies are written with relative links ('work/sidequest.html',
+   '../contact.html?topic=…') because that reads naturally. The build resolves
+   each against its page and emits the clean root-relative form. */
+const rewriteLinks = (html, slug) => {
+  const dir = path.posix.dirname(slug);
+  return html.replace(/(href|src)="([^"]+)"/g, (m, attr, href) => {
+    if (/^(https?:|mailto:|tel:|#|data:|\/)/.test(href)) return m;
+    const mm = href.match(/^([^?#]*)(.*)$/);
+    const p = mm[1], rest = mm[2] || '';
+    const abs = path.posix.normalize(path.posix.join(dir === '.' ? '' : dir, p));
+    if (/\.(css|js|png|jpg|jpeg|svg|webp|mp4|json|xml|txt)$/i.test(abs)) return attr + '="/' + abs + rest + '"';
+    return attr + '="' + clean(abs) + rest + '"';
+  });
+};
 for (const p of PAGES) {
   if (rendered.has(p.slug)) throw new Error('two pages claim ' + p.slug);
-  rendered.set(p.slug, page(p));
+  rendered.set(p.slug, rewriteLinks(page(p), p.slug));
 }
+/* a clean URL maps back to the file that answers it */
+const fileFor = (u) => {
+  u = u.replace(/^\//, '');
+  if (u === '') return 'index.html';
+  if (u.endsWith('/')) return u + 'index.html';
+  if (/\.[a-z0-9]+$/i.test(u)) return u;
+  return u + '.html';
+};
 
 /* ─── checks ───────────────────────────────────────────────────────────── */
 const problems = [];
@@ -31,8 +53,6 @@ const note = (slug, msg) => problems.push(`${slug}: ${msg}`);
 /* Files that exist in public/ but are not generated here — the RHRN microsite,
    the assets, the vendor scripts. A link may point at any of them. */
 const exists = (rel) => fs.existsSync(path.join(PUB, rel));
-
-const AREAS = new Set(['tech', 'media', 'rnd', 'co', 'svc', 'sq', 'teal']);
 
 /* The company is a technology and media company. These describe one of the
    things it does and must not describe the company itself. */
@@ -43,6 +63,14 @@ const BANNED = [
   /\bis a (?:North Carolina[^.]{0,20})?media company\b/i,
   /(?<!["“])\bproduction company\b/i   /* quoted = a mention, as in "please avoid ..." */
 ];
+/* Private. Never published: the Sidequest on-set spend, and Welcome to
+   Wilmy's distribution (festival, cutdowns, release) — undecided. */
+const PRIVATE = [
+  { re: /\b1,400\b/, why: 'Sidequest on-set spend is private' },
+  { re: /on-set spend/i, why: 'Sidequest on-set spend is private' }
+];
+const WILMY_PRIVATE = /Cucalorus|festival cut|cutdown|picture lock|festival assembly|release window/i;
+
 /* Pure Alacrity post-dates the Sidequest shoot — never say the season ran on it. */
 const ORIGIN = [/Sidequest[^.]{0,60}\b(?:ran|was made|was shot) on Pure Alacrity/i, /the pipeline behind Right Here Right Now!? and Sidequest/i];
 
@@ -52,21 +80,29 @@ for (const [slug, html] of rendered) {
 
   for (const re of BANNED) { const m = html.match(re); if (m) note(slug, `banned company description: “${m[0]}”`); }
   for (const re of ORIGIN) { const m = html.match(re); if (m) note(slug, `Pure Alacrity origin misstated: “${m[0]}”`); }
+  for (const { re, why } of PRIVATE) { const m = html.match(re); if (m) note(slug, `private figure “${m[0]}” — ${why}`); }
+  if (/welcome-to-wilmy/.test(slug)) { const m = html.match(WILMY_PRIVATE); if (m) note(slug, `Wilmy distribution is undecided and private — “${m[0]}”`); }
 
-  /* only pure@ is ever offered as an address */
+  /* only SITE.email is ever offered as an address */
   const mails = [...html.matchAll(/mailto:([^"'?]+)/g)].map((m) => m[1]);
   mails.filter((m) => m !== SITE.email).forEach((m) => note(slug, `contact address ${m} — only ${SITE.email} ships`));
 
-  /* area tokens must be ones the stylesheet defines */
-  [...html.matchAll(/data-area="([a-z]+)"/g)].forEach((m) => { if (!AREAS.has(m[1])) note(slug, `data-area="${m[1]}" is not a defined area`); });
-  [...html.matchAll(/class="[^"]*\bt-([a-z]+)\b/g)].forEach((m) => { if (!AREAS.has(m[1])) note(slug, `t-${m[1]} is not a defined area`); });
+  /* the pass-3 per-area vocabulary is gone */
+  if (/data-area=|\bt-(?:tech|media|rnd|co|svc|sq|teal)\b|btn--area|btn--ghost|btn--arc|class="band|class="flat/.test(html)) note(slug, 'uses a class from the retired pass-3 vocabulary');
+  /* and so is the pass-5 sky: its stylesheet is gone, so these would render unstyled */
+  if (/class="[^"]*\b(?:glass|on-sky|skyline|object__still|tilt|sheen)\b/.test(html)) note(slug, 'uses a class from the retired pass-5 sky vocabulary');
 
-  /* every relative link resolves to a real file */
-  const dir = path.posix.dirname(slug);
+  /* a plate whose image is missing draws nothing at all, silently */
+  [...html.matchAll(/data-src="([^"]+)"/g)].forEach((m) => { if (!exists(m[1].replace(/^\//, ''))) note(slug, `plate image ${m[1]} does not exist`); });
+
+  /* every internal link is clean, root-relative, and answered by a real file.
+     A link carrying .html would be 301'd by Pages on every click, and a
+     redirect rule pointing at .html loops — "redirected you too many times". */
   [...html.matchAll(/(?:href|src)="([^"]+)"/g)].map((m) => m[1]).forEach((href) => {
-    if (/^(https?:|mailto:|data:|#)/.test(href)) return;
-    const target = path.posix.normalize(path.posix.join(dir === '.' ? '' : dir, href.split('#')[0].split('?')[0]));
-    if (!target || target === '.') return;
+    if (/^(https?:|mailto:|tel:|data:|#)/.test(href)) return;
+    if (!href.startsWith('/')) { note(slug, `link ${href} is not root-relative`); return; }
+    if (/\.html([?#]|$)/.test(href)) { note(slug, `link ${href} carries .html`); return; }
+    const target = fileFor(href.split(/[?#]/)[0]);
     if (!rendered.has(target) && !exists(target)) note(slug, `link to ${href} → ${target} does not exist`);
   });
 
@@ -88,20 +124,29 @@ if (problems.length) {
 }
 
 /* ─── write ────────────────────────────────────────────────────────────── */
+/* On this machine a write can fail transiently with UNKNOWN -4094 while a
+   preview server or watcher has the file open. It clears in well under a
+   second; a build that dies on it leaves public/ half-written. */
+const writeRetry = (file, data) => {
+  for (let i = 0; ; i++) {
+    try { fs.writeFileSync(file, data, 'utf8'); return; }
+    catch (e) { if (i >= 6 || !/UNKNOWN|EBUSY|EPERM/.test(String(e.code))) throw e; Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 250 * (i + 1)); }
+  }
+};
 let written = 0;
 for (const [slug, html] of rendered) {
   const out = path.join(PUB, slug);
   fs.mkdirSync(path.dirname(out), { recursive: true });
-  fs.writeFileSync(out, html, 'utf8');
+  writeRetry(out, html);
   written++;
 }
 
 /* sitemap — every generated page plus the two things that are not generated */
 const urls = [...rendered.keys()]
   .filter((s) => s !== '404.html')
-  .map((s) => SITE.origin + '/' + (s === 'index.html' ? '' : s.replace(/\/index\.html$/, '/')))
-  .concat([SITE.origin + '/work/rhrn.html', SITE.origin + '/pure']);
-fs.writeFileSync(path.join(PUB, 'sitemap.xml'),
+  .map((s) => SITE.origin + clean(s))
+  .concat([SITE.origin + '/work/rhrn', SITE.origin + '/pure']);
+writeRetry(path.join(PUB, 'sitemap.xml'),
   '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
   urls.map((u) => `  <url><loc>${u}</loc></url>`).join('\n') + '\n</urlset>\n', 'utf8');
 
@@ -111,7 +156,11 @@ let mirrored = 0; const pruned = [];
 if (fs.existsSync(MIRROR)) {
   const copy = (from, to) => {
     fs.mkdirSync(path.dirname(to), { recursive: true });
-    fs.copyFileSync(from, to);
+    /* the same transient UNKNOWN -4094 the writes see, most often on the 22 MB microsite */
+    for (let i = 0; ; i++) {
+      try { fs.copyFileSync(from, to); break; }
+      catch (e) { if (i >= 6 || !/UNKNOWN|EBUSY|EPERM/.test(String(e.code))) throw e; Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 250 * (i + 1)); }
+    }
     mirrored++;
   };
   const seen = new Set();

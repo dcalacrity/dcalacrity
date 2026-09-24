@@ -1,36 +1,29 @@
 /* Services, contact and the 404. The rate card stays exactly as specific as
    it was — the people who need it need the numbers. */
 
-import { SITE, band, phero } from './shell.mjs';
+import { SITE, close, phero, plate } from './shell.mjs';
 
-const pkg = (o) => `          <article class="flat package${o.featured ? ' featured' : ''}" data-flat data-tilt>
+const pkg = (o) => `          <article class="package${o.featured ? ' featured paper' : ''}" data-rise>
             <p class="tier">${o.tier}</p>
             <h3>${o.name}</h3>
             <p class="price">${o.price} <small>${o.unit}</small></p>
             <ul>
 ${o.items.map((i) => `              <li>${i}</li>`).join('\n')}
             </ul>
-            <a class="btn ${o.featured ? 'btn--area' : 'btn--ghost'} btn--sm" href="contact.html?topic=Client%20%2F%20commercial">${o.cta}</a>
+            <a class="btn ${o.featured ? '' : 'btn--quiet '}btn--sm" href="contact.html?topic=Client%20%2F%20commercial">${o.cta}</a>
           </article>`;
 
 const services = {
   slug: 'services.html',
   current: 'services',
-  area: 'svc',
   title: 'Services — The Commercial Unit · D.C Alacrity',
   description: 'Shoots, editing, colour and social packages from D.C Alacrity’s commercial unit, at published rates for North Carolina businesses. VR commercial work opening soon.',
   footNote: 'The commercial unit of a technology and media company. Same crews, same tools, client brief.',
-  body: `${phero({
-    eyebrow: 'Services',
-    title: 'Hire the commercial unit.',
-    lede: 'The same crews and the same software that make our own work, pointed at a client brief. Rates are published because a small business should be able to plan without a discovery call.',
-    actions: '<a class="btn btn--area" href="#packages">See the rates</a> <a class="btn btn--ghost" href="contact.html?topic=Client%20%2F%20commercial">Start a project</a>',
-    aside: `<div class="flat" data-rise style="padding:1.75rem"><p class="eyebrow eyebrow--plain">Where this sits</p><p class="small">Client work funds the slate and keeps the bench warm between original productions. It runs on the same <a href="technology.html">production software</a> as everything else we make, which is why estimates and delivery are quick.</p></div>`
-  })}
+  body: `${phero({ plate: 'assets/img/rhrn-tools.jpg', eyebrow: 'Services', title: 'Hire the commercial unit.', lede: 'The same crews and the same software that make our own work, pointed at a client brief. Rates are published because a small business should be able to plan without a discovery call. Client work funds the slate and keeps the bench warm between original productions.', actions: '<a class="btn" href="#packages">See the rates</a> <a class="link" href="contact.html?topic=Client%20%2F%20commercial">Start a project</a>' })}
 
     <section class="sec" id="packages">
       <div class="wrap">
-        <div class="sec-head" data-rise>
+        <div class="head" data-rise>
           <div><p class="eyebrow">Shoots</p><h2>Get it on camera.</h2></div>
           <p class="lede">Camera and operator packages. Editing is available as an add-on or as a separate post package below.</p>
         </div>
@@ -42,9 +35,9 @@ ${pkg({ tier: 'Content day', name: 'Social shoot', price: '$225', unit: 'startin
       </div>
     </section>
 
-    <section class="sec sec--deep" id="post">
+    <section class="sec" id="post">
       <div class="wrap">
-        <div class="sec-head" data-rise>
+        <div class="head" data-rise>
           <div><p class="eyebrow">Post</p><h2>Editing &amp; colour.</h2></div>
           <p class="lede">Bring your own footage or pair it with a shoot. Rates sit in the independent and local-business lane, not on a broadcast retainer.</p>
         </div>
@@ -53,7 +46,7 @@ ${pkg({ tier: 'Edit', name: 'Social cut', price: '$95', unit: 'per cut', cta: 'R
 ${pkg({ tier: 'Edit', name: 'Brand / promo edit', price: '$275', unit: 'starting', featured: true, cta: 'Request brand edit', items: ['30–90s polished cut', 'Basic graphics and lower thirds', 'Two revision rounds', 'Export masters and social crops'] })}
 ${pkg({ tier: 'Colour', name: 'Colour grade', price: '$85', unit: 'short · from', cta: 'Request grade', items: ['Short-form look pass — $85', 'Promo or brand grade — from $150', 'Longer narrative — custom quote', 'DaVinci Resolve workflow'] })}
         </div>
-        <div class="table-wrap" data-rise style="margin-top:2.5rem">
+        <div class="table-wrap" data-rise style="margin-top:3rem">
           <table class="data">
             <thead><tr><th>Add-on</th><th>What you get</th><th>From</th></tr></thead>
             <tbody>
@@ -69,7 +62,7 @@ ${pkg({ tier: 'Colour', name: 'Colour grade', price: '$85', unit: 'short · from
 
     <section class="sec" id="social">
       <div class="wrap">
-        <div class="sec-head" data-rise>
+        <div class="head" data-rise>
           <div><p class="eyebrow">Ongoing</p><h2>Social media management.</h2></div>
           <p class="lede">Monthly retainers for businesses that need steady posting, without an agency floor attached.</p>
         </div>
@@ -81,9 +74,9 @@ ${pkg({ tier: 'Bundle', name: 'Shoot + social', price: '$599', unit: '/ month', 
       </div>
     </section>
 
-    <section class="sec sec--deep" id="brand">
+    <section class="sec" id="brand">
       <div class="wrap">
-        <div class="sec-head" data-rise>
+        <div class="head" data-rise>
           <div><p class="eyebrow">Bundled films</p><h2>Shoot and edit together.</h2></div>
           <p class="lede">One booking, one delivery date, and a lower total than buying the halves separately.</p>
         </div>
@@ -97,52 +90,48 @@ ${pkg({ tier: 'Event', name: 'Event / recap', price: '$550', unit: 'starting', c
 
     <section class="sec" id="destination">
       <div class="wrap">
-        <div class="sec-head" data-rise>
+        <div class="head" data-rise>
           <div><p class="eyebrow">Destination &amp; local</p><h2>Wilmington on camera.</h2></div>
           <p class="lede">Built alongside <a href="work/welcome-to-wilmy.html">Welcome to Wilmy</a> — tourism cutdowns, shop features and place films for Cape Fear businesses.</p>
         </div>
         <div class="package-grid">
 ${pkg({ tier: 'Destination', name: 'Place film', price: '$449', unit: 'starting', cta: 'Request place film', items: ['Half-day coastal or downtown coverage', '60–90s destination cut', 'Captions and 2 social teases', 'For boards, venues and tourism partners'] })}
 ${pkg({ tier: 'Local brand', name: 'Shop feature', price: '$599', unit: 'starting', featured: true, cta: 'Request shop feature', items: ['Owner or craft interview with B-roll', '90s hero plus 3 cutdowns', 'Optional stills pack', 'Priority if you appear in Wilmy'] })}
-${pkg({ tier: 'Festival', name: 'Event recap', price: '$550', unit: 'starting', cta: 'Request festival recap', items: ['The same event package as above', 'Tuned for Cucalorus and local showcases', 'Highlight plus social teaser', 'Fast turnaround windows'] })}
+${pkg({ tier: 'Festival', name: 'Event recap', price: '$550', unit: 'starting', cta: 'Request festival recap', items: ['The same event package as above', 'Tuned for local festivals and showcases', 'Highlight plus social teaser', 'Fast turnaround windows'] })}
         </div>
       </div>
     </section>
 
-    <section class="sec sec--deep" id="vr">
+    <section class="sec" id="vr">
       <div class="wrap">
-        <div class="sec-head" data-rise>
+        <div class="head" data-rise>
           <div><p class="eyebrow">Opening soon</p><h2>VR for property and brands.</h2></div>
           <p class="lede">The same interactive and 360° pipeline behind <a href="work/right-here-right-now.html">Right Here Right Now!</a>, opening to commercial clients.</p>
         </div>
-        <div class="service-list">
+        <div class="service-list" data-rise>
           <div class="service-item"><span class="num">01</span><div><h3>VR property tours</h3><p>Immersive walkthroughs for listings, short-term rentals and developments, with headset and phone-friendly cuts.</p></div><span class="meta">Coming soon</span></div>
           <div class="service-item"><span class="num">02</span><div><h3>VR commercial work</h3><p>Brand experiences, venue showcases, and training or orientation films in 360°.</p></div><span class="meta">Coming soon</span></div>
           <div class="service-item"><span class="num">03</span><div><h3>Interactive branching spots</h3><p>Choose-your-path advertising built on the same compile path as our own titles.</p></div><span class="meta">Coming soon</span></div>
         </div>
-        <p style="margin-top:1.5rem"><a class="btn btn--ghost" href="contact.html?topic=VR%20waitlist">Join the VR waitlist</a></p>
+        <p style="margin-top:2rem"><a class="btn btn--quiet" href="contact.html?topic=VR%20waitlist">Join the VR waitlist</a></p>
       </div>
     </section>
 
-${band('Tell us what you need.', 'We reply with a simple estimate and no mystery fees. Within two business days on commercial work.', `<a class="btn btn--area" href="contact.html?topic=Client%20%2F%20commercial">Start a project</a> <a class="btn btn--ghost" href="mailto:${SITE.email}">${SITE.email}</a>`)}`
+${close('Tell us what you need.', 'We reply with a simple estimate and no mystery fees. Within two business days on commercial work.', `<a class="btn" href="contact.html?topic=Client%20%2F%20commercial">Start a project</a> <a class="link" href="mailto:${SITE.email}">${SITE.email}</a>`)}`
 };
 
 const contact = {
   slug: 'contact.html',
   current: 'contact',
-  area: 'co',
   title: 'Contact — D.C Alacrity',
-  description: 'Contact D.C Alacrity about client work, partnerships, press, technology, crew or Pure Alacrity. North Carolina. pure@dcalacrity.com',
-  body: `${phero({
-    eyebrow: 'Contact',
-    title: 'Tell us what you’re building.',
-    lede: 'Client work, partnerships, press, technology, crew or a question about Pure Alacrity — one form, routed by topic. Everything reaches ' + SITE.email + '.'
-  })}
+  description: 'Contact D.C Alacrity about client work, partnerships, press, technology, crew or Pure Alacrity. North Carolina. support@dcalacrity.com',
+  body: `${phero({ plate: 'assets/brand/sky-cloud.jpg', eyebrow: 'Contact', title: 'Tell us what you’re building.', lede: 'Client work, partnerships, press, technology, crew or a question about Pure Alacrity — one form, routed by topic. Everything reaches ' + SITE.email + '.' })}
 
     <section class="sec">
       <div class="wrap">
-        <div class="split contact-layout split--top">
-          <div data-rise>
+        <div class="desk" data-rise>
+          <div class="desk__form">
+            <h2>Send it once. It reaches a person.</h2>
             <form class="form-grid" id="contact-form" novalidate>
               <div class="form-row">
                 <label>Name *<input type="text" name="name" required autocomplete="name" placeholder="Your name" maxlength="120"/></label>
@@ -217,28 +206,26 @@ const contact = {
               <label>Message *<textarea name="message" required placeholder="What are you making, booking, partnering on or asking? Include links, dates or locations if you have them." maxlength="5000"></textarea></label>
               <label class="hp-field" aria-hidden="true">Company website<input type="text" name="website" tabindex="-1" autocomplete="off"/></label>
               <div class="form-actions">
-                <button class="btn btn--arc" type="submit" id="contact-submit">Send message</button>
+                <button class="btn" type="submit" id="contact-submit">Send message</button>
                 <p class="form-note">Sends to ${SITE.email}. We aim to reply within two business days on commercial estimates.</p>
               </div>
               <div class="form-status" id="contact-status" role="status" aria-live="polite" hidden></div>
             </form>
           </div>
 
-          <aside data-rise>
-            <p class="eyebrow">Direct</p>
-            <h2 class="contact-email"><a href="mailto:${SITE.email}">${SITE.email}</a></h2>
-            <div class="prose" style="margin-top:1.5rem">
-              <p><strong>Based in</strong> North Carolina.</p>
-              <p><strong>Product:</strong> <a href="${SITE.app}">dcalacrity.com/pure</a> — free to use.</p>
-              <p><strong>Press assets:</strong> <a href="press.html">the press kit</a>, including the boilerplate we ask to be introduced by.</p>
+          <aside class="desk__side">
+            ${plate('assets/brand/clouds.jpg', 'fill')}
+            <div class="desk__card">
+              <p class="caption">Direct</p>
+              <p class="contact-email"><a href="mailto:${SITE.email}">${SITE.email}</a></p>
+              <p class="small muted">North Carolina · <a href="${SITE.app}">dcalacrity.com/pure</a> is free to use · the <a href="press.html">press kit</a> has the boilerplate.</p>
+              <div class="lines">
+                <div><h3>Clients</h3><p>Shoots, edits, social, destination packages.</p></div>
+                <div><h3>Partners</h3><p>The slate, interactive titles, investment.</p></div>
+                <div><h3>Technology</h3><p>The runtime, the bundle format, pipelines of your own.</p></div>
+                <div><h3>Press &amp; crew</h3><p>Interviews, assets, embargoes — and credits on real productions.</p></div>
+              </div>
             </div>
-            <ul class="contact-topics">
-              <li><strong>Clients</strong> — shoots, edits, social, destination packages</li>
-              <li><strong>Partners</strong> — the slate, interactive titles, investment</li>
-              <li><strong>Technology</strong> — the runtime, the bundle format, pipelines of your own</li>
-              <li><strong>Press</strong> — interviews, assets, embargoes</li>
-              <li><strong>Crew</strong> — credits on real productions</li>
-            </ul>
           </aside>
         </div>
       </div>
@@ -248,19 +235,19 @@ const contact = {
 const notFound = {
   slug: '404.html',
   current: null,
-  area: 'tech',
   title: 'Page not found — D.C Alacrity',
   description: 'That page does not exist on dcalacrity.com.',
   body: `    <section class="lost">
+      ${plate('graph', 'fill')}
       <div class="wrap">
         <p class="eyebrow">404</p>
         <h1>Off the graph.</h1>
-        <p class="lede" style="margin-inline:auto">That path does not lead anywhere on this site. Here are the ones that do.</p>
+        <p class="lede" style="margin:1.5rem auto 2rem">That path does not lead anywhere on this site. Here are the ones that do.</p>
         <div class="btn-row" style="justify-content:center">
-          <a class="btn btn--arc" href="index.html">Home</a>
-          <a class="btn btn--ghost" href="technology.html">Technology</a>
-          <a class="btn btn--ghost" href="work/index.html">The work</a>
-          <a class="btn btn--ghost" href="contact.html">Contact</a>
+          <a class="btn" href="index.html">Home</a>
+          <a class="link" href="technology.html">Technology</a>
+          <a class="link" href="work/index.html">The work</a>
+          <a class="link" href="contact.html">Contact</a>
         </div>
       </div>
     </section>`

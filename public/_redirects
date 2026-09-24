@@ -1,23 +1,20 @@
 # Cloudflare Pages static redirects.
+#
+# ⚠ Pages serves clean URLs on its own: /technology.html is answered at
+# /technology, and a request for /technology.html is 301'd to /technology.
+# A rule here of the form "/technology /technology.html" therefore LOOPS —
+# Pages sends it straight back — and the browser reports "redirected you too
+# many times". Never add one. Point redirects at the clean form only.
 
 # www → apex (backup for functions/_middleware.js).
 # Only works once DNS for www exists and www is served by this project.
-# Primary fix: Cloudflare Dashboard → DNS → CNAME www → dcalacrity.com (Proxied),
-# then Pages → Custom domains → add www.dcalacrity.com (or a Redirect Rule).
 https://www.dcalacrity.com/* https://dcalacrity.com/:splat 301
 http://www.dcalacrity.com/* https://dcalacrity.com/:splat 301
 
 # The product page became the technology page in the Sep 2026 rebuild.
-# Keep this: /product was linked from the app, the press kit and social posts.
-/product /technology.html 301
-/product.html /technology.html 301
+# /product was linked from the app, the press kit and social posts.
+/product /technology 301
+/product.html /technology 301
 
-# Convenience paths people type or that appear in print.
-/work /work/ 301
-/press /press.html 301
-/about /about.html 301
-/company /about.html 301
-/technology /technology.html 301
-/research /research.html 301
-/services /services.html 301
-/contact /contact.html 301
+# "Studio" was the old label for the company page.
+/studio /about 301

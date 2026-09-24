@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+  <style>
+    body { margin: 0; font-family: Inter, "Segoe UI", system-ui, sans-serif; background: #061018; }
+    a { color: #7fe3ff; text-decoration: none; } a:hover { color: #ffffff; }
+  </style>
+</helmet>
+
+<!-- ELECTRIC HOUR on a phone: same sky, the graph steps back behind the copy,
+     the mark rises low right. No fake status bar; the real one sits on top. -->
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #061018; color: #eef5f9;">
+  <div style="position: absolute; inset: 0; background: linear-gradient(180deg, #040818 0%, #0a1a4a 28%, #163f9a 50%, #2b8fe6 64%, #46c8ff 70%, #6e5cff 79%, #1a0f3f 92%, #061018 100%);"></div>
+  <img src="skycloud.jpg" alt="" style="position: absolute; left: -200px; top: 0; width: 900px; height: 420px; object-fit: cover; opacity: .5; mix-blend-mode: screen;">
+  <img src="clouds.jpg" alt="" style="position: absolute; left: -120px; top: 430px; width: 640px; height: 460px; object-fit: cover; object-position: 50% 30%; opacity: .6; mix-blend-mode: screen; filter: hue-rotate(20deg) saturate(1.3); mask-image: linear-gradient(180deg, transparent 0%, #000 34%, #000 78%, transparent 100%); -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 34%, #000 78%, transparent 100%);">
+  <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(4,8,24,.5) 0%, rgba(4,8,24,0) 40%, rgba(129,67,255,.18) 74%, rgba(6,16,24,.85) 96%);"></div>
+
+  <div style="position: absolute; left: 190px; top: 470px; width: 300px; height: 220px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,194,255,.5), rgba(0,194,255,.14) 45%, rgba(0,194,255,0) 72%); filter: blur(8px);"></div>
+  <img src="mark.png" alt="" style="position: absolute; left: 300px; top: 500px; width: 54px; height: auto; filter: drop-shadow(0 0 18px rgba(0,194,255,.85));">
+
+  <div style="position: absolute; left: 150px; top: 120px; width: 420px; height: 360px; opacity: .55; transform: perspective(900px) rotateY(-30deg) rotateX(8deg); transform-origin: 20% 60%;">
+    <svg viewBox="0 -20 1140 940" width="420" height="360" style="overflow: visible;">
+      <defs><linearGradient id="lk3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e7faff"/><stop offset=".5" stop-color="#00c2ff"/><stop offset="1" stop-color="#8143ff"/></linearGradient><filter id="glow3" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="12"/></filter></defs>
+      <g fill="none" stroke="url(#lk3)" stroke-width="9" stroke-linecap="round" opacity=".85">
+        <path d="M120 80 C240 80 200 80 360 80"/><path d="M120 80 C240 80 200 240 360 240"/><path d="M360 80 C480 80 440 80 600 80"/><path d="M360 80 C480 80 440 240 600 240"/><path d="M360 240 C480 240 440 400 600 400"/><path d="M360 240 C480 240 440 560 600 560"/><path d="M600 80 C720 80 680 80 840 80"/><path d="M600 80 C720 80 680 240 840 240"/><path d="M600 240 C720 240 680 400 840 400"/><path d="M600 240 C720 240 680 560 840 560"/><path d="M600 400 C720 400 680 720 840 720"/><path d="M600 400 C720 400 680 880 840 880"/><path d="M600 560 C720 560 680 80 840 80"/><path d="M600 560 C720 560 680 240 840 240"/><path d="M840 80 C960 80 920 80 1080 80"/><path d="M840 80 C960 80 920 400 840 400"/><path d="M840 240 C960 240 920 560 840 560"/><path d="M840 240 C960 240 920 400 840 400"/>
+      </g>
+      <g filter="url(#glow3)" opacity=".8">
+        <circle cx="120" cy="80" r="30" fill="#e7faff"/><circle cx="360" cy="80" r="22" fill="#00c2ff"/><circle cx="360" cy="240" r="22" fill="#00c2ff"/><circle cx="600" cy="80" r="22" fill="#00c2ff"/><circle cx="600" cy="240" r="22" fill="#00c2ff"/><circle cx="600" cy="400" r="22" fill="#00c2ff"/><circle cx="600" cy="560" r="22" fill="#00c2ff"/><circle cx="840" cy="80" r="22" fill="#00c2ff"/><circle cx="840" cy="240" r="22" fill="#00c2ff"/><circle cx="1080" cy="80" r="22" fill="#8143ff"/><circle cx="840" cy="400" r="22" fill="#8143ff"/><circle cx="840" cy="560" r="22" fill="#8143ff"/><circle cx="840" cy="720" r="22" fill="#8143ff"/><circle cx="840" cy="880" r="22" fill="#8143ff"/>
+      </g>
+    </svg>
+  </div>
+
+  <div style="position: absolute; left: 0; top: 0; width: 390px; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; box-sizing: border-box;">
+    <div style="display: flex; align-items: center; gap: 10px;"><img src="mark.png" alt="" style="height: 38px; width: auto;"><img src="wordmark.png" alt="D.C Alacrity" style="height: 22px; width: auto;"></div>
+    <div style="width: 44px; height: 44px; border-radius: 12px; border: 1px solid rgba(238,245,249,.25); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;"><span style="width: 18px; height: 2px; background: #fff; border-radius: 2px;"></span><span style="width: 18px; height: 2px; background: #fff; border-radius: 2px;"></span><span style="width: 18px; height: 2px; background: #fff; border-radius: 2px;"></span></div>
+  </div>
+
+  <div style="position: absolute; left: 20px; top: 118px; width: 350px; display: flex; flex-direction: column; gap: 16px;">
+    <div style="display: inline-flex; align-items: center; gap: 10px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: rgba(238,245,249,.6);"><span style="width: 7px; height: 7px; border-radius: 50%; background: #00c2ff; box-shadow: 0 0 12px #00c2ff;"></span>D.C Alacrity · North Carolina</div>
+    <h1 style="margin: 0; font-family: Unbounded, 'Inter Tight', system-ui, sans-serif; font-weight: 800; font-size: 38px; line-height: 1.02; letter-spacing: -.02em; color: #ffffff; text-shadow: 0 8px 30px rgba(4,8,24,.5);">Building the<br><span style="font-weight: 300; background: linear-gradient(90deg, #ffffff 0%, #bdf1ff 50%, #d9c8ff 100%); -webkit-background-clip: text; background-clip: text; color: transparent;">Experience Industry</span><span style="color: #00c2ff;">.</span></h1>
+    <p style="margin: 0; font-size: 17px; line-height: 1.5; color: rgba(238,245,249,.84); text-wrap: pretty;">We are a technology and media company developing original IP, software and interactive experiences. Our first products and productions are the foundation for a broader mission.</p>
+    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+      <span style="display: inline-flex; align-items: center; height: 48px; padding: 0 20px; border-radius: 999px; background: #00c2ff; color: #061018; font-weight: 600; font-size: 15px;">See the technology</span>
+      <span style="display: inline-flex; align-items: center; height: 48px; padding: 0 20px; border-radius: 999px; border: 1px solid rgba(238,245,249,.35); background: rgba(6,16,24,.3); backdrop-filter: blur(8px); color: #ffffff; font-weight: 600; font-size: 15px;">See the work</span>
+    </div>
+  </div>
+
+  <div style="position: absolute; left: 20px; top: 640px; display: grid; gap: 14px; font-size: 14px;">
+    <div><div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(238,245,249,.55);">Founded</div><div style="color: #fff;">North Carolina</div></div>
+    <div><div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(238,245,249,.55);">Live</div><div style="color: #fff;"><span style="color: #7fe3ff;">Pure Alacrity</span> — free to use</div></div>
+    <div><div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(238,245,249,.55);">Shipped</div><div style="color: #fff;"><span style="color: #7fe3ff;">Right Here Right Now!</span> on Meta Horizon</div></div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>
