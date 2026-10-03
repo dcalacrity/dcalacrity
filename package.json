@@ -1,16 +1,13 @@
 {
-  "name": "purealacrity",
+  "name": "dcalacrity-com",
   "version": "1.0.0",
   "private": true,
-  "description": "Pure Alacrity — Cloudflare Worker security gateway + single-file app deployment (dcalacrity.com/pure)",
+  "description": "D.C Alacrity official website — Cloudflare Pages (dcalacrity.com)",
   "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy",
-    "tail": "wrangler tail",
-    "build": "node tools/build-webdeploy.js"
+    "dev": "wrangler pages dev ./public",
+    "deploy": "wrangler pages deploy ./public --project-name=dcalacrity"
   },
   "devDependencies": {
-    "wrangler": "^3.90.0",
-    "javascript-obfuscator": "^4.1.1"
+    "wrangler": "^3.90.0"
   }
 }

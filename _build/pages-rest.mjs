@@ -1,12 +1,11 @@
-/* Services, contact and the 404. The rate card stays exactly as specific as
-   it was — the people who need it need the numbers. */
+/* Services, contact and the 404. Services carry NO prices (owner's call,
+   2026-10-03): every project gets a written estimate instead. */
 
 import { SITE, close, phero, plate } from './shell.mjs';
 
-const pkg = (o) => `          <article class="package${o.featured ? ' featured paper' : ''}" data-rise>
+const pkg = (o) => `          <article class="package${o.featured ? ' featured' : ''}" data-rise>
             <p class="tier">${o.tier}</p>
             <h3>${o.name}</h3>
-            <p class="price">${o.price} <small>${o.unit}</small></p>
             <ul>
 ${o.items.map((i) => `              <li>${i}</li>`).join('\n')}
             </ul>
@@ -17,9 +16,9 @@ const services = {
   slug: 'services.html',
   current: 'services',
   title: 'Services — The Commercial Unit · D.C Alacrity',
-  description: 'Shoots, editing, colour and social packages from D.C Alacrity’s commercial unit, at published rates for North Carolina businesses. VR commercial work opening soon.',
+  description: 'Shoots, editing, colour and social media packages from D.C Alacrity’s commercial unit, for North Carolina businesses. Every project gets a clear written estimate. VR commercial work opening soon.',
   footNote: 'The commercial unit of a technology and media company. Same crews, same tools, client brief.',
-  body: `${phero({ plate: 'assets/img/rhrn-tools.jpg', eyebrow: 'Services', title: 'Hire the commercial unit.', lede: 'The same crews and the same software that make our own work, pointed at a client brief. Rates are published because a small business should be able to plan without a discovery call. Client work funds the slate and keeps the bench warm between original productions.', actions: '<a class="btn" href="#packages">See the rates</a> <a class="link" href="contact.html?topic=Client%20%2F%20commercial">Start a project</a>' })}
+  body: `${phero({ plate: 'assets/img/rhrn-tools.jpg', eyebrow: 'Services', title: 'Hire the commercial unit.', lede: 'The same crews and the same software that make our own work, pointed at a client brief. Tell us what you need and you get a clear, written estimate before anything is booked.', actions: '<a class="btn" href="#packages">See what we do</a> <a class="link" href="contact.html?topic=Client%20%2F%20commercial">Start a project</a>' })}
 
     <section class="sec" id="packages">
       <div class="wrap">
@@ -28,9 +27,9 @@ const services = {
           <p class="lede">Camera and operator packages. Editing is available as an add-on or as a separate post package below.</p>
         </div>
         <div class="package-grid">
-${pkg({ tier: 'Half day', name: 'Shoot · 4 hours', price: '$275', unit: 'starting', cta: 'Book half day', items: ['One camera operator with kit', 'Up to 4 hours on location', 'Raw footage handoff on a drive', 'Shot list consultation'] })}
-${pkg({ tier: 'Most booked', name: 'Shoot · Full day', price: '$475', unit: 'starting', featured: true, cta: 'Book full day', items: ['Up to 8 hours on location', 'One camera plus audio basics', 'Raw footage handoff', 'Simple lighting where needed'] })}
-${pkg({ tier: 'Content day', name: 'Social shoot', price: '$225', unit: 'starting', cta: 'Book social shoot', items: ['About 3 hours, vertical first', 'Phone and camera hybrid welcome', 'Up to 8 raw clips or setups', 'Pair with an edit pack below'] })}
+${pkg({ tier: 'Half day', name: 'Shoot · 4 hours', cta: 'Book half day', items: ['One camera operator with kit', 'Up to 4 hours on location', 'Raw footage handoff on a drive', 'Shot list consultation'] })}
+${pkg({ tier: 'Most booked', name: 'Shoot · Full day', featured: true, cta: 'Book full day', items: ['Up to 8 hours on location', 'One camera plus audio basics', 'Raw footage handoff', 'Simple lighting where needed'] })}
+${pkg({ tier: 'Content day', name: 'Social shoot', cta: 'Book social shoot', items: ['About 3 hours, vertical first', 'Phone and camera hybrid welcome', 'Up to 8 raw clips or setups', 'Pair with an edit pack below'] })}
         </div>
       </div>
     </section>
@@ -39,23 +38,21 @@ ${pkg({ tier: 'Content day', name: 'Social shoot', price: '$225', unit: 'startin
       <div class="wrap">
         <div class="head" data-rise>
           <div><p class="eyebrow">Post</p><h2>Editing &amp; colour.</h2></div>
-          <p class="lede">Bring your own footage or pair it with a shoot. Rates sit in the independent and local-business lane, not on a broadcast retainer.</p>
+          <p class="lede">Bring your own footage or pair it with a shoot. Built for independent creators and local businesses.</p>
         </div>
         <div class="package-grid">
-${pkg({ tier: 'Edit', name: 'Social cut', price: '$95', unit: 'per cut', cta: 'Request edit', items: ['15–60s Reel, Short or TikTok', 'Captions and a music bed', 'One revision round', '48–72 hour typical turnaround'] })}
-${pkg({ tier: 'Edit', name: 'Brand / promo edit', price: '$275', unit: 'starting', featured: true, cta: 'Request brand edit', items: ['30–90s polished cut', 'Basic graphics and lower thirds', 'Two revision rounds', 'Export masters and social crops'] })}
-${pkg({ tier: 'Colour', name: 'Colour grade', price: '$85', unit: 'short · from', cta: 'Request grade', items: ['Short-form look pass — $85', 'Promo or brand grade — from $150', 'Longer narrative — custom quote', 'DaVinci Resolve workflow'] })}
+${pkg({ tier: 'Edit', name: 'Social cut', cta: 'Request edit', items: ['15–60s Reel, Short or TikTok', 'Captions and a music bed', 'One revision round', '48–72 hour typical turnaround'] })}
+${pkg({ tier: 'Edit', name: 'Brand / promo edit', featured: true, cta: 'Request brand edit', items: ['30–90s polished cut', 'Basic graphics and lower thirds', 'Two revision rounds', 'Export masters and social crops'] })}
+${pkg({ tier: 'Colour', name: 'Colour grade', cta: 'Request grade', items: ['Short-form look pass', 'Promo or brand grade', 'Longer narrative grades', 'DaVinci Resolve workflow'] })}
         </div>
-        <div class="table-wrap" data-rise style="margin-top:3rem">
-          <table class="data">
-            <thead><tr><th>Add-on</th><th>What you get</th><th>From</th></tr></thead>
-            <tbody>
-              <tr><td>Rush turnaround</td><td>Same-day or next-day when capacity allows</td><td>+40%</td></tr>
-              <tr><td>Extra revision</td><td>Beyond the package rounds</td><td>$35</td></tr>
-              <tr><td>Motion / titles pack</td><td>Simple animated open and end card</td><td>$75</td></tr>
-              <tr><td>Long-form edit (5–12 min)</td><td>YouTube or event recap style</td><td>$350</td></tr>
-            </tbody>
-          </table>
+        <div class="addons" data-rise>
+          <h3 class="addons__h">Add-ons</h3>
+          <ul class="addons__list">
+            <li><b>Rush turnaround</b><span>Same-day or next-day when capacity allows</span></li>
+            <li><b>Extra revision</b><span>Beyond the rounds in your package</span></li>
+            <li><b>Motion and titles</b><span>A simple animated open and end card</span></li>
+            <li><b>Long-form edit</b><span>5–12 minutes, YouTube or event recap style</span></li>
+          </ul>
         </div>
       </div>
     </section>
@@ -64,12 +61,12 @@ ${pkg({ tier: 'Colour', name: 'Colour grade', price: '$85', unit: 'short · from
       <div class="wrap">
         <div class="head" data-rise>
           <div><p class="eyebrow">Ongoing</p><h2>Social media management.</h2></div>
-          <p class="lede">Monthly retainers for businesses that need steady posting, without an agency floor attached.</p>
+          <p class="lede">Monthly support for businesses that need steady posting, without the overhead of an agency.</p>
         </div>
         <div class="package-grid">
-${pkg({ tier: 'Starter', name: 'Social lite', price: '$249', unit: '/ month', cta: 'Start lite', items: ['8 posts a month, static or light video', 'One platform', 'Caption and hashtag drafts', 'A simple monthly report'] })}
-${pkg({ tier: 'Growth', name: 'Social + video', price: '$449', unit: '/ month', featured: true, cta: 'Start growth', items: ['12 posts a month', 'Includes 4 short video cuts', 'Up to two platforms', 'Content calendar and light strategy'] })}
-${pkg({ tier: 'Bundle', name: 'Shoot + social', price: '$599', unit: '/ month', cta: 'Start bundle', items: ['One half-day shoot per month', 'The social and video package above', 'Batch content for the month', 'Best value if you want fresh footage'] })}
+${pkg({ tier: 'Starter', name: 'Social lite', cta: 'Start lite', items: ['8 posts a month, static or light video', 'One platform', 'Caption and hashtag drafts', 'A simple monthly report'] })}
+${pkg({ tier: 'Growth', name: 'Social + video', featured: true, cta: 'Start growth', items: ['12 posts a month', 'Includes 4 short video cuts', 'Up to two platforms', 'Content calendar and light strategy'] })}
+${pkg({ tier: 'Bundle', name: 'Shoot + social', cta: 'Start bundle', items: ['One half-day shoot per month', 'The social and video package above', 'Batch content for the month', 'Best value if you want fresh footage'] })}
         </div>
       </div>
     </section>
@@ -78,12 +75,12 @@ ${pkg({ tier: 'Bundle', name: 'Shoot + social', price: '$599', unit: '/ month', 
       <div class="wrap">
         <div class="head" data-rise>
           <div><p class="eyebrow">Bundled films</p><h2>Shoot and edit together.</h2></div>
-          <p class="lede">One booking, one delivery date, and a lower total than buying the halves separately.</p>
+          <p class="lede">One booking, one team, one delivery date.</p>
         </div>
         <div class="package-grid">
-${pkg({ tier: 'Starter', name: 'Spark film', price: '$399', unit: 'starting', cta: 'Request Spark', items: ['Half-day shoot and 2 social cuts', 'Captions included', 'One revision round', 'Good for cafes, shops, campus organisations'] })}
-${pkg({ tier: 'Brand', name: 'Brand film', price: '$799', unit: 'starting', featured: true, cta: 'Request brand film', items: ['Full-day shoot', '60–90s hero plus 2 cutdowns', 'Colour pass and captions', 'Two revision rounds'] })}
-${pkg({ tier: 'Event', name: 'Event / recap', price: '$550', unit: 'starting', cta: 'Request event', items: ['Coverage day and highlight reel', '2–4 minute recap cut', 'Social teaser included', 'Festivals, showcases, launches'] })}
+${pkg({ tier: 'Starter', name: 'Spark film', cta: 'Request Spark', items: ['Half-day shoot and 2 social cuts', 'Captions included', 'One revision round', 'Good for cafes, shops, campus organisations'] })}
+${pkg({ tier: 'Brand', name: 'Brand film', featured: true, cta: 'Request brand film', items: ['Full-day shoot', '60–90s hero plus 2 cutdowns', 'Colour pass and captions', 'Two revision rounds'] })}
+${pkg({ tier: 'Event', name: 'Event / recap', cta: 'Request event', items: ['Coverage day and highlight reel', '2–4 minute recap cut', 'Social teaser included', 'Festivals, showcases, launches'] })}
         </div>
       </div>
     </section>
@@ -95,9 +92,9 @@ ${pkg({ tier: 'Event', name: 'Event / recap', price: '$550', unit: 'starting', c
           <p class="lede">Built alongside <a href="work/welcome-to-wilmy.html">Welcome to Wilmy</a> — tourism cutdowns, shop features and place films for Cape Fear businesses.</p>
         </div>
         <div class="package-grid">
-${pkg({ tier: 'Destination', name: 'Place film', price: '$449', unit: 'starting', cta: 'Request place film', items: ['Half-day coastal or downtown coverage', '60–90s destination cut', 'Captions and 2 social teases', 'For boards, venues and tourism partners'] })}
-${pkg({ tier: 'Local brand', name: 'Shop feature', price: '$599', unit: 'starting', featured: true, cta: 'Request shop feature', items: ['Owner or craft interview with B-roll', '90s hero plus 3 cutdowns', 'Optional stills pack', 'Priority if you appear in Wilmy'] })}
-${pkg({ tier: 'Festival', name: 'Event recap', price: '$550', unit: 'starting', cta: 'Request festival recap', items: ['The same event package as above', 'Tuned for local festivals and showcases', 'Highlight plus social teaser', 'Fast turnaround windows'] })}
+${pkg({ tier: 'Destination', name: 'Place film', cta: 'Request place film', items: ['Half-day coastal or downtown coverage', '60–90s destination cut', 'Captions and 2 social teases', 'For boards, venues and tourism partners'] })}
+${pkg({ tier: 'Local brand', name: 'Shop feature', featured: true, cta: 'Request shop feature', items: ['Owner or craft interview with B-roll', '90s hero plus 3 cutdowns', 'Optional stills pack', 'Priority if you appear in Wilmy'] })}
+${pkg({ tier: 'Festival', name: 'Event recap', cta: 'Request festival recap', items: ['The same event package as above', 'Tuned for local festivals and showcases', 'Highlight plus social teaser', 'Fast turnaround windows'] })}
         </div>
       </div>
     </section>
@@ -117,7 +114,7 @@ ${pkg({ tier: 'Festival', name: 'Event recap', price: '$550', unit: 'starting', 
       </div>
     </section>
 
-${close('Tell us what you need.', 'We reply with a simple estimate and no mystery fees. Within two business days on commercial work.', `<a class="btn" href="contact.html?topic=Client%20%2F%20commercial">Start a project</a> <a class="link" href="mailto:${SITE.email}">${SITE.email}</a>`)}`
+${close('Tell us what you need.', 'We reply with a clear, written estimate within two business days.', `<a class="btn" href="contact.html?topic=Client%20%2F%20commercial">Start a project</a> <a class="link" href="mailto:${SITE.email}">${SITE.email}</a>`)}`
 };
 
 const contact = {

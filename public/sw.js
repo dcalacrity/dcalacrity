@@ -1,1 +1,32 @@
-'use strict';const CACHE='pure-alacrity-e3453023b0ca';self['addEventListener']('install',_0x4a9313=>{_0x4a9313['waitUntil'](((async()=>{try{const _0x345513=await caches['open'](CACHE),_0x154a27=await fetch('./');if(_0x154a27['ok']){await _0x345513['put']('__shell__',_0x154a27['clone']());try{const _0x20a23a=[...new Set((await _0x154a27['text']())['match'](/pa-(?:logo|img-[0-9a-f]{10})\.jpg/g)||[])];await Promise['all'](_0x20a23a['map'](async _0x20f401=>{try{const _0x52f414=await fetch(_0x20f401);if(_0x52f414['ok'])await _0x345513['put'](_0x20f401,_0x52f414);}catch(_0x344b61){}}));}catch(_0x29b7ad){}}}catch(_0x332788){}await self['skipWaiting']();})()));}),self['addEventListener']('activate',_0x3e33db=>{_0x3e33db['waitUntil'](((async()=>{const _0x365fe3=await caches['keys']();await Promise['all'](_0x365fe3['filter'](_0x2951a9=>_0x2951a9!==CACHE)['map'](_0xc2aff6=>caches['delete'](_0xc2aff6))),await self['clients']['claim']();})()));}),self['addEventListener']('fetch',_0x1367df=>{const _0xbe95a0=_0x1367df['request'];if(_0xbe95a0['method']!=='GET')return;let _0x4df8f8;try{_0x4df8f8=new URL(_0xbe95a0['url']);}catch(_0x58d215){return;}if(_0x4df8f8['origin']!==self['location']['origin'])return;if(_0xbe95a0['mode']==='navigate'){_0x1367df['respondWith'](((async()=>{const _0x180236=await caches['open'](CACHE),_0x1722ae=await _0x180236['match'](_0xbe95a0,{'ignoreSearch':!![]})||await _0x180236['match']('__shell__');if(_0x1722ae)return _0x1722ae;const _0x5ca682=await fetch(_0xbe95a0);if(_0x5ca682&&_0x5ca682['ok'])try{await _0x180236['put'](_0xbe95a0,_0x5ca682['clone']()),await _0x180236['put']('__shell__',_0x5ca682['clone']());}catch(_0x15b0b5){}return _0x5ca682;})()));return;}if(/\/chunks\/[A-Z0-9_]+\.js$/['test'](_0x4df8f8['pathname'])){_0x1367df['respondWith'](((async()=>{const _0x129f79=await caches['open'](CACHE),_0x56d44=await _0x129f79['match'](_0xbe95a0);if(_0x56d44)return _0x56d44;const _0x68670e=await fetch(_0xbe95a0);if(_0x68670e&&_0x68670e['ok'])try{await _0x129f79['put'](_0xbe95a0,_0x68670e['clone']());}catch(_0x187169){}return _0x68670e;})()));return;}if(/\/ocr\/(tesseract\.min\.js|worker\.min\.js|tesseract-core-lstm\.wasm\.js|eng\.traineddata)$/['test'](_0x4df8f8['pathname'])){_0x1367df['respondWith'](((async()=>{const _0x1c273e=await caches['open'](CACHE),_0x15f65d=await _0x1c273e['match'](_0xbe95a0);if(_0x15f65d)return _0x15f65d;const _0x405275=await fetch(_0xbe95a0);if(_0x405275&&_0x405275['ok'])try{await _0x1c273e['put'](_0xbe95a0,_0x405275['clone']());}catch(_0x115975){}return _0x405275;})()));return;}if(/\/(pa-logo\.jpg|pa-img-[0-9a-f]{10}\.jpg)$/['test'](_0x4df8f8['pathname'])){_0x1367df['respondWith'](((async()=>{const _0x27bcc8=await caches['open'](CACHE),_0x112e7f=await _0x27bcc8['match'](_0xbe95a0);if(_0x112e7f)return _0x112e7f;const _0x42050c=await fetch(_0xbe95a0);if(_0x42050c&&_0x42050c['ok'])try{await _0x27bcc8['put'](_0xbe95a0,_0x42050c['clone']());}catch(_0x5b5de4){}return _0x42050c;})()));return;}/(manifest\.webmanifest|icon-\d+\.png)$/['test'](_0x4df8f8['pathname'])&&_0x1367df['respondWith'](((async()=>{const _0x52af4f=await caches['open'](CACHE),_0x214af1=await _0x52af4f['match'](_0xbe95a0),_0x2fa808=fetch(_0xbe95a0)['then'](_0x4ed869=>{if(_0x4ed869['ok'])_0x52af4f['put'](_0xbe95a0,_0x4ed869['clone']());return _0x4ed869;})['catch'](()=>null);return _0x214af1||_0x2fa808['then'](_0x11ae85=>{if(!_0x11ae85)throw new Error('offline');return _0x11ae85;});})()));});
+/* dcalacrity.com/sw.js — this website has no service worker. This file removes one.
+ *
+ * WHY IT EXISTS (2026-10-03)
+ * Pure Alacrity lives at dcalacrity.com/pure/ and has its own service worker
+ * there (scope /pure/). Once, its files were also deployed at the ROOT of this
+ * site, and a browser that opened the app there registered its worker for the
+ * whole domain (scope /). That worker answers every page from its cached copy
+ * of the app, so dcalacrity.com showed Pure Alacrity instead of the website,
+ * and kept doing so even after the right files were deployed.
+ *
+ * Browsers re-check /sw.js on every visit. Finding this file, they install it
+ * in place of the stray worker. It then:
+ *   · takes over the pages the stray worker held,
+ *   · unregisters itself, so nothing controls dcalacrity.com/ any more,
+ *   · reloads those pages from the network, so the website shows.
+ * It deletes NO caches and NO storage. Pure Alacrity's data and its own
+ * worker at /pure/ are a different registration and are untouched.
+ * Keep this file deployed for a few months; it is harmless and tiny.
+ */
+self.addEventListener('install', function () { self.skipWaiting(); });
+self.addEventListener('activate', function (event) {
+  event.waitUntil((async function () {
+    try { await self.clients.claim(); } catch (_) {}
+    try { await self.registration.unregister(); } catch (_) {}
+    var clients = [];
+    try { clients = await self.clients.matchAll({ type: 'window', includeUncontrolled: true }); } catch (_) {}
+    clients.forEach(function (c) {
+      try { if (!new URL(c.url).pathname.startsWith('/pure')) c.navigate(c.url); } catch (_) {}
+    });
+  })());
+});
+/* no fetch handler: every request goes to the network */

@@ -196,6 +196,18 @@ function mockFetch(handler) { globalThis.fetch = handler; }
   j = await r.json();
   check('?check=1 proves the Apps Script without sending', j.providers.appsScript === true && /sending as support@dcalacrity\.com/.test(j.checks.appsScript), j.checks.appsScript);
 
+  /* setup problems are named, values never shown */
+  r = await onRequest({ request: new Request('https://dcalacrity.com/api/contact?check=1'), env: {} });
+  j = await r.json();
+  check('?check=1 says the variables are not reaching the deployment', /Production/.test(j.checks.appsScriptSetup || ''), j.checks.appsScriptSetup);
+  mockFetch(async () => new Response(JSON.stringify({ ok: true, from: 'support@dcalacrity.com', to: 'support@dcalacrity.com' }), { status: 200 }));
+  r = await onRequest({ request: new Request('https://dcalacrity.com/api/contact?check=1'), env: { APPS_SCRIPT_URL: '  "https://script.google.com/a/macros/dcalacrity.com/s/ABC/exec"\n', APPS_SCRIPT_SECRET: ' s3cret ' } });
+  j = await r.json();
+  check('pasted spaces, quotes and newlines are tolerated (Workspace /a/macros/ URL)', j.providers.appsScript === true && !j.checks.appsScriptSetup, JSON.stringify(j.checks));
+  r = await onRequest({ request: new Request('https://dcalacrity.com/api/contact?check=1'), env: { APPS_SCRIPT_URL: 'https://script.google.com/macros/s/ABC/dev', APPS_SCRIPT_SECRET: 'x' } });
+  j = await r.json();
+  check('a /dev URL is named as the problem', /\/exec/.test(j.checks.appsScriptSetup || ''));
+
   /* the lead reader is locked */
   const { onRequest: leads } = await import('../functions/api/leads.js');
   const store = new Map([['lead:AAA1', JSON.stringify({ name: 'A', message: 'hi' })]]);

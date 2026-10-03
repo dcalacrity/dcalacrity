@@ -308,7 +308,7 @@ const prizePool = {
 
     <section class="sec sec--lead">
       <div class="wrap">
-        <figure class="with-caption" data-rise><div class="visual" style="aspect-ratio:3/2"><img src="../assets/img/prize-pool-placeholder.jpg" alt="Key art for Prize Pool VR" width="1536" height="1024"/></div><figcaption class="caption" style="margin-top:.75rem">Key art in progress. The film is written, mapped, scheduled and budgeted; photography is next.</figcaption></figure>
+        <figure class="with-caption" data-rise><div class="visual" style="aspect-ratio:3/2"><img src="../assets/img/prize-pool-placeholder.jpg" alt="Key art for Prize Pool VR" width="1536" height="1024"/></div><figcaption class="caption" style="margin-top:.75rem">Key art in progress. The film is written, mapped and scheduled; photography is next.</figcaption></figure>
 ${facts([['41', 'scenes, each one unbroken take'], ['9', 'endings, from 19 choices'], ['5,535', 'distinct routes through it'], ['12½–17½', 'minutes a viewing']])}
       </div>
     </section>
@@ -331,6 +331,7 @@ ${facts([['41', 'scenes, each one unbroken take'], ['9', 'endings, from 19 choic
             <div><h3>She has a lease nobody knows about</h3><p><strong>Maya Okonkwo</strong> is the fast one — her house said so. Under the game map on her phone is a studio over a laundromat with one name on it. Every door on her route is a way out of that house.</p></div>
           </div>
         </div>
+        <p class="caption" style="margin-top:1.25rem">Character names are working names and may change before release.</p>
       </div>
     </section>
 
@@ -384,21 +385,15 @@ ${ENDINGS.map((e) => `          <li style="--w:${(e[1] / ENDINGS[0][1] * 100).to
     <section class="sec" id="production">
       <div class="wrap">
         <div class="head" data-rise>
-          <div><p class="eyebrow">The production</p><h2>Eight nights, seven locations, no interiors, a thousand dollars.</h2></div>
-          <p class="lede">Every scene is outside and on campus, so there is no weather cover and no location fee. The board is built for that: it averages under six hours a night, the opening is split across two golden windows, and the wet work has a night of its own.</p>
+          <div><p class="eyebrow">The production</p><h2>Shot on location, planned scene by scene.</h2></div>
+          <p class="lede">Prize Pool VR is an exterior, on-location production. Every scene, location and call is planned in the same document as the script and the story graph, so the plan and the story cannot drift apart.</p>
         </div>
-${facts([['8', 'shoot nights · 42 hours'], ['7', 'locations · 12 sets'], ['41', 'minutes of unique footage'], ['$1,000', 'cash, built from the board']])}
-        <div class="beside beside--flip" data-rise style="margin-top:3rem">
+        <div class="grid-2" data-rise>
           <div class="lines">
-            <div><h3>The pathway multiplier is 2.34×</h3><p>You pay for forty-one minutes of footage and each viewer sees about sixteen. Every cost that scales with footage — shoot nights, cast nights, stitch, colour, encode, delivery — carries that number on it. It is 2.34 and not 4 because the two protagonists cross in the same nine places, and a mirrored pair at one standing setup is where the savings live.</p></div>
-            <div><h3>What the exterior buys</h3><p>No interior lighting packages at all, natural practicals on most sets, and a geography a viewer can hold in their head: the quad at the start and the quad at the end, with the same folding table in both.</p></div>
+            <div><h3>Built for the format</h3><p>The two protagonists cross in the same places, so a mirrored pair of scenes can share one setup. The story was shaped around that from the first draft, which keeps a branching film practical to shoot.</p></div>
           </div>
-          <div>
-            <p class="eyebrow">Still to prove</p>
-            <div class="prose" style="margin-top:1.25rem">
-              <p>Every hour on that board rests on a time model — setup, rehearsal, takes, and a reset where the crew leaves 180 degrees of the world and comes back. That model is reasoned, not measured.</p>
-              <p>One scene shot properly, start to finish, replaces the reasoning with a number, and all forty-two hours move with it. That single-scene test is the most valuable line in the plan.</p>
-            </div>
+          <div class="lines">
+            <div><h3>A world you can hold in your head</h3><p>Natural light and real places, and a geography a viewer can follow: the quad at the start and the quad at the end, with the same folding table in both.</p></div>
           </div>
         </div>
       </div>
@@ -407,18 +402,18 @@ ${facts([['8', 'shoot nights · 42 hours'], ['7', 'locations · 12 sets'], ['41'
     <section class="sec sec--line" id="pipeline">
       <div class="wrap">
         <div class="head" data-rise>
-          <div><p class="eyebrow">Built in our own software</p><h2>The script, the graph, the board and the budget are one document.</h2></div>
-          <p class="lede">Prize Pool VR is written, mapped, scheduled and costed inside Pure Alacrity, and exported to Unity through Alacrity Player — the same pipeline that shipped Right Here Right Now!</p>
+          <div><p class="eyebrow">Built in our own software</p><h2>The script, the graph and the board are one document.</h2></div>
+          <p class="lede">Prize Pool VR is written, mapped and scheduled inside Pure Alacrity, and exported to Unity through Alacrity Player — the same pipeline that shipped Right Here Right Now!</p>
         </div>
         <div class="grid-3" data-rise>
           <div class="lines"><div><h3>One script, two readers</h3><p>The interactive format carries real pathway and choice lines beside the standard set, so the same file is a screenplay a human reads and a graph the engine walks.</p></div></div>
           <div class="lines"><div><h3>The logic travels</h3><p>Eight typed facts with starting values, nineteen conditions and the effects on every link export with the map, so the build arrives knowing what the story remembers.</p></div></div>
-          <div class="lines"><div><h3>The board is the same object</h3><p>Forty-one scenes, eight nights, seven locations and the per-scene cast come off the same document the script is in — so the schedule and the graph cannot disagree.</p></div></div>
+          <div class="lines"><div><h3>The board is the same object</h3><p>Scenes, locations and the per-scene cast come off the same document the script is in — so the schedule and the graph cannot disagree.</p></div></div>
         </div>
       </div>
     </section>
 
-${close('Follow the Architect.', 'The seventh draft is locked, the graph is walked, the board is laid and the budget is built. What is open is photography — eight nights on a campus in North Carolina, and the people to make them with.', '<a class="btn" href="../contact.html?topic=Investor%20%2F%20partner">Investor / partner inquiry</a> <a class="btn btn--quiet" href="../contact.html?topic=Crew%20%2F%20collaborator">Crew &amp; collaborators</a> <a class="link" href="index.html">Back to the work</a>')}`
+${close('Follow the Architect.', 'The script is locked, the graph is walked and the board is laid. What is open is photography in North Carolina, and the people to make it with.', '<a class="btn" href="../contact.html?topic=Investor%20%2F%20partner">Investor / partner inquiry</a> <a class="btn btn--quiet" href="../contact.html?topic=Crew%20%2F%20collaborator">Crew &amp; collaborators</a> <a class="link" href="index.html">Back to the work</a>')}`
 };
 
 /* ───────────────────────────────────────────── wilmy ──────────────────── */

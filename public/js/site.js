@@ -428,3 +428,15 @@
   document.addEventListener("visibilitychange", function () { if (!document.hidden) kick(); });
   kick();
 })();
+
+/* A stray service worker at the site root (Pure Alacrity's, see /sw.js) made
+   dcalacrity.com show the app. Any page that loads removes one; /pure/'s own
+   worker is a different scope and is left alone. */
+(function () {
+  try {
+    if (!('serviceWorker' in navigator)) return;
+    navigator.serviceWorker.getRegistrations().then(function (rs) {
+      rs.forEach(function (r) { try { if (new URL(r.scope).pathname === '/') r.unregister(); } catch (_) {} });
+    });
+  } catch (_) {}
+})();

@@ -134,16 +134,30 @@ async function persist(env, fields, meta) {
 }
 
 /* ── 2 · Google Apps Script (Workspace: a web app deployed as support@) ─── */
-function appsScriptConfigured(env) { return !!(env && env.APPS_SCRIPT_URL && env.APPS_SCRIPT_SECRET && /^https:\/\/script\.google\.com\//.test(env.APPS_SCRIPT_URL)); }
+/* a value pasted into the dashboard often brings a space, a newline or quotes with it */
+function val(v) { return String(v == null ? '' : v).trim().replace(/^["']+|["']+$/g, '').trim(); }
+function asUrl(env) { return val(env && env.APPS_SCRIPT_URL); }
+function asSecret(env) { return val(env && env.APPS_SCRIPT_SECRET); }
+function appsScriptConfigured(env) { return !!(asUrl(env) && asSecret(env) && /^https:\/\/script\.google\.com\/.+\/exec$/.test(asUrl(env))); }
+/* what is wrong with the Apps Script settings, in words, never revealing a value */
+function appsScriptProblem(env) {
+  const u = asUrl(env), k = asSecret(env);
+  if (!u && !k) return 'APPS_SCRIPT_URL and APPS_SCRIPT_SECRET are not visible to this deployment. Add both under Settings → Variables and Secrets → Production (not Preview), then deploy again: variables only reach deployments made after they were saved.';
+  if (!u) return 'APPS_SCRIPT_SECRET is set but APPS_SCRIPT_URL is not (check the name is exactly APPS_SCRIPT_URL, Production).';
+  if (!k) return 'APPS_SCRIPT_URL is set but APPS_SCRIPT_SECRET is not (check the name is exactly APPS_SCRIPT_SECRET, Production).';
+  if (!/^https:\/\/script\.google\.com\//.test(u)) return 'APPS_SCRIPT_URL must start with https://script.google.com/ — copy the "Web app" URL from Deploy → Manage deployments, not the editor address or a googleusercontent.com link.';
+  if (!/\/exec$/.test(u)) return 'APPS_SCRIPT_URL must end in /exec (a URL ending in /dev only works for you while signed in).';
+  return '';
+}
 async function sendAppsScript(env, fields, meta) {
   if (!appsScriptConfigured(env)) return { sent: false, skipped: 'no-apps-script' };
   try {
     /* Apps Script answers a POST with a 302 to script.googleusercontent.com; fetch follows it */
-    const res = await fetch(env.APPS_SCRIPT_URL, {
+    const res = await fetch(asUrl(env), {
       method: 'POST', redirect: 'follow',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify({
-        secret: env.APPS_SCRIPT_SECRET,
+        secret: asSecret(env),
         replyTo: fields.email,
         subject: `[dcalacrity.com] ${fields.topic} — ${fields.name}`,
         html: asHTML(fields, meta),
@@ -335,11 +349,17 @@ export async function onRequestGet(context) {
   let check = false; try { check = new URL(context.request.url).searchParams.get('check') === '1'; } catch { /* ignore */ }
   if (check) {
     out.checks = {};
+    const why = appsScriptProblem(env);
+    /* named when Apps Script is half set up, or when nothing real is set up at all */
+    if (why && (asUrl(env) || asSecret(env) || (!env.RESEND_API_KEY && !gmailConfigured(env)))) out.checks.appsScriptSetup = why;
     if (appsScriptConfigured(env)) {
       try {
-        const u = new URL(env.APPS_SCRIPT_URL); u.searchParams.set('check', '1'); u.searchParams.set('secret', env.APPS_SCRIPT_SECRET);
-        const r = await fetch(u.toString(), { redirect: 'follow' }); const j = await r.json().catch(() => null);
-        out.checks.appsScript = j && j.ok ? 'script answers, sending as ' + j.from + ' to ' + j.to : (j ? 'script refused: ' + (j.error || 'wrong secret') : 'not reachable as a public web app (' + r.status + ')');
+        const u = new URL(asUrl(env)); u.searchParams.set('check', '1'); u.searchParams.set('secret', asSecret(env));
+        const r = await fetch(u.toString(), { redirect: 'follow' }); const t = await r.text(); let j = null; try { j = JSON.parse(t); } catch { /* html */ }
+        out.checks.appsScript = j && j.ok ? 'script answers, sending as ' + j.from + ' to ' + j.to
+          : j ? 'script refused: ' + (j.error === 'forbidden' ? 'the secret does not match SECRET in the script\'s properties' : (j.error || 'unknown'))
+          : /accounts\.google\.com|ServiceLogin|Sign in/i.test(t) ? 'the web app asks for a Google sign-in: Deploy → Manage deployments → edit → Who has access: Anyone. If "Anyone" is not offered, a Workspace admin must allow sharing outside dcalacrity.com (Admin → Apps → Google Workspace → Drive and Docs → Sharing settings).'
+          : 'not reachable as a public web app (HTTP ' + r.status + ')';
       } catch (e) { out.checks.appsScript = 'unreachable: ' + String(e && e.message || e).slice(0, 80); }
     }
     if (env.RESEND_API_KEY) {

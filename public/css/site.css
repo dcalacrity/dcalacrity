@@ -714,3 +714,23 @@ a, button { touch-action: manipulation; }
 
 /* No sideways page scroll from the travelling light streak on /technology. */
 .path { overflow-x: clip; overflow-clip-margin: 16px; }
+
+/* ── Services, 2026-10-03: no prices; the featured card was a light-theme card on
+   a dark well (".paper" swapped the text colours but not the background), so its
+   text all but vanished. It is now a lit dark card. ─────────────────────────── */
+.package h3 { font-size: 1.2rem; margin: 0 0 1rem; }
+.package ul { margin-top: .1rem; }
+.package li { list-style: none; }
+.package li::before { background: var(--c-spark); opacity: .7; }
+.package.featured { position: relative; background: linear-gradient(180deg, rgba(0, 194, 255, .09), rgba(0, 194, 255, .02) 55%), var(--c-well); border-color: rgba(0, 194, 255, .45); box-shadow: 0 0 0 1px rgba(0, 194, 255, .12), 0 24px 60px -30px rgba(0, 194, 255, .45); }
+.package.featured .tier { color: var(--c-spark); }
+.package.featured h3, .package.featured li { color: var(--ink); }
+.package.featured ul { color: var(--ink); }
+.addons { margin-top: 2.5rem; padding: 1.5rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--c-well); }
+.addons__h { font-family: var(--mono); font-size: .72rem; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 1rem; }
+.addons__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem 1.5rem; }
+.addons__list li { display: grid; gap: .25rem; padding-left: .9rem; border-left: 2px solid rgba(0, 194, 255, .45); }
+.addons__list b { font-weight: 600; color: var(--ink); font-size: .98rem; }
+.addons__list span { color: var(--ink-2); font-size: .9rem; line-height: 1.45; }
+@media (max-width: 1023px) { .addons__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .addons__list { grid-template-columns: minmax(0, 1fr); } .addons { padding: 1.25rem; } }
