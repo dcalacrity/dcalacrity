@@ -1,0 +1,9 @@
+OCR engine files carried beside Pure Alacrity so scanned PDFs can be read with no network.
+
+  tesseract.min.js, worker.min.js   tesseract.js 7.0.0       Apache-2.0  (c) naptha / Project Naptha contributors
+  tesseract-core-lstm.wasm.js       tesseract.js-core 7.0.0  Apache-2.0  (Tesseract OCR compiled to WebAssembly; Tesseract (c) Google / contributors)
+  eng.traineddata                   tesseract-ocr/tessdata   Apache-2.0  (English LSTM model)
+
+The full licence text is LICENSE-Apache-2.0.txt beside this file. The files are verbatim.
+Only the plain LSTM core is carried (no SIMD variant): one file that runs on every browser,
+at the cost of speed on machines that could have used SIMD.

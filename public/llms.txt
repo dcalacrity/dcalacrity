@@ -1,0 +1,23 @@
+# Pure Alacrity
+
+> Pure Alacrity is an offline film-production suite (screenplay, breakdown, stripboard, schedule, budget, story map, on-set tools) that runs entirely in the browser. It has no API and no server: an AI cannot call it. An AI writes a screenplay (Fountain) or a production file (JSON), and a person pastes it into Productions → Use with ChatGPT → Paste from ChatGPT, where the app checks it and imports it with its own importers.
+
+Contact: pure@dcalacrity.com
+
+## For an AI assistant
+
+- [Instructions](ai-kit/INSTRUCTIONS.md): what to hand back, the Fountain dialect the app reads (including branching markers), the production file, and what never to invent. Under 8,000 characters.
+- [Reference](ai-kit/KNOWLEDGE.md): every field the production reader accepts and which screen shows it, the `.pure` story-map format, and the export → edit → import round trip.
+- [Schema](ai-kit/pure-production.schema.json): JSON Schema of the production file, derived from the reader code.
+- [Example production](ai-kit/example-production.json): a small complete file that imports cleanly.
+- [Example branching screenplay](ai-kit/example-branching.fountain): pathways, choices, node tags and notes.
+
+## For an agent with a browser
+
+- Open this address, press Demo on the front door for a local workspace, then Productions → Use with ChatGPT.
+- Paste your file under Paste from ChatGPT and press Check it. Fix what it flags, then import.
+- Your browser session is not the user's: export the result (Transfer Bay, or Send to ChatGPT → Download) and hand the file back.
+
+## Optional
+
+- [Setup guide](ai-kit/README.md): setting up a ChatGPT Project or custom GPT in three steps, and what would need a server.

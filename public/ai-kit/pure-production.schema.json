@@ -1,0 +1,233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dcalacrity.com/pure/ai-kit/pure-production.schema.json",
+  "title": "Pure Alacrity production file",
+  "description": "What Pure Alacrity's production reader accepts: AH.V1.importBlob (every production file goes through it: Productions → Load, Transfer Bay, Use with ChatGPT), the AH.Hydrate.fromBlob chain that fills each store, and the AH.AiKit normaliser in front of it. Derived from that code and measured at runtime by importing a file with a unique token in every field and reading which store and which screen shows it. 'x-store' is the per-production storage key (suffixed with the production id); 'x-screen' is where a person sees it. Unknown fields are allowed: they are kept in the production record, and the Use with ChatGPT check names each one. Joins are by scene NUMBER (scenes[].n), never by heading.",
+  "type": "object",
+  "required": ["_alacrityProduction"],
+  "properties": {
+    "_alacrityProduction": { "const": true, "description": "Marks a production file. With it, every loader creates a NEW production. The Use with ChatGPT panel also accepts a file without it that has a production and scenes, and says so." },
+    "_intakeVersion": { "type": ["string", "number"], "description": "\"1\"." },
+    "_note": { "type": "string", "description": "Free text; kept, not shown." },
+    "_exportedBy": { "type": "string", "description": "Written by Use with ChatGPT → Send to ChatGPT: \"Pure Alacrity · Use with ChatGPT\". Keep it when you return an edited export." },
+    "_sourceProductionId": { "type": "string", "description": "The production the export came from. Informational: the import always makes a new production." },
+    "production": {
+      "type": "object",
+      "description": "Merged into the file by AH.V1.importBlob. name, type, status, client, director, logline (or synopsis / description) and budget reach the production card; the rest is kept in the production record (dc_alacrity_prod_<id>).",
+      "properties": {
+        "name": { "type": "string", "description": "The production's title. Falls back to title, then to the file name." },
+        "title": { "type": "string", "description": "Used as the name when name is missing." },
+        "type": { "type": "string", "examples": ["Short Film", "Feature Film", "TV Series / Pilot", "Documentary", "Commercial", "Music Video", "Web Series", "VR / Interactive"] },
+        "status": { "type": "string", "description": "Upper-cased. The card colours BID, R&D, PRE-PROD, IN PROD, POST, WRAP, SHELVED.", "examples": ["PRE-PROD"] },
+        "logline": { "type": "string", "description": "Shown on the card as the description." },
+        "synopsis": { "type": "string" },
+        "description": { "type": "string" },
+        "genre": { "type": "string", "x-screen": "Marketability" },
+        "format": { "type": "string" },
+        "director": { "type": "string", "x-screen": "production card, Production brief" },
+        "writer": { "type": "string" },
+        "producer": { "type": "string" },
+        "client": { "type": "string", "x-screen": "production card" },
+        "budget": { "type": "string", "description": "Text with the currency sign, e.g. \"$25,000\" or \"$1.5M\". A bare number is rewritten as money by the normaliser (it used to show $0 on the card)." },
+        "currency": { "type": "string", "examples": ["USD", "EUR", "GBP"] },
+        "shootStart": { "type": "string", "format": "date" },
+        "shootEnd": { "type": "string", "format": "date" },
+        "wrapDate": { "type": "string", "format": "date" },
+        "runtimeMin": { "type": "number" },
+        "estDays": { "type": "number" },
+        "location": { "type": "string" },
+        "company": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "script": {
+      "description": "The screenplay. Give `fountain` (the whole script as Fountain text) and the normaliser reads it with the app's own parser into `lines`; or give `lines` in the app's line model. A plain string is read as Fountain. x-store ah_script_; x-screen Script Studio.",
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "properties": {
+            "title": { "type": "string" },
+            "fountain": { "type": "string", "description": "Fountain text. [[ ]] before the first heading becomes the manual (front matter); [[ ]] after a heading becomes that scene's director's note; # pathway and * choice lines make it a branching (Interactive) script." },
+            "titlePage": {
+              "type": "object",
+              "description": "Wins over the Fountain title page.",
+              "properties": {
+                "title": { "type": "string" }, "credit": { "type": "string" }, "author": { "type": "string" },
+                "basedon": { "type": "string" }, "draft": { "type": "string" }, "contact": { "type": "string" }
+              },
+              "additionalProperties": true
+            },
+            "format": { "type": "string", "description": "Set to \"interactive\" automatically when the Fountain has branching markers; otherwise \"screenplay\"." },
+            "scriptType": { "type": "string", "enum": ["regular", "multipathway"] },
+            "paths": { "type": "array", "items": { "type": "object", "properties": { "id": { "type": "string" }, "name": { "type": "string" }, "color": { "type": "string" } } } },
+            "manual": { "type": "object", "properties": { "on": { "type": "boolean" }, "title": { "type": "string" }, "blocks": { "type": "array", "items": { "type": "object", "properties": { "t": { "enum": ["h1", "h2", "p", "bullet", "num", "rule", "pagebreak", "script"] }, "x": { "type": "string" }, "chars": { "type": "array", "items": { "type": "string" } }, "sides": { "type": "boolean" } } } } } },
+            "dirNotes": { "type": "object", "description": "Director's notes keyed by the index of the scene-heading line. Prefer [[ ]] under the heading in the Fountain, which survives edits.", "additionalProperties": { "type": "string" } },
+            "lines": {
+              "type": "array",
+              "description": "The app's line model. Types: scene action char dial paren trans centered pathway choice.",
+              "items": { "type": "object", "required": ["t", "x"], "properties": { "t": { "enum": ["scene", "action", "char", "dial", "paren", "trans", "centered", "pathway", "choice"] }, "x": { "type": "string" } } }
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    "scenes": {
+      "type": "array",
+      "description": "One row per scene heading, in script order. x-store ah_scenes_; x-screen Stripboard, Schedule, Call sheet, Shooting schedule. The reader folds number/scene → n, heading/slug → title, location → loc, intExt → int.",
+      "items": {
+        "type": "object",
+        "required": ["n"],
+        "properties": {
+          "n": { "type": "string", "description": "Scene number: \"1\", \"2\", \"3A\". Unique. Shots, breakdown rows and risks join on it." },
+          "number": { "type": "string" },
+          "heading": { "type": "string", "description": "The heading exactly as in the script, node tag included, e.g. \"EXT. LEVEL CROSSING - NIGHT [N00]\"." },
+          "title": { "type": "string" },
+          "loc": { "type": "string", "description": "The set, without INT./EXT. and without the time of day." },
+          "location": { "type": "string" },
+          "int": { "type": "boolean", "description": "true for INT. and INT./EXT." },
+          "intExt": { "type": "string", "enum": ["INT", "EXT", "INT/EXT"] },
+          "timeOfDay": { "type": "string", "examples": ["DAY", "NIGHT", "DAWN", "DUSK", "CONTINUOUS"] },
+          "pages": { "type": "string", "description": "Eighths as text: \"1 2/8\", \"3/8\". An estimate; the app re-measures from the script." },
+          "day": { "type": "string", "description": "Shoot day the scene is scheduled on: \"D01\", \"D02\"." },
+          "synopsis": { "type": "string" },
+          "characters": { "type": "array", "items": { "type": "string" } }
+        },
+        "additionalProperties": true
+      }
+    },
+    "cast": {
+      "type": "array",
+      "description": "Performers. Stored with crew in ah_cast_ (dept defaults to CAST). x-screen Cast & Crew, Contacts, Call sheet (rows without a name are left off the call sheet).",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "description": "The performer. \"\" when nobody is cast." },
+          "scriptChar": { "type": "string", "description": "The character exactly as the cue spells it (\"MAYA\"). This is the link to the script." },
+          "role": { "type": "string", "description": "Part description or tier: \"Lead\", \"Supporting\", \"Day player\"." },
+          "dept": { "type": "string", "const": "CAST" },
+          "email": { "type": "string" }, "phone": { "type": "string" }, "agency": { "type": "string" }, "agent": { "type": "string" },
+          "dayRate": { "type": ["string", "number"] }, "rate": { "type": ["string", "number"] }, "status": { "type": "string" }, "notes": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "crew": {
+      "type": "array",
+      "description": "Crew. Stored with cast in ah_cast_ (dept defaults to CREW).",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "role": { "type": "string", "examples": ["Director", "Director of Photography", "1st AD", "Sound Recordist", "Gaffer"] },
+          "dept": { "type": "string", "examples": ["DIRECTING", "PRODUCTION", "CAMERA", "SOUND", "GRIP", "ELECTRIC", "ART", "WARDROBE", "MAKEUP"] },
+          "email": { "type": "string" }, "phone": { "type": "string" }, "dayRate": { "type": ["string", "number"] }, "notes": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "locations": {
+      "type": "array",
+      "description": "x-store ah_loc_; x-screen Locations. name ⇄ n, status ⇄ st, notes ⇄ note are both written.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" }, "type": { "type": "string", "enum": ["Interior", "Exterior", "Both"] },
+          "address": { "type": "string" }, "notes": { "type": "string" }, "contact": { "type": "string" },
+          "permit": { "type": "string" }, "fee": { "type": "number" }, "scenes": { "type": "string", "description": "Scene numbers, e.g. \"1, 8, 13\"." }
+        },
+        "additionalProperties": true
+      }
+    },
+    "breakdown": {
+      "type": "array",
+      "description": "One row per scene. x-store ah_bdown_; x-screen Breakdown (and Shopping reads the props). `breakdownRows` and `breakdowns` are accepted as the same thing.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "scn": { "type": "string", "description": "The scene NUMBER (scenes[].n)." },
+          "scene": { "type": "string", "description": "Same as scn." },
+          "cast": { "type": "array", "items": { "type": "string" } },
+          "extras": { "type": ["number", "array"] },
+          "stunts": { "type": "array", "items": { "type": "string" } }, "vehicles": { "type": "array", "items": { "type": "string" } },
+          "animals": { "type": "array", "items": { "type": "string" } }, "props": { "type": "array", "items": { "type": "string" } },
+          "setDressing": { "type": "array", "items": { "type": "string" } }, "greenery": { "type": "array", "items": { "type": "string" } },
+          "costumes": { "type": "array", "items": { "type": "string" } }, "wardrobe": { "type": "array", "items": { "type": "string" } },
+          "makeup": { "type": "array", "items": { "type": "string" } }, "sfx": { "type": "array", "items": { "type": "string" } },
+          "mechfx": { "type": "array", "items": { "type": "string" } }, "vfx": { "type": "array", "items": { "type": "string" } },
+          "equipment": { "type": "array", "items": { "type": "string" } }, "sound": { "type": "array", "items": { "type": "string" } },
+          "music": { "type": "array", "items": { "type": "string" } }, "security": { "type": "array", "items": { "type": "string" } },
+          "labor": { "type": "array", "items": { "type": "string" } }, "notes": { "type": "array", "items": { "type": "string" } }
+        },
+        "additionalProperties": true
+      }
+    },
+    "shotlist": {
+      "type": "array",
+      "description": "x-store ah_shots_ (normalised by the shot reader); x-screen Shot List, Shooting Schedule. `shots` is accepted as the same thing.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "n": { "type": "string", "description": "Shot number, e.g. \"1A\"." },
+          "scn": { "type": "string", "description": "The scene NUMBER." },
+          "size": { "enum": ["ECU", "XCU", "CU", "MCU", "MS", "MWS", "WS", "EWS", "OTS", "POV", "INSERT", "OTHER"] },
+          "move": { "enum": ["STATIC", "PAN", "TILT", "DOLLY", "TRUCK", "CRANE", "JIB", "HANDHELD", "STEADI", "GIMBAL", "ZOOM", "RACK"] },
+          "lens": { "type": "string" }, "desc": { "type": "string" }, "subjects": { "type": "string" },
+          "prepMin": { "type": "number", "description": "Minutes to set up; drives the time-linked Shooting Schedule." },
+          "shootMin": { "type": "number" }, "sound": { "enum": ["SYNC", "MOS"] }, "adr": { "enum": ["No ADR", "ADR planned", "ADR required"] },
+          "equip": { "type": "string" }, "notes": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "budgetLines": {
+      "type": "array",
+      "description": "x-store ah_budget_lines_; x-screen Budget, which reads cat / name / est / act. category → cat, line / item / description → name, amount / estimate / cost → est are mapped by the normaliser (they used to show nothing).",
+      "items": {
+        "type": "object",
+        "properties": { "cat": { "type": "string" }, "name": { "type": "string" }, "est": { "type": "number" }, "act": { "type": "number" }, "vendor": { "type": "string" }, "notes": { "type": "string" } },
+        "additionalProperties": true
+      }
+    },
+    "risks": {
+      "type": "array",
+      "description": "x-store ah_risk_; x-screen Risk, which reads t / s / lvl / mit. title / risk → t, scene → s, severity / level / impact → lvl, mitigation → mit are mapped by the normaliser (they used to show an empty table).",
+      "items": {
+        "type": "object",
+        "properties": { "t": { "type": "string", "description": "The hazard." }, "s": { "type": "string", "description": "Scene number, or \"—\"." }, "lvl": { "enum": ["HIGH", "MEDIUM", "LOW"] }, "mit": { "type": "string", "description": "Mitigation." } },
+        "additionalProperties": true
+      }
+    },
+    "milestones": {
+      "type": "array",
+      "description": "x-store ah_ms_; x-screen Milestones, Timeline. name / n / title, date / d / dueDate / due and status / st are all written.",
+      "items": { "type": "object", "properties": { "name": { "type": "string" }, "date": { "type": "string", "format": "date" }, "status": { "type": "string", "examples": ["QUEUED", "IN PROGRESS", "DONE"] }, "pct": { "type": "number" } }, "additionalProperties": true }
+    },
+    "devNotes": {
+      "type": "array",
+      "description": "x-store ah_devnotes_; x-screen Dev Notes, which reads title / body (note → body is mapped).",
+      "items": { "type": "object", "properties": { "title": { "type": "string" }, "body": { "type": "string" } }, "additionalProperties": true }
+    },
+    "dayLog": { "type": "array", "description": "x-store ah_daylog_; x-screen Day Log.", "items": { "type": "object", "properties": { "dayNo": { "type": "number" }, "date": { "type": "string" }, "location": { "type": "string" }, "summary": { "type": "string" }, "scenes": { "type": "string" } }, "additionalProperties": true } },
+    "music": { "type": "array", "description": "x-store ah_music_; x-screen Music.", "items": { "type": "object", "properties": { "title": { "type": "string" }, "artist": { "type": "string" }, "type": { "type": "string" }, "usage": { "type": "string" }, "durationSec": { "type": "number" } }, "additionalProperties": true } },
+    "tech": { "type": "array", "description": "x-store ah_tech_; read by Equipment only while the production has no equipment list of its own.", "items": { "type": "object", "properties": { "item": { "type": "string" }, "spec": { "type": "string" }, "qty": { "type": "number" }, "dept": { "type": "string" }, "source": { "type": "string" }, "status": { "type": "string" } }, "additionalProperties": true } },
+    "shopping": { "type": "array", "description": "x-store ah_shop_; x-screen Shopping.", "items": { "type": "object", "properties": { "t": { "type": "string" }, "item": { "type": "string" }, "vendor": { "type": "string" }, "qty": { "type": "number" }, "cost": { "type": "number" } }, "additionalProperties": true } },
+    "coverage": { "type": ["object", "array"], "description": "Script coverage. x-store ah_coverage_. Fields: title writer form genre pages logline synopsis strengths concerns suggestions characterNotes marketability comps comments rec reader date scores." },
+    "beats": { "type": "array", "description": "x-store ah_beats_; x-screen Beat board.", "items": { "type": "object", "properties": { "act": { "type": "number" }, "name": { "type": "string" }, "scene": { "type": ["number", "string"] }, "note": { "type": "string" } }, "additionalProperties": true } },
+    "documents": { "type": "array", "description": "x-store ah_library_; x-screen Library. `library` is accepted as the same thing.", "items": { "type": "object", "properties": { "title": { "type": "string" }, "category": { "type": "string" }, "body": { "type": "string" } }, "additionalProperties": true } },
+    "ipBible": { "type": "object", "description": "x-store ah_ipbible_; x-screen IP & World Bible. title premise themes world characters." },
+    "post": { "type": "object", "description": "x-store ah_post_; x-screen Post & Delivery. pipeline[] deliverables[] clearances[]." },
+    "financials": { "type": "object", "description": "x-store ah_fin_set_. base (currency) fringe contingency (percent)." },
+    "mode": { "type": ["object", "string"], "description": "x-store ah_mode_." },
+    "scripts": { "type": "array", "description": "Several drafts; the one with active:true becomes the script. x-store ah_scripts_." },
+    "scheduleStrips": { "type": "array", "description": "Stored exactly as given in ah_scenes_ (no normalising). Prefer scenes." },
+    "schedule": { "description": "Older strip format: { strips: [ {type:'daybreak'|'banner'|'scene', scene, description, location, intExt, pages} ] }. Prefer scenes." },
+    "storymap": { "description": "Not reliable in a production file: the app builds the story map from the script, and once it has, this section is dropped (measured). Use # pathways and * choices in the script, or a .pure map." },
+    "mediaLog": { "type": "object", "description": "x-store ah_media_. video[] audio[] drives[]." },
+    "market": { "type": "object", "description": "x-store ah_market_." },
+    "songsync": { "type": "object", "description": "x-store ah_songsync_. songTitle artist durationSec sections[]." },
+    "stills": { "type": "array", "description": "x-store ah_stills_. Images as data URIs; never ask ChatGPT for these." }
+  },
+  "additionalProperties": true
+}

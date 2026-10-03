@@ -1,0 +1,339 @@
+{
+ "base": "chunks/",
+ "build": "muq9aq2y",
+ "routes": {
+  "music": [
+   "MUSIC_V2"
+  ],
+  "crm-prod": [
+   "CRM_V2"
+  ],
+  "crm-biz": [
+   "CRM_V2"
+  ],
+  "prod-pipeline": [
+   "CRM_V2"
+  ],
+  "biz-pipeline": [
+   "CRM_V2"
+  ],
+  "vault": [
+   "BIZPRO_TRUST"
+  ],
+  "shopping": [
+   "DEMO_FEATURES"
+  ],
+  "storymap": [
+   "STORYMAP_PRO",
+   "MAP_PICTURE"
+  ],
+  "export": [
+   "TRANSFERBAY_V2",
+   "TRANSFER_BAY3"
+  ],
+  "receipts": [
+   "RECEIPTS"
+  ],
+  "shot-schedule": [
+   "SHOT_SCHEDULE"
+  ],
+  "library": [
+   "LIBRARY_HTML"
+  ],
+  "onset": [
+   "ONSET_LIVE"
+  ],
+  "custody": [
+   "POST_VAULT"
+  ],
+  "story-arc": [
+   "STORY_ARC"
+  ],
+  "revenue-bridge": [
+   "REV_BRIDGE"
+  ],
+  "campaign": [
+   "CAMPAIGN_COMMAND"
+  ],
+  "campaign-ops": [
+   "BUSINESS_ENGINE"
+  ],
+  "docworks": [
+   "PDF_WORKS",
+   "OCR_LAB"
+  ],
+  "elements": [
+   "ELEMENTREGISTRY"
+  ],
+  "post": [
+   "POSTSTATE"
+  ],
+  "sheets": [
+   "XLSX_IO",
+   "SHEET_EDITOR",
+   "SHEET_ROUTE"
+  ],
+  "book": [
+   "WBTEMPLATE_DATA",
+   "WBTEMPLATE",
+   "LEDGER_T",
+   "WB_PARTS",
+   "XLSX_IO",
+   "FORMULA",
+   "BOOK_MODEL",
+   "BOOK_EDITOR",
+   "SHAPES_DATA",
+   "SHAPES"
+  ],
+  "tech": [
+   "WBTEMPLATE_DATA",
+   "WBTEMPLATE",
+   "WB_PARTS",
+   "XLSX_IO",
+   "FORMULA",
+   "BOOK_MODEL",
+   "BOOK_SYNC",
+   "EQUIPMENT"
+  ],
+  "equipment": [
+   "WBTEMPLATE_DATA",
+   "WBTEMPLATE",
+   "WB_PARTS",
+   "XLSX_IO",
+   "FORMULA",
+   "BOOK_MODEL",
+   "BOOK_SYNC",
+   "EQUIPMENT",
+   "GEAR_DB",
+   "GEAR_KNOW"
+  ],
+  "braindump": [
+   "BRAIN_DUMP"
+  ],
+  "deliver": [
+   "DELIVER"
+  ]
+ },
+ "order": [
+  "BIZPRO_TRUST",
+  "BRAIN_DUMP",
+  "BUSINESS_ENGINE",
+  "CAMPAIGN_COMMAND",
+  "CRM_V2",
+  "DELIVER",
+  "DEMO_FEATURES",
+  "ELEMENTREGISTRY",
+  "GEAR_DB",
+  "LIBRARY_HTML",
+  "MUSIC_V2",
+  "ONSET_LIVE",
+  "PDFENGINE",
+  "PDFLIB_VENDOR",
+  "PDF_WORKS",
+  "POSTSTATE",
+  "POST_VAULT",
+  "RECEIPTS",
+  "REV_BRIDGE",
+  "SHAPES_DATA",
+  "SHOT_SCHEDULE",
+  "STORYMAP_PRO",
+  "STORY_ARC",
+  "TRANSFERBAY_V2",
+  "TRANSFER_BAY3",
+  "WBTEMPLATE_DATA",
+  "XLSX_IO",
+  "FORMULA",
+  "MAP_PICTURE",
+  "OCR_LAB",
+  "SHEET_EDITOR",
+  "WBTEMPLATE",
+  "BOOK_SYNC",
+  "EQUIPMENT",
+  "GEAR_KNOW",
+  "LEDGER_T",
+  "SHAPES",
+  "SHEET_ROUTE",
+  "WB_PARTS",
+  "BOOK_MODEL",
+  "BOOK_EDITOR"
+ ],
+ "warm": [],
+ "provides": {
+  "BOOK_EDITOR": "BookEditor",
+  "BOOK_MODEL": "BookModel",
+  "BOOK_SYNC": "BookSync",
+  "BRAIN_DUMP": "Dump",
+  "BUSINESS_ENGINE": "BizEngine",
+  "CAMPAIGN_COMMAND": "Campaign",
+  "CRM_V2": "CRM2",
+  "DELIVER": "Deliver",
+  "DEMO_FEATURES": "ShopPro",
+  "ELEMENTREGISTRY": "Elem",
+  "EQUIPMENT": "Equipment",
+  "FORMULA": "Formula",
+  "GEAR_DB": "GearDB",
+  "GEAR_KNOW": "GearKnow",
+  "LEDGER_T": "LedgerT",
+  "MAP_PICTURE": "MapPicture",
+  "MUSIC_V2": "MusicRoom",
+  "OCR_LAB": "OcrLab",
+  "ONSET_LIVE": "OnSetLive",
+  "PDFENGINE": "PdfEngineBundled",
+  "PDFLIB_VENDOR": "PdfLibVendor",
+  "PDF_WORKS": "PdfKit",
+  "POSTSTATE": "PostState",
+  "POST_VAULT": "Custody",
+  "RECEIPTS": "Receipts",
+  "REV_BRIDGE": "RevBridge",
+  "SHAPES_DATA": "Shapes",
+  "SHEET_EDITOR": "SheetEditor",
+  "SHEET_ROUTE": "SheetRoute",
+  "SHOT_SCHEDULE": "ShotSched",
+  "STORYMAP_PRO": "SMPro",
+  "STORY_ARC": "StoryArc",
+  "TRANSFERBAY_V2": "Post",
+  "TRANSFER_BAY3": "TransferBay3",
+  "WBTEMPLATE": "WBTemplate",
+  "WBTEMPLATE_DATA": "WBTemplate",
+  "WB_PARTS": "WBParts",
+  "XLSX_IO": "XlsxIO"
+ },
+ "stubs": {
+  "book": {
+   "id": "book",
+   "label": "Breakdown & Budget",
+   "group": "PROD",
+   "parent": "money",
+   "icon": "dollar",
+   "crumb": "MONEY · BREAKDOWN & BUDGET"
+  },
+  "braindump": {
+   "id": "braindump",
+   "label": "Brain Dump",
+   "group": "STORY",
+   "parent": "story",
+   "icon": "doc",
+   "crumb": "STORY · BRAIN DUMP"
+  },
+  "campaign-ops": {
+   "id": "campaign-ops",
+   "label": "Business Engine",
+   "group": "BIZ",
+   "parent": "camp",
+   "icon": "target",
+   "crumb": "CAMPAIGN &middot; BUSINESS ENGINE",
+   "img": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=80"
+  },
+  "campaign": {
+   "id": "campaign",
+   "label": "Campaign Command",
+   "group": "BIZ",
+   "parent": "camp",
+   "icon": "radio",
+   "crumb": "CAMPAIGN · COMMAND",
+   "img": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=1800&q=80"
+  },
+  "deliver": {
+   "id": "deliver",
+   "label": "Deliver",
+   "group": "POST",
+   "parent": "post",
+   "icon": "upload",
+   "crumb": "POST · DELIVER"
+  },
+  "elements": {
+   "id": "elements",
+   "label": "Elements",
+   "group": "PROD",
+   "parent": "production",
+   "icon": "grid",
+   "crumb": "PRODUCTION · ELEMENTS",
+   "lede": "Every prop, costume, vehicle and location defined once — with quantities, departments and the scenes that need them."
+  },
+  "custody": {
+   "id": "custody",
+   "label": "Post Vault",
+   "group": "POST",
+   "parent": "post",
+   "icon": "shield",
+   "crumb": "POST · CUSTODY",
+   "img": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1800&q=80"
+  },
+  "receipts": {
+   "id": "receipts",
+   "label": "Receipts",
+   "group": "BIZ",
+   "parent": "biz",
+   "icon": "dollar",
+   "crumb": "BIZ · RECEIPTS",
+   "img": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1800&q=80"
+  },
+  "revenue-bridge": {
+   "id": "revenue-bridge",
+   "label": "Revenue Bridge",
+   "group": "BIZ",
+   "parent": "biz",
+   "icon": "dollar",
+   "crumb": "BIZ · REVENUE BRIDGE",
+   "img": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=80"
+  },
+  "sheets": {
+   "id": "sheets",
+   "label": "Workbook editor"
+  },
+  "shot-schedule": {
+   "id": "shot-schedule",
+   "label": "Shooting Schedule",
+   "group": "PRE",
+   "parent": "pre",
+   "icon": "radio",
+   "crumb": "PRE · SHOOTING SCHEDULE",
+   "img": "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1800&q=80"
+  },
+  "story-arc": {
+   "id": "story-arc",
+   "label": "Story Architect",
+   "group": "STORY",
+   "parent": "story",
+   "icon": "script",
+   "crumb": "STORY · ARCHITECT",
+   "img": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1800&q=80"
+  }
+ },
+ "words": {
+  "book": [
+   "What it costs",
+   "The breakdown and budget, tier by tier."
+  ],
+  "braindump": [
+   "Brain dump",
+   "Get it out of your head first; sort it into the film after."
+  ],
+  "deliver": [
+   "Make the versions",
+   "The cuts people actually watch, from one master."
+  ],
+  "tech": [
+   "Your gear",
+   "Everything you own, hire or borrow for the shoot."
+  ],
+  "sheets": [
+   "Spreadsheet",
+   "Edit the workbook as a real grid of cells."
+  ]
+ },
+ "stubOwner": {
+  "book": "BOOK_EDITOR",
+  "braindump": "BRAIN_DUMP",
+  "campaign-ops": "BUSINESS_ENGINE",
+  "campaign": "CAMPAIGN_COMMAND",
+  "deliver": "DELIVER",
+  "elements": "ELEMENTREGISTRY",
+  "custody": "POST_VAULT",
+  "receipts": "RECEIPTS",
+  "revenue-bridge": "REV_BRIDGE",
+  "sheets": "SHEET_ROUTE",
+  "shot-schedule": "SHOT_SCHEDULE",
+  "story-arc": "STORY_ARC"
+ }
+}

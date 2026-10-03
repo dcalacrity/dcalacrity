@@ -1,0 +1,73 @@
+{
+  "_alacrityProduction": true,
+  "_intakeVersion": "1",
+  "_note": "Example only: a fictional four-scene short that shows every section the importer reads. Never copy its names, numbers or dates into a real production. Nobody is cast and nothing is priced, which is what an honest file looks like before the producer supplies those facts.",
+  "production": {
+    "name": "LOW TIDE",
+    "type": "Short Film",
+    "status": "PRE-PROD",
+    "logline": "A harbour worker follows a rope into the low-tide sand and finds the boat the old harbourmaster swore would come back on its own.",
+    "synopsis": "At dawn Ada walks the harbour wall to check a rope that has hung from an iron ring for twenty years. Jonah, the harbourmaster, tells her ropes only last. At low tide the rope leads her to a half-buried boat, and she brings its nameplate back to him.",
+    "genre": "Drama",
+    "format": "Short film",
+    "runtimeMin": 4
+  },
+  "script": {
+    "title": "LOW TIDE",
+    "titlePage": { "title": "LOW TIDE", "credit": "Written by", "author": "Pure Alacrity example" },
+    "fountain": "Title: LOW TIDE\nCredit: Written by\nAuthor: Pure Alacrity example\n\n[[HOW TO READ THIS\nA four-scene example that shows every element the importer reads. It is not a real production.]]\n\nEXT. HARBOUR WALL - DAWN\n\nGrey water, a long stone wall. ADA (30s, oilskin jacket) walks the top of it with a torch she no longer needs.\n\nShe stops at an iron ring set into the stone. A rope runs from it down into the water.\n\nADA\n(to herself)\nStill here.\n\n[[Practical dawn only. Shoot the wide first while the sky holds.]]\n\nINT. HARBOURMASTER'S OFFICE - DAWN\n\nA kettle on a gas ring. Charts pinned over charts. JONAH (60s) does not look up from the tide table.\n\nJONAH\nYou went out on the wall again.\n\nADA\nThe rope's still there.\n\nJONAH\nRopes last. That's all they do.\n\nHe turns the tide table round so she can read it.\n\nEXT. HARBOUR WALL - DAY\n\nLow tide. The rope runs down into wet sand and ends at a small wooden boat, half buried, painted blue once.\n\nAda climbs down the iron ladder.\n\nADA (V.O.)\nHe said it would come back on its own.\n\nCUT TO:\n\nINT. HARBOURMASTER'S OFFICE - DAY\n\nAda sets a brass nameplate on the desk: BLUE HOUR.\n\nJonah looks at it for a long time.\n\nJONAH\nPut the kettle on.\n\n> THE END <\n"
+  },
+  "scenes": [
+    { "n": "1", "heading": "EXT. HARBOUR WALL - DAWN", "loc": "HARBOUR WALL", "int": false, "timeOfDay": "DAWN", "pages": "4/8", "day": "D01", "synopsis": "Ada checks the rope on the harbour wall.", "characters": ["ADA"] },
+    { "n": "2", "heading": "INT. HARBOURMASTER'S OFFICE - DAWN", "loc": "HARBOURMASTER'S OFFICE", "int": true, "timeOfDay": "DAWN", "pages": "5/8", "day": "D02", "synopsis": "Jonah tells Ada ropes only last.", "characters": ["ADA", "JONAH"] },
+    { "n": "3", "heading": "EXT. HARBOUR WALL - DAY", "loc": "HARBOUR WALL", "int": false, "timeOfDay": "DAY", "pages": "3/8", "day": "D01", "synopsis": "At low tide the rope leads to a buried boat.", "characters": ["ADA"] },
+    { "n": "4", "heading": "INT. HARBOURMASTER'S OFFICE - DAY", "loc": "HARBOURMASTER'S OFFICE", "int": true, "timeOfDay": "DAY", "pages": "3/8", "day": "D02", "synopsis": "Ada brings the nameplate back.", "characters": ["ADA", "JONAH"] }
+  ],
+  "cast": [
+    { "name": "", "scriptChar": "ADA", "role": "Lead", "dept": "CAST" },
+    { "name": "", "scriptChar": "JONAH", "role": "Supporting", "dept": "CAST" }
+  ],
+  "crew": [
+    { "name": "", "role": "Director", "dept": "DIRECTING" },
+    { "name": "", "role": "Director of Photography", "dept": "CAMERA" },
+    { "name": "", "role": "Sound Recordist", "dept": "SOUND" },
+    { "name": "", "role": "Production Designer", "dept": "ART" }
+  ],
+  "locations": [
+    { "name": "HARBOUR WALL", "type": "Exterior", "notes": "Scene 3 needs low water; schedule to the tide table." },
+    { "name": "HARBOURMASTER'S OFFICE", "type": "Interior", "notes": "Practical gas ring and kettle in shot." }
+  ],
+  "breakdown": [
+    { "scn": "1", "cast": ["ADA"], "props": ["torch", "rope on iron ring"], "costumes": ["Ada — oilskin jacket"], "notes": ["Dawn exterior, practical light only"] },
+    { "scn": "2", "cast": ["ADA", "JONAH"], "props": ["kettle", "gas ring", "tide table"], "setDressing": ["pinned charts"], "costumes": ["Ada — oilskin jacket"] },
+    { "scn": "3", "cast": ["ADA"], "props": ["rope"], "setDressing": ["half-buried blue boat"], "notes": ["Low tide only"] },
+    { "scn": "4", "cast": ["ADA", "JONAH"], "props": ["brass nameplate BLUE HOUR", "kettle"] }
+  ],
+  "shotlist": [
+    { "n": "1A", "scn": "1", "size": "WS", "move": "STATIC", "lens": "24mm", "desc": "Ada small on the long wall against the dawn sky", "subjects": "ADA", "prepMin": 20, "shootMin": 10 },
+    { "n": "1B", "scn": "1", "size": "CU", "move": "HANDHELD", "lens": "50mm", "desc": "The iron ring and the rope going into the water", "subjects": "", "prepMin": 5, "shootMin": 5 },
+    { "n": "2A", "scn": "2", "size": "MS", "move": "STATIC", "lens": "35mm", "desc": "Jonah at the desk, Ada in the doorway", "subjects": "ADA, JONAH", "prepMin": 25, "shootMin": 15 },
+    { "n": "2B", "scn": "2", "size": "INSERT", "move": "STATIC", "lens": "85mm", "desc": "The tide table turned round", "subjects": "", "prepMin": 5, "shootMin": 5 },
+    { "n": "3A", "scn": "3", "size": "EWS", "move": "CRANE", "lens": "18mm", "desc": "The rope across wet sand to the buried boat", "subjects": "ADA", "prepMin": 30, "shootMin": 10 },
+    { "n": "4A", "scn": "4", "size": "MCU", "move": "STATIC", "lens": "50mm", "desc": "Jonah looks at the nameplate", "subjects": "JONAH", "prepMin": 10, "shootMin": 10 }
+  ],
+  "budgetLines": [
+    { "cat": "Camera", "name": "Camera and lens package", "est": 0, "act": 0 },
+    { "cat": "Sound", "name": "Sound package", "est": 0, "act": 0 },
+    { "cat": "Art", "name": "Boat dressing and nameplate", "est": 0, "act": 0 },
+    { "cat": "Locations", "name": "Harbour permit", "est": 0, "act": 0 },
+    { "cat": "Catering", "name": "Two shoot days", "est": 0, "act": 0 }
+  ],
+  "risks": [
+    { "t": "Working on a harbour wall at dawn", "s": "1", "lvl": "MEDIUM", "mit": "Spotter on the wall; nobody within a metre of the edge without a line." },
+    { "t": "Scene 3 only works at low water", "s": "3", "lvl": "HIGH", "mit": "Schedule to the tide table and keep a second low tide as the weather day." }
+  ],
+  "milestones": [
+    { "name": "Script lock", "status": "QUEUED" },
+    { "name": "Harbour recce at low tide", "status": "QUEUED" },
+    { "name": "Shoot day 1 (harbour wall)", "status": "QUEUED" }
+  ],
+  "devNotes": [
+    { "title": "The rope is the film", "body": "Every scene should know where the rope is. It is the only thing that connects the wall, the office and the boat." }
+  ]
+}

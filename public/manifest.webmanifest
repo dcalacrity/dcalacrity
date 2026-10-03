@@ -1,0 +1,17 @@
+{
+  "name": "Pure Alacrity",
+  "short_name": "Pure Alacrity",
+  "description": "Production command system by D.C. Alacrity — script to screen in one app.",
+  "id": "pure-alacrity",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#061018",
+  "theme_color": "#061018",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

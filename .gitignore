@@ -4,7 +4,7 @@
 .dev.vars.*
 wrangler.toml.bak
 
-# Secrets
+# Secrets — never commit
 .env
 .env.*
 *.pem
@@ -15,9 +15,12 @@ node_modules/
 npm-debug.log*
 yarn-error.log
 
-# OS / editor
+# OS / editor cruft
 .DS_Store
 Thumbs.db
 .idea/
 .vscode/
 *.swp
+
+# web build: scrambled-script cache
+tools/.cache/
