@@ -213,3 +213,55 @@ refuses their classes.
 - The contact form: validation, the topic from `?topic=`, the eleven fields
   POSTed to `/api/contact`, the success line — unchanged, re-verified with the
   network stubbed. `tests/contact.test.mjs` 14/14.
+
+## 10 · Seventh pass — the official image, the ascent (2026-10-02)
+
+Brief: *"It needs the official D.C Alacrity image logo on the site … feel like
+the next multi-billion dollar business in its early grassroots state … elite
+UI/UX … 3D cinematic dynamic websites."* The halftone story-graph plate stays
+on the inner pages. The home hero is now the official image, made to move.
+
+### The ascent (home hero)
+
+- **The image is the hero.** `assets/brand/official-{900,1400,2000}.webp` (plus
+  a JPEG fallback) is the still. `official-depth.png` is a hand-built depth map:
+  R = depth (sky far, hand and arm near, the arrow nearest), G = lightning mask,
+  B = cloud mask.
+- **2.5D camera.** `js/ascent.js` draws it in WebGL with three-step depth
+  parallax toward the pointer and slow cloud drift. The lightning flickers on
+  noise and the arrow pulses, both through a soft halo. The look is finished
+  with a contrast grade, grain and a vignette. It is the depth-map "photo
+  becomes a set" move used by the cinematic studio sites, without a 3D library.
+  The page carries 0 KB of frameworks, and the shader is about 3 KB.
+- **Scroll-pinned chapter.** The section pins for 260 svh (210 on phones).
+  Scrolling dollies the camera up the arm into the arrow, and the frame sinks to
+  ink. Meanwhile the headline gives way to one sentence that inks in word by
+  word: *One idea. A team that can operate it. An industry that can grow from it.*
+- **Honest about cost.** The device-pixel ratio is capped at 1.5. Rendering
+  stops off-screen and in hidden tabs. A watchdog drops to the still if more
+  than 30 of 90 frames run late. Reduced motion and Save-Data get the still
+  layout, with no pinning. A pause button covers WCAG 2.2.2 and is remembered
+  in `localStorage` as `dca_motion`.
+- **After the hero:**
+  - the startup-programs band
+  - *Early, and already shipping*, with numbers that count up only when seen
+  - *From one production to an industry*, a Now → Next → Horizon line that
+    lights as you scroll
+  - a pointer spotlight with a slight lean on every card
+  - an emblem (rings, the mark, the bolt) in place of the old hand photo
+- **OG image** regenerated from the official image with the lockup.
+
+### Checked
+
+- axe WCAG 2.2 AA on all ten page types at 1440, plus home at 390, plus home
+  with reduced motion at both widths: 0 violations.
+- The Vercel Web Interface Guidelines review of the hero turned up five
+  problems, all fixed:
+  - one rAF-batched scroll pass (it had several listeners)
+  - the pause control
+  - safe-area padding
+  - `color-scheme: dark`
+  - `translate="no"` on the brand name
+- Horizontal overflow: the travelling light streak on `/technology` pushed the
+  page to 1616 px wide at 1440. It is now clipped on `.path`. `overflow-x: clip`
+  on `html` was tried and rejected, because it breaks the sticky pin.

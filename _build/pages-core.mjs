@@ -3,7 +3,7 @@
    technology and media company; Pure Alacrity was built out of Sidequest, not
    for it; no private figures. */
 
-import { SITE, close, phero, facts, plate, fill } from './shell.mjs';
+import { SITE, close, phero, facts, plate, fill, ver } from './shell.mjs';
 
 const PURE = SITE.app;
 
@@ -33,34 +33,72 @@ const STAGES = [
   ['deliver', 'Deliver', 'Wherever people are', 'rings', 'Headset, a flat path, the web — the same graph. Right Here Right Now! is free on Meta Horizon and SideQuest.']
 ];
 
+/* the startup programs D.C Alacrity is a member of — marks are Simple Icons (CC0) paths, drawn in currentColor */
+const PROGRAMS = [
+  { id: 'google', color: '#4285F4', title: 'Google for Startups', sub: 'Cloud Program', d: 'M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z' },
+  { id: 'cloudflare', color: '#F38020', title: 'Cloudflare', sub: 'for Startups', d: 'M16.5088 16.8447c.1475-.5068.0908-.9707-.1553-1.3154-.2246-.3164-.6045-.499-1.0615-.5205l-8.6592-.1123a.1559.1559 0 0 1-.1333-.0713c-.0283-.042-.0351-.0986-.021-.1553.0278-.084.1123-.1484.2036-.1562l8.7359-.1123c1.0351-.0489 2.1601-.8868 2.5537-1.9136l.499-1.3013c.0215-.0561.0293-.1128.0147-.168-.5625-2.5463-2.835-4.4453-5.5499-4.4453-2.5039 0-4.6284 1.6177-5.3876 3.8614-.4927-.3658-1.1187-.5625-1.794-.499-1.2026.119-2.1665 1.083-2.2861 2.2856-.0283.31-.0069.6128.0635.894C1.5683 13.171 0 14.7754 0 16.752c0 .1748.0142.3515.0352.5273.0141.083.0844.1475.1689.1475h15.9814c.0909 0 .1758-.0645.2032-.1553l.12-.4268zm2.7568-5.5634c-.0771 0-.1611 0-.2383.0112-.0566 0-.1054.0415-.127.0976l-.3378 1.1744c-.1475.5068-.0918.9707.1543 1.3164.2256.3164.6055.498 1.0625.5195l1.8437.1133c.0557 0 .1055.0263.1329.0703.0283.043.0351.1074.0214.1562-.0283.084-.1132.1485-.204.1553l-1.921.1123c-1.041.0488-2.1582.8867-2.5527 1.914l-.1406.3585c-.0283.0713.0215.1416.0986.1416h6.5977c.0771 0 .1474-.0489.169-.126.1122-.4082.1757-.837.1757-1.2803 0-2.6025-2.125-4.727-4.7344-4.727' },
+  { id: 'claude', color: '#D97757', title: 'Claude', sub: 'for Startups · Anthropic', d: 'm4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z' },
+  { id: 'amazonwebservices', color: '#FF9900', title: 'AWS Activate', sub: 'Amazon Web Services', d: 'M6.763 10.036c0 .296.032.535.088.71.064.176.144.368.256.576.04.063.056.127.056.183 0 .08-.048.16-.152.24l-.503.335a.383.383 0 0 1-.208.072c-.08 0-.16-.04-.239-.112a2.47 2.47 0 0 1-.287-.375 6.18 6.18 0 0 1-.248-.471c-.622.734-1.405 1.101-2.347 1.101-.67 0-1.205-.191-1.596-.574-.391-.384-.59-.894-.59-1.533 0-.678.239-1.23.726-1.644.487-.415 1.133-.623 1.955-.623.272 0 .551.024.846.064.296.04.6.104.918.176v-.583c0-.607-.127-1.03-.375-1.277-.255-.248-.686-.367-1.3-.367-.28 0-.568.031-.863.103-.295.072-.583.16-.862.272a2.287 2.287 0 0 1-.28.104.488.488 0 0 1-.127.023c-.112 0-.168-.08-.168-.247v-.391c0-.128.016-.224.056-.28a.597.597 0 0 1 .224-.167c.279-.144.614-.264 1.005-.36a4.84 4.84 0 0 1 1.246-.151c.95 0 1.644.216 2.091.647.439.43.662 1.085.662 1.963v2.586zm-3.24 1.214c.263 0 .534-.048.822-.144.287-.096.543-.271.758-.51.128-.152.224-.32.272-.512.047-.191.08-.423.08-.694v-.335a6.66 6.66 0 0 0-.735-.136 6.02 6.02 0 0 0-.75-.048c-.535 0-.926.104-1.19.32-.263.215-.39.518-.39.917 0 .375.095.655.295.846.191.2.47.296.838.296zm6.41.862c-.144 0-.24-.024-.304-.08-.064-.048-.12-.16-.168-.311L7.586 5.55a1.398 1.398 0 0 1-.072-.32c0-.128.064-.2.191-.2h.783c.151 0 .255.025.31.08.065.048.113.16.16.312l1.342 5.284 1.245-5.284c.04-.16.088-.264.151-.312a.549.549 0 0 1 .32-.08h.638c.152 0 .256.025.32.08.063.048.12.16.151.312l1.261 5.348 1.381-5.348c.048-.16.104-.264.16-.312a.52.52 0 0 1 .311-.08h.743c.127 0 .2.065.2.2 0 .04-.009.08-.017.128a1.137 1.137 0 0 1-.056.2l-1.923 6.17c-.048.16-.104.263-.168.311a.51.51 0 0 1-.303.08h-.687c-.151 0-.255-.024-.32-.08-.063-.056-.119-.16-.15-.32l-1.238-5.148-1.23 5.14c-.04.16-.087.264-.15.32-.065.056-.177.08-.32.08zm10.256.215c-.415 0-.83-.048-1.229-.143-.399-.096-.71-.2-.918-.32-.128-.071-.215-.151-.247-.223a.563.563 0 0 1-.048-.224v-.407c0-.167.064-.247.183-.247.048 0 .096.008.144.024.048.016.12.048.2.08.271.12.566.215.878.279.319.064.63.096.95.096.502 0 .894-.088 1.165-.264a.86.86 0 0 0 .415-.758.777.777 0 0 0-.215-.559c-.144-.151-.416-.287-.807-.415l-1.157-.36c-.583-.183-1.014-.454-1.277-.813a1.902 1.902 0 0 1-.4-1.158c0-.335.073-.63.216-.886.144-.255.335-.479.575-.654.24-.184.51-.32.83-.415.32-.096.655-.136 1.006-.136.175 0 .359.008.535.032.183.024.35.056.518.088.16.04.312.08.455.127.144.048.256.096.336.144a.69.69 0 0 1 .24.2.43.43 0 0 1 .071.263v.375c0 .168-.064.256-.184.256a.83.83 0 0 1-.303-.096 3.652 3.652 0 0 0-1.532-.311c-.455 0-.815.071-1.062.223-.248.152-.375.383-.375.71 0 .224.08.416.24.567.159.152.454.304.877.44l1.134.358c.574.184.99.44 1.237.767.247.327.367.702.367 1.117 0 .343-.072.655-.207.926-.144.272-.336.511-.583.703-.248.2-.543.343-.886.447-.36.111-.734.167-1.142.167zM21.698 16.207c-2.626 1.94-6.442 2.969-9.722 2.969-4.598 0-8.74-1.7-11.87-4.526-.247-.223-.024-.527.272-.351 3.384 1.963 7.559 3.153 11.877 3.153 2.914 0 6.114-.607 9.06-1.852.439-.2.814.287.383.607zM22.792 14.961c-.336-.43-2.22-.207-3.074-.103-.255.032-.295-.192-.063-.36 1.5-1.053 3.967-.75 4.254-.399.287.36-.08 2.826-1.485 4.007-.215.184-.423.088-.327-.151.32-.79 1.03-2.57.695-2.994z' },
+];
+const programTile = (p) => `<li class="backers__item" style="--brand:${p.color}"><svg class="backers__mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="${p.d}"/></svg><span class="backers__name"><b>${p.title}</b><small>${p.sub}</small></span></li>`;
+const programSet = (hidden) => `<ul class="backers__set"${hidden ? ' aria-hidden="true"' : ' role="list"'}>${PROGRAMS.map(programTile).join('')}</ul>`;
+/* four copies of the set: the track slides exactly one set, so the loop has no seam at any width up to ~3 sets wide */
+const BACKERS = `    <section class="backers" aria-labelledby="backers-title">
+      <div class="wrap backers__head">
+        <p class="backers__label" id="backers-title"><span class="dot" aria-hidden="true"></span>Supported by the startup programs of</p>
+      </div>
+      <div class="backers__view">
+        <div class="backers__track">${programSet(false)}${programSet(true)}${programSet(true)}${programSet(true)}</div>
+      </div>
+    </section>
+`;
+const ASCENT_JS = '/js/ascent.js?v=' + ver('js/ascent.js');
 const home = {
   slug: 'index.html',
   current: null,
   title: 'D.C Alacrity — Technology, Media & the Experience Industry',
   description: 'D.C Alacrity is a technology and media company building original IP, software and interactive experiences, with a mission to expand across industries.',
   ogDescription: 'A technology and media company building original IP, software and interactive experiences. Founded in North Carolina.',
-  body: `    <section class="hero" aria-labelledby="hero-title">
-      <div class="stage">
-        ${plate('graph', 'hero')}
-        <div class="wrap plate__caps">
-          <p class="plate__cap">Technology and media for the Experience Industry</p>
-          <a class="plate__status" href="work/prize-pool.html"><span class="dot" aria-hidden="true"></span><span><small>Now in pre-production</small><b>Prize Pool VR</b></span></a>
-        </div>
-      </div>
-      <div class="panel paper">
-        <div class="wrap panel__grid">
-          <div>
-            <p class="eyebrow">D.C Alacrity · North Carolina</p>
-            <h1 id="hero-title">Building the Experience Industry.</h1>
-          </div>
-          <div class="panel__side">
-            <p class="lede">A technology and media company developing original IP, software and interactive experiences — the foundation for a broader mission across industries.</p>
+  head: `  <link rel="preload" as="image" href="/assets/brand/official-1400.webp" type="image/webp" fetchpriority="high"/>
+  <script src="${ASCENT_JS}" defer></script>`,
+  body: `    <section class="ascent" data-ascent data-img-lg="/assets/brand/official-2000.webp" data-img-sm="/assets/brand/official-1400.webp" data-depth="/assets/brand/official-depth.png" aria-labelledby="hero-title">
+      <div class="ascent__stage">
+        <picture class="ascent__still">
+          <source type="image/webp" srcset="/assets/brand/official-900.webp 900w, /assets/brand/official-1400.webp 1400w, /assets/brand/official-2000.webp 2000w" sizes="100vw"/>
+          <img src="/assets/brand/official-1400.jpg" alt="The D.C Alacrity image: a hand points into the sky as lightning runs up the arm into a glowing arrow" width="1400" height="1400" fetchpriority="high" decoding="async"/>
+        </picture>
+        <div class="ascent__scrim" aria-hidden="true"></div>
+        <div class="wrap ascent__copy">
+          <p class="ascent__eyebrow"><span class="dot" aria-hidden="true"></span><span translate="no">D.C Alacrity</span><span class="hide-sm"> · Technology &amp; media</span> · North Carolina</p>
+          <h1 id="hero-title" class="ascent__h1"><span class="ln"><span>Building the</span></span> <span class="ln"><span>Experience Industry.</span></span></h1>
+          <div class="ascent__foot">
+            <p class="ascent__lede">A technology and media company developing original IP, software and interactive experiences — the foundation for a broader mission across industries.</p>
             <div class="btn-row">
-              <a class="btn" href="technology.html">See the technology</a>
-              <a class="link" href="work/index.html">See the work</a>
+              <a class="btn btn--lg" href="technology.html">See the technology</a>
+              <a class="btn btn--quiet btn--lg" href="${PURE}">Open Pure Alacrity</a>
             </div>
           </div>
         </div>
+        <div class="wrap ascent__chapter">
+          <p class="ascent__k">The move</p>
+          <p class="ascent__say">${fill([['One idea.', true], ['A team that can operate it.'], ['An industry that can grow from it.', true]])}</p>
+        </div>
+        <a class="ascent__status" href="work/prize-pool.html"><span class="dot" aria-hidden="true"></span><span><small>Now in pre-production</small><b>Prize Pool VR</b></span></a>
+        <div class="ascent__cue" aria-hidden="true"><span>Scroll</span><i></i></div>
+        <button class="ascent__pause" type="button" data-ascent-pause aria-pressed="false" aria-label="Pause the hero animation" hidden><span aria-hidden="true"></span></button>
+      </div>
+    </section>
+
+${BACKERS}
+    <section class="momentum" aria-labelledby="momentum-title">
+      <div class="wrap">
+        <p class="momentum__k" id="momentum-title">Early, and already shipping</p>
+        <dl class="momentum__grid">
+          <div class="lit"><dt><span data-count="3">3</span></dt><dd>products: a production suite, a story runtime and a bridge into post</dd></div>
+          <div class="lit"><dt><span data-count="4">4</span></dt><dd>original properties across series, VR and documentary</dd></div>
+          <div class="lit"><dt><span>1</span><sup>st</sup></dt><dd>interactive live-action VR film made in North Carolina, released free</dd></div>
+          <div class="lit"><dt><span data-count="100">100</span><sup>+</sup></dt><dd>production modules in Pure Alacrity, free for anyone to use</dd></div>
+        </dl>
       </div>
     </section>
 
@@ -171,10 +209,24 @@ ${STAGES.map((s, i) => `            <div class="stage-panel${i === 0 ? ' is-on' 
       </div>
     </section>
 
+    <section class="horizon" aria-labelledby="horizon-title">
+      <div class="wrap">
+        <div class="head" data-rise>
+          <div><p class="eyebrow">Where it goes</p><h2 id="horizon-title">From one production to an industry.</h2></div>
+          <p class="lede">The first products are real and in use. Each step is the same move made bigger: a process from one person, made into something a team can operate.</p>
+        </div>
+        <ol class="horizon__line" data-horizon>
+          <li class="horizon__step lit" data-rise><span class="horizon__when">Now</span><h3>Shipping</h3><p>A released interactive film, the runtime that plays it, and the production suite it was made with — free for anyone to use.</p></li>
+          <li class="horizon__step lit" data-rise><span class="horizon__when">Next</span><h3>Bigger stories, deeper tools</h3><p>Prize Pool VR in pre-production, and Alacrity Bridge carrying the shot plan and the day’s record into professional post.</p></li>
+          <li class="horizon__step lit" data-rise><span class="horizon__when">Horizon</span><h3>Across industries</h3><p>Any field where complicated work has to be coordinated, then delivered as something a person experiences, is the same shape of problem.</p></li>
+        </ol>
+      </div>
+    </section>
+
     <section class="sec" id="company">
       <div class="wrap">
         <div class="beside beside--flip" data-rise>
-          <div class="visual visual--tone" style="aspect-ratio:4/3"><img src="assets/brand/hero-hand.jpg" alt="The D.C Alacrity brand image — a hand reaching into the sky" width="1600" height="1600" loading="lazy" decoding="async"/></div>
+          <div class="emblem" aria-hidden="true"><div class="emblem__ring"></div><div class="emblem__ring emblem__ring--2"></div><img class="emblem__mark" src="assets/brand/mark.png" alt="" width="176" height="320" loading="lazy" decoding="async"/><span class="emblem__bolt"></span></div>
           <div>
             <p class="eyebrow">Company</p>
             <h2>Why the first products support a broader future.</h2>
