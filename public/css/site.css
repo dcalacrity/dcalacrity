@@ -913,3 +913,4 @@ a.engine__step:hover { color: inherit; border-color: rgba(0, 194, 255, .45); tra
 @media (max-width: 1023px) { .svc-grid--3 { grid-template-columns: minmax(0, 1fr); } }
 .screens__tag { display: inline-block; margin-left: .4rem; vertical-align: 2px; font-family: var(--mono); font-size: .62rem; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; padding: .15rem .5rem; border-radius: 999px; border: 1px dashed var(--line-2); color: var(--ink-3); }
 .screens__tag--on { border-style: solid; border-color: rgba(0, 194, 255, .5); color: var(--c-spark); }
+.ascent__motto { display: block; margin-bottom: .45rem; font-family: var(--display); font-weight: 600; font-stretch: 112%; font-size: clamp(1.1rem, 1.6vw, 1.4rem); letter-spacing: -.015em; line-height: 1.25; color: #fff; text-shadow: 0 0 28px rgba(0, 194, 255, .35); }
