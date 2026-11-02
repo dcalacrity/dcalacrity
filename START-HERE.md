@@ -1,5 +1,16 @@
 # dcalacrity.com — start here
 
+> **⚠ November 2026: `public/` is now the source of truth. Do not run `node _build/build.mjs`.**
+> The pages in `public/` were edited directly from October 2026 onward (the
+> "Huge update" commit, then the November rebuild around the company plan:
+> For Business, the `/start` funnel, Grok in the startup-program strip, the
+> new Sidequest page). `_build/` was never updated to match, so running it
+> would overwrite all of that with older pages. Edit `public/*.html` directly
+> until `_build/` is brought back in sync.
+>
+> When you change `public/css/site.css` or a script in `public/js/`, bump its
+> `?v=` stamp in every page: `/css/*` and `/js/*` are cached for a year.
+
 This folder is **the whole website**: every page, image, script and the
 contact-form backend. Deploy it as it is.
 
@@ -7,7 +18,7 @@ contact-form backend. Deploy it as it is.
 |---|---|
 | `public/` | the website exactly as it is served. **This is what Cloudflare Pages publishes.** |
 | `functions/` | the backend: `/api/contact` (the contact form), `/api/leads`, the www redirect |
-| `_build/` | the generator for `public/*.html`. Never hand-edit `public/*.html`; edit `_build/` and run `node _build/build.mjs` |
+| `_build/` | the old generator for `public/*.html`. **Stale since Oct 2026. Do not run it** (see the note above) |
 | `tools/apps-script/Code.gs` | the Google Apps Script that sends contact-form email through your Workspace |
 | `tests/` | `node tests/contact.test.mjs`: 38 checks, nobody is emailed |
 | `BACKEND-SETUP.md` | every email and lead-store setting, step by step |

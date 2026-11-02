@@ -4,12 +4,12 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>$IDEQU3ST — Sidequest, a crime dramedy · D.C Alacrity</title>
-  <meta name="description" content="Sidequest ($IDEQU3ST): grocery clerk Adam Dawnbringer reunites the ABC Squad, a group of former high-school pranksters, for a lawless dark-web gig economy. Episodes 1–3 are in post. The Episode 1 on YouTube is a beta; final Episode 1 is unreleased. Produced across 2024–2026, before and alongside the creation of Pure Alacrity."/>
+  <meta name="description" content="Somewhere, a website is hiring. Sidequest ($IDEQU3ST) is a crime dramedy about a $15 trillion illegal gig economy that everybody uses and nobody owns, and the grocery clerk who gets his old high-school prank crew back together. An Alacrity Original. Season 1 Part 1 is in post."/>
   <link rel="canonical" href="https://dcalacrity.com/work/sidequest"/>
   <meta property="og:type" content="website"/>
   <meta property="og:site_name" content="D.C Alacrity"/>
-  <meta property="og:title" content="$IDEQU3ST — Sidequest · D.C Alacrity"/>
-  <meta property="og:description" content="No job too illegal. No debt too deep. No exit from the game."/>
+  <meta property="og:title" content="$IDEQU3ST — Sidequest, a crime dramedy · D.C Alacrity"/>
+  <meta property="og:description" content="Somewhere, a website is hiring. It pays better than your job, it’s still illegal, and nobody knows who owns it."/>
   <meta property="og:image" content="https://dcalacrity.com/assets/img/squad.jpg"/>
   <meta property="og:url" content="https://dcalacrity.com/work/sidequest"/>
   <meta name="twitter:card" content="summary_large_image"/>
@@ -19,23 +19,118 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Geist+Mono:wght@400;500&display=swap"/>
-  <link rel="stylesheet" href="/css/site.css?v=70cbef19d7"/>
+  <link rel="stylesheet" href="/css/site.css?v=57e6a2bec0"/>
   <style>
     .sq-logo { display: block; max-width: min(460px, 92%); height: auto; margin: .5rem 0 0; }
-    .pull { font-family: var(--display); font-weight: 300; font-size: clamp(1.25rem, 2vw, 1.6rem); line-height: 1.35; color: var(--ink); max-width: 24ch; }
-    .sq-note { border: 1px solid rgba(110,190,225,.45); border-radius: .75rem; padding: 1.25rem; margin: 0 0 1.75rem; background: rgba(30,80,105,.12); }
-    .sq-note h2 { font-size: clamp(1.2rem, 2vw, 1.6rem); margin: 0 0 .65rem; }
-    .sq-note p { max-width: 75ch; }
-    .sq-note .btn-row { margin-top: 1rem; }
+    .pull { font-family: var(--display); font-weight: 300; font-size: clamp(1.25rem, 2vw, 1.6rem); line-height: 1.35; color: var(--ink); max-width: 26ch; }
+    .sq-mono { font-family: var(--mono); letter-spacing: .02em; }
+    /* the job ticket */
+    .sq-term { border: 1px solid rgba(0, 194, 255, .35); border-radius: 14px; background: #02070a; overflow: hidden; box-shadow: 0 30px 80px -40px rgba(0, 194, 255, .45); }
+    .sq-term__bar { display: flex; align-items: center; gap: .45rem; padding: .7rem 1rem; border-bottom: 1px solid rgba(0, 194, 255, .18); font-family: var(--mono); font-size: .72rem; color: var(--ink-3); }
+    .sq-term__bar i { width: 9px; height: 9px; border-radius: 50%; background: rgba(165, 183, 191, .25); }
+    .sq-term__bar span { margin-left: .5rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .sq-term__body { padding: clamp(1.25rem, 3vw, 2rem); font-family: var(--mono); font-size: clamp(.85rem, 1.2vw, .98rem); line-height: 1.7; color: #9fe9ff; }
+    .sq-term__body p + p { margin-top: .35rem; }
+    .sq-term__body .dim { color: #4f7380; }
+    .sq-term__body .hot { color: #fff; }
+    .sq-term__menu { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.25rem; }
+    .sq-term__menu button { font-family: var(--mono); font-size: .9rem; letter-spacing: .08em; padding: .7rem 1.2rem; border: 1px solid rgba(0, 194, 255, .55); border-radius: 6px; color: #9fe9ff; background: rgba(0, 194, 255, .06); }
+    .sq-term__menu button:hover, .sq-term__menu button[aria-pressed="true"] { background: #9fe9ff; color: #02070a; }
+    .sq-term__out { min-height: 1.7em; margin-top: 1rem; color: #fff; }
+    @media (prefers-reduced-motion: no-preference) { .sq-caret::after { content: "▌"; margin-left: .2rem; animation: sqblink 1s steps(1) infinite; } @keyframes sqblink { 50% { opacity: 0; } } }
+    /* two eras */
+    .sq-eras { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .sq-era { padding: 1.75rem 1.6rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--c-well); }
+    .sq-era--now { border-color: rgba(0, 194, 255, .4); background: linear-gradient(180deg, rgba(0, 194, 255, .07), transparent 60%), var(--c-well); }
+    .sq-era .k { font-family: var(--mono); font-size: .72rem; letter-spacing: .05em; text-transform: uppercase; color: var(--c-spark); margin-bottom: .6rem; }
+    .sq-era h3 { font-size: 1.3rem; margin-bottom: .7rem; }
+    .sq-era p { color: var(--ink-2); font-size: .97rem; }
+    .sq-era p + p { margin-top: .7rem; }
+    .sq-era blockquote { margin-top: 1rem; padding-left: 1rem; border-left: 2px solid rgba(0, 194, 255, .5); color: var(--ink); font-style: italic; }
+    @media (max-width: 860px) { .sq-eras { grid-template-columns: minmax(0, 1fr); } }
+    /* systems */
+    .sq-sys { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+    .sq-sys > div { padding: 1.35rem 1.25rem; border: 1px solid var(--line); border-radius: 12px; background: var(--c-well); }
+    .sq-sys .k { font-family: var(--mono); font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+    .sq-sys h3 { margin: .45rem 0 .5rem; font-size: 1.1rem; }
+    .sq-sys p { color: var(--ink-2); font-size: .92rem; }
+    @media (max-width: 1023px) { .sq-sys { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 560px) { .sq-sys { grid-template-columns: minmax(0, 1fr); } }
+    /* who uses it */
+    .sq-class { display: grid; border-top: 1px solid var(--line-2); }
+    .sq-class > div { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 4fr) minmax(0, 4fr); gap: 1rem 2rem; padding: 1.15rem 0; border-bottom: 1px solid var(--line); }
+    .sq-class h3 { font-size: 1.02rem; }
+    .sq-class p { color: var(--ink-2); font-size: .93rem; }
+    .sq-class .lbl { display: block; font-family: var(--mono); font-size: .64rem; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-3); margin-bottom: .2rem; }
+    @media (max-width: 760px) { .sq-class > div { grid-template-columns: minmax(0, 1fr); gap: .5rem; } }
+    /* episodes */
+    .sq-eps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+    .sq-ep { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--c-well); }
+    .sq-ep img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+    .sq-ep__b { display: grid; gap: .45rem; padding: 1.1rem 1.15rem 1.3rem; }
+    .sq-ep .k { font-family: var(--mono); font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; color: var(--c-spark); }
+    .sq-ep h3 { font-size: 1.08rem; }
+    .sq-ep p { color: var(--ink-2); font-size: .92rem; }
+    .sq-ep q { color: var(--ink); font-style: italic; }
+    @media (max-width: 1100px) { .sq-eps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 600px) { .sq-eps { grid-template-columns: minmax(0, 1fr); } }
+    /* the HUD choice */
+    .sq-hud { margin-top: 1.5rem; padding: 1.4rem; border: 1px dashed rgba(0, 194, 255, .45); border-radius: 14px; background: rgba(0, 194, 255, .04); }
+    .sq-hud__q { font-family: var(--mono); font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); margin-bottom: .8rem; }
+    .sq-hud__opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+    .sq-hud__opts button { text-align: left; padding: .9rem 1rem; border: 1px solid var(--line-2); border-radius: 10px; font-family: var(--mono); font-size: .86rem; color: var(--ink); background: rgba(3, 8, 12, .5); }
+    .sq-hud__opts button:hover { border-color: var(--c-spark); }
+    .sq-hud__opts button[aria-pressed="true"] { border-color: #ff5b6b; background: rgba(255, 91, 107, .1); }
+    .sq-hud__out { margin-top: .9rem; color: var(--ink); min-height: 1.6em; }
+    @media (max-width: 600px) { .sq-hud__opts { grid-template-columns: minmax(0, 1fr); } }
+    /* squad */
     .sq-role-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1.5rem; margin: 2rem 0; }
     .sq-role { border-top: 1px solid rgba(130,165,185,.35); padding-top: 1rem; min-width: 0; }
-    .sq-role h3 { margin: 0 0 .35rem; }
-    .sq-role .k { margin-bottom: .6rem; }
-    .sq-role p { overflow-wrap: anywhere; }
-    .sq-history .lines { margin-top: 1.5rem; }
-    .sq-history .prose { max-width: 78ch; margin-top: 2rem; }
+    .sq-role h3 { margin: 0 0 .25rem; }
+    .sq-role .k { font-family: var(--mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--c-spark); margin-bottom: .6rem; }
+    .sq-role p { overflow-wrap: anywhere; color: var(--ink-2); font-size: .95rem; }
+    .sq-role .comps { margin-top: .55rem; font-size: .8rem; color: var(--ink-3); }
     @media (max-width: 900px) { .sq-role-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
     @media (max-width: 600px) { .sq-role-grid { grid-template-columns: minmax(0,1fr); gap: 1.25rem; } }
+    /* case file */
+    .sq-case { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 1.25rem; }
+    .sq-qs { display: grid; gap: .1rem; counter-reset: q; }
+    .sq-qs li { counter-increment: q; display: grid; grid-template-columns: 2.6rem minmax(0, 1fr); gap: .6rem; padding: 1rem 0; border-bottom: 1px solid var(--line); color: var(--ink); font-size: 1.02rem; }
+    .sq-qs li::before { content: "0" counter(q); font-family: var(--mono); font-size: .78rem; color: var(--c-spark); padding-top: .2rem; }
+    .sq-vault { padding: 1.5rem; border: 1px solid rgba(255, 91, 107, .35); border-radius: 14px; background: repeating-linear-gradient(-45deg, rgba(255, 91, 107, .03) 0 12px, transparent 12px 24px), #06090c; }
+    .sq-vault__k { font-family: var(--mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: #ff7a86; margin-bottom: 1rem; }
+    .sq-vault ol { display: grid; gap: .7rem; }
+    .sq-vault li { display: flex; gap: .7rem; align-items: center; font-family: var(--mono); font-size: .8rem; color: var(--ink-3); }
+    .sq-vault li s { flex: 1; height: .95rem; border-radius: 2px; background: #1a2329; text-decoration: none; }
+    .sq-vault p { margin-top: 1.1rem; color: var(--ink-2); font-size: .9rem; }
+    @media (max-width: 900px) { .sq-case { grid-template-columns: minmax(0, 1fr); } }
+    /* the books */
+    .sq-books { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+    .sq-book { position: relative; display: grid; gap: .5rem; align-content: start; padding: 1.4rem 1.3rem 1.35rem 1.6rem; border: 1px solid var(--line); border-radius: 12px; background: var(--c-well); }
+    .sq-book::before { content: ""; position: absolute; left: 0; top: 1rem; bottom: 1rem; width: 3px; border-radius: 0 3px 3px 0; background: linear-gradient(180deg, var(--c-spark), rgba(0, 194, 255, .1)); }
+    .sq-book h3 { font-size: 1.08rem; font-style: italic; font-weight: 520; }
+    .sq-book .by { font-family: var(--mono); font-size: .68rem; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-3); }
+    .sq-book p { color: var(--ink-2); font-size: .93rem; }
+    .sq-book .in { color: var(--ink); font-size: .9rem; padding-top: .5rem; border-top: 1px solid var(--line); }
+    @media (max-width: 1023px) { .sq-books { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 600px) { .sq-books { grid-template-columns: minmax(0, 1fr); } }
+    /* the franchise */
+    .sq-map { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+    .sq-map > div { padding: 1.4rem 1.3rem; border: 1px solid var(--line); border-radius: 12px; background: var(--c-well); }
+    .sq-map .k { font-family: var(--mono); font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+    .sq-map .k b { color: var(--c-spark); font-weight: 500; }
+    .sq-map h3 { margin: .45rem 0 .45rem; font-size: 1.08rem; }
+    .sq-map p { color: var(--ink-2); font-size: .92rem; }
+    @media (max-width: 1023px) { .sq-map { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 600px) { .sq-map { grid-template-columns: minmax(0, 1fr); } }
+    .sq-note { border: 1px solid rgba(110,190,225,.45); border-radius: .75rem; padding: 1.25rem; background: rgba(30,80,105,.12); }
+    .sq-note h3 { margin: 0 0 .5rem; }
+    .sq-note p { max-width: 75ch; color: var(--ink-2); }
+    .sq-crew { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .25rem 1.5rem; margin-top: 2rem; }
+    .sq-crew div { padding: .8rem 0; border-top: 1px solid var(--line); }
+    .sq-crew b { display: block; font-weight: 550; }
+    .sq-crew span { font-size: .85rem; color: var(--ink-3); }
+    @media (max-width: 900px) { .sq-crew { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   </style>
 </head>
 <body>
@@ -48,10 +143,10 @@
     </a>
       <nav class="nav" aria-label="Primary">
         <a href="/technology">Technology</a>
-        <a href="/work/" aria-current="page">Experiences</a>
-        <a href="/research">R&D</a>
+        <a href="/services">For Business</a>
+        <a href="/work/" aria-current="page">Originals</a>
+        <a href="/research">R&amp;D</a>
         <a href="/about">Company</a>
-        <a href="/services">Services</a>
         <a href="/contact">Contact</a>
       </nav>
     <div class="top__end">
@@ -64,11 +159,11 @@
 
   <div class="menu" id="menu" aria-hidden="true">
     <nav class="menu__links" aria-label="All pages">
-        <a href="/technology">Technology <small>Pure Alacrity · Alacrity Player · Alacrity Bridge</small></a>
-        <a href="/work/" aria-current="page">Experiences <small>Media and experiences we own</small></a>
-        <a href="/research">R&D <small>What we are investigating</small></a>
-        <a href="/about">Company <small>The Experience Industry, and why we build</small></a>
-        <a href="/services">Services <small>Hire the commercial unit</small></a>
+        <a href="/technology">Technology <small>Pure · Bridge · Player · Insights</small></a>
+        <a href="/services">For Business <small>Spaces · Training · Destinations · production</small></a>
+        <a href="/work/" aria-current="page">Originals <small>Sidequest · Right Here Right Now! · Prize Pool VR</small></a>
+        <a href="/research">R&amp;D <small>What we are investigating</small></a>
+        <a href="/about">Company <small>The team, the brand and why we build</small></a>
         <a href="/contact">Contact <small>Clients · partners · press · crew</small></a>
     </nav>
     <div class="menu__foot">
@@ -83,32 +178,39 @@
       <div class="panel paper panel--lead">
         <div class="wrap panel__grid">
           <div>
-            <p class="eyebrow">Flagship series · crime dramedy</p>
+            <p class="eyebrow">Alacrity Originals · crime dramedy</p>
             <h1><img class="sq-logo" src="/assets/img/sidequest-logo.png" alt="$IDEQU3ST" width="1200" height="334"/></h1>
           </div>
           <div class="panel__side">
-            <p class="lede">Adam Dawnbringer is a grocery clerk who treats life like a video game. Chasing a supercar and a way out of low-paid work, he reunites the ABC Squad — a group of former high-school pranksters — for Sidequest, a lawless, game-like dark-web marketplace. Their old tricks meet new stakes. The jobs promise fast money; the consequences follow them home.</p>
-            <div class="btn-row"><a class="btn" href="#cast">Meet ABC Squad</a> <a class="link" href="#status">Beta &amp; release status</a> <a class="link" href="#next-round">Beyond Episode 3</a></div>
+            <p class="lede">Somewhere, a website is hiring. Fifteen years ago it was a black-market terminal passed between war veterans and career criminals. Today it pays better than your job, your degree and your landlord’s patience combined. Everybody uses it in secret. It is still illegal. And nobody knows who owns it.</p>
+            <div class="btn-row"><a class="btn" href="#job">Take the job</a> <a class="link" href="#cast">Meet the ABC Squad</a> <a class="link" href="#books">The books underneath it</a></div>
           </div>
         </div>
       </div>
     </header>
 
-    <section class="sec sec--lead">
+    <section class="sec sec--lead" id="job">
       <div class="wrap">
-        <aside class="sq-note" aria-labelledby="beta-title">
-          <p class="eyebrow">Before you watch</p>
-          <h2 id="beta-title">The Episode 1 on YouTube is the beta episode.</h2>
-          <p>It comes from the early Raleigh production in November–December 2024, while D.C Agwu was in community college. The final Episode 1 has not been released. Episodes 1–3 form the current Season 1 Part 1 production; the beta is an earlier iteration, not its finished first episode.</p>
-          <div class="btn-row"><a class="link" href="https://www.youtube.com/@dcalacrity">Visit D.C Alacrity on YouTube</a> <a class="link" href="#history">Read the production history</a></div>
-        </aside>
-        <div class="visual" data-rise style="aspect-ratio:16/9"><img src="/assets/img/squad.jpg" alt="The ABC Squad on location" width="1800" height="1012"/></div>
-      <div class="facts" data-rise>
-        <div><strong>3</strong><span>episodes in Season 1 Part 1</span></div>
-        <div><strong>~28</strong><span>shooting days across the full production</span></div>
-        <div><strong>2024–26</strong><span>Raleigh &amp; Wilmington production</span></div>
-        <div><strong>Beta</strong><span>the Episode 1 currently on YouTube</span></div>
-      </div>
+        <div class="sq-term" data-rise>
+          <div class="sq-term__bar"><i></i><i></i><i></i><span>sidequest.onion · mainstream-illegal protocol v4.0</span></div>
+          <div class="sq-term__body" data-sq-term>
+            <p class="dim">&gt; connecting through the Cyber Realm…</p>
+            <p>&gt; 1 NEW JOB AVAILABLE · PAYS WELL · NO QUESTIONS</p>
+            <p>&gt; payout: <span class="hot">345 K.U.M.</span> <span class="dim">(≈ $3,500)</span> · reward: <span class="hot">+1000 XP</span> · type: CO-OP</p>
+            <p class="sq-caret">&gt; How about a Sidequest?</p>
+            <div class="sq-term__menu" role="group" aria-label="Your choice">
+              <button type="button" data-sq="start">START GAME</button>
+              <button type="button" data-sq="exit">EXIT</button>
+            </div>
+            <p class="sq-term__out" data-sq-out aria-live="polite"></p>
+          </div>
+        </div>
+        <div class="facts" data-rise>
+          <div><strong>$15T</strong><span>in-world shadow economy, with no flag, no taxes and no borders</span></div>
+          <div><strong>15 yrs</strong><span>between the prologue and the present day</span></div>
+          <div><strong>7</strong><span>former high-school pranksters, back together</span></div>
+          <div><strong>0</strong><span>known owners</span></div>
+        </div>
       </div>
     </section>
 
@@ -116,16 +218,71 @@
       <div class="wrap">
         <div class="beside" data-rise>
           <div>
-            <p class="eyebrow">The lead</p>
-            <h2>Adam Dawnbringer treats life like a video game.</h2>
+            <p class="eyebrow">The pitch</p>
+            <h2>Uber met the Silk Road. Fifteen years later, they run the world.</h2>
             <div class="prose" style="margin-top:1.25rem">
-              <p>Adam is a college kid and grocery clerk, convinced that a supercar will fix a humiliating date. His mother wants him to earn honest money; his friends know a faster route. Beneath the status chase is a family story he has never resolved. The car is the goal he can name. His missing father is the question he cannot put down.</p>
-              <p>The ABC Squad are former high-school pranksters: Adam the networker, Brock the driver, Chester the strategist, Diego the wild card, Felicia the hacker, Gemma the locksmith and Eric the muscle. Reuniting them means reopening friendships, rivalries and histories. Sidequest turns their skills into jobs, rewards and levels; it cannot make them agree on what a job is worth.</p>
-              <p>On the surface it is a heist comedy — <strong>Mr. Robot</strong>’s paranoia, <strong>Barry</strong>’s heart, <strong>Baby Driver</strong>’s needle drops, and the interface of <strong>GTA Online</strong>. Underneath the jobs and jokes is a family mystery and a world whose rules the squad does not yet understand.</p>
+              <p>Picture a freelance marketplace with one rule: there are no rules. You can rescue a lost pet on Tuesday and help pull off an international incident on Friday. You’re paid in untraceable K.U.M. You earn XP. Your five-star rating opens more doors than your diploma ever did. It looks like a video game. It runs like the shadow economy that quietly replaced the real one.</p>
+              <p>Now meet its newest player. <strong>Adam Dawnbringer</strong> is twenty, a college kid and grocery clerk making $589 a week, with a hero complex, a pickup truck he’s embarrassed by, and a date that died the moment she saw it. He wants a $50,000 supercar in three weeks. His mother wants him to earn honest money. His friends want him to say yes to Sidequest. And his father, a military veteran who went missing chasing dirty money, left him one inheritance: <em>life is like a video game.</em></p>
+              <p>So Adam does what any reluctant hero does. He gets the band back together.</p>
             </div>
-            <p class="pull" style="margin-top:1.75rem">No job too illegal. No debt too deep. No exit from the game.</p>
+            <p class="pull" style="margin-top:1.75rem">When the legal economy offers scraps, an illegal game becomes the most rational career path.</p>
           </div>
           <div class="visual" style="aspect-ratio:16/9"><img src="/assets/img/adam.jpg" alt="Adam Dawnbringer, played by Garrett Sessoms" width="1280" height="720" loading="lazy"/></div>
+        </div>
+        <p class="muted" data-rise style="margin-top:2.25rem;max-width:72ch">The tone: <strong>Mr. Robot</strong>’s paranoia × <strong>Barry</strong>’s heart × <strong>Baby Driver</strong>’s needle drops × <strong>GTA Online</strong>’s interface. Live-action series with first-person moments and a hand-built game HUD.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="eras">
+      <div class="wrap">
+        <div class="head" data-rise>
+          <div><p class="eyebrow">Two eras</p><h2>Version 0.1 to version 4.0.</h2></div>
+          <p class="lede">The story spans fifteen years of one platform’s history: from an invite-only tool for criminals to the job market everyone uses and nobody admits to.</p>
+        </div>
+        <div class="sq-eras" data-rise>
+          <article class="sq-era">
+            <p class="k">Fifteen years ago · the prologue</p>
+            <h3>A black-market terminal and a backseat offer.</h3>
+            <p>Before the holograms and the leaderboards, Sidequest was a raw text terminal with two options, START GAME and EXIT, known only to fixers and smugglers. Cain Dawnbringer is a veteran driving rideshare for tips, raising a five-year-old son and losing a slow war against his bills.</p>
+            <p>One night an old war buddy slides into his backseat.</p>
+            <blockquote>“It’s a cold world, Cain. You gotta cheat the system if you want to win. How about a Sidequest?”</blockquote>
+          </article>
+          <article class="sq-era sq-era--now">
+            <p class="k">Today · Season 1 Part 1</p>
+            <h3>Mainstream culture. Still illegal.</h3>
+            <p>Sidequest now has holographic Quest Brokers, a Mystery Box job randomizer, co-op missions, zero-trace payouts and a HUD over everything. Radio hosts argue about people calling Sidequest instead of the police. Gen Z treats a five-star rating like a résumé.</p>
+            <p>The son is twenty now. He has never been told what that first job cost his family. That is where the story begins.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="rules">
+      <div class="wrap">
+        <div class="head" data-rise>
+          <div><p class="eyebrow">How the game works</p><h2>A $15 trillion economy needs rules.</h2></div>
+          <p class="lede">A market that size can’t be a lawless void. It has currency, ranking, dispatch and enforcement. Somebody writes the code. As the in-world broadcast puts it, no one knows who’s really in control.</p>
+        </div>
+        <div class="sq-sys" data-rise>
+          <div><p class="k">Currency</p><h3>K.U.M.</h3><p>A zero-trace currency native to the Cyber Realm, held in escrow until the job is verified.</p></div>
+          <div><p class="k">Progression</p><h3>XP &amp; five-star rep</h3><p>The new résumé. A five-star profile unlocks elite brokers and earns more respect than a degree.</p></div>
+          <div><p class="k">Dispatch</p><h3>Brokers &amp; the Mystery Box</h3><p>Filter contracts yourself, or spin the randomizer for a high-payout co-op job and take what you get.</p></div>
+          <div><p class="k">Governance</p><h3>Ordered anarchy</h3><p>Unseen admins take a cut of every job and enforce strict rules of engagement. Their names are a secret.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="everyone">
+      <div class="wrap">
+        <div class="head" data-rise>
+          <div><p class="eyebrow">The hypocrisy</p><h2>Everybody uses it. Nobody admits it.</h2></div>
+          <p class="lede">That is why Sidequest has survived fifteen years of federal crackdowns. Nobody in this world is recruited by a supervillain. They’re recruited by a bad month.</p>
+        </div>
+        <div class="sq-class" data-rise>
+          <div><h3>Gen Z, 18–30</h3><p><span class="lbl">In public</span>Just another gig app, with faster payouts.</p><p><span class="lbl">In private</span>Entry-level pay can’t cover rent, let alone dreams. Felonies start to feel like quests.</p></div>
+          <div><h3>The shrinking middle</h3><p><span class="lbl">In public</span>Outrage. Sidequest is ruining the kids and law and order.</p><p><span class="lbl">In private</span>Teachers, office workers and even cops wear masks at night to pay down debt. Any neighbor could be a Quester.</p></div>
+          <div><h3>The comfortable</h3><p><span class="lbl">In public</span>Condemnation of “lazy youth criminals.”</p><p><span class="lbl">In private</span>A private black-market concierge for leverage, vendettas and cheap dirty work.</p></div>
+          <div><h3>FBI Team 4B</h3><p><span class="lbl">On paper</span>Sworn to dismantle the Cyber Realm.</p><p><span class="lbl">In reality</span>Understaffed, with training cut from 18 weeks to 8, thirteen open cases, and trillions in untraceable money within reach.</p></div>
         </div>
       </div>
     </section>
@@ -133,32 +290,40 @@
     <section class="sec" id="season">
       <div class="wrap">
         <div class="head" data-rise>
-          <div><p class="eyebrow">Season 1 Part 1</p><h2>Three episodes. One crew coming back together.</h2></div>
-          <p class="lede">A crime dramedy with a game interface, an ensemble of conflicting motives and a mystery beneath the job market. First-person sequences and on-screen choices are part of its cinematic language; the current episodes are not being presented as released VR films.</p>
+          <div><p class="eyebrow">Season 1 Part 1</p><h2>A prologue and three episodes.</h2></div>
+          <p class="lede">Comedy up front, a family mystery underneath, and choices that keep getting more expensive. No spoilers past the setup.</p>
         </div>
-        <div class="grid-3" data-rise>
-          <div class="lines"><div><h3>Episode 1 · The promise</h3><p>Adam’s supercar obsession meets the reality of low-paid work and the promise of a shortcut. A larger mystery stirs behind the marketplace.</p></div></div>
-          <div class="lines"><div><h3>Episode 2 · The pressure</h3><p>The search for quick money puts relationships under pressure. What looks like a simple gig can carry a much more personal cost.</p></div></div>
-          <div class="lines"><div><h3>Episode 3 · The reunion</h3><p>Reuniting old friends means reopening old tensions. The squad’s talents fit together more easily than their motives do, and the stakes keep growing.</p></div></div>
+        <div class="sq-eps" data-rise>
+          <article class="sq-ep"><img src="/assets/img/cain.jpg" alt="A man types into a laptop in a dark room" width="1400" height="788" loading="lazy"/><div class="sq-ep__b"><p class="k">Prologue</p><h3>The worst job interview ever held</h3><p>A warehouse that exists nowhere. A man in a camel coat hiring desperate people, with questions like <q>Have you ever hot-wired a car?</q> And one about a donkey. The donkey is coming back.</p></div></article>
+          <article class="sq-ep"><img src="/assets/img/megan.jpg" alt="Megan on a date with Adam" width="1400" height="788" loading="lazy"/><div class="sq-ep__b"><p class="k">Episode 1</p><h3>Player One</h3><p>A date that dies in a parking lot, a $50,000 goal, and a motivational guru who fires Adam from a job he hasn’t even started yet, before 9:00 AM.</p></div></article>
+          <article class="sq-ep"><img src="/assets/img/kendall.jpg" alt="Kendall, Adam’s ex" width="1400" height="788" loading="lazy"/><div class="sq-ep__b"><p class="k">Episode 2</p><h3>The Pressure</h3><p>Legal side gigs go badly. An ex pays $200 to say what she’s been holding in for years. Across town, a coffee-shop date where both people are lying.</p></div></article>
+          <article class="sq-ep"><img src="/assets/img/squad.jpg" alt="The ABC Squad together" width="1800" height="1012" loading="lazy"/><div class="sq-ep__b"><p class="k">Episode 3</p><h3>Choose Your Player</h3><p>Getting the old crew back together takes three scenes, and every one of them is a disaster. The final scene doesn’t belong to Adam.</p></div></article>
         </div>
-        <div class="prose" data-rise style="max-width:78ch;margin-top:2rem"><p>Adam and the squad carry the main story. The FBI investigation, Cain and Nelson’s history, and the Cyber Realm’s mythology give the same events different meanings. Later stories can follow those perspectives without requiring every viewer to own a headset.</p></div>
+        <div class="sq-hud" data-rise data-sq-hud>
+          <p class="sq-hud__q">Time slows. A choice appears. Ep. 1, the parking lot. He clicks the key fob, and a pickup truck beeps.</p>
+          <div class="sq-hud__opts">
+            <button type="button" data-pick="a">OPTION A // Fail the date honestly</button>
+            <button type="button" data-pick="b">OPTION B // Tell a small lie (“I drive a supercar”)</button>
+          </div>
+          <p class="sq-hud__out" data-sq-hud-out aria-live="polite"></p>
+        </div>
       </div>
     </section>
 
     <section class="sec" id="cast">
       <div class="wrap">
         <div class="head" data-rise>
-          <div><p class="eyebrow">ABC Squad</p><h2>Seven skills. Seven reasons to say yes.</h2></div>
-          <p class="lede">The ABC Squad’s chemistry is the center of the series. Their specialties make them useful together; their motives make the reunion unstable. Supporting characters connect the crew to the investigation and family history.</p>
+          <div><p class="eyebrow">The ABC Squad</p><h2>Seven skills. Seven reasons to say yes.</h2></div>
+          <p class="lede">Former high-school pranksters whose old tricks are about to meet real stakes. Their skills fit together easily. Their motives don’t. Every one of them is carrying something the others haven’t been told.</p>
         </div>
         <div class="sq-role-grid" data-rise>
-          <article class="sq-role"><h3>Adam Dawnbringer</h3><p class="k">The networker</p><p>He can bring the friends together and sell them on an idea. Treating life like a game helps him take action, but makes other people’s feelings and consequences easier to miss.</p></article>
-          <article class="sq-role"><h3>Brock Turismo</h3><p class="k">The driver</p><p>Quick under pressure and more pragmatic than Adam. His confidence behind the wheel does not extend to Felicia, where jealousy pulls him into decisions he cannot steer so easily.</p></article>
-          <article class="sq-role"><h3>Chester Wiseman</h3><p class="k">The brains</p><p>A strategist and gambler who wants to be five moves ahead. He questions adding people to the crew, even as his own appetite for risk makes that caution complicated.</p></article>
-          <article class="sq-role"><h3>Diego Cicatriz-Olvidado</h3><p class="k">The wild card</p><p>Unpredictable, funny and eager to be part of the action. He changes the energy of a scene instantly and can turn a carefully laid plan into something nobody expected.</p></article>
-          <article class="sq-role"><h3>Felicia Wall</h3><p class="k">The hacker</p><p>Resourceful and skeptical of authority. She can see how reckless the others are; knowing more than the rest of the squad makes trust and loyalty complicated.</p></article>
-          <article class="sq-role"><h3>Gemma Gazelle</h3><p class="k">The locksmith</p><p>Warm, playful and comfortable around a lock she should not be opening. She brings a sense of ease to a crew that can make even a reunion feel like a competition.</p></article>
-          <article class="sq-role"><h3>Eric McSharry</h3><p class="k">The muscle</p><p>A fighter who also carries poetry, grief and loyalty. He protects the people he cares about fiercely, with more behind that intensity than the others always see.</p></article>
+          <article class="sq-role"><h3>Adam Dawnbringer</h3><p class="k">Player 1 · the networker</p><p>A reluctant leader with golden-retriever energy who can sell anything to anyone except himself. The supercar is the goal he can name. His missing father is the question he can’t put down.</p><p class="comps">Percy Jackson × Ultimate Spider-Man × Griffin Bing</p></article>
+          <article class="sq-role"><h3>Brock Turismo</h3><p class="k">The driver</p><p>Scruffy, pragmatic and calm at 100 miles an hour, with the clutch gene. Completely uncool around Felicia.</p><p class="comps">Baby Driver × Han Solo × Sokka</p></article>
+          <article class="sq-role"><h3>Chester Wiseman</h3><p class="k">The brains</p><p>A day-trading strategist in a quarter-zip who is always five moves ahead, and hooked on volatility.</p><p class="comps">Tony Stark × Tywin Lannister × Lester (GTA V)</p></article>
+          <article class="sq-role"><h3>Diego Cicatriz-Olvidado</h3><p class="k">The wild card</p><p>Human roulette with absurd plot armor and a snack obsession. The funniest person in any room, and the hardest one to read.</p><p class="comps">Deadpool × Michelangelo × Shaggy</p></article>
+          <article class="sq-role"><h3>Felicia Wall</h3><p class="k">The hacker</p><p>A sarcastic coffee-shop hacktivist, a master social engineer, and the laziest genius alive, until somebody provokes her.</p><p class="comps">Shikamaru × Elliot (Mr. Robot) × Go Go Tomago</p></article>
+          <article class="sq-role"><h3>Gemma Gazelle</h3><p class="k">The locksmith</p><p>Bubbly, in athleisure, hugging her friends while she cracks a safe that isn’t hers. Her sunny smile doesn’t tell you everything.</p><p class="comps">Ludwig Dieter × Arya Stark × Anna (Frozen)</p></article>
+          <article class="sq-role"><h3>Eric McSharry</h3><p class="k">The muscle</p><p>A quiet poet who lets his fists do the talking. He skips stones at Memory Lake and talks to someone who isn’t there.</p><p class="comps">John Wick × Red Hood × Winter Soldier</p></article>
         </div>
         <div class="cast-grid" data-rise>
           <figure><img src="/assets/img/adam.jpg" alt="Adam Dawnbringer" loading="lazy"/><figcaption>Adam Dawnbringer<span>Garrett Sessoms</span></figcaption></figure>
@@ -168,57 +333,58 @@
           <figure><img src="/assets/img/eric.jpg" alt="Eric McSharry" loading="lazy"/><figcaption>Eric McSharry<span>Andrew Overby III</span></figcaption></figure>
           <figure><img src="/assets/img/nelson.jpg" alt="Nelson" loading="lazy"/><figcaption>Nelson<span>The recruiter</span></figcaption></figure>
           <figure><img src="/assets/img/cain.jpg" alt="Cain Dawnbringer" loading="lazy"/><figcaption>Cain Dawnbringer<span>The missing father</span></figcaption></figure>
-          <figure><img src="/assets/img/alexa.jpg" alt="Agent Alexa" loading="lazy"/><figcaption>Agent Alexa<span>FBI Cyber Realm</span></figcaption></figure>
+          <figure><img src="/assets/img/alexa.jpg" alt="Agent Alexa" loading="lazy"/><figcaption>Agent Alexa<span>FBI Team 4B</span></figcaption></figure>
         </div>
-        <p class="muted" data-rise style="margin-top:1.75rem;max-width:66ch"><strong>Brock Turismo</strong> (Isaac Corrigan) and <strong>Gemma Gazelle</strong> (Emily Kahl) are also members of the ABC Squad. The portraits above include supporting characters as well as squad members; they are not the full credits.</p>
+        <p class="muted" data-rise style="margin-top:1.75rem;max-width:66ch"><strong>Brock Turismo</strong> (Isaac Corrigan) and <strong>Gemma Gazelle</strong> (Emily Kahl) complete the squad. The portraits include supporting characters and are not the full credits.</p>
       </div>
     </section>
 
-    <section class="sec" id="world">
+    <section class="sec" id="case">
       <div class="wrap">
-        <div class="beside beside--flip" data-rise>
-          <div class="visual" style="aspect-ratio:4/3"><img src="/assets/img/cyberrealm-logo.jpeg" alt="The Cyber Realm insignia" width="2000" height="1748" style="object-fit:contain;padding:2rem;background:#000" loading="lazy"/></div>
-          <div>
-            <p class="eyebrow">The world underneath</p>
-            <h2>The game has an owner.</h2>
-            <div class="prose" style="margin-top:1.25rem">
-              <p>Sidequest operates inside the Cyber Realm, an encrypted digital world of jobs, rewards and levels. The Trojan Stallion’s name hangs over its history. To Adam, the marketplace looks like a shortcut; to FBI Team 4B, it is part of a much larger case. Who built the game, and what it asks of its players, is a mystery the series can unfold.</p>
-              <p>The world bible and actor guides connect the squad’s personal histories to Cain and Nelson, FBI Team 4B and the Trojan Stallion. Those relationships give future stories a foundation: a family crime drama, a procedural, an origin story or a mission seen from more than one character. They are creative possibilities, not announced releases.</p>
-              <p>That continuity also matters to the tools. <a href="https://dcalacrity.com/pure">Pure Alacrity</a> is being developed to connect story records, production decisions and the assets a later episode can reuse. Sidequest supplied the practical problems before Pure’s development began in January 2026.</p>
-            </div>
+        <div class="head" data-rise>
+          <div><p class="eyebrow">The case file</p><h2>The game has an owner.</h2></div>
+          <p class="lede">Sidequest runs inside the Cyber Realm, the most encrypted network ever built. Federal agencies call it the Second Silk Road. Its creation myth begins in Nigeria, with a builder the world came to know as the Trojan Stallion. Officially, he’s dead.</p>
+        </div>
+        <div class="sq-case" data-rise>
+          <ol class="sq-qs">
+            <li>His house exploded in the largest raid in FBI history. So why did his account just log back in?</li>
+            <li>Who writes the rules, holds the escrow and runs the brokers of a $15 trillion illegal economy?</li>
+            <li>What happened to Cain Dawnbringer after he pressed START GAME, and where is he now?</li>
+            <li>Why does a motivational guru keep all of his research on paper?</li>
+            <li>Which member of the squad is keeping the biggest secret?</li>
+          </ol>
+          <div class="sq-vault">
+            <p class="sq-vault__k">Writers’ room archive · eyes only</p>
+            <ol>
+              <li>01 <s></s></li>
+              <li>02 <s style="max-width:78%"></s></li>
+              <li>03 <s style="max-width:92%"></s></li>
+              <li>04 <s style="max-width:70%"></s></li>
+              <li>05 <s style="max-width:85%"></s></li>
+              <li>06 <s style="max-width:64%"></s></li>
+            </ol>
+            <p>The mythology behind Season 1 is already written, across multiple seasons: an origin, a pact, a coup, and heirs nobody expects. It stays classified until it’s on screen.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="sec" id="status">
+    <section class="sec" id="books">
       <div class="wrap">
         <div class="head" data-rise>
-          <div><p class="eyebrow">Release status</p><h2>The beta is public. Final Episode 1 is unreleased.</h2></div>
-          <p class="lede">Season 1 Part 1 covers Episodes 1–3 and is in post-production, with pickups in the January–October 2026 window. The existing October 2026 release aim remains a target, not a confirmed release date. Approximately 28 shooting days cover the full production across its phases.</p>
+          <div><p class="eyebrow">Literary inspirations</p><h2>The books underneath it.</h2></div>
+          <p class="lede">On the surface, Sidequest is a heist comedy with a game interface. Underneath, it’s in conversation with some very old stories about fathers, brothers, gifts that aren’t gifts, and what poverty makes reasonable.</p>
         </div>
-        <div class="grid-3" data-rise>
-          <div class="lines"><div><h3>Watch now · Episode 1 beta</h3><p>The Episode 1 currently on YouTube is the early beta. It should be understood as a development iteration, not the final Episode 1 of the current release.</p></div></div>
-          <div class="lines"><div><h3>Next · The finished three-episode release</h3><p>The release work centers on completing post, sound, graphics, captions, credits and delivery for Episodes 1–3. Final release details will be announced when confirmed.</p></div></div>
-          <div class="lines"><div><h3>After release · The next production round</h3><p>More story and potential VR-exclusive missions can extend the world. Their format, budget and production dates remain to be decided; the current episodes do not depend on those experiments being finished.</p></div></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="sec sq-history" id="history">
-      <div class="wrap">
-        <div class="head" data-rise>
-          <div><p class="eyebrow">The production history</p><h2>Three phases, from Raleigh to Wilmington.</h2></div>
-          <p class="lede">Sidequest began before Pure Alacrity and before D.C Agwu began VR development. An interest in immersive cinema was already part of the creative direction.</p>
-        </div>
-        <div class="grid-3" data-rise>
-          <div class="lines"><div><h3>1 · November–December 2024</h3><p><strong>Raleigh · community college.</strong> The early Episode 1 beta was shot. D.C Agwu had already shot roughly 80% of that early Episode 1 iteration while in community college. This was not 80% of the whole three-episode production.</p></div></div>
-          <div class="lines"><div><h3>2 · The 2025 production</h3><p><strong>May · Wilmington:</strong> the commercial scene shoot.</p><p><strong>June–August · Raleigh:</strong> most of Episodes 2–3 and parts of Episode 1.</p><p><strong>November · Wilmington:</strong> the prologue.</p></div></div>
-          <div class="lines"><div><h3>3 · January–October 2026</h3><p><strong>Wilmington · pickups.</strong> Additional photography continued within this window. The full production spans approximately 28 shooting days in total across the early beta, main production and pickups.</p></div></div>
-        </div>
-        <div class="prose" data-rise>
-          <p><strong>January 2026: Pure Alacrity development began.</strong> A majority of the footage for Episodes 1–3 had already been shot. Pure grew from the production and post-production problems the team had encountered. It did not plan or run the original 2024–2025 shoots; later pickups and post overlap its development.</p>
-          <p><strong>The earlier pitch deck is historical context.</strong> It was prepared before D.C Agwu began hands-on VR development. It already proposed first-person cinematics, spatial audio, game-style graphics and later interactive/VR work. Those proposals record the creative direction at that time, not completed VR capabilities or the current episode count and production schedule.</p>
+        <div class="sq-books" data-rise>
+          <article class="sq-book"><h3>The Odyssey</h3><p class="by">Homer</p><p>The epic opens with a son, Telemachus, setting out to find a father who never came home.</p><p class="in">Adam says he wants a supercar. What he’s really on is the oldest quest there is.</p></article>
+          <article class="sq-book"><h3>Genesis 4</h3><p class="by">The story of Cain and Abel</p><p>The first question after the first crime: “Am I my brother’s keeper?”</p><p class="in">War buddies, a crew of old friends, a twin. The name Cain was not chosen by accident.</p></article>
+          <article class="sq-book"><h3>The Aeneid, Book II</h3><p class="by">Virgil</p><p>Troy doesn’t fall to a siege. It falls to a gift it wheels in through its own gates.</p><p class="in">The Trojan Stallion never breaks in. It starts with an email, then a small charge.</p></article>
+          <article class="sq-book"><h3>Things Fall Apart</h3><p class="by">Chinua Achebe</p><p>Tradition, ambition and a new economic order colliding in southeastern Nigeria.</p><p class="in">The Cyber Realm’s creation myth begins in Nigeria. So do the writer’s own roots.</p></article>
+          <article class="sq-book"><h3>Oliver Twist</h3><p class="by">Charles Dickens</p><p>Fagin doesn’t need to threaten anyone. Hunger does his recruiting for him.</p><p class="in">Nelson’s warehouse is the same gate, fifteen years before the world catches on.</p></article>
+          <article class="sq-book"><h3>Crime and Punishment</h3><p class="by">Fyodor Dostoevsky</p><p>A broke student convinces himself that one crime is the rational choice, then has to live with it.</p><p class="in">Every Sidequest job is a small Raskolnikov argument, with XP attached.</p></article>
+          <article class="sq-book"><h3>Neuromancer &amp; Snow Crash</h3><p class="by">William Gibson · Neal Stephenson</p><p>Cyberspace as a place, and a gig economy run like a game, decades before either existed.</p><p class="in">The Cyber Realm is what happens when that future arrives as an app.</p></article>
+          <article class="sq-book"><h3>American Kingpin</h3><p class="by">Nick Bilton</p><p>The true story of the Silk Road, and of the federal agents convicted of stealing from the market they were sent to shut down.</p><p class="in">Team 4B’s temptation is drawn from the real record.</p></article>
+          <article class="sq-book"><h3>“Social Structure and Anomie”</h3><p class="by">Robert K. Merton, 1938</p><p>Strain theory: when society blocks the legitimate road to success, people invent other roads.</p><p class="in">The show’s whole thesis, in one essay. Sidequest is the other road.</p></article>
         </div>
       </div>
     </section>
@@ -226,17 +392,66 @@
     <section class="sec" id="next-round">
       <div class="wrap">
         <div class="head" data-rise>
-          <div><p class="eyebrow">Beyond Episode 3 · exploration</p><h2>Enter the world you have been watching.</h2></div>
-          <p class="lede">After the three-episode release, the next production round could include stories made specifically for VR. The aim is a meaningful role inside Sidequest, with filmed performances, spatial sound and decisions that change what you discover.</p>
+          <div><p class="eyebrow">One world, many screens</p><h2>Built to run for years.</h2></div>
+          <p class="lede">Sidequest was written as a world, not a one-off. The show bible covers two eras, fourteen fully profiled characters, the rules of an entire economy, and season mysteries with answers already written. That gives one property room for many formats.</p>
+        </div>
+        <div class="sq-map" data-rise>
+          <div><p class="k"><b>In post</b> · the series</p><h3>Season 1 Part 1</h3><p>A prologue and three episodes, shot across about 28 days in Raleigh and Wilmington.</p></div>
+          <div><p class="k">Possible · a prequel</p><h3>Fifteen years ago</h3><p>Cain and Nelson’s era is its own crime drama: the warehouse, the terminal, the first jobs.</p></div>
+          <div><p class="k">Possible · the procedural</p><h3>Team 4B</h3><p>The same events from the other side of the case, with hunters who are tempted too.</p></div>
+          <div><p class="k">Possible · interactive &amp; VR</p><h3>Squad missions on Alacrity Player</h3><p>Take a job alongside the ABC Squad. Choose whose lead to follow, what to share, and whether to trust the offer.</p></div>
+          <div><p class="k">Possible · play</p><h3>A game-shaped world</h3><p>K.U.M., XP, brokers, the Mystery Box and mission contracts are mechanics already, which makes them ready for games, live events and merch.</p></div>
+          <div><p class="k"><b>Owned</b> · the IP</p><h3>An Alacrity Original</h3><p>Owned by the company that builds the engine. Sidequest’s production problems are why Pure Alacrity exists.</p></div>
+        </div>
+        <p class="muted" data-rise style="margin-top:1.5rem;max-width:78ch">Formats marked “possible” are creative directions, not announced releases. The series is the first way into the world, and it works on any ordinary screen.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="made">
+      <div class="wrap">
+        <div class="head" data-rise>
+          <div><p class="eyebrow">How it’s made</p><h2>Cinema with a game’s nervous system.</h2></div>
+          <p class="lede">Mostly third-person cinema, cut with first-person moments: waking HUD boot-ups, fight flashes and character switches. Spatial audio is recorded on set with an ambisonic array and a binaural rig. The HUD is designed by hand in Blender and After Effects. The look pairs punchy 1980s contrast with vivid 2000s colour. The sound is “nostalgia of a new age”: 2000s rock, orchestra, pop-punk, electronic jazz and rap.</p>
+        </div>
+        <div class="sq-crew" data-rise>
+          <div><b>D.C Agwu</b><span>Writer / Executive Producer</span></div>
+          <div><b>Harry Marshall</b><span>Showrunner</span></div>
+          <div><b>Martin McGowan</b><span>Director / DP, Episode 1</span></div>
+          <div><b>Tommy Bowers</b><span>Co-writer / Episode Director</span></div>
+          <div><b>Jacky D. Otto</b><span>Chief Editor / Co-writer</span></div>
+          <div><b>Walker Dixon</b><span>Head of Visual Effects</span></div>
+          <div><b>Mason Dail</b><span>Head of Sound Design</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="status">
+      <div class="wrap">
+        <div class="head" data-rise>
+          <div><p class="eyebrow">Release status</p><h2>In post. Final Episode 1 is unreleased.</h2></div>
+          <p class="lede">Season 1 Part 1 is in post-production: sound, graphics, captions, credits and delivery. The release date will be announced when it’s confirmed.</p>
+        </div>
+        <aside class="sq-note" data-rise>
+          <h3>The Episode 1 on YouTube is the beta.</h3>
+          <p>It comes from the early Raleigh production in November–December 2024, shot while D.C Agwu was in community college. It is an earlier version, not the finished first episode of Season 1 Part 1.</p>
+          <div class="btn-row" style="margin-top:1rem"><a class="link" href="https://www.youtube.com/@dcalacrity">Watch the beta on YouTube</a></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="sec sq-history" id="history">
+      <div class="wrap">
+        <div class="head" data-rise>
+          <div><p class="eyebrow">The production history</p><h2>Three phases, from Raleigh to Wilmington.</h2></div>
+          <p class="lede">Sidequest began before Pure Alacrity existed. About 28 shooting days in total, across the beta, the main production and pickups.</p>
         </div>
         <div class="grid-3" data-rise>
-          <div class="lines"><div><h3>A squad mission</h3><p>Enter a new job alongside the ABC Squad. Choose whose perspective to follow, what information to share or whether to trust the offer. The characters and consequences make the interaction matter.</p></div></div>
-          <div class="lines"><div><h3>The other side of the case</h3><p>A complementary FBI or Cain-and-Nelson story could reveal information the squad never sees. A traditional episode and a VR exclusive can stand alone while making each other richer.</p></div></div>
-          <div class="lines"><div><h3>A deeper cinematic space</h3><p>Start with a bounded live-action immersive scene. Then test filmed performance inside real-time environments, spatial audio and persistent story state. More freedom should follow measured quality, comfort and production feasibility.</p></div></div>
+          <div class="lines"><div><h3>1 · November–December 2024</h3><p><strong>Raleigh, community college.</strong> The early Episode 1 beta.</p></div></div>
+          <div class="lines"><div><h3>2 · 2025</h3><p><strong>May, Wilmington:</strong> the commercial scene. <strong>June–August, Raleigh:</strong> most of Episodes 2–3 and parts of Episode 1. <strong>November, Wilmington:</strong> the prologue.</p></div></div>
+          <div class="lines"><div><h3>3 · January–October 2026</h3><p><strong>Wilmington pickups.</strong> Additional photography.</p></div></div>
         </div>
         <div class="prose" data-rise style="max-width:78ch;margin-top:2rem">
-          <p><strong>The tools evolve with the production.</strong> Pure plans the story and coverage. Bridge is being developed to preserve scene, take and version context through editing, sound, color and VFX. Player runs supported interactive packages. Sidequest’s next round can test that complete path without pretending those future systems made its original episodes.</p>
-          <p>These are directions for development, not announced titles or a promise of a particular device-store release. The three-episode series remains a complete way into the story for people watching on ordinary screens.</p>
+          <p><strong>Where Pure Alacrity came from.</strong> Pure development began in January 2026, after most of the footage for Episodes 1–3 had been shot. Making the series by hand, with every change rippling through schedules, budgets and call sheets, is what led D.C Agwu to build his own production software. Pure did not plan or run the original 2024–2025 shoots.</p>
         </div>
       </div>
     </section>
@@ -246,17 +461,17 @@
         <div class="close__card">
           <div class="close__copy">
             <h2>Press Start.</h2>
-            <p class="lede">Sidequest gives the company a story world and a crew with a production history. Pure grew from that work. Bridge and Player create a path toward the next kinds of stories the team wants to make.</p>
+            <p class="lede">Follow the release, watch the beta, or talk to us about partnering on the world of Sidequest.</p>
             <dl class="close__facts">
               <div><dt>Write to</dt><dd><a href="mailto:support@dcalacrity.com">support@dcalacrity.com</a></dd></div>
-              <div><dt>Based in</dt><dd>North Carolina</dd></div>
-              <div><dt>The suite</dt><dd><a href="https://dcalacrity.com/pure">dcalacrity.com/pure</a></dd></div>
+              <div><dt>Made in</dt><dd>Raleigh &amp; Wilmington, NC</dd></div>
+              <div><dt>Follow</dt><dd><a href="https://www.youtube.com/@dcalacrity">YouTube</a></dd></div>
             </dl>
-            <div class="btn-row"><a class="btn" href="/work/right-here-right-now">See Right Here Right Now!</a> <a class="link" href="/contact?topic=Investor%20%2F%20partner">Partner with us</a></div>
+            <div class="btn-row"><a class="btn" href="https://www.youtube.com/@dcalacrity">Follow on YouTube</a> <a class="link" href="/contact?topic=Investor%20%2F%20partner">Partner with us</a></div>
           </div>
           <div class="close__plate">
-            <div class="plate plate--fill plate--img" data-plate="image" data-src="/assets/brand/sky-cloud.jpg" style="--plate-img:url(/assets/brand/sky-cloud.jpg)" aria-hidden="true"></div>
-            <a class="close__note" href="https://dcalacrity.com/pure"><span><b>Pure Alacrity is free.</b>No account, and it works with no internet.</span></a>
+            <div class="plate plate--fill plate--img" data-plate="image" data-src="/assets/img/cyberrealm.jpg" style="--plate-img:url(/assets/img/cyberrealm.jpg)" aria-hidden="true"></div>
+            <a class="close__note" href="/work/"><span><b>More Alacrity Originals.</b>Right Here Right Now!, Prize Pool VR, Welcome to Wilmy.</span></a>
           </div>
         </div>
       </div>
@@ -268,12 +483,14 @@
       <div class="foot__grid">
         <div>
           <img class="foot__lockup" src="/assets/brand/lockup.png" alt="D.C Alacrity" width="1400" height="440" loading="lazy"/>
-          <p>A technology and media company building the Experience Industry.</p>
+          <p>Step inside. Choose. Interactive experiences people can step inside, powered by our own engine.</p>
         </div>
         <div>
           <h4>Company</h4>
           <nav aria-label="Company">
             <a href="/about">Company &amp; vision</a>
+            <a href="/services">For Business</a>
+            <a href="/start">Start a project</a>
             <a href="/research">Research &amp; development</a>
             <a href="/press">Press kit</a>
             <a href="/contact">Contact</a>
@@ -285,13 +502,13 @@
             <a href="/technology">Overview</a>
             <a href="https://dcalacrity.com/pure">Pure Alacrity</a>
             <a href="/technology#player">Alacrity Player</a>
-            <a href="/services">Services</a>
+            <a href="/technology#insights">Alacrity Insights</a>
           </nav>
         </div>
         <div>
-          <h4>Experiences</h4>
-          <nav aria-label="Experiences">
-            <a href="/work/">All work</a>
+          <h4>Originals</h4>
+          <nav aria-label="Originals">
+            <a href="/work/">All originals</a>
             <a href="/work/sidequest">Sidequest</a>
             <a href="/work/right-here-right-now">Right Here Right Now!</a>
             <a href="/work/prize-pool">Prize Pool VR</a>
@@ -308,5 +525,6 @@
 
   <script src="/js/site.js?v=f33a251105" defer></script>
   <script src="/js/widgets.js?v=a40a52a584" defer></script>
+  <script src="/js/sidequest.js?v=3d1d5fda8d" defer></script>
 </body>
 </html>
