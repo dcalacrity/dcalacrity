@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Geist+Mono:wght@400;500&display=swap"/>
-  <link rel="stylesheet" href="/css/site.css?v=720d001030"/>
+  <link rel="stylesheet" href="/css/site.css?v=a5f469dd95"/>
   <style>
     .sq-logo { display: block; max-width: min(460px, 92%); height: auto; margin: .5rem 0 0; }
     .pull { font-family: var(--display); font-weight: 300; font-size: clamp(1.25rem, 2vw, 1.6rem); line-height: 1.35; color: var(--ink); max-width: 26ch; }
@@ -131,6 +131,119 @@
     .sq-crew b { display: block; font-weight: 550; }
     .sq-crew span { font-size: .85rem; color: var(--ink-3); }
     @media (max-width: 900px) { .sq-crew { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    /* how it works: the eight steps */
+    .sq-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+    .sq-steps li { position: relative; display: grid; gap: .45rem; align-content: start; padding: 1.3rem 1.2rem 1.35rem; border: 1px solid var(--line); border-radius: 12px; background: var(--c-well); }
+    .sq-steps__n { font-family: var(--mono); font-size: .72rem; color: #ff4fd8; letter-spacing: .06em; }
+    .sq-steps h3 { font-size: 1.05rem; }
+    .sq-steps p { color: var(--ink-2); font-size: .92rem; }
+    @media (max-width: 1100px) { .sq-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 560px) { .sq-steps { grid-template-columns: minmax(0, 1fr); } }
+    /* ── the job board ── */
+    .g { --neon: #ff4fd8; --cy: #57e3ff; --g-line: rgba(87, 227, 255, .2); position: relative; border: 1px solid rgba(255, 79, 216, .45); border-radius: 16px; background: radial-gradient(120% 70% at 50% 0%, rgba(255, 79, 216, .08), transparent 60%), #04070b; overflow: hidden; box-shadow: 0 0 0 1px rgba(87, 227, 255, .08), 0 40px 90px -40px rgba(255, 79, 216, .55); scroll-margin-top: 5.5rem; }
+    .g::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(180deg, rgba(255, 255, 255, .025) 0 1px, transparent 1px 3px); }
+    .g__bar { display: flex; align-items: center; gap: .45rem; padding: .7rem 1rem; border-bottom: 1px solid var(--g-line); font-family: var(--mono); font-size: .72rem; color: #6f8a96; }
+    .g__bar i { width: 9px; height: 9px; border-radius: 50%; background: rgba(165, 183, 191, .25); }
+    .g__bar i:first-child { background: var(--neon); }
+    .g__bar span { margin-left: .5rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .g__hud { display: grid; gap: .55rem; padding: 1rem clamp(1rem, 3vw, 1.75rem); border-bottom: 1px solid var(--g-line); background: rgba(87, 227, 255, .03); }
+    .g-hud__row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .5rem 1rem; margin-bottom: .2rem; }
+    .g-stat span { display: block; font-family: var(--mono); font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; color: #6f8a96; }
+    .g-stat b { font-family: var(--mono); font-weight: 500; font-size: clamp(.92rem, 1.4vw, 1.1rem); color: #fff; }
+    .g-stat--cash b { color: #7dffb0; }
+    .g-stars { color: #ffd166; letter-spacing: .08em; }
+    .g-meter { display: grid; grid-template-columns: 3.4rem minmax(0, 1fr) 9.5rem; gap: .7rem; align-items: center; font-family: var(--mono); font-size: .7rem; }
+    .g-meter__k { color: #6f8a96; text-transform: uppercase; letter-spacing: .08em; }
+    .g-meter__bar { height: .5rem; border-radius: 99px; background: rgba(165, 183, 191, .12); overflow: hidden; }
+    .g-meter__bar i { display: block; height: 100%; border-radius: inherit; transition: width .6s var(--ease); }
+    .g-meter b { font-weight: 500; color: #cfe3ea; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .g-meter--goal i { background: linear-gradient(90deg, #2bd47d, #7dffb0); }
+    .g-meter--xp i { background: linear-gradient(90deg, #3aa7ff, var(--cy)); }
+    .g-meter--heat i { background: linear-gradient(90deg, #ffb347, #ff4b5c); }
+    .g-meter--heat.is-hot b { color: #ff7a86; }
+    .g-meter--trust i { background: linear-gradient(90deg, #b48cff, #ffd1f4); }
+    @media (max-width: 640px) { .g-hud__row { grid-template-columns: repeat(2, minmax(0, 1fr)); } .g-meter { grid-template-columns: 2.9rem minmax(0, 1fr) 6.5rem; } }
+    .g__body { position: relative; z-index: 1; padding: clamp(1.25rem, 3.5vw, 2.25rem); min-height: 24rem; }
+    .g-screen { display: grid; gap: 1rem; animation: g-in .35s var(--ease) both; }
+    @keyframes g-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .g-screen { animation: none; } .g-meter__bar i { transition: none; } }
+    .g-head { display: grid; gap: .35rem; }
+    .g-kicker { font-family: var(--mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--cy); }
+    .g-screen h3 { font-size: clamp(1.3rem, 2.4vw, 1.9rem); font-stretch: var(--wide); font-weight: 520; letter-spacing: -.03em; color: #fff; outline: none; }
+    .g-title { font-family: var(--mono) !important; font-stretch: 100% !important; font-size: clamp(2rem, 6vw, 3.6rem) !important; letter-spacing: .06em !important; color: var(--neon) !important; text-shadow: 0 0 24px rgba(255, 79, 216, .55), 0 0 2px #fff; }
+    .g-line { color: #b9cdd5; max-width: 66ch; }
+    .g-line--term { font-family: var(--mono); color: var(--cy); }
+    .g-line--hot { font-family: var(--mono); color: #fff; min-height: 1.5em; }
+    .g-line--obj { font-family: var(--mono); font-size: .9rem; letter-spacing: .04em; color: #7dffb0; padding: .6rem .85rem; border: 1px solid rgba(125, 255, 176, .35); border-radius: 8px; background: rgba(125, 255, 176, .06); justify-self: start; }
+    .g-line--warn { font-family: var(--mono); font-size: .88rem; color: #ffb347; }
+    .g-row { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: .35rem; }
+    .g-btn { display: inline-flex; align-items: center; min-height: 2.9rem; padding: 0 1.15rem; border: 1px solid rgba(87, 227, 255, .55); border-radius: 8px; font-family: var(--mono); font-size: .86rem; letter-spacing: .06em; color: var(--cy); background: rgba(87, 227, 255, .06); transition: background .2s, color .2s, transform .2s; }
+    .g-btn:hover { background: var(--cy); color: #04070b; transform: translateY(-1px); }
+    .g-btn--go { border-color: var(--neon); color: #fff; background: rgba(255, 79, 216, .18); box-shadow: 0 0 22px -6px rgba(255, 79, 216, .8); }
+    .g-btn--go:hover { background: var(--neon); color: #04070b; }
+    .g-btn--ghost { border-color: rgba(165, 183, 191, .3); color: #b9cdd5; background: transparent; }
+    .g-btn--ghost:hover { background: rgba(165, 183, 191, .15); color: #fff; }
+    .g-rules { display: grid; gap: .55rem; padding: 1rem 1.1rem; border: 1px dashed rgba(87, 227, 255, .35); border-radius: 10px; color: #b9cdd5; font-size: .93rem; max-width: 72ch; }
+    .g-rules b { color: #fff; }
+    .g-best { font-family: var(--mono); font-size: .78rem; color: #ffd166; }
+    .g-boardwrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 15rem); gap: 1rem; align-items: start; }
+    .g-board { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+    .g-job { display: grid; gap: .45rem; align-content: start; text-align: left; padding: 1rem 1.05rem 1.05rem; border: 1px solid var(--g-line); border-radius: 12px; background: rgba(10, 21, 28, .75); color: #cfe3ea; transition: border-color .2s, transform .25s var(--ease), box-shadow .25s; }
+    .g-job:hover, .g-job:focus-visible { border-color: var(--cy); transform: translateY(-2px); box-shadow: 0 14px 34px -18px rgba(87, 227, 255, .6); }
+    .g-job--t2 { border-color: rgba(58, 167, 255, .35); }
+    .g-job--t3 { border-color: rgba(180, 140, 255, .45); }
+    .g-job--t4 { border-color: rgba(255, 209, 102, .5); background: linear-gradient(180deg, rgba(255, 209, 102, .07), transparent 60%), rgba(10, 21, 28, .8); }
+    .g-job--box { border-style: dashed; border-color: var(--neon); background: repeating-linear-gradient(-45deg, rgba(255, 79, 216, .06) 0 10px, transparent 10px 20px), rgba(10, 21, 28, .8); }
+    .g-job__top { display: flex; justify-content: space-between; gap: .5rem; font-family: var(--mono); font-size: .64rem; letter-spacing: .07em; text-transform: uppercase; color: #6f8a96; }
+    .g-job--box .g-job__tag { color: var(--neon); }
+    .g-job__name { font-family: var(--display); font-weight: 600; font-size: 1.08rem; color: #fff; }
+    .g-job__brief { font-size: .88rem; line-height: 1.45; color: #a9bfc8; }
+    .g-job__meta { display: flex; flex-wrap: wrap; gap: .3rem .7rem; font-family: var(--mono); font-size: .7rem; color: #cfe3ea; margin-top: .15rem; }
+    .g-heat { color: #ffb347; }
+    .g-needs { display: inline-flex; flex-wrap: wrap; gap: .3rem; align-items: center; }
+    .g-needs i { font-style: normal; font-family: var(--mono); font-size: .64rem; letter-spacing: .05em; text-transform: uppercase; padding: .12rem .45rem; border-radius: 99px; border: 1px solid rgba(87, 227, 255, .4); color: var(--cy); }
+    .g-needs--big { font-family: var(--mono); font-size: .78rem; color: #6f8a96; }
+    .g-side { display: grid; gap: .6rem; }
+    .g-act { display: grid; gap: .2rem; text-align: left; padding: .85rem .95rem; border: 1px solid rgba(165, 183, 191, .22); border-radius: 10px; background: rgba(3, 8, 12, .5); color: #cfe3ea; transition: border-color .2s, background .2s; }
+    .g-act:hover { border-color: #7dffb0; background: rgba(125, 255, 176, .06); }
+    .g-act b { font-family: var(--mono); font-weight: 500; font-size: .84rem; color: #fff; }
+    .g-act span { font-size: .8rem; color: #8aa2ac; }
+    .g-act--recruit { border-color: var(--neon); background: rgba(255, 79, 216, .08); }
+    .g-act--recruit b { color: var(--neon); }
+    .g-last { font-family: var(--mono); font-size: .74rem; color: #6f8a96; }
+    @media (max-width: 860px) { .g-boardwrap { grid-template-columns: minmax(0, 1fr); } }
+    @media (max-width: 600px) { .g-board { grid-template-columns: minmax(0, 1fr); } }
+    .g-crew { display: grid; grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: .6rem; }
+    .g-mate { display: grid; gap: .2rem; text-align: left; padding: .8rem .9rem; border: 1px solid rgba(165, 183, 191, .25); border-radius: 10px; background: rgba(3, 8, 12, .5); color: #cfe3ea; transition: border-color .2s, background .2s; }
+    .g-mate b { color: #fff; font-size: 1rem; }
+    .g-mate__skill { font-family: var(--mono); font-size: .66rem; letter-spacing: .07em; text-transform: uppercase; color: var(--cy); }
+    .g-mate small { font-size: .74rem; color: #7d949e; }
+    .g-mate.is-needed { border-color: rgba(87, 227, 255, .55); }
+    .g-mate.is-needed .g-mate__skill::after { content: " · needed"; color: #7dffb0; }
+    .g-mate[aria-pressed="true"] { border-color: var(--neon); background: rgba(255, 79, 216, .14); box-shadow: 0 0 0 1px rgba(255, 79, 216, .4); }
+    .g-mate:disabled:not([aria-pressed="true"]) { opacity: .4; cursor: not-allowed; }
+    .g-mate:disabled[aria-pressed="true"] { cursor: default; }
+    .g-odds { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.25rem; padding: .9rem 1rem; border: 1px solid var(--g-line); border-radius: 10px; }
+    .g-odds__big b { display: block; font-family: var(--mono); font-weight: 500; font-size: 2rem; line-height: 1; color: #fff; }
+    .g-odds__big span { font-family: var(--mono); font-size: .64rem; letter-spacing: .07em; text-transform: uppercase; color: #6f8a96; }
+    .g-odds__note { flex: 1 1 18rem; color: #b9cdd5; font-size: .9rem; }
+    .g-twist { font-size: clamp(1.05rem, 1.7vw, 1.25rem); line-height: 1.45; color: #fff; padding-left: 1rem; border-left: 3px solid var(--neon); max-width: 60ch; }
+    .g-opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+    .g-opt { display: grid; gap: .3rem; text-align: left; padding: 1rem 1.05rem; border: 1px solid rgba(87, 227, 255, .35); border-radius: 12px; background: rgba(87, 227, 255, .04); color: #cfe3ea; transition: border-color .2s, background .2s, transform .2s; }
+    .g-opt:hover, .g-opt:focus-visible { border-color: var(--neon); background: rgba(255, 79, 216, .1); transform: translateY(-2px); }
+    .g-opt__k { font-family: var(--mono); font-size: .68rem; letter-spacing: .08em; color: var(--neon); }
+    .g-opt b { color: #fff; font-size: 1rem; font-weight: 550; }
+    .g-opt small { font-family: var(--mono); font-size: .7rem; color: #8aa2ac; }
+    @media (max-width: 600px) { .g-opts { grid-template-columns: minmax(0, 1fr); } }
+    .g-res { font-family: var(--mono) !important; font-stretch: 100% !important; letter-spacing: .08em !important; }
+    .g-res--win { color: #7dffb0 !important; text-shadow: 0 0 20px rgba(125, 255, 176, .45); }
+    .g-res--messy { color: #ffd166 !important; }
+    .g-res--fail { color: #ff5b6b !important; text-shadow: 0 0 20px rgba(255, 91, 107, .4); }
+    .g-payout { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .5rem; padding: .9rem 1rem; border: 1px solid var(--g-line); border-radius: 10px; }
+    .g-payout dt { font-family: var(--mono); font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; color: #6f8a96; }
+    .g-payout dd { font-family: var(--mono); font-size: .95rem; color: #fff; }
+    @media (max-width: 760px) { .g-payout { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .g-caption { margin-top: 1rem; max-width: 72ch; font-size: .9rem; }
   </style>
 </head>
 <body>
@@ -174,7 +287,7 @@
 
   <main id="main">
     <header class="phero">
-      <div class="plate plate--page plate--img" data-plate="image" data-src="/assets/img/squad.jpg" style="--plate-img:url(/assets/img/squad.jpg)" aria-hidden="true"></div>
+      <div class="plate plate--page plate--photo" style="--plate-img:url(/assets/img/squad.jpg);--plate-pos:center 22%" aria-hidden="true"></div>
       <div class="panel paper panel--lead">
         <div class="wrap panel__grid">
           <div>
@@ -183,7 +296,7 @@
           </div>
           <div class="panel__side">
             <p class="lede">Somewhere, a website is hiring. Fifteen years ago it was a black-market terminal passed between war veterans and career criminals. Today it pays better than your job, your degree and your landlord’s patience combined. Everybody uses it in secret. It is still illegal. And nobody knows who owns it.</p>
-            <div class="btn-row"><a class="btn" href="#job">Take the job</a> <a class="link" href="#cast">Meet the ABC Squad</a> <a class="link" href="#books">The books underneath it</a></div>
+            <div class="btn-row"><a class="btn" href="#job">Play the job board</a> <a class="link" href="#cast">Meet the ABC Squad</a> <a class="link" href="#books">The books underneath it</a></div>
           </div>
         </div>
       </div>
@@ -191,20 +304,14 @@
 
     <section class="sec sec--lead" id="job">
       <div class="wrap">
-        <div class="sq-term" data-rise>
-          <div class="sq-term__bar"><i></i><i></i><i></i><span>sidequest.onion · mainstream-illegal protocol v4.0</span></div>
-          <div class="sq-term__body" data-sq-term>
-            <p class="dim">&gt; connecting through the Cyber Realm…</p>
-            <p>&gt; 1 NEW JOB AVAILABLE · PAYS WELL · NO QUESTIONS</p>
-            <p>&gt; payout: <span class="hot">345 K.U.M.</span> <span class="dim">(≈ $3,500)</span> · reward: <span class="hot">+1000 XP</span> · type: CO-OP</p>
-            <p class="sq-caret">&gt; How about a Sidequest?</p>
-            <div class="sq-term__menu" role="group" aria-label="Your choice">
-              <button type="button" data-sq="start">START GAME</button>
-              <button type="button" data-sq="exit">EXIT</button>
-            </div>
-            <p class="sq-term__out" data-sq-out aria-live="polite"></p>
+        <div class="g" data-sq-game data-rise>
+          <div class="g__bar"><i></i><i></i><i></i><span>sidequest.onion · the job board</span></div>
+          <div class="g__hud" data-g-hud hidden></div>
+          <div class="g__body" data-g-body aria-live="polite">
+            <noscript><p class="g-line">The job board needs JavaScript to play.</p></noscript>
           </div>
         </div>
+        <p class="muted g-caption" data-rise>A mini game set in the world of Sidequest. Play Adam’s Episode 1 objective: turn $8,000 into $50,000 in three weeks without getting caught. Your progress saves in this browser.</p>
         <div class="facts" data-rise>
           <div><strong>$15T</strong><span>in-world shadow economy, with no flag, no taxes and no borders</span></div>
           <div><strong>15 yrs</strong><span>between the prologue and the present day</span></div>
@@ -260,15 +367,20 @@
     <section class="sec" id="rules">
       <div class="wrap">
         <div class="head" data-rise>
-          <div><p class="eyebrow">How the game works</p><h2>A $15 trillion economy needs rules.</h2></div>
-          <p class="lede">A market that size can’t be a lawless void. It has currency, ranking, dispatch and enforcement. Somebody writes the code. As the in-world broadcast puts it, no one knows who’s really in control.</p>
+          <div><p class="eyebrow">How Sidequest works</p><h2>A $15 trillion economy needs rules.</h2></div>
+          <p class="lede">A market that size can’t be a lawless void. It has onboarding, currency, ranking, dispatch, escrow and enforcement. It looks like a video game on purpose. Somebody writes the code, and as the in-world broadcast puts it, no one knows who’s really in control.</p>
         </div>
-        <div class="sq-sys" data-rise>
-          <div><p class="k">Currency</p><h3>K.U.M.</h3><p>A zero-trace currency native to the Cyber Realm, held in escrow until the job is verified.</p></div>
-          <div><p class="k">Progression</p><h3>XP &amp; five-star rep</h3><p>The new résumé. A five-star profile unlocks elite brokers and earns more respect than a degree.</p></div>
-          <div><p class="k">Dispatch</p><h3>Brokers &amp; the Mystery Box</h3><p>Filter contracts yourself, or spin the randomizer for a high-payout co-op job and take what you get.</p></div>
-          <div><p class="k">Governance</p><h3>Ordered anarchy</h3><p>Unseen admins take a cut of every job and enforce strict rules of engagement. Their names are a secret.</p></div>
-        </div>
+        <ol class="sq-steps" data-rise>
+          <li><span class="sq-steps__n">01</span><h3>The invite</h3><p>Nobody finds Sidequest by accident. A friend sends a link, and it only opens in an encrypted Cyber Realm browser. Fifteen years ago the invite was a man in a camel coat. Now it’s a group chat.</p></li>
+          <li><span class="sq-steps__n">02</span><h3>The Quest Broker</h3><p>A holographic broker snaps his fingers and says <em>“Welcome, New User.”</em> Your HUD boots up: a mission log, a rating and an XP bar over your actual life.</p></li>
+          <li><span class="sq-steps__n">03</span><h3>The contract</h3><p>Browse jobs by pay, tier and skill, from finding a lost pet to things nobody writes down. Or hit the <strong>Mystery Box</strong>: a randomized job with a bigger payout, where you don’t see the details until you’ve committed.</p></li>
+          <li><span class="sq-steps__n">04</span><h3>The crew</h3><p>The best-paying jobs are <strong>Co-Op</strong>. They need a driver, a hacker, a locksmith or muscle. Everyone takes a cut. That’s why an old prank crew suddenly looks like a business plan.</p></li>
+          <li><span class="sq-steps__n">05</span><h3>Escrow</h3><p>The client pays in <strong>K.U.M.</strong> (Knox Ugwu Monetaries), a zero-trace currency. The platform holds it in escrow until the job is verified. 345 K.U.M. is about $3,500. Fail the job and the escrow freezes.</p></li>
+          <li><span class="sq-steps__n">06</span><h3>The rating</h3><p>Every job ends in stars and XP, scaled by an AI difficulty score. A five-star profile unlocks elite brokers and bigger contracts, and earns more respect than a university degree. It is the new résumé.</p></li>
+          <li><span class="sq-steps__n">07</span><h3>The rules of engagement</h3><p>Unseen admins take a tiny cut of every transaction and enforce strict rules. Scammers get banned. Disputes get settled. It’s ordered anarchy, and it runs better than most governments.</p></li>
+          <li><span class="sq-steps__n">08</span><h3>The heat</h3><p>It’s still illegal. FBI Team 4B is chasing the network with half the staff it needs. Every job adds a little attention, and nobody knows exactly where the line is until someone knocks.</p></li>
+        </ol>
+        <p data-rise style="margin-top:2rem"><a class="btn btn--quiet" href="#job">Try it on the job board</a></p>
       </div>
     </section>
 
@@ -525,6 +637,7 @@
 
   <script src="/js/site.js?v=f33a251105" defer></script>
   <script src="/js/widgets.js?v=a40a52a584" defer></script>
+  <script src="/js/sidequest-game.js?v=a530e01a9d" defer></script>
   <script src="/js/sidequest.js?v=3d1d5fda8d" defer></script>
 </body>
 </html>
