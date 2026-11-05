@@ -40,10 +40,12 @@ co-author or contributor anywhere in this repository's history or on GitHub.
   `public/css/site.css` or a script in `public/js/`, bump its `?v=` stamp in
   every page that loads it.
 - Contact form tests: `node tests/contact.test.mjs`.
-- The home headline is "Don't just watch. Step inside." with the line "We make
-  interactive films, VR tours and the free software behind them. Next up: the
-  Experience Machine." The motto "Sprinting the Marathon of Tomorrow." stays on
-  the home page.
+- The brand line and home headline is "Reality, made interactive." (we film real
+  people and real places, then let you step inside and choose). The motto
+  "Sprinting the Marathon of Tomorrow." stays on the home page.
+- The site is organised by audience: For Business (/services, /start), fans
+  (/work/, /interest), filmmakers (/filmmakers), investors (/investors). Keep
+  the home page's "Start where you are" block pointing at those.
 - The Experience Machine is the goal and is in development. Never present it
   (or splats, AI restyling, the reality switch, web/phone playback, Insights)
   as finished. Live today: Pure Alacrity, Alacrity Player on Quest, Right Here
