@@ -1072,3 +1072,23 @@ a.path-card .link { margin-top: auto; }
 .pillars__motto { margin-top: 2rem; max-width: 62ch; }
 @media (max-width: 1023px) { .pillars { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 520px) { .pillars { grid-template-columns: minmax(0, 1fr); } }
+/* Pure tour */
+.ptour { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 1.25rem; align-items: start; }
+.ptour__tabs { display: grid; gap: .5rem; }
+.ptour__tabs button { display: grid; gap: .2rem; text-align: left; padding: .9rem 1rem; border: 1px solid var(--line); border-radius: 12px; color: var(--ink-2); transition: border-color .2s, background .2s; }
+.ptour__tabs button b { font-family: var(--display); font-weight: 560; font-size: 1.02rem; color: var(--ink); }
+.ptour__tabs button span { font-size: .88rem; line-height: 1.45; }
+.ptour__tabs button:hover { border-color: rgba(0, 194, 255, .4); }
+.ptour__tabs button[aria-selected="true"] { border-color: rgba(140, 110, 255, .6); background: linear-gradient(90deg, rgba(120, 90, 255, .14), rgba(0, 194, 255, .06)); }
+.ptour__shot { position: sticky; top: calc(var(--nav-h) + 1rem); margin: 0; padding: clamp(.75rem, 1.6vw, 1.25rem); border-radius: 20px; background: radial-gradient(120% 90% at 30% 0%, rgba(150, 120, 255, .35), rgba(0, 194, 255, .18) 55%, rgba(10, 21, 28, .6)); border: 1px solid rgba(150, 130, 255, .35); }
+.ptour__shot img { width: 100%; height: auto; border-radius: 14px; }
+.ptour__shot figcaption { margin-top: .7rem; font-size: .82rem; color: var(--ink-3); }
+.ptour__shot figcaption a { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 1023px) { .ptour { grid-template-columns: minmax(0, 1fr); } .ptour__shot { position: static; order: -1; } .ptour__tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .ptour__tabs { grid-template-columns: minmax(0, 1fr); } .ptour__tabs button span { display: none; } .ptour__tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.pfeat { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem 2rem; margin-top: 2rem; }
+.pfeat > div { padding-top: 1rem; border-top: 1px solid var(--line-2); }
+.pfeat h3 { font-size: 1.05rem; margin-bottom: .4rem; }
+.pfeat p { color: var(--ink-2); font-size: .92rem; }
+@media (max-width: 1023px) { .pfeat { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .pfeat { grid-template-columns: minmax(0, 1fr); } }

@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Geist+Mono:wght@400;500&display=swap"/>
-  <link rel="stylesheet" href="/css/site.css?v=4c96e10d3c"/>
+  <link rel="stylesheet" href="/css/site.css?v=330b998ba3"/>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -80,19 +80,28 @@
 
     <section class="sec" id="pure">
       <div class="wrap">
-        <div class="beside" data-rise>
-          <div>
-            <p class="eyebrow"><span class="st st--on">Live · free</span> Pure Alacrity</p>
-            <h2>One production. One record. Free forever.</h2>
-            <div class="prose" style="margin-top:1.25rem">
-              <p>Script, story graph, breakdown, stripboard, schedule, budget, call sheets and on-set logs, all reading the same production, so the numbers agree everywhere. No account needed, and it works with no internet. It has run real productions since March 2026.</p>
-              <p>For interactive work, the branch map <em>is</em> the stripboard: every choice the audience can make is costed and scheduled like any other scene.</p>
-              <p><strong>The rule:</strong> nothing a filmmaker already uses for free will ever move behind a paywall. Paid storage, services and live support come later, for productions that grow.</p>
-            </div>
-            <div class="btn-row" style="margin-top:1.5rem"><a class="btn" href="https://dcalacrity.com/pure">Open Pure Alacrity</a> <a class="link" href="https://dcalacrity.com/pure/demo.html">Watch the demo</a></div>
-          </div>
-          <div class="screen"><img src="/assets/screens/script-editor.jpg" alt="Pure Alacrity’s Script Studio with a formatted screenplay page" width="1440" height="900" loading="lazy" decoding="async"></div>
+        <div class="head" data-rise>
+          <div><p class="eyebrow"><span class="st st--on">Live · free</span> Pure Alacrity</p><h2>Every film is a storm. Pure is the eye.</h2></div>
+          <p class="lede">Script, departments, schedule and spend in one clear place, so the bigger the production gets, the calmer it feels. Nothing a filmmaker uses for free will ever move behind a paywall.</p>
         </div>
+        <div class="ptour" data-rise>
+          <div class="ptour__tabs" role="tablist" aria-label="Inside Pure Alacrity">
+            <button type="button" role="tab" aria-selected="true" data-shot="today"><b>Today</b><span>The one thing that needs you, and a readiness score for tomorrow.</span></button>
+            <button type="button" role="tab" aria-selected="false" data-shot="schedule" tabindex="-1"><b>Schedule</b><span>The whole shoot on one board, with suggestions that save a company move.</span></button>
+            <button type="button" role="tab" aria-selected="false" data-shot="live" tabindex="-1"><b>Live room</b><span>Every setup, take and call from the set, on everyone’s phone.</span></button>
+            <button type="button" role="tab" aria-selected="false" data-shot="script" tabindex="-1"><b>Script</b><span>One version every department sees the moment it’s saved.</span></button>
+            <button type="button" role="tab" aria-selected="false" data-shot="messages" tabindex="-1"><b>Messages</b><span>A channel for every department, next to the work it’s about.</span></button>
+            <button type="button" role="tab" aria-selected="false" data-shot="creators" tabindex="-1"><b>Channel Studio</b><span>For YouTube creators: plan the next video with your channel’s own numbers.</span></button>
+          </div>
+          <figure class="ptour__shot"><img src="/assets/screens/pure-today.jpg" alt="Pure Alacrity Today: the one thing that needs you and a readiness score of 82" width="1274" height="1040" loading="lazy" decoding="async" data-shot-img><figcaption>Example production shown. <a href="https://dcalacrity.com/pure">Open the real thing, free</a>.</figcaption></figure>
+        </div>
+        <div class="pfeat" data-rise>
+          <div><h3>Smart, quietly</h3><p>Pure reads your production and points at what matters: the one thing that needs you, readiness checks with owners, project health, schedule moves that save a day, and what a changed edit affects.</p></div>
+          <div><h3>Set up around you</h3><p>Tell it what you make and what you do. With 54 film jobs to choose from, it shows your tools in the order you’ll use them, with film words explained if you’re new.</p></div>
+          <div><h3>The whole production</h3><p>155 tools across eight stages, from story to plan, set, post, delivery and business, all reading the same production.</p></div>
+          <div><h3>Your work is yours</h3><p>No account needed. It stays on your device and works offline. You decide what leaves it, and you own everything you make.</p></div>
+        </div>
+        <div class="btn-row" data-rise style="margin-top:1.75rem"><a class="btn" href="https://dcalacrity.com/pure">Open Pure Alacrity</a> <a class="link" href="https://dcalacrity.com/pure/design">Explore every module</a></div>
       </div>
     </section>
 
@@ -103,7 +112,7 @@
           <p class="lede">Each of these is being built now. Get on the list for the ones you want and we’ll tell you when they open.</p>
         </div>
         <div class="branches branches--3" data-rise>
-          <a class="branch" href="/interest?project=channels"><span class="st">Beta soon · free</span><b>Production channels</b><span>#general, #client and a channel per department, wired to the schedule. Move a scene and Pure tells the people it affects.</span></a>
+          <a class="branch" href="/interest?project=channels"><span class="st">Expanding · free</span><b>Channels, wired to the schedule</b><span>Move a scene and Pure tells exactly the people it affects, in the channels where they already talk.</span></a>
           <a class="branch" href="/start?service=storage"><span class="st">Coming soon</span><b>Storage, review &amp; live support</b><span>Dailies and review copies linked to the scenes and takes they belong to, with real people on call on shoot days.</span></a>
           <a class="branch" href="/interest?project=artdept"><span class="st">Prototype in development</span><b>Pure Art Department</b><span>Scan a set, dress it at true scale before anyone builds, and send every decision into the budget.</span></a>
         </div>
@@ -207,5 +216,6 @@
 
   <script src="/js/site.js?v=f33a251105" defer></script>
   <script src="/js/widgets.js?v=a40a52a584" defer></script>
+  <script src="/js/ptour.js?v=553478d03b" defer></script>
 </body>
 </html>
