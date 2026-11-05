@@ -33,11 +33,11 @@
   var CATALOG = [
     /* Business experiences: turnkey production + annual Player & Insights plan */
     {
-      id: "spaces", group: "experiences", name: "Alacrity Spaces", kicker: "Real estate & venues",
-      line: "Walk the house. Pick the room.",
-      blurb: "Live-action VR walkthroughs where the viewer chooses which door to go through. It looks like the real place, with real light and real people, not a grey 3D dollhouse.",
-      gets: ["8K–11K VR180/360 capture at every room position", "Branching navigation: buyers choose the room", "Optional drone exterior and LiDAR floor plan", "Plays on a Quest now; listing link and phone from early 2027", "A lead score for every viewer: rooms visited, time spent, replays"],
-      next: NEXT_BUSINESS, cta: "Request my walkthrough", topic: "For Business: Alacrity Spaces",
+      id: "spaces", group: "experiences", name: "Alacrity Spaces · Full-Stack", kicker: "Real estate & developers · available now",
+      line: "Walk the home. Redesign it. Flip back to the real one.",
+      blurb: "One capture day for a listing, a model home or a development: a 2D film, drone footage, a LiDAR-measured twin and a branching VR tour where buyers choose the room. Our crew shoots it and plans it in Pure.",
+      gets: ["A 2D listing film and drone footage", "A LiDAR-measured floor plan and twin", "A branching live-action VR tour: buyers choose the room", "Plays on Meta Quest now; web and phone playback in development", "AI restaging (always labeled), photoreal splat twin and buyer lead scores: in development, delivered with our first clients"],
+      next: NEXT_BUSINESS, cta: "Request my Full-Stack shoot", topic: "For Business: Alacrity Spaces (Full-Stack)",
       fields: [
         { id: "propertyType", label: "What kind of property?", type: "chips", required: true, options: ["Residential listing", "Luxury home", "Commercial / office", "Event venue", "Hotel or short-term rental", "Campus / admissions", "Something else"] },
         { id: "volume", label: "How many properties?", type: "chips", required: true, options: ["One, to start", "2–5", "6–15 a month", "More than 15 a month"] },
@@ -49,7 +49,7 @@
       budget: ["Under $2,500", "$2,500–$5,000", "$5,000–$15,000", "$15,000+", "Not sure yet"]
     },
     {
-      id: "training", group: "experiences", name: "Alacrity Training", kicker: "Industrial, maritime & onboarding",
+      id: "training", group: "pilots", soon: "2027", statusLabel: "In development · pilots 2027", name: "Alacrity Training", waitTitle: "Tell us about the pilot you have in mind.", cta: "Join the pilot list", kicker: "Industrial, maritime & onboarding",
       line: "Practice the risky decision safely.",
       blurb: "Branching, filmed scenarios where trainees make the call at each decision point and see what happens. You get a record of every choice, not just a completion tick.",
       gets: ["A filmed scenario with real decision points and outcomes", "Quest builds now; browser and phone from early 2027", "A decision record for each trainee", "Completion records you can use for compliance", "Content updates every year under the site license"],
@@ -65,13 +65,13 @@
       budget: ["Under $10,000", "$10,000–$25,000", "$25,000–$50,000", "$50,000+", "Not sure yet"]
     },
     {
-      id: "destinations", group: "experiences", name: "Alacrity Destinations", kicker: "Tourism, museums & events",
-      line: "Visit the place before you go.",
-      blurb: "Step-inside previews of places and exhibits, where the visitor chooses where to go next. For tourism boards, museums, attractions, venues and brand activations.",
+      id: "destinations", group: "pilots", soon: "2027", statusLabel: "In development · pilots 2027", name: "Vendors, venues & destinations", waitTitle: "Tell us about the pilot you have in mind.", cta: "Join the pilot list", kicker: "Factories, hospitality, tourism",
+      line: "Inspect the plant, walk the ballroom, visit before you go.",
+      blurb: "A buyer abroad inspects a supplier’s plant with the real line running. A planner walks the ballroom before booking. A visitor steps into a place before the trip. Measured, filmed and provably real.",
       gets: ["Filmed, explorable places and exhibits", "Guided stories with choices, or free exploration", "Kiosk, trade-show, website and phone versions", "Visitor data: where people went and what they replayed", "Seasonal updates under the annual plan"],
       next: NEXT_BUSINESS, cta: "Plan my destination experience", topic: "For Business: Alacrity Destinations",
       fields: [
-        { id: "orgType", label: "You are a…", type: "chips", required: true, options: ["Tourism board / CVB", "Museum or gallery", "Attraction", "Venue or event", "Brand activation", "University / admissions", "Other"] },
+        { id: "orgType", label: "You are a…", type: "chips", required: true, options: ["Manufacturer / supplier", "Hotel or venue", "Tourism board / CVB", "Museum or attraction", "University / admissions", "Other"] },
         { id: "experience", label: "What kind of experience?", type: "chips", required: true, options: ["Walk through a place", "A guided story with choices", "An exhibit companion", "An event or activation", "Not sure yet"] },
         { id: "stops", label: "How many locations or stops?", type: "chips", options: ["1", "2–5", "6–12", "More than 12"] },
         { id: "where", label: "Where will people experience it?", type: "multi", options: ["Headsets on site", "Our website", "Trade shows", "Phones / social"] },
@@ -80,14 +80,14 @@
       budget: ["Under $10,000", "$10,000–$25,000", "$25,000–$60,000", "$60,000+", "Not sure yet"]
     },
     {
-      id: "celebrations", group: "experiences", name: "Alacrity Celebrations", kicker: "Weddings & personal events",
-      line: "Relive the day from inside it.",
+      id: "celebrations", group: "experiences", name: "Live events & celebrations", kicker: "VR180 · on request",
+      line: "Concerts, games, festivals and the big day, from inside.",
       blurb: "Your wedding or milestone, captured so you can step back into the room years from now. You choose which moment to go to: the vows, the first dance, the speeches.",
       gets: ["VR180/360 capture of the moments you pick", "A menu so you choose which moment to relive", "A private link for phones and browsers (from early 2027)", "Optional headset keepsake for the family", "Spatial audio, so you hear the room as it was"],
       next: ["We reply within two business days.", "A short call about the day and the venue.", "A written estimate. Your date is held once you approve it.", "A walkthrough of the venue and the shot plan.", "Your experience is delivered as a private link."],
       cta: "Hold my date", topic: "For Business: Alacrity Celebrations",
       fields: [
-        { id: "eventType", label: "What are we celebrating?", type: "chips", required: true, options: ["Wedding", "Quinceañera / sweet 16", "Anniversary", "Graduation", "Family reunion", "Memorial", "Other"] },
+        { id: "eventType", label: "What’s the event?", type: "chips", required: true, options: ["Concert", "Festival", "Game / sports", "Wedding", "Graduation", "Other celebration"] },
         { id: "date", label: "Event date", type: "date", required: true },
         { id: "venue", label: "Venue and city", type: "text", required: true, placeholder: "e.g. Airlie Gardens, Wilmington" },
         { id: "guests", label: "Guests", type: "chips", options: ["Under 50", "50–150", "150+"] },
@@ -160,6 +160,10 @@
     },
 
     /* Coming soon: greyed out, waitlist only */
+    { id: "channels", group: "soon", soon: "Q4 2026 beta", statusLabel: "In development · beta Q4 2026", name: "Pure channels", kicker: "Pure Alacrity · free", line: "Your production’s chat, wired to the schedule.", blurb: "Every production gets #general, #client and a channel per department, with crew added from the call sheet. Move a scene and Pure tells the people it affects. Free, like the rest of Pure’s core.", topic: "Waitlist: Pure channels beta", waitQ: { id: "size", label: "Your typical crew size", options: ["Under 10", "10–30", "30–100", "100+"] } },
+    { id: "certified", group: "soon", soon: "2027", statusLabel: "In development · 2027", name: "Alacrity Certified crews", kicker: "Camera operators & Part 107 pilots", line: "Learn the capture spec. Get booked in your city.", blurb: "Local operators learn our capture spec, pass a paid test shoot and get booked for Experience Machine jobs through Pure, with Wilmington producers approving each position live. Raleigh and Charlotte first.", topic: "Waitlist: Alacrity Certified crews", waitQ: { id: "city", label: "Your city", options: ["Wilmington", "Raleigh / Triangle", "Charlotte", "Atlanta", "Los Angeles", "New York", "Somewhere else"] } },
+    { id: "artdept", group: "soon", soon: "2027 prototype", statusLabel: "In development · prototype 2027", name: "Pure Art Department", kicker: "For studio art departments", line: "Dress the scanned set before anyone builds.", blurb: "Scan a location, dress it at true scale with real catalog pieces and AI concepts, walk it in a headset, and send every approved item straight into the budget and breakdown.", topic: "Waitlist: Pure Art Department", waitQ: { id: "role", label: "Your role", options: ["Production designer", "Art director", "Set decorator", "Location manager", "Producer", "Other"] } },
+    { id: "commerce", group: "soon", soon: "2028", statusLabel: "In development · 2028", name: "Art, decor & commerce", kicker: "Galleries, furniture, brands", line: "See the real thing, at true scale, in your own room.", blurb: "A collector sees the real painting on their own wall; a shopper places real products in their measured room. Needs phone self-capture, so it opens in 2028 through one gallery or brand partner.", topic: "Waitlist: Art, decor & commerce", waitQ: { id: "kind", label: "You are a…", options: ["Gallery or artist", "Furniture / decor brand", "Retailer", "Other"] } },
     { id: "storage", group: "soon", soon: "Q1 2027", name: "Pure Storage", kicker: "Pure Alacrity", line: "Footage, dailies and review copies inside the production.", blurb: "Cloud storage linked to the scenes and takes it belongs to, from 1 TB to 20 TB, with archive tiers for wrapped productions. The software itself stays free.", topic: "Waitlist: Pure Storage", waitQ: { id: "size", label: "How much footage per production?", options: ["Under 1 TB", "1–5 TB", "5–20 TB", "20 TB+"] } },
     { id: "swas", group: "soon", soon: "Q1 2027", name: "Services through Pure", kicker: "Pure Alacrity", line: "Our team does the work inside your production.", blurb: "Producer and production management, schedule and budget builds, post and deliverables supervision, and interactive story and VR consulting, delivered inside Pure.", topic: "Waitlist: Services through Pure", waitQ: { id: "service", label: "Which service?", options: ["Production management", "Schedule & budget", "Post supervision", "Interactive / VR consulting"] } },
     { id: "support", group: "soon", soon: "Q1 2027", name: "Live support", kicker: "Pure Alacrity", line: "Real people on call, including shoot days.", blurb: "Real-time help from people who run sets, with a guaranteed response on shoot days.", topic: "Waitlist: Live support", waitQ: { id: "shootDays", label: "Shoot days a year", options: ["Under 10", "10–30", "30–100", "100+"] } },
@@ -168,29 +172,104 @@
     { id: "studio", group: "soon", soon: "2027", name: "Studio & Enterprise", kicker: "Pure Alacrity", line: "Every production, one dashboard.", blurb: "Multi-production dashboards, production benchmarks, SSO, SLA support and security reviews, with storage bundled.", topic: "Waitlist: Studio & Enterprise", waitQ: { id: "productions", label: "Productions a year", options: ["1–5", "6–20", "20+"] } },
     { id: "education", group: "soon", soon: "2027", name: "Education license", kicker: "Film programs", line: "Students use Pure free. Programs get the rest.", blurb: "Bundled storage, live support and instructor dashboards for film programs. Students use Pure Alacrity free regardless.", topic: "Waitlist: Education license", waitQ: { id: "students", label: "Students in the program", options: ["Under 50", "50–200", "200+"] } },
     { id: "publishing", group: "soon", soon: "2027", name: "Alacrity Publishing", kicker: "For creators on Player", line: "Release your story under our label.", blurb: "Build on Pure and Player, and we handle store submission, porting and marketing for a revenue share.", topic: "Waitlist: Alacrity Publishing", waitQ: { id: "stage", label: "Where is your project?", options: ["An idea", "Script written", "Shot", "Ready to release"] } },
-    { id: "pass", group: "soon", soon: "2027", name: "Alacrity Pass", kicker: "Quest & phones", line: "Every live-action interactive story, one app.", blurb: "One subscription for our originals and third-party stories built on Player, on Meta Quest and phones.", topic: "Waitlist: Alacrity Pass", waitQ: { id: "device", label: "Where would you watch?", options: ["Meta Quest", "Phone", "Both"] } }
+    { id: "pass", group: "soon", soon: "Q3 2027", name: "Alacrity Pass", kicker: "Quest & phones", line: "Every live-action interactive story, one app.", blurb: "One subscription for our originals and third-party stories built on Player, on Meta Quest and phones.", topic: "Waitlist: Alacrity Pass", waitQ: { id: "device", label: "Where would you watch?", options: ["Meta Quest", "Phone", "Both"] } }
   ];
 
   var GROUPS = [
-    { id: "experiences", title: "Business experiences", note: "We make it, then a yearly plan keeps it live, updated and measured." },
+    { id: "experiences", title: "Available now", note: "Booking in Wilmington and across North Carolina." },
+    { id: "pilots", title: "In development · pilots 2027", note: "Not open yet. Tell us about your project and we’ll talk when pilots open." },
     { id: "production", title: "Production & creative", note: "Available now." },
     { id: "network", title: "Join the network", note: "Open now." },
     { id: "soon", title: "Coming soon", note: "Not open yet. Join the waitlist and we’ll email you once, when it opens." }
   ];
+
+  /* ── the interest list (/interest): upcoming projects, same engine ───── */
+  var ROLE = function (opts) { return { id: "role", label: "Which best describes you?", type: "chips", required: true, options: opts }; };
+  var NOTE = { id: "note", label: "Anything you’d like us to know? (optional)", type: "textarea", placeholder: "What drew you to it, how you’d like to be involved, links." };
+  var FANS = ["Fan / viewer", "Investor", "Partner or sponsor", "Press", "Cast or crew", "Studio or distributor"];
+  var INTEREST = [
+    { id: "prizepool", group: "originals", soon: "pre-production", statusLabel: "Pre-production · shoot target Q2 2027", name: "Prize Pool VR", kicker: "Flagship original", line: "A million-dollar campus water-gun game. Two lives to step into.",
+      blurb: "A branching live-action VR180 thriller and the launch title for Alacrity Pass. It is the first original made start to finish on our own engine, and the stress test for every new tool.", topic: "Interest list: Prize Pool VR", after: ["Explore Prize Pool VR", "/work/prize-pool"],
+      waitFields: [ROLE(FANS), { id: "want", label: "What do you want to hear about?", type: "multi", options: ["Release date", "Trailer and first look", "Casting calls", "Crew calls", "Investment", "Sponsorship"] }, NOTE] },
+    { id: "sidequest", group: "originals", soon: "in post", statusLabel: "Season 1 Part 1 · in post", name: "Sidequest", kicker: "Crime dramedy series", line: "Somewhere, a website is hiring.",
+      blurb: "The series that started it all. Season 1 Part 1 is in post-production, with a world written to grow into choose-your-path episodes, VR missions and more.", topic: "Interest list: Sidequest", after: ["Play the job board", "/work/sidequest#job"],
+      waitFields: [ROLE(FANS), { id: "want", label: "What do you want to hear about?", type: "multi", options: ["Season 1 Part 1 release", "Choose-your-path episodes", "VR squad missions", "Investment", "Distribution"] }, NOTE] },
+    { id: "wilmy", group: "originals", soon: "in production", statusLabel: "In production", name: "Welcome to Wilmy", kicker: "Documentary", line: "Surf and beach culture on the Cape Fear coast.",
+      blurb: "A portrait of the Wilmington coast and the people who make it what it is, shot under a City of Wilmington permit.", topic: "Interest list: Welcome to Wilmy", after: ["About Welcome to Wilmy", "/work/welcome-to-wilmy"],
+      waitFields: [ROLE(["Fan / viewer", "Local business", "Tourism partner", "Sponsor", "Press", "Want to be featured"]), NOTE] },
+
+    { id: "pass", group: "branches", soon: "Q3 2027", statusLabel: "In development · target Q3 2027", name: "Alacrity Pass", kicker: "Meta Quest & phones", line: "Every live-action interactive story, one app.",
+      blurb: "One subscription for our originals and partner titles built on Alacrity Player: Prize Pool VR, Right Here Right Now! and what comes next. On Quest and phones.", topic: "Interest list: Alacrity Pass",
+      waitFields: [ROLE(["Viewer", "Filmmaker with a title", "Studio or distributor", "Investor", "Press"]), { id: "device", label: "Where would you watch?", type: "chips", options: ["Meta Quest", "Phone", "Both", "Another headset"] }, NOTE] },
+    { id: "walkable", group: "branches", soon: "pilot", statusLabel: "In development · pilot on Prize Pool VR", name: "Walkable movie sets", kicker: "For studios and fans", line: "Step into the world of the film between scenes.",
+      blurb: "We scan a production’s sets and locations with LiDAR and splats so fans can walk the world of the film. A marketing product for studios, piloting on Prize Pool VR’s sets.", topic: "Interest list: Walkable movie sets",
+      waitFields: [ROLE(["Studio or producer", "Marketing / distribution", "Fan", "Investor", "Press"]), NOTE] },
+    { id: "venues", group: "branches", soon: "2027 tests", statusLabel: "In development · tests in 2027", name: "VR venue stories", kicker: "Arcades & location-based VR", line: "A group votes. The story changes.",
+      blurb: "15–20 minute live-action branching stories where a whole group votes on the choices, licensed to VR arcades and venues. Testing with one or two operators in 2027.", topic: "Interest list: VR venue licensing",
+      waitFields: [ROLE(["VR venue or arcade operator", "Investor", "Filmmaker", "Press", "Player"]), NOTE] },
+    { id: "creatoreps", group: "branches", soon: "2027", statusLabel: "In development · 2027", name: "Creator episodes", kicker: "YouTube creators", line: "Choose-your-path episodes your audience plays.",
+      blurb: "Interactive episodes hosted on Alacrity Player for creators moving to long-form, with data on which choices viewers made, including sponsor moments.", topic: "Interest list: Creator episodes", after: ["Apply to the creator seed program", "/start?service=creators"],
+      waitFields: [ROLE(["Creator", "Brand or sponsor", "Viewer", "Investor"]), { id: "channel", label: "Your channel (optional)", type: "url", placeholder: "https://youtube.com/@…" }, NOTE] },
+
+    { id: "machine", group: "platform", soon: "in development", statusLabel: "In development · first build Nov 2026–Jan 2027", name: "The Experience Machine app", kicker: "Meta Quest & phones", line: "Step inside. Change it. Know what’s real.",
+      blurb: "The flagship: featured real places, create-with-AI tools and the reality switch, on the Meta store and phones. The first end-to-end build is underway now; the store launch target is Q2 2027.", topic: "Interest list: The Experience Machine app", after: ["How it works", "/technology#machine"],
+      waitFields: [ROLE(["Curious viewer", "Real estate / developer", "Employer or trainer", "Vendor or manufacturer", "Investor", "Press"]), NOTE] },
+    { id: "channels", group: "platform", soon: "Q4 2026 beta", statusLabel: "In development · beta Q4 2026", name: "Pure channels beta", kicker: "Free in Pure Alacrity", line: "Your production’s chat, wired to the schedule.",
+      blurb: "Every production gets #general, #client and a channel per department. Move a scene and Pure tells the people it affects. Free, like the rest of Pure’s core.", topic: "Interest list: Pure channels beta", after: ["Open Pure Alacrity", "https://dcalacrity.com/pure"],
+      waitFields: [ROLE(["Producer", "Director", "Department head", "Crew", "Student", "Film program"]), { id: "size", label: "Typical crew size", type: "chips", options: ["Under 10", "10–30", "30–100", "100+"] }, NOTE] },
+    { id: "certified", group: "platform", soon: "2027", statusLabel: "In development · 2027", name: "Alacrity Certified crews", kicker: "Camera operators & Part 107 pilots", line: "Learn the capture spec. Get booked in your city.",
+      blurb: "Local operators learn our capture spec, pass a paid test shoot, and get booked for Experience Machine jobs through Pure. Raleigh and Charlotte first, then Atlanta, LA and New York.", topic: "Interest list: Alacrity Certified crews", after: ["Join the bench now", "/start?service=crew"],
+      waitFields: [ROLE(["Camera operator", "Drone / LiDAR pilot", "360 / VR specialist", "Editor", "Production company"]), { id: "city", label: "Your city", type: "chips", options: ["Wilmington", "Raleigh / Triangle", "Charlotte", "Atlanta", "Los Angeles", "New York", "Elsewhere"] }, NOTE] },
+    { id: "artdept", group: "platform", soon: "2027 prototype", statusLabel: "In development · prototype 2027", name: "Pure Art Department", kicker: "For studio art departments", line: "Dress the scanned set before anyone builds.",
+      blurb: "Scan a location, dress it at true scale with real catalog pieces and AI concepts, walk it in a headset, and send every approved item straight into the budget.", topic: "Interest list: Pure Art Department",
+      waitFields: [ROLE(["Production designer", "Art director", "Set decorator", "Location manager", "Producer", "Studio"]), NOTE] },
+    { id: "lab", group: "platform", soon: "planned", statusLabel: "Planned with UNCW", name: "Alacrity Lab", kicker: "Research", line: "Where the next medium gets built.",
+      blurb: "Planned research with UNCW faculty on live-action VR synchronized to real props, so you reach for the valve in the footage and your hand finds a real one.", topic: "Interest list: Alacrity Lab",
+      waitFields: [ROLE(["Researcher", "Educator", "Student", "Training partner", "Funder"]), NOTE] },
+
+    { id: "investors", group: "company", soon: "monthly", statusLabel: "Monthly investor update", name: "Investor updates", kicker: "Pre-seed · Wilmington, NC", line: "Real numbers, every month.",
+      blurb: "A short monthly update: jobs delivered, Pure adoption, the Experience Machine build and the slate. For angels, funds and accelerators.", topic: "Interest list: Investor updates", cta: "Get the updates",
+      waitFields: [ROLE(["Angel", "Fund", "Accelerator", "Strategic partner", "Advisor"]), { id: "layer", label: "Most interested in", type: "multi", options: ["The Experience Machine", "Pure Alacrity", "Film & media", "All of it"] }, NOTE] }
+  ];
+  var INTEREST_GROUPS = [
+    { id: "originals", title: "Alacrity Originals", note: "Our own titles: the lab and the showroom." },
+    { id: "branches", title: "Entertainment branches", note: "New ways our films reach people." },
+    { id: "platform", title: "The platform", note: "What we’re building next." },
+    { id: "company", title: "The company", note: "For investors and partners." }
+  ];
+  var interest = root.getAttribute("data-funnel") === "interest";
+  var MODE = interest ? {
+    key: "dca-interest-v1", param: "project", path: "/interest", firstStep: "Project", waitStep: "Your interest",
+    pickTitle: "What do you want to follow?", pickLine: "Pick a project. We’ll only email you when there’s real news about it: a date, a trailer, a beta, a casting call.",
+    tileGo: "Get on the list", waitTitle: "Tell us what you’re after.", composeKey: "INTEREST", composeTag: "INTEREST LIST",
+    sideSoon: "Get on the list and we’ll email you when there’s real news. No newsletter you didn’t ask for.", sideLink: ["See what’s live today", "/technology"],
+    youLine: function (svc) { return "We’ll email you about " + svc.name + " when there’s real news."; },
+    doneHead: "You’re on the list.", doneLine: function (svc) { return svc.name + ": " + svc.statusLabel.toLowerCase() + ". We’ll email you when there’s real news."; }
+  } : {
+    key: "dca-start-v1", param: "service", path: "/start", firstStep: "Service", waitStep: "Waitlist",
+    pickTitle: "What can we make for you?", pickLine: "Choose one. Greyed-out services aren’t open yet. You can still join their waitlist.",
+    tileGo: "Join the waitlist", waitTitle: "Join the waitlist.", composeKey: "SERVICE", composeTag: "WAITLIST",
+    sideSoon: "Not open yet. Join the waitlist and we’ll email you once, when it opens. Pure Alacrity itself is free today.", sideLink: ["Open Pure Alacrity", "https://dcalacrity.com/pure"],
+    youLine: function (svc) { return "One email when " + svc.name + " opens."; },
+    doneHead: "We’ll email you when it opens.", doneLine: function (svc) { return svc.name + " is " + soonLabel(svc).toLowerCase() + ". You’ll get one email when it opens."; }
+  };
+  if (interest) { CATALOG = INTEREST; GROUPS = INTEREST_GROUPS; }
   var byId = {}; CATALOG.forEach(function (s) { byId[s.id] = s; });
 
   /* ── state ──────────────────────────────────────────────────────────── */
-  var KEY = "dca-start-v1";
+  var KEY = MODE.key;
   var state = { service: null, step: 0, answers: {}, contact: {} };
   try { var saved = JSON.parse(localStorage.getItem(KEY) || "null"); if (saved && saved.answers) { state.answers = saved.answers; state.contact = saved.contact || {}; } } catch (e) { /* storage blocked: fine */ }
   var save = function () { try { localStorage.setItem(KEY, JSON.stringify({ answers: state.answers, contact: state.contact })); } catch (e) { /* ignore */ } };
 
+  var soonLabel = function (svc) { return svc.statusLabel || ("Coming " + svc.soon); };
+  var waitSpecs = function (svc) { return svc.waitFields || (svc.waitQ ? [Object.assign({ type: "chips" }, svc.waitQ)] : (svc.fields || [])); };
   var stepsFor = function (svc) {
     if (!svc) return ["service"];
     if (svc.soon) return ["service", "waitlist", "you"];
     return svc.scope === false ? ["service", "details", "you"] : ["service", "details", "scope", "you"];
   };
-  var STEP_LABEL = { service: "Service", details: "Details", scope: "Scope & timing", waitlist: "Waitlist", you: "About you" };
+  var STEP_LABEL = { service: MODE.firstStep, details: "Details", scope: "Scope & timing", waitlist: MODE.waitStep, you: "About you" };
 
   /* ── dom helpers ────────────────────────────────────────────────────── */
   var el = function (tag, attrs, kids) {
@@ -262,7 +341,7 @@
   /* ── rendering ──────────────────────────────────────────────────────── */
   var renderRail = function () {
     var svc = byId[state.service], steps = stepsFor(svc);
-    if (!svc) steps = ["service", "details", "scope", "you"];
+    if (!svc) steps = interest ? ["service", "waitlist", "you"] : ["service", "details", "scope", "you"];
     rail.innerHTML = "";
     steps.forEach(function (s, i) {
       var cls = "rail__step" + (i === state.step ? " is-on" : "") + (i < state.step ? " is-done" : "");
@@ -274,19 +353,19 @@
     var svc = byId[state.service];
     side.innerHTML = "";
     if (!svc) {
-      side.appendChild(el("p", { class: "caption", text: "How it works" }));
-      side.appendChild(el("h3", { text: "Pick what you need. We ask only what matters for it." }));
-      side.appendChild(el("ol", { class: "side__next" }, NEXT_BUSINESS.map(function (t) { return el("li", { text: t }); })));
+      side.appendChild(el("p", { class: "caption", text: interest ? "The interest list" : "How it works" }));
+      side.appendChild(el("h3", { text: interest ? "Follow the projects you care about." : "Pick what you need. We ask only what matters for it." }));
+      side.appendChild(el("ol", { class: "side__next" }, (interest ? ["Pick a project.", "Tell us how you’d like to be involved.", "We email you when there’s real news: a date, a trailer, a beta, a casting call."] : NEXT_BUSINESS).map(function (t) { return el("li", { text: t }); })));
       side.appendChild(el("p", { class: "side__fine", html: 'Prefer email? <a href="mailto:support@dcalacrity.com">support@dcalacrity.com</a>' }));
       return;
     }
-    side.appendChild(el("p", { class: "caption", text: svc.soon ? "Coming " + svc.soon : svc.kicker }));
+    side.appendChild(el("p", { class: "caption", text: svc.soon ? soonLabel(svc) : svc.kicker }));
     side.appendChild(el("h3", { text: svc.name }));
     side.appendChild(el("p", { class: "side__line", text: svc.line }));
     side.appendChild(el("p", { class: "side__blurb", text: svc.blurb }));
     if (svc.soon) {
-      side.appendChild(el("p", { class: "side__soon", text: "Not open yet. Join the waitlist and we’ll email you once, when it opens. Pure Alacrity itself is free today." }));
-      side.appendChild(el("a", { class: "link", href: "https://dcalacrity.com/pure", text: "Open Pure Alacrity" }));
+      side.appendChild(el("p", { class: "side__soon", text: MODE.sideSoon }));
+      if (MODE.sideLink) side.appendChild(el("a", { class: "link", href: MODE.sideLink[1], text: MODE.sideLink[0] }));
       return;
     }
     side.appendChild(el("p", { class: "caption side__k", text: "What you get" }));
@@ -310,7 +389,7 @@
 
   var renderService = function () {
     var box = el("div", { class: "fstep" });
-    box.appendChild(head("Step 1", "What can we make for you?", "Choose one. Greyed-out services aren’t open yet. You can still join their waitlist."));
+    box.appendChild(head("Step 1", MODE.pickTitle, MODE.pickLine));
     GROUPS.forEach(function (g) {
       var items = CATALOG.filter(function (s) { return s.group === g.id; });
       var grp = el("fieldset", { class: "tiles" + (g.id === "soon" ? " tiles--soon" : "") }, [el("legend", { class: "tiles__h" }, [el("span", { text: g.title }), el("small", { text: g.note })])]);
@@ -318,12 +397,12 @@
       items.forEach(function (s) {
         var input = el("input", { type: "radio", name: "svc", value: s.id, checked: state.service === s.id });
         input.addEventListener("change", function () { pick(s.id, true); });
-        grid.appendChild(el("label", { class: "tile" + (s.soon ? " tile--soon" : "") }, [
+        grid.appendChild(el("label", { class: "tile" + (s.soon && !interest ? " tile--soon" : "") + (interest ? " tile--interest" : "") }, [
           input,
-          el("span", { class: "tile__k", text: s.soon ? "Coming " + s.soon : s.kicker }),
+          el("span", { class: "tile__k", text: s.soon ? soonLabel(s) : s.kicker }),
           el("span", { class: "tile__name", text: s.name }),
           el("span", { class: "tile__line", text: s.line }),
-          el("span", { class: "tile__go", text: s.soon ? "Join the waitlist" : "Start" })
+          el("span", { class: "tile__go", text: s.soon ? MODE.tileGo : "Start" })
         ]));
       });
       grp.appendChild(grid); box.appendChild(grp);
@@ -357,7 +436,7 @@
 
   var renderYou = function (svc) {
     var form = el("form", { class: "fstep", novalidate: true });
-    form.appendChild(head("Last step", svc.soon ? "Where should we send the news?" : "Who should we reply to?", svc.soon ? "One email when " + svc.name + " opens." : "A person reads every one of these."));
+    form.appendChild(head("Last step", svc.soon ? "Where should we send the news?" : "Who should we reply to?", svc.soon ? (svc.youLine || MODE.youLine(svc)) : "A person reads every one of these."));
     var list = el("div", { class: "fx-list" });
     var specs = svc.soon ? CONTACT.slice(0, 2).concat([CONTACT[3]]) : CONTACT;
     specs.forEach(function (sp) { list.appendChild(field(sp, state.contact)); });
@@ -366,7 +445,7 @@
     form.appendChild(el("p", { class: "fstep__fine", html: "We use this only to reply to you. Prefer email? <a href=\"mailto:support@dcalacrity.com\">support@dcalacrity.com</a>" }));
     var status = el("div", { class: "form-status", role: "status", "aria-live": "polite", hidden: true });
     form.appendChild(status);
-    form.appendChild(nav({ label: svc.soon ? "Join the waitlist" : svc.cta, submit: true }));
+    form.appendChild(nav({ label: svc.soon ? (svc.cta || MODE.tileGo) : svc.cta, submit: true }));
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (!check(specs, state.contact, form)) return;
@@ -383,23 +462,23 @@
     if (s === "service") view = renderService();
     else if (s === "details") view = renderFields("Step 2 · " + svc.name, detailsTitle(svc), svc.blurb, svc.fields, bagFor(svc), "Continue");
     else if (s === "scope") view = renderFields("Step 3 · " + svc.name, "Timing and budget.", null, scopeFields(svc), bagFor(svc), "Continue");
-    else if (s === "waitlist") view = renderFields("Coming " + svc.soon + " · " + svc.name, "Join the waitlist.", svc.blurb, [Object.assign({ type: "chips" }, svc.waitQ)], bagFor(svc), "Continue");
+    else if (s === "waitlist") view = renderFields(soonLabel(svc) + " · " + svc.name, svc.waitTitle || MODE.waitTitle, svc.blurb, waitSpecs(svc), bagFor(svc), "Continue");
     else if (s === "you") view = renderYou(svc);
     if (svc && s !== "service") view.insertBefore(el("button", { type: "button", class: "fchange", onclick: function () { go(0); } }, [el("span", { text: svc.name }), el("small", { text: "Change" })]), view.firstChild);
     stage.appendChild(view);
-    root.classList.toggle("is-soon", !!(svc && svc.soon));
+    root.classList.toggle("is-soon", !!(svc && svc.soon && !interest));
     renderRail(); renderSide();
     if (focus) { var h = stage.querySelector(".fstep__h"); if (h) h.focus({ preventScroll: true }); var top = root.getBoundingClientRect().top + window.scrollY - 90; if (window.scrollY > top) window.scrollTo({ top: top, behavior: "smooth" }); }
   };
   var detailsTitle = function (svc) {
-    return { spaces: "Tell us about the property.", training: "Tell us what people need to practice.", destinations: "Tell us about the place.", celebrations: "Tell us about the day.", production: "Tell us about the shoot.", coverage: "Tell us about the script.", creators: "Tell us about your channel.", crew: "Tell us what you do." }[svc.id] || "Tell us about it.";
+    return { spaces: "Tell us about the property.", training: "Tell us what people need to practice.", destinations: "Tell us about the place.", celebrations: "Tell us about the event.", production: "Tell us about the shoot.", coverage: "Tell us about the script.", creators: "Tell us about your channel.", crew: "Tell us what you do." }[svc.id] || "Tell us about it.";
   };
 
   var go = function (i) { state.step = Math.max(0, i); render(true); };
   var pick = function (id, advance) {
     if (!byId[id]) return;
     state.service = id;
-    try { var u = new URL(window.location.href); u.searchParams.set("service", id); history.replaceState(null, "", u.pathname + u.search); } catch (e) { /* ignore */ }
+    try { var u = new URL(window.location.href); u.searchParams.set(MODE.param, id); history.replaceState(null, "", u.pathname + u.search); } catch (e) { /* ignore */ }
     if (advance) go(1); else render(false);
   };
 
@@ -407,10 +486,10 @@
   var compose = function (svc) {
     var a = bagFor(svc), lines = [];
     var fmt = function (v) { return Array.isArray(v) ? v.join(", ") : String(v || "").trim(); };
-    lines.push("SERVICE: " + svc.name + (svc.soon ? " (WAITLIST, coming " + svc.soon + ")" : " (available now)"));
+    lines.push(MODE.composeKey + ": " + svc.name + (svc.soon ? " (" + MODE.composeTag + ", " + soonLabel(svc) + ")" : " (available now)"));
     lines.push("");
-    var specs = svc.soon ? [svc.waitQ] : svc.fields;
-    lines.push(svc.soon ? "Waitlist" : "Details");
+    var specs = svc.soon ? waitSpecs(svc) : svc.fields;
+    lines.push(svc.soon ? MODE.composeTag.charAt(0) + MODE.composeTag.slice(1).toLowerCase() : "Details");
     specs.forEach(function (sp) { var v = fmt(a[sp.id]); if (v) lines.push("  " + sp.label.replace(/\?$/, "") + ": " + v); });
     if (!svc.soon && svc.scope !== false) {
       lines.push(""); lines.push("Scope & timing");
@@ -419,7 +498,7 @@
     }
     var c = state.contact;
     if (fmt(c.prefer)) { lines.push(""); lines.push("Preferred contact: " + fmt(c.prefer)); }
-    lines.push(""); lines.push("Sent from dcalacrity.com/start?service=" + svc.id);
+    lines.push(""); lines.push("Sent from dcalacrity.com" + MODE.path + "?" + MODE.param + "=" + svc.id);
     return lines.join("\n").slice(0, 4900);
   };
 
@@ -427,7 +506,7 @@
     var a = bagFor(svc), c = state.contact;
     var payload = {
       name: String(c.name || "").trim(), email: String(c.email || "").trim(), phone: String(c.phone || "").trim(), organization: String(c.organization || "").trim(),
-      topic: svc.topic, projectType: svc.name, budget: svc.soon ? "N/A (waitlist)" : String(a.budget || ""), timeline: svc.soon ? "Waitlist: " + svc.soon : String(a.timeline || a.deadline || a.date || ""),
+      topic: svc.topic, projectType: svc.name, budget: svc.soon ? "N/A (" + MODE.composeTag.toLowerCase() + ")" : String(a.budget || ""), timeline: svc.soon ? soonLabel(svc) : String(a.timeline || a.deadline || a.date || ""),
       source: String(c.source || ""), message: compose(svc), website: honeypot || ""
     };
     var btn = form.querySelector(".fnav__next"), label = btn ? btn.textContent : "";
@@ -453,13 +532,14 @@
     stage.innerHTML = "";
     var first = String(state.contact.name || "").trim().split(/\s+/)[0];
     var box = el("div", { class: "fstep fdone" }, [
-      el("p", { class: "fstep__k", text: svc.soon ? "You’re on the list" : "Sent" + (ref ? " · ref " + ref : "") }),
-      el("h2", { class: "fstep__h", tabindex: "-1", text: (first ? "Thanks, " + first + ". " : "Thanks. ") + (svc.soon ? "We’ll email you when it opens." : "We have it.") }),
-      el("p", { class: "fstep__p", text: svc.soon ? svc.name + " is planned for " + svc.soon + ". You’ll get one email when it opens." : "A person reads every enquiry. Here’s what happens next:" })
+      el("p", { class: "fstep__k", text: svc.soon ? "You’re on the list" + (ref ? " · ref " + ref : "") : "Sent" + (ref ? " · ref " + ref : "") }),
+      el("h2", { class: "fstep__h", tabindex: "-1", text: (first ? "Thanks, " + first + ". " : "Thanks. ") + (svc.soon ? MODE.doneHead : "We have it.") }),
+      el("p", { class: "fstep__p", text: svc.soon ? (svc.doneLine || MODE.doneLine(svc)) : "A person reads every enquiry. Here’s what happens next:" })
     ]);
     if (!svc.soon) box.appendChild(el("ol", { class: "side__next fdone__next" }, svc.next.map(function (t) { return el("li", { text: t }); })));
     var row = el("div", { class: "btn-row fdone__row" });
-    if (svc.group === "experiences") row.appendChild(el("a", { class: "btn", href: "/work/right-here-right-now", text: "See an experience we shipped" }));
+    if (svc.after) row.appendChild(el("a", { class: "btn", href: svc.after[1], text: svc.after[0] }));
+    else if (svc.group === "experiences") row.appendChild(el("a", { class: "btn", href: "/work/right-here-right-now", text: "See an experience we shipped" }));
     else row.appendChild(el("a", { class: "btn", href: "https://dcalacrity.com/pure", text: "Open Pure Alacrity" }));
     row.appendChild(el("button", { type: "button", class: "link", text: "Start another", onclick: function () { state.service = null; go(0); } }));
     box.appendChild(row);
@@ -469,7 +549,7 @@
   };
 
   /* ── boot ───────────────────────────────────────────────────────────── */
-  var want = new URLSearchParams(window.location.search).get("service");
+  var qs = new URLSearchParams(window.location.search), want = qs.get(MODE.param) || qs.get("service") || qs.get("project");
   if (want && byId[want]) { state.service = want; state.step = 1; }
   render(false);
 })();
