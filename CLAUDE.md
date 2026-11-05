@@ -40,9 +40,16 @@ co-author or contributor anywhere in this repository's history or on GitHub.
   `public/css/site.css` or a script in `public/js/`, bump its `?v=` stamp in
   every page that loads it.
 - Contact form tests: `node tests/contact.test.mjs`.
-- The brand line and home headline is "Reality, made interactive." (we film real
-  people and real places, then let you step inside and choose). The motto
-  "Sprinting the Marathon of Tomorrow." stays on the home page.
+- The home headline is "Meet the future early." The motto "Sprinting the
+  Marathon of Tomorrow." stays on the home page.
+- D.C Alacrity owns the word: "Alacrity: the speed of optimism." Bright, ready,
+  fast, electric, bold. Optimistic about the future, never cautious or hedging.
+- Never show dates, quarters or years for future plans (no "2027", "Q1",
+  "target ..."). Use Now / Next / Then / Ultimately, "coming soon" or "in
+  development". Past milestones (for example the May 31, 2026 release) are fine.
+- Right Here Right Now! has one page, /work/right-here-right-now. "Play" links go
+  to the Meta store listing:
+  https://www.meta.com/experiences/right-here-right-now/36126987003553198/
 - The site is organised by audience: For Business (/services, /start), fans
   (/work/, /interest), filmmakers (/filmmakers), investors (/investors). Keep
   the home page's "Start where you are" block pointing at those.
@@ -54,6 +61,6 @@ co-author or contributor anywhere in this repository's history or on GitHub.
   Southeast USA".
 - Never publish advisors, salaries, the funding ask, unit economics or revenue
   projections from the business plan: they are private.
-- Say only what's true: label what is planned as planned (for example, browser
-  and phone playback is early 2027) and never publish private figures.
+- Say only what's true: label what is planned as planned and never publish
+  private figures.
 - Sidequest copy stays spoiler-safe: nothing past the setup of Season 1 Part 1.

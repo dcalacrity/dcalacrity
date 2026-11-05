@@ -1065,3 +1065,10 @@ a.path-card .link { margin-top: auto; }
 @media (max-width: 520px) { .traction__side { grid-template-columns: minmax(0, 1fr); } }
 .team-faces { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
 .team-faces img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--line); }
+.pillars { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1.25rem 1.5rem; margin-top: clamp(2rem, 4vw, 3rem); }
+.pillars li { display: grid; gap: .35rem; align-content: start; padding-top: 1rem; border-top: 2px solid var(--ink); }
+.pillars b { font-family: var(--display); font-stretch: var(--wide); font-weight: 560; font-size: 1.25rem; letter-spacing: -.02em; color: var(--ink); }
+.pillars span { color: var(--ink-2); font-size: .93rem; line-height: 1.5; }
+.pillars__motto { margin-top: 2rem; max-width: 62ch; }
+@media (max-width: 1023px) { .pillars { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .pillars { grid-template-columns: minmax(0, 1fr); } }
