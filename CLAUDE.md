@@ -40,10 +40,18 @@ co-author or contributor anywhere in this repository's history or on GitHub.
   `public/css/site.css` or a script in `public/js/`, bump its `?v=` stamp in
   every page that loads it.
 - Contact form tests: `node tests/contact.test.mjs`.
-- The company's own words come first: the one-liner is "D.C Alacrity creates
-  interactive experiences people can step inside, powered by our own engine
-  that takes any production from idea to audience, on any screen." The motto
-  "Sprinting the Marathon of Tomorrow." stays on the home page.
+- The home headline is "Don't just watch. Step inside." with the line "We make
+  interactive films, VR tours and the free software behind them. Next up: the
+  Experience Machine." The motto "Sprinting the Marathon of Tomorrow." stays on
+  the home page.
+- The Experience Machine is the goal and is in development. Never present it
+  (or splats, AI restyling, the reality switch, web/phone playback, Insights)
+  as finished. Live today: Pure Alacrity, Alacrity Player on Quest, Right Here
+  Right Now!, Full-Stack shoots. Label everything else "in development".
+- The film claim is "the first live-action interactive VR film in the entire
+  Southeast USA".
+- Never publish advisors, salaries, the funding ask, unit economics or revenue
+  projections from the business plan: they are private.
 - Say only what's true: label what is planned as planned (for example, browser
   and phone playback is early 2027) and never publish private figures.
 - Sidequest copy stays spoiler-safe: nothing past the setup of Season 1 Part 1.
