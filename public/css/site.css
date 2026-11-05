@@ -1004,3 +1004,6 @@ a.engine__step:hover { color: inherit; border-color: rgba(0, 194, 255, .45); tra
 @media (max-width: 480px) { .team-rest { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 900px) { .horizon__line--4 { grid-template-columns: 1fr; } }
 .tile--interest .tile__k { color: var(--c-spark); }
+.team-rest .mate { display: grid; gap: .1rem; align-content: start; padding: 1.25rem 1.2rem; background: var(--c-well); }
+.mate__av { display: grid !important; place-items: center; width: 2.6rem; height: 2.6rem; margin: 0 0 .7rem !important; border-radius: 50%; border: 1px solid rgba(0, 194, 255, .45); background: rgba(0, 194, 255, .08); color: var(--c-spark) !important; font-family: var(--mono); font-size: .78rem !important; letter-spacing: .04em; }
+.team-rest .mate p { margin-top: .35rem; color: var(--ink-2); font-size: .9rem; line-height: 1.5; }
