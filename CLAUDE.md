@@ -72,3 +72,7 @@ co-author or contributor anywhere in this repository's history or on GitHub.
   placeholders. The brief's own shoot and premiere timing ("Shooting Dec 2026",
   "Festival premiere: 2027 — TBA") is the one allowed exception to the no-dates
   rule, on the Prize Pool page only.
+- Prize Pool VR's leads are Hope and Chase. Give the premise (campus water-gun
+  game, anonymous donation makes it a million dollars, one dry winner, hidden
+  cameras) but never spoil routes or endings. D.C Agwu's credit is Executive
+  Producer & Experience Architect.

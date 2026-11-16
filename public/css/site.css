@@ -1138,3 +1138,10 @@ a.path-card .link { margin-top: auto; }
 .pp-field a { text-decoration: underline; text-underline-offset: 3px; }
 a.pp-next { color: inherit; transition: border-color .3s var(--ease); }
 a.pp-next:hover { color: inherit; border-color: rgba(0, 194, 255, .5); }
+.pp-leads { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
+.pp-lead { padding: 1.5rem 1.4rem; border: 1px solid rgba(0, 194, 255, .35); border-radius: var(--radius); background: linear-gradient(180deg, rgba(0, 194, 255, .08), transparent 70%), var(--c-well); }
+.pp-lead__k { font-family: var(--mono); font-size: .68rem; letter-spacing: .07em; text-transform: uppercase; color: var(--c-spark); }
+.pp-lead h3 { font-size: clamp(1.4rem, 2.2vw, 1.9rem); font-stretch: var(--wide); font-weight: 500; margin: .3rem 0 .5rem; }
+.pp-lead p:not(.pp-lead__k) { color: var(--ink-2); }
+.pp-sub { margin: 2.5rem 0 1rem; font-size: 1.1rem; }
+@media (max-width: 640px) { .pp-leads { grid-template-columns: minmax(0, 1fr); } }
