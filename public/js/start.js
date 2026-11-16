@@ -230,8 +230,8 @@
       blurb: "Planned research with UNCW faculty on live-action VR synchronized to real props, so you reach for the valve in the footage and your hand finds a real one.", topic: "Interest list: Alacrity Lab",
       waitFields: [ROLE(["Researcher", "Educator", "Student", "Training partner", "Funder"]), NOTE] },
 
-    { id: "investors", group: "company", soon: "monthly", statusLabel: "Monthly investor update", name: "Investor updates", kicker: "Pre-seed · Wilmington, NC", line: "Real numbers, every month.",
-      blurb: "A short monthly update: jobs delivered, Pure adoption, the Experience Machine build and the slate. For angels, funds and accelerators.", topic: "Interest list: Investor updates", cta: "Get the updates",
+    { id: "investors", group: "company", soon: "monthly", statusLabel: "Monthly investor update", name: "Investor updates", kicker: "D.C Alacrity · Wilmington, NC", line: "Company news and investor conversations.",
+      blurb: "A company update: released work, production tools, the Experience Machine build and the slate. For angels, funds and accelerators.", topic: "Interest list: Investor updates", cta: "Get the updates",
       waitFields: [ROLE(["Angel", "Fund", "Accelerator", "Strategic partner", "Advisor"]), { id: "layer", label: "Most interested in", type: "multi", options: ["The Experience Machine", "Pure Alacrity", "Film & media", "All of it"] }, NOTE] }
   ];
   var INTEREST_GROUPS = [
