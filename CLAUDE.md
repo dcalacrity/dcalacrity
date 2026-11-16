@@ -64,3 +64,11 @@ co-author or contributor anywhere in this repository's history or on GitHub.
 - Say only what's true: label what is planned as planned and never publish
   private figures.
 - Sidequest copy stays spoiler-safe: nothing past the setup of Season 1 Part 1.
+- Prize Pool VR follows the owner's production brief: it is "the first Open World
+  Movie". Wherever that phrase appears, the definition appears with it: "Walk
+  anywhere in the story. Choose by what you do. The story still lands." Keep "as
+  far as we know" in the long-form explanation. Never name festivals or other
+  titles. Use only facts the owner has given; unknowns stay as visible "TBA"
+  placeholders. The brief's own shoot and premiere timing ("Shooting Dec 2026",
+  "Festival premiere: 2027 — TBA") is the one allowed exception to the no-dates
+  rule, on the Prize Pool page only.

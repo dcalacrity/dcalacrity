@@ -188,9 +188,12 @@
   var NOTE = { id: "note", label: "Anything you’d like us to know? (optional)", type: "textarea", placeholder: "What drew you to it, how you’d like to be involved, links." };
   var FANS = ["Fan / viewer", "Investor", "Partner or sponsor", "Press", "Cast or crew", "Studio or distributor"];
   var INTEREST = [
-    { id: "prizepool", group: "originals", soon: "pre-production", statusLabel: "Pre-production", name: "Prize Pool VR", kicker: "Flagship original", line: "A million-dollar campus water-gun game. Two lives to step into.",
-      blurb: "A branching live-action VR180 thriller and the launch title for Alacrity Pass. It is the first original made start to finish on our own engine, and the stress test for every new tool.", topic: "Interest list: Prize Pool VR", after: ["Explore Prize Pool VR", "/work/prize-pool"],
-      waitFields: [ROLE(FANS), { id: "want", label: "What do you want to hear about?", type: "multi", options: ["Release date", "Trailer and first look", "Casting calls", "Crew calls", "Investment", "Sponsorship"] }, NOTE] },
+    { id: "prizepool", group: "originals", soon: "in production", statusLabel: "In production · shooting in Wilmington", name: "Prize Pool VR", kicker: "The first Open World Movie", line: "Walk anywhere in the story. Choose by what you do. The story still lands.",
+      blurb: "The first Open World Movie: a narrative film you walk through, with real Wilmington locations and real actors’ performances. Choose by what you do and where you go; the story still lands wherever you stand.", topic: "Interest list: Prize Pool VR", after: ["Explore Prize Pool VR", "/work/prize-pool"],
+      waitFields: [ROLE(FANS), { id: "want", label: "What do you want to hear about?", type: "multi", options: ["Trailer and first look", "Screenings", "Behind the scenes", "Casting calls", "Crew calls", "Investment", "Sponsorship"] }, NOTE] },
+    { id: "ppscreenings", group: "originals", soon: "screenings", statusLabel: "Screenings · TBA", name: "Prize Pool VR screenings", kicker: "Premiere and screening updates", line: "Be first to know where to see it.",
+      blurb: "Get an email when Prize Pool VR, the first Open World Movie, announces its premiere and screenings. Walk anywhere in the story. Choose by what you do. The story still lands.", topic: "Interest list: Prize Pool VR screenings", after: ["Explore Prize Pool VR", "/work/prize-pool"],
+      waitFields: [ROLE(["Viewer", "Press", "Screening venue", "Educator", "Industry"]), { id: "city", label: "Your city (optional)", type: "text", placeholder: "Where would you like to see it?" }, NOTE] },
     { id: "sidequest", group: "originals", soon: "in post", statusLabel: "Season 1 Part 1 · in post", name: "Sidequest", kicker: "Crime dramedy series", line: "Somewhere, a website is hiring.",
       blurb: "The series that started it all. Season 1 Part 1 is in post-production, with a world written to grow into choose-your-path episodes, VR missions and more.", topic: "Interest list: Sidequest", after: ["Play the job board", "/work/sidequest#job"],
       waitFields: [ROLE(FANS), { id: "want", label: "What do you want to hear about?", type: "multi", options: ["Season 1 Part 1 release", "Choose-your-path episodes", "VR squad missions", "Investment", "Distribution"] }, NOTE] },
@@ -199,7 +202,7 @@
       waitFields: [ROLE(["Fan / viewer", "Local business", "Tourism partner", "Sponsor", "Press", "Want to be featured"]), NOTE] },
 
     { id: "pass", group: "branches", soon: "soon", statusLabel: "In development", name: "Alacrity Pass", kicker: "Meta Quest & phones", line: "Every live-action interactive story, one app.",
-      blurb: "One subscription for our originals and partner titles built on Alacrity Player: Prize Pool VR, Right Here Right Now! and what comes next. On Quest and phones.", topic: "Interest list: Alacrity Pass",
+      blurb: "One subscription for our originals and partner titles built on Alacrity Player, starting with Right Here Right Now! On Quest and phones.", topic: "Interest list: Alacrity Pass",
       waitFields: [ROLE(["Viewer", "Filmmaker with a title", "Studio or distributor", "Investor", "Press"]), { id: "device", label: "Where would you watch?", type: "chips", options: ["Meta Quest", "Phone", "Both", "Another headset"] }, NOTE] },
     { id: "walkable", group: "branches", soon: "pilot", statusLabel: "In development · pilot on Prize Pool VR", name: "Walkable movie sets", kicker: "For studios and fans", line: "Step into the world of the film between scenes.",
       blurb: "We scan a production’s sets and locations with LiDAR and splats so fans can walk the world of the film. A marketing product for studios, piloting on Prize Pool VR’s sets.", topic: "Interest list: Walkable movie sets",
