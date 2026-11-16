@@ -1145,3 +1145,10 @@ a.pp-next:hover { color: inherit; border-color: rgba(0, 194, 255, .5); }
 .pp-lead p:not(.pp-lead__k) { color: var(--ink-2); }
 .pp-sub { margin: 2.5rem 0 1rem; font-size: 1.1rem; }
 @media (max-width: 640px) { .pp-leads { grid-template-columns: minmax(0, 1fr); } }
+.pp-lead { display: grid; gap: .6rem; align-content: start; }
+.pp-lead h3 { margin-bottom: 0; }
+.pp-lead__tag { font-family: var(--display); font-size: 1.15rem; color: var(--ink) !important; }
+.pp-lead__choice { margin-top: .4rem; padding-top: .8rem; border-top: 1px solid var(--line); color: var(--ink) !important; font-style: italic; }
+.pp-lead--chase { border-color: rgba(170, 120, 255, .4); background: linear-gradient(180deg, rgba(170, 120, 255, .09), transparent 70%), var(--c-well); }
+.pp-lead--chase .pp-lead__k { color: #b99bff; }
+.pp-leads__line { margin-top: 1.5rem; font-family: var(--display); font-size: clamp(1.05rem, 1.6vw, 1.3rem); color: var(--ink); }
