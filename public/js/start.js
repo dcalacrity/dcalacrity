@@ -35,15 +35,15 @@
     {
       id: "spaces", group: "experiences", name: "Alacrity Spaces · Full-Stack", kicker: "Real estate & developers · available now",
       line: "Walk the home. Redesign it. Flip back to the real one.",
-      blurb: "One capture day for a listing, a model home or a development: a 2D film, drone footage, a LiDAR-measured twin and a branching VR tour where buyers choose the room. Our crew shoots it and plans it in Pure.",
-      gets: ["A 2D listing film and drone footage", "A LiDAR-measured floor plan and twin", "A branching live-action VR tour: buyers choose the room", "Plays on Meta Quest now; web and phone playback in development", "AI restaging (always labeled), photoreal splat twin and buyer lead scores: in development, delivered with our first clients"],
+      blurb: "One capture day for a listing, a model home or a development: a 2D film, drone footage and a branching VR tour where buyers choose the room. Our crew shoots it and plans it in Pure.",
+      gets: ["A 2D listing film and drone footage",  "A branching live-action VR tour: buyers choose the room", "Plays on Meta Quest now; web and phone playback in development", "LiDAR scans and measured floor plans (process still being refined), AI restaging, photoreal splat twins and buyer lead scores: in development"],
       next: NEXT_BUSINESS, cta: "Request my Full-Stack shoot", topic: "For Business: Alacrity Spaces (Full-Stack)",
       fields: [
         { id: "propertyType", label: "What kind of property?", type: "chips", required: true, options: ["Residential listing", "Luxury home", "Commercial / office", "Event venue", "Hotel or short-term rental", "Campus / admissions", "Something else"] },
         { id: "volume", label: "How many properties?", type: "chips", required: true, options: ["One, to start", "2–5", "6–15 a month", "More than 15 a month"] },
         { id: "rooms", label: "Roughly how many rooms or stops each?", type: "chips", options: ["1–5", "6–10", "11–20", "20+", "Not sure"] },
         { id: "location", label: "Where is it?", type: "text", required: true, placeholder: "City, or the address if you have it" },
-        { id: "addons", label: "Add anything you want", type: "multi", options: ["Drone exterior", "LiDAR floor plan / digital twin", "Agent greeting on camera", "Virtual restaging", "A Quest headset for showings"] },
+        { id: "addons", label: "Add anything you want", type: "multi", options: ["Drone exterior", "Agent greeting on camera", "Virtual restaging", "A Quest headset for showings"] },
         { id: "viewing", label: "Where will people view it?", type: "multi", options: ["Listing link / MLS", "Open houses", "Social media", "In the office", "Not sure yet"] }
       ],
       budget: ["Under $2,500", "$2,500–$5,000", "$5,000–$15,000", "$15,000+", "Not sure yet"]
@@ -205,7 +205,7 @@
       blurb: "One subscription for our originals and partner titles built on Alacrity Player, starting with Right Here Right Now! On Quest and phones.", topic: "Interest list: Alacrity Pass",
       waitFields: [ROLE(["Viewer", "Filmmaker with a title", "Studio or distributor", "Investor", "Press"]), { id: "device", label: "Where would you watch?", type: "chips", options: ["Meta Quest", "Phone", "Both", "Another headset"] }, NOTE] },
     { id: "walkable", group: "branches", soon: "pilot", statusLabel: "In development · pilot on Prize Pool VR", name: "Walkable movie sets", kicker: "For studios and fans", line: "Step into the world of the film between scenes.",
-      blurb: "We scan a production’s sets and locations with LiDAR and splats so fans can walk the world of the film. A marketing product for studios, piloting on Prize Pool VR’s sets.", topic: "Interest list: Walkable movie sets",
+      blurb: "We’re developing a process to capture production sets with LiDAR and Gaussian splats so fans can walk the world of the film. The scanning workflow is still being refined for Prize Pool VR.", topic: "Interest list: Walkable movie sets",
       waitFields: [ROLE(["Studio or producer", "Marketing / distribution", "Fan", "Investor", "Press"]), NOTE] },
     { id: "venues", group: "branches", soon: "soon", statusLabel: "In development · testing", name: "VR venue stories", kicker: "Arcades & location-based VR", line: "A group votes. The story changes.",
       blurb: "15–20 minute live-action branching stories where a whole group votes on the choices, licensed to VR arcades and venues. Testing with VR venue operators.", topic: "Interest list: VR venue licensing",
