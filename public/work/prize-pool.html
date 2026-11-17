@@ -26,6 +26,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
   <link rel="stylesheet" href="/css/site.css?v=496f838d66">
+  <link rel="stylesheet" href="/css/prize-pool.css?v=76914c3280">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Movie", "name": "Prize Pool VR", "alternativeHeadline": "The first Open World Movie", "description": "Prize Pool VR by D.C Alacrity is in production as the first Open World Movie, a live-action 6DoF movie. Most scenes use real actors green-screened into 360° VR with 3DoF viewing; specific 6DoF choice sequences use actor-scanned MetaHumans in environments captured from real locations. Walk anywhere in the story. Choose by what you do. The story still lands. As far as we know, it is the first film built this way.", "director": {"@type": "Person", "name": "Tommy Bowers"}, "productionCompany": {"@type": "Organization", "name": "D.C Alacrity", "url": "https://dcalacrity.com/"}, "genre": ["Interactive", "Virtual reality"], "image": "https://dcalacrity.com/assets/img/prize-pool-og.jpg", "url": "https://dcalacrity.com/work/prize-pool"}</script>
 </head>
 <body>
@@ -69,23 +70,55 @@
   </div>
 
   <main id="main">
-    <header class="phero">
-      <div class="plate plate--page plate--photo" style="--plate-img:image-set(url(/assets/img/prize-pool-hero.webp) type('image/webp'), url(/assets/img/prize-pool-placeholder.jpg) type('image/jpeg'));--plate-pos:center 38%" aria-hidden="true"></div>
-      <div class="panel paper panel--lead">
-        <div class="wrap panel__grid">
-          <div>
-            <p class="eyebrow"><span class="st st--on">In production · Shooting Dec 2026</span> An Alacrity Original</p>
-            <h1>Prize Pool VR: The First Open World Movie</h1>
-            <p class="pp-claim">A live-action 6DoF movie from D.C Alacrity.</p>
-            <p class="pp-def">Walk anywhere in the story. Choose by what you do. The story still lands.</p>
+    <header class="pp-hero" data-pp-hero data-lead="hope" aria-labelledby="pp-title">
+      <div class="pp-hero__visual" aria-hidden="true">
+        <picture class="pp-hero__art">
+          <source srcset="/assets/img/prize-pool-hero.webp" type="image/webp">
+          <img src="/assets/img/prize-pool-placeholder.jpg" alt="" width="1536" height="1024" fetchpriority="high" decoding="async">
+        </picture>
+        <div class="pp-hero__halo"></div>
+        <div class="pp-hero__scan"></div>
+      </div>
+      <div class="wrap pp-hero__inner">
+        <div class="pp-hero__mast">
+          <p class="pp-hero__origin">D.C Alacrity <span>/</span> An Alacrity Original</p>
+          <p class="pp-hero__status"><span></span> In production</p>
+        </div>
+        <div class="pp-hero__main">
+          <div class="pp-hero__copy">
+            <p class="pp-hero__kicker">A live-action 6DoF movie</p>
+            <h1 id="pp-title"><span>Prize</span><span>Pool<span class="pp-hero__vr">VR</span></span><span class="sr-only"> — The First Open World Movie</span></h1>
+            <p class="pp-hero__hook">Get wet, you’re out.<br>Stay dry. <em>Win a million.</em></p>
+            <p class="pp-hero__premise">A campus water-gun game. A million-dollar prize. <br>Two lives to step into. Only one dry winner.</p>
+            <div class="btn-row pp-hero__actions">
+              <a class="btn pp-hero__cta" href="/interest?project=prizepool">Follow the production</a>
+              <a class="pp-hero__explore" href="#open-world">Explore the film <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m5 5 14 14M5 19h14V5"/></svg></a>
+            </div>
           </div>
-          <div class="panel__side">
-            <p class="lede">A campus water-gun game with a million-dollar prize. Play as Hope, finding her way out of a toxic crew, or Chase, who’ll do anything to win. Made in Wilmington, North Carolina by the team behind <a href="/work/right-here-right-now">Right Here Right Now!</a></p>
-            <div class="btn-row"><a class="btn" href="/interest?project=prizepool">Follow the production</a> <a class="btn btn--quiet" href="/interest?project=ppscreenings">Get screening updates</a></div>
-          </div>
+          <aside class="pp-hero__perspectives" aria-label="Meet the two leads">
+            <p class="pp-hero__perspective-label">Same game. Two perspectives.</p>
+            <div class="pp-hero__lead-buttons" role="group" aria-label="Preview a character">
+              <button type="button" data-pp-lead="hope" disabled aria-pressed="true" aria-controls="pp-lead-copy"><span>01</span> Hope <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button>
+              <button type="button" data-pp-lead="chase" disabled aria-pressed="false" aria-controls="pp-lead-copy"><span>02</span> Chase <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button>
+            </div>
+            <p class="pp-hero__lead-copy" id="pp-lead-copy" data-pp-lead-copy aria-live="polite">Find your own way out of a crew that has already decided who you are.</p>
+            <noscript><p class="pp-hero__lead-copy">Chase: A million dollars. A promise to your friends. How far will you go to win?</p></noscript>
+          </aside>
+        </div>
+        <div class="pp-hero__footer">
+          <p>360° live-action cinema <span aria-hidden="true">/</span> 6DoF choice sequences</p>
+          <button class="pp-hero__motion" type="button" data-pp-motion aria-pressed="false" hidden><svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor" aria-hidden="true"><path class="pp-motion-pause" d="M4 2h3v12H4zM10 2h3v12h-3z"/><path class="pp-motion-play" d="m4 1 10 7-10 7z"/></svg> <span data-pp-motion-label>Pause motion</span></button>
         </div>
       </div>
     </header>
+
+    <section class="pp-manifesto" aria-label="The first Open World Movie">
+      <div class="wrap pp-manifesto__inner">
+        <p class="pp-manifesto__claim">The first<br><strong>Open World Movie.</strong></p>
+        <p class="pp-manifesto__definition">Walk anywhere in the story.<br>Choose by what you do.<br><span>The story still lands.</span></p>
+        <a class="pp-manifesto__link" href="#made">Go behind the scenes <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a>
+      </div>
+    </section>
 
     <section class="sec sec--lead">
       <div class="wrap">
@@ -319,5 +352,6 @@
 
   <script src="/js/site.js?v=f33a251105" defer></script>
   <script src="/js/widgets.js?v=a40a52a584" defer></script>
+  <script src="/js/prize-pool.js?v=3bc3f37cb0" defer></script>
 </body>
 </html>
