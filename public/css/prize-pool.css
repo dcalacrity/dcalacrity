@@ -123,3 +123,5 @@
 .pp-hero__motion[aria-pressed="true"] .pp-motion-pause,
 .pp-hero__motion[aria-pressed="false"] .pp-motion-play { display: none; }
 .pp-hero__lead-buttons button:disabled { cursor: default; }
+.pp-hero__kicker-sub { color: rgba(238, 244, 246, .62); letter-spacing: .12em; }
+@media (max-width: 640px) { .pp-hero__kicker-sub { display: block; margin-top: .2rem; } }

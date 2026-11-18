@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Alacrity Originals — Sidequest, Right Here Right Now!, Prize Pool VR · D.C Alacrity</title>
-  <meta name="description" content="Alacrity Originals: Sidequest, Right Here Right Now!, Prize Pool VR and Welcome to Wilmy. Owned titles that prove the Alacrity engine on real productions."/>
+  <title>Alacrity Originals — Prize Pool VR, the first Open World Movie · D.C Alacrity</title>
+  <meta name="description" content="Alacrity Originals, led by Prize Pool VR, the first Open World Movie: walk anywhere in the story, choose by what you do, the story still lands. Plus Sidequest, Right Here Right Now! and Welcome to Wilmy."/>
   <link rel="canonical" href="https://dcalacrity.com/work/"/>
   <meta property="og:type" content="website"/>
   <meta property="og:site_name" content="D.C Alacrity"/>
-  <meta property="og:title" content="Alacrity Originals — Sidequest, Right Here Right Now!, Prize Pool VR · D.C Alacrity"/>
-  <meta property="og:description" content="Alacrity Originals: Sidequest, Right Here Right Now!, Prize Pool VR and Welcome to Wilmy. Owned titles that prove the Alacrity engine on real productions."/>
+  <meta property="og:title" content="Alacrity Originals — Prize Pool VR, the first Open World Movie · D.C Alacrity"/>
+  <meta property="og:description" content="Alacrity Originals, led by Prize Pool VR, the first Open World Movie: walk anywhere in the story, choose by what you do, the story still lands. Plus Sidequest, Right Here Right Now! and Welcome to Wilmy."/>
   <meta property="og:image" content="https://dcalacrity.com/assets/img/squad.jpg"/>
   <meta property="og:url" content="https://dcalacrity.com/work/"/>
   <meta name="twitter:card" content="summary_large_image"/>
@@ -20,6 +20,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Geist+Mono:wght@400;500&display=swap"/>
   <link rel="stylesheet" href="/css/site.css?v=496f838d66"/>
+  <link rel="stylesheet" href="/css/prize-pool.css?v=9b2a63bfac">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -62,25 +63,62 @@
   </div>
 
   <main id="main">
-    <header class="phero">
-      <div class="plate plate--page plate--photo" style="--plate-img:url(/assets/img/rhrn-bts.jpg);--plate-pos:center 45%" aria-hidden="true"></div>
-      <div class="panel paper">
-        <div class="wrap panel__grid">
-          <div>
-            <p class="eyebrow">Alacrity Originals</p>
-            <h1>Our own titles prove the engine.</h1>
+    <header class="pp-hero" data-pp-hero data-lead="hope" aria-labelledby="pp-title">
+      <div class="pp-hero__visual" aria-hidden="true">
+        <picture class="pp-hero__art">
+          <source srcset="/assets/img/prize-pool-hero.webp" type="image/webp">
+          <img src="/assets/img/prize-pool-placeholder.jpg" alt="" width="1536" height="1024" fetchpriority="high" decoding="async">
+        </picture>
+        <div class="pp-hero__halo"></div>
+        <div class="pp-hero__scan"></div>
+      </div>
+      <div class="wrap pp-hero__inner">
+        <div class="pp-hero__mast">
+          <p class="pp-hero__origin">D.C Alacrity <span>/</span> Alacrity Originals</p>
+          <p class="pp-hero__status"><span></span> In production</p>
+        </div>
+        <div class="pp-hero__main">
+          <div class="pp-hero__copy">
+            <p class="pp-hero__kicker">The First Open World Movie <span class="pp-hero__kicker-sub">· a live-action 6DoF movie</span></p>
+            <h1 id="pp-title"><span>Prize</span><span>Pool<span class="pp-hero__vr">VR</span></span></h1>
+            <p class="pp-hero__hook">Get wet, you’re out.<br>Stay dry. <em>Win a million.</em></p>
+            <p class="pp-hero__premise">A campus water-gun game. A million-dollar prize. <br>Two lives to step into. Only one dry winner.</p>
+            <div class="btn-row pp-hero__actions">
+              <a class="btn pp-hero__cta" href="/interest?project=prizepool">Follow the production</a>
+              <a class="pp-hero__explore" href="/work/prize-pool">Explore the film <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m5 5 14 14M5 19h14V5"/></svg></a>
+            </div>
           </div>
-          <div class="panel__side">
-            <p class="lede">Entertainment is where the engine gets famous: the R&amp;D lab where the hardest problems get solved first, the showroom that wins the next client, and the magnet for the crews who then use Pure. Every title runs on the same pipeline paying clients use, and each is financed as its own project, never with the company’s operating cash.</p>
-            <div class="btn-row"><a class="btn" href="/interest">Get on the interest list</a></div>
-            
-          </div>
+          <aside class="pp-hero__perspectives" aria-label="Meet the two leads">
+            <p class="pp-hero__perspective-label">Same game. Two perspectives.</p>
+            <div class="pp-hero__lead-buttons" role="group" aria-label="Preview a character">
+              <button type="button" data-pp-lead="hope" disabled aria-pressed="true" aria-controls="pp-lead-copy"><span>01</span> Hope <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button>
+              <button type="button" data-pp-lead="chase" disabled aria-pressed="false" aria-controls="pp-lead-copy"><span>02</span> Chase <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button>
+            </div>
+            <p class="pp-hero__lead-copy" id="pp-lead-copy" data-pp-lead-copy aria-live="polite">Find your own way out of a crew that has already decided who you are.</p>
+            <noscript><p class="pp-hero__lead-copy">Chase: A million dollars. A promise to your friends. How far will you go to win?</p></noscript>
+          </aside>
+        </div>
+        <div class="pp-hero__footer">
+          <p>360° live-action cinema <span aria-hidden="true">/</span> 6DoF choice sequences</p>
+          <button class="pp-hero__motion" type="button" data-pp-motion aria-pressed="false" hidden><svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor" aria-hidden="true"><path class="pp-motion-pause" d="M4 2h3v12H4zM10 2h3v12h-3z"/><path class="pp-motion-play" d="m4 1 10 7-10 7z"/></svg> <span data-pp-motion-label>Pause motion</span></button>
         </div>
       </div>
     </header>
 
-    <section class="sec">
+    <section class="pp-manifesto" aria-label="The first Open World Movie">
+      <div class="wrap pp-manifesto__inner">
+        <p class="pp-manifesto__claim">The first<br><strong>Open World Movie.</strong></p>
+        <p class="pp-manifesto__definition">Walk anywhere in the story.<br>Choose by what you do.<br><span>The story still lands.</span></p>
+        <a class="pp-manifesto__link" href="/work/prize-pool">See Prize Pool VR <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a>
+      </div>
+    </section>
+
+    <section class="sec" id="originals">
       <div class="wrap">
+        <div class="head" data-rise>
+          <div><p class="eyebrow">Alacrity Originals</p><h2>Our own titles prove the engine.</h2></div>
+          <p class="lede">Entertainment is where the engine gets famous: the R&amp;D lab where the hardest problems get solved first, the showroom that wins the next client, and the magnet for the crews who then use Pure. Every title runs on the same pipeline paying clients use, and each is financed as its own project, never with the company’s operating cash.</p>
+        </div>
         <div class="props props--2">
           <a class="prop" data-rise href="/work/sidequest">
             <div class="visual"><img src="/assets/img/squad.jpg" alt="The ABC Squad cast of Sidequest" width="1800" height="1012" loading="lazy" decoding="async"/></div>
@@ -211,5 +249,6 @@
 
   <script src="/js/site.js?v=f33a251105" defer></script>
   <script src="/js/widgets.js?v=a40a52a584" defer></script>
+  <script src="/js/prize-pool.js?v=3bc3f37cb0" defer></script>
 </body>
 </html>
