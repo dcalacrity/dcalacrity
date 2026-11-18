@@ -125,3 +125,27 @@
 .pp-hero__lead-buttons button:disabled { cursor: default; }
 .pp-hero__kicker-sub { color: rgba(238, 244, 246, .62); letter-spacing: .12em; }
 @media (max-width: 640px) { .pp-hero__kicker-sub { display: block; margin-top: .2rem; } }
+
+/* Fit the screen: height follows the viewport, type scales with height as well as width,
+   and the key art is no longer zoomed past its resolution. */
+.pp-hero { min-height: max(620px, 100svh); }
+.pp-hero__inner { min-height: calc(max(620px, 100svh) - var(--nav-h)); }
+.pp-hero__art { inset: -4% -2% -2%; }
+.pp-hero__art img { object-position: 64% 62%; opacity: .92; }
+.pp-hero__mast { padding-block: clamp(.9rem, 2.6vh, 2.1rem); }
+.pp-hero__main { gap: clamp(1.25rem, 3vw, 3rem); padding-top: clamp(.5rem, 2vh, 2rem); padding-bottom: clamp(1.25rem, 4vh, 3rem); }
+.pp-hero__kicker { margin-bottom: clamp(.6rem, 1.6vh, 1rem); }
+.pp-hero h1 { font-size: clamp(4.2rem, min(11.2vw, 19vh), 11.3rem); line-height: .84; letter-spacing: -.045em; }
+.pp-hero__vr { font-size: clamp(.75rem, min(1.4vw, 2.2vh), 1.3rem); }
+.pp-hero__hook { margin-top: clamp(1rem, 3vh, 2.1rem); font-size: clamp(1.3rem, min(2.2vw, 3.6vh), 2.1rem); }
+.pp-hero__premise { margin-top: clamp(.6rem, 1.6vh, 1.1rem); }
+.pp-hero__actions { margin-top: clamp(1rem, 2.6vh, 1.8rem); }
+.pp-hero__perspectives { align-self: end; }
+.pp-hero__footer { padding-block: .7rem 1rem; }
+@media (max-height: 760px) and (min-width: 900px) {
+  .pp-hero__premise br { display: none; }
+  .pp-hero__lead-copy { min-height: 0; }
+  .pp-hero__perspectives { padding: 1.1rem 1.25rem 1rem; }
+}
+.pp-hero__art { inset: -2% -1% -1%; }
+.pp-hero__art img { object-position: 62% 40%; }
